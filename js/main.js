@@ -337,6 +337,24 @@ const SEARCH_INDEX = [
     keywords: 'resources guides databases tools templates bioinformatics citation papers poster presentation'
   },
   {
+    title: 'Data Science Curriculum',
+    url: 'datascience.html',
+    description: 'Self-contained course map for biology data analysis with separate Python and RStudio tracks.',
+    keywords: 'data science curriculum rstudio python pandas numpy scipy statistics analysis dataset lessons exercises'
+  },
+  {
+    title: 'Python Track',
+    url: 'python.html',
+    description: 'On-site Python lessons for pandas, NumPy, SciPy, biology datasets, exercises, and answer checks.',
+    keywords: 'python pandas numpy scipy notebook data frame dataframe t-test enzyme activity answer key'
+  },
+  {
+    title: 'RStudio Track',
+    url: 'rstudio.html',
+    description: 'On-site RStudio lessons for R data frames, grouped summaries, t-tests, plots, and answer checks.',
+    keywords: 'rstudio r statistics data frames t.test aggregate boxplot enzyme activity answer key'
+  },
+  {
     title: 'For Schools',
     url: 'schools.html',
     description: 'Information for schools and educators interested in sending students to EBS.',

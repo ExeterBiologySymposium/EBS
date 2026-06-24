@@ -62,6 +62,16 @@
       <li><a href="resources.html" class="nav__link">Resources</a></li>
       <li class="nav__dd">
         <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Data Science <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="datascience.html" class="nav__dd-item" role="menuitem">Curriculum Hub</a>
+          <a href="python.html"      class="nav__dd-item" role="menuitem">Python Track</a>
+          <a href="rstudio.html"     class="nav__dd-item" role="menuitem">RStudio Track</a>
+        </div>
+      </li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
           Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
         </button>
         <div class="nav__dd-menu" role="menu">
@@ -92,6 +102,10 @@
       <a href="about.html"     class="nav__m-link">About</a>
       <a href="team.html"      class="nav__m-link">Team</a>
       <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Data Science</span>
+      <a href="datascience.html" class="nav__m-link">Curriculum Hub</a>
+      <a href="python.html"      class="nav__m-link">Python Track</a>
+      <a href="rstudio.html"     class="nav__m-link">RStudio Track</a>
       <span class="nav__m-label">Participate</span>
       <a href="schools.html"     class="nav__m-link">For Schools</a>
       <a href="researchers.html" class="nav__m-link">For Researchers</a>
@@ -109,7 +123,7 @@
   <section class="page-hero">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="index.html">Home</a>
+        <a href="index.html">EBS</a>
         <span class="breadcrumb__sep" aria-hidden="true">/</span>
         <span aria-current="page">Resources</span>
       </nav>
@@ -129,6 +143,7 @@
         <a href="#tools"      class="btn btn--secondary btn--sm">Research Tools</a>
         <a href="#presenting" class="btn btn--secondary btn--sm">Presenting Research</a>
         <a href="#templates"  class="btn btn--secondary btn--sm">Templates</a>
+        <a href="datascience.html" class="btn btn--secondary btn--sm">Data Science</a>
       </div>
     </div>
   </section>
@@ -171,7 +186,7 @@
               <div class="step__num">4</div>
               <div class="step__body">
                 <p class="step__title">Analyze &amp; Interpret</p>
-                <p>Apply appropriate analytical methods — statistical tests, bioinformatics pipelines, or qualitative synthesis. Tools like R, Python (Biopython, Pandas), and Galaxy are beginner-friendly. Focus on what your results actually show, not what you hoped they'd show.</p>
+                <p>Apply appropriate analytical methods — statistical tests, bioinformatics pipelines, or qualitative synthesis. Tools like RStudio, Python (Biopython, pandas), and Galaxy are beginner-friendly. Focus on what your results actually show, not what you hoped they'd show.</p>
               </div>
             </div>
             <div class="step">
@@ -374,18 +389,25 @@
               <span class="tool-link__desc">Browser-based bioinformatics. No coding required for many analyses. Great for beginners.</span>
             </div>
           </a>
-          <a href="https://www.r-project.org" target="_blank" rel="noopener" class="tool-link">
+          <a href="https://posit.co/products/open-source/rstudio" target="_blank" rel="noopener" class="tool-link">
             <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-chart"/></svg></div>
             <div>
-              <span class="tool-link__name">R / RStudio</span>
-              <span class="tool-link__desc">The standard for statistical analysis in biology. Free, powerful, and well-documented.</span>
+              <span class="tool-link__name">RStudio</span>
+              <span class="tool-link__desc">The standard R interface for statistical analysis in biology. Use it with the EBS RStudio track.</span>
             </div>
           </a>
           <a href="https://colab.research.google.com" target="_blank" rel="noopener" class="tool-link">
             <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-laptop"/></svg></div>
             <div>
               <span class="tool-link__name">Google Colab (Python)</span>
-              <span class="tool-link__desc">Free cloud-based Python notebooks. Great for data analysis and machine learning with Biopython/Pandas.</span>
+              <span class="tool-link__desc">Free cloud-based Python notebooks. Use with the EBS Python track for pandas, NumPy, and SciPy.</span>
+            </div>
+          </a>
+          <a href="python.html" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-laptop"/></svg></div>
+            <div>
+              <span class="tool-link__name">EBS Python Track</span>
+              <span class="tool-link__desc">On-site lessons for pandas, NumPy, SciPy, practice data, exercises, and answer checks.</span>
             </div>
           </a>
           <a href="https://blast.ncbi.nlm.nih.gov" target="_blank" rel="noopener" class="tool-link">
@@ -402,11 +424,11 @@
               <span class="tool-link__desc">Multiple sequence alignment tool. Compare protein or DNA sequences across species.</span>
             </div>
           </a>
-          <a href="https://www.statmethods.net" target="_blank" rel="noopener" class="tool-link">
+          <a href="rstudio.html" class="tool-link">
             <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-book"/></svg></div>
             <div>
-              <span class="tool-link__name">Quick-R Reference</span>
-              <span class="tool-link__desc">Clear, beginner-friendly R reference for statistical methods used in biology.</span>
+              <span class="tool-link__name">EBS RStudio Track</span>
+              <span class="tool-link__desc">On-site RStudio lessons for data frames, grouped summaries, t-tests, plots, and answer checks.</span>
             </div>
           </a>
         </div>

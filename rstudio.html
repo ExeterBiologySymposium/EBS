@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A self-contained RStudio data science track for biology research using R data frames, summaries, plots, and statistical tests.">
+  <title>RStudio Track — Exeter Biology Symposium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .course-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: var(--sp-16); align-items: start; }
+    .course-aside { position: sticky; top: calc(var(--nav-h) + var(--sp-8)); }
+    .course-nav { display: flex; flex-direction: column; border: 1px solid var(--col-border); background: #fff; }
+    .course-nav a { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--col-border); color: var(--col-text-sec); font-size: var(--sz-sm); font-weight: 700; text-decoration: none; }
+    .course-nav a:last-child { border-bottom: 0; }
+    .course-nav a:hover { background: var(--col-primary); color: #fff; }
+    .course-card { border: 1px solid var(--col-border); background: #fff; padding: var(--sp-6); }
+    .course-card + .course-card { margin-top: var(--sp-5); }
+    .course-card h3 { font-size: var(--sz-xl); margin-bottom: var(--sp-3); }
+    .course-card p, .course-card li { font-size: var(--sz-sm); color: var(--col-text-sec); line-height: 1.55; }
+    .course-card ul { list-style: square; padding-left: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2); }
+    .lesson { scroll-margin-top: calc(var(--nav-h) + var(--sp-8)); margin-bottom: var(--sp-20); }
+    .lesson:last-child { margin-bottom: 0; }
+    .lesson h2 { margin-bottom: var(--sp-4); }
+    .lesson > p { max-width: 780px; margin-bottom: var(--sp-6); font-size: var(--sz-lg); }
+    .lesson-panel { border: 1px solid var(--col-border); border-top: 4px solid var(--col-primary); background: #fff; padding: var(--sp-6); margin-bottom: var(--sp-5); }
+    .lesson-panel h3 { font-size: var(--sz-2xl); margin-bottom: var(--sp-3); }
+    .lesson-panel p, .lesson-panel li { color: var(--col-text-sec); line-height: 1.65; }
+    .lesson-panel ul, .lesson-panel ol { margin-top: var(--sp-3); padding-left: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2); }
+    .lesson-panel ul { list-style: square; }
+    .lesson-panel ol { list-style: decimal; }
+    .teacher-note { margin-top: var(--sp-4); padding: var(--sp-4); border-left: 4px solid var(--col-primary); background: var(--col-bg-alt); color: var(--col-text-sec); font-size: var(--sz-sm); line-height: 1.6; }
+    .dataset-wrap { overflow-x: auto; border: 1px solid var(--col-border); background: #fff; }
+    .dataset-table { width: 100%; min-width: 760px; border-collapse: collapse; }
+    .dataset-table th, .dataset-table td { padding: var(--sp-3); border-bottom: 1px solid var(--col-border); font-size: var(--sz-sm); text-align: left; }
+    .dataset-table th { background: var(--col-bg-alt); color: var(--col-text); font-weight: 800; }
+    .dataset-table td { color: var(--col-text-sec); }
+    .code-sample { margin: var(--sp-4) 0; padding: var(--sp-4); background: #111; color: #fff; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: var(--sz-sm); line-height: 1.6; }
+    .practice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); }
+    .practice-card { border: 1px solid var(--col-border); background: #fff; padding: var(--sp-6); }
+    .practice-card h3 { font-size: var(--sz-xl); margin-bottom: var(--sp-3); }
+    .practice-card ol { list-style: decimal; padding-left: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2); color: var(--col-text-sec); }
+    .answer { border: 1px solid var(--col-border); background: #fff; padding: var(--sp-5); margin-bottom: var(--sp-4); }
+    .answer summary { cursor: pointer; font-family: var(--font-body); font-size: var(--sz-sm); font-weight: 800; color: var(--col-text); text-transform: uppercase; letter-spacing: 0.08em; }
+    .answer div { margin-top: var(--sp-4); color: var(--col-text-sec); line-height: 1.65; }
+    .formula { display: block; margin: var(--sp-3) 0; padding: var(--sp-3) var(--sp-4); background: var(--col-bg-alt); border: 1px solid var(--col-border); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: var(--sz-sm); color: var(--col-text); overflow-x: auto; }
+    @media (max-width: 980px) {
+      .course-shell { grid-template-columns: 1fr; gap: var(--sp-10); }
+      .course-aside { position: static; }
+      .course-nav { flex-direction: row; flex-wrap: wrap; }
+      .course-nav a { border-right: 1px solid var(--col-border); }
+      .practice-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="about.html" class="nav__link">About</a></li>
+      <li><a href="team.html" class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Data Science <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="datascience.html" class="nav__dd-item" role="menuitem">Curriculum Hub</a>
+          <a href="python.html"      class="nav__dd-item" role="menuitem">Python Track</a>
+          <a href="rstudio.html"     class="nav__dd-item" role="menuitem">RStudio Track</a>
+        </div>
+      </li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html" class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html" class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="currentColor" stroke-width="1.5" fill="none"><circle cx="9.2" cy="9" r="8.5"></circle><path d="M14.85 14.64 L20.71 20.5"></path></g></svg>
+    </button>
+    <a href="register.html" class="nav__register">Register</a>
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html" class="nav__m-link">About</a>
+      <a href="team.html" class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Data Science</span>
+      <a href="datascience.html" class="nav__m-link">Curriculum Hub</a>
+      <a href="python.html"      class="nav__m-link">Python Track</a>
+      <a href="rstudio.html"     class="nav__m-link">RStudio Track</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html" class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html" class="nav__m-link">For Judges</a>
+      <a href="faq.html" class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta"><a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a></div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="datascience.html">Data Science</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">RStudio Track</span>
+      </nav>
+      <span class="overline">RStudio Track</span>
+      <h1>RStudio for Biology Data Analysis</h1>
+      <p class="page-hero__desc">This page teaches the RStudio workflow directly: build a project, read a data frame, summarize groups, run tests, make plots, and write a defensible result.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="course-shell">
+        <aside class="course-aside">
+          <nav class="course-nav" aria-label="RStudio lesson sections">
+            <a href="#mental-model">Mental Model</a>
+            <a href="#dataset">Dataset</a>
+            <a href="#dataframes">Data Frames</a>
+            <a href="#summaries">Summaries</a>
+            <a href="#tests">Tests</a>
+            <a href="#practice">Practice</a>
+            <a href="#answers">Answer Key</a>
+          </nav>
+          <div class="course-card" style="margin-top: var(--sp-5);">
+            <h3>What you need</h3>
+            <ul>
+              <li>A place to run R code</li>
+              <li>The dataset printed on this page</li>
+              <li>No outside R tutorial</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div>
+          <section class="lesson reveal" id="mental-model">
+            <span class="overline">Lesson 1</span>
+            <h2>The RStudio Mental Model</h2>
+            <p>RStudio helps you keep a research project organized. Think in four parts: a script where your instructions live, a console where code runs, an environment where objects appear, and files/plots where outputs are stored.</p>
+            <div class="lesson-panel">
+              <h3>R Objects</h3>
+              <p>In R, you usually create an object and then ask questions about it. The assignment operator is <code>&lt;-</code>. Read it as "gets."</p>
+              <pre class="code-sample"><code>activity &lt;- c(11.2, 10.8, 11.5)
+mean(activity)</code></pre>
+              <p class="teacher-note"><strong>Teacher note:</strong> A script is better than typing everything into the console because the script becomes your methods record. If a judge asks what you did, your script should answer.</p>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="dataset">
+            <span class="overline">Lesson 2</span>
+            <h2>Practice Dataset: Enzyme Activity</h2>
+            <p>This is the same dataset used in the Python track. The research question is: does the treatment condition increase enzyme activity compared with control?</p>
+            <div class="dataset-wrap">
+              <table class="dataset-table">
+                <thead>
+                  <tr><th>sample_id</th><th>condition</th><th>temperature_c</th><th>ph</th><th>enzyme_activity</th><th>cell_viability</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>E01</td><td>control</td><td>37</td><td>7.2</td><td>11.2</td><td>96</td></tr>
+                  <tr><td>E02</td><td>control</td><td>37</td><td>7.2</td><td>10.8</td><td>95</td></tr>
+                  <tr><td>E03</td><td>control</td><td>37</td><td>7.1</td><td>11.5</td><td>94</td></tr>
+                  <tr><td>E04</td><td>control</td><td>37</td><td>7.3</td><td>10.9</td><td>97</td></tr>
+                  <tr><td>E05</td><td>control</td><td>37</td><td>7.2</td><td>11.0</td><td>96</td></tr>
+                  <tr><td>E06</td><td>control</td><td>37</td><td>7.1</td><td>11.3</td><td>95</td></tr>
+                  <tr><td>E07</td><td>treatment</td><td>39</td><td>7.2</td><td>14.1</td><td>93</td></tr>
+                  <tr><td>E08</td><td>treatment</td><td>39</td><td>7.2</td><td>13.7</td><td>92</td></tr>
+                  <tr><td>E09</td><td>treatment</td><td>39</td><td>7.1</td><td>14.5</td><td>91</td></tr>
+                  <tr><td>E10</td><td>treatment</td><td>39</td><td>7.3</td><td>15.0</td><td>90</td></tr>
+                  <tr><td>E11</td><td>treatment</td><td>39</td><td>7.2</td><td>13.9</td><td>92</td></tr>
+                  <tr><td>E12</td><td>treatment</td><td>39</td><td>7.1</td><td>14.3</td><td>93</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <pre class="code-sample"><code>sample_id,condition,temperature_c,ph,enzyme_activity,cell_viability
+E01,control,37,7.2,11.2,96
+E02,control,37,7.2,10.8,95
+E03,control,37,7.1,11.5,94
+E04,control,37,7.3,10.9,97
+E05,control,37,7.2,11.0,96
+E06,control,37,7.1,11.3,95
+E07,treatment,39,7.2,14.1,93
+E08,treatment,39,7.2,13.7,92
+E09,treatment,39,7.1,14.5,91
+E10,treatment,39,7.3,15.0,90
+E11,treatment,39,7.2,13.9,92
+E12,treatment,39,7.1,14.3,93</code></pre>
+          </section>
+
+          <section class="lesson reveal" id="dataframes">
+            <span class="overline">Lesson 3</span>
+            <h2>Data Frames: Tables in R</h2>
+            <p>An R data frame is a table. Each row is one sample. Each column is one variable. Your first job is always to inspect the data before analyzing it.</p>
+            <div class="lesson-panel">
+              <h3>Read and Inspect</h3>
+              <pre class="code-sample"><code>df &lt;- read.csv("enzyme_activity.csv")
+
+head(df)
+dim(df)
+names(df)
+table(df$condition)
+
+clean &lt;- subset(df, !is.na(condition) &amp; !is.na(enzyme_activity))</code></pre>
+              <p>The dollar sign selects one column from a data frame. For example, <code>df$condition</code> means "the condition column inside df."</p>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="summaries">
+            <span class="overline">Lesson 4</span>
+            <h2>Grouped Summaries</h2>
+            <p>A grouped summary compares each condition. Here the key comparison is mean enzyme activity in control samples versus treatment samples.</p>
+            <div class="lesson-panel">
+              <h3>Base R Summary</h3>
+              <pre class="code-sample"><code>aggregate(enzyme_activity ~ condition, clean, function(x) {
+  c(n = length(x), mean = mean(x), sd = sd(x))
+})
+
+control &lt;- subset(clean, condition == "control")$enzyme_activity
+treatment &lt;- subset(clean, condition == "treatment")$enzyme_activity
+
+mean(treatment) - mean(control)</code></pre>
+              <p>The formula <code>enzyme_activity ~ condition</code> means: summarize enzyme activity separately for each condition.</p>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="tests">
+            <span class="overline">Lesson 5</span>
+            <h2>Statistical Tests and Plots</h2>
+            <p>R can run a Welch t-test directly from a formula. The test asks whether the group means are different relative to the variation within groups.</p>
+            <div class="lesson-panel">
+              <h3>Welch t-Test</h3>
+              <pre class="code-sample"><code>result &lt;- t.test(enzyme_activity ~ condition, data = clean)
+result
+result$p.value</code></pre>
+              <h3 style="margin-top: var(--sp-5);">Simple Plot</h3>
+              <pre class="code-sample"><code>boxplot(enzyme_activity ~ condition,
+        data = clean,
+        xlab = "Condition",
+        ylab = "Enzyme activity",
+        main = "Treatment samples show higher enzyme activity")</code></pre>
+              <span class="formula">Interpretation template: Treatment samples had a higher mean enzyme activity than controls. A Welch t-test gave p = Y. Because treatment samples also had lower viability, the poster should mention possible stress or toxicity as a limitation.</span>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="practice">
+            <span class="overline">Practice</span>
+            <h2>Exercises</h2>
+            <div class="practice-grid">
+              <div class="practice-card">
+                <h3>Skill Check A</h3>
+                <ol>
+                  <li>What does <code>enzyme_activity ~ condition</code> mean in plain English?</li>
+                  <li>What is the mean enzyme activity for each condition?</li>
+                  <li>What is the treatment minus control difference?</li>
+                </ol>
+              </div>
+              <div class="practice-card">
+                <h3>Skill Check B</h3>
+                <ol>
+                  <li>Run a grouped summary for <code>cell_viability</code>.</li>
+                  <li>Why is cell viability a possible limitation?</li>
+                  <li>Write a one-sentence result for a poster.</li>
+                </ol>
+              </div>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="answers">
+            <span class="overline">Answer Key</span>
+            <h2>Check Your Work</h2>
+            <details class="answer">
+              <summary>Skill Check A Answers</summary>
+              <div>
+                <p><code>enzyme_activity ~ condition</code> means "compare enzyme activity across condition groups." The control mean enzyme activity is about 11.12. The treatment mean is 14.25. The treatment group is higher by about 3.13 activity units.</p>
+              </div>
+            </details>
+            <details class="answer">
+              <summary>t-Test Answer</summary>
+              <div>
+                <p>R's default two-sample <code>t.test</code> uses Welch's method. The p-value is about 5.79e-07 for this dataset, which is strong evidence that the treatment and control groups differ in enzyme activity. The test does not prove the treatment is the only cause of the difference.</p>
+              </div>
+            </details>
+            <details class="answer">
+              <summary>Skill Check B Answers</summary>
+              <div>
+                <p>Mean cell viability is 95.5 for control and 91.83 for treatment. That is a limitation because the treatment condition may be changing both enzyme activity and cell health. A good poster sentence would be: "Treatment samples showed higher enzyme activity than controls, but lower treatment viability suggests the effect should be interpreted alongside possible cell stress."</p>
+              </div>
+            </details>
+            <div class="btn-group" style="margin-top: var(--sp-8);">
+              <a href="datascience.html" class="btn btn--secondary">Back to Curriculum</a>
+              <a href="python.html" class="btn btn--primary">Compare Python Track</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

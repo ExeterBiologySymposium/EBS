@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A self-contained Python data science track for biology research using pandas, NumPy, and SciPy.">
+  <title>Python Track — Exeter Biology Symposium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .course-shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: var(--sp-16); align-items: start; }
+    .course-aside { position: sticky; top: calc(var(--nav-h) + var(--sp-8)); }
+    .course-nav { display: flex; flex-direction: column; border: 1px solid var(--col-border); background: #fff; }
+    .course-nav a { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--col-border); color: var(--col-text-sec); font-size: var(--sz-sm); font-weight: 700; text-decoration: none; }
+    .course-nav a:last-child { border-bottom: 0; }
+    .course-nav a:hover { background: var(--col-primary); color: #fff; }
+    .course-card { border: 1px solid var(--col-border); background: #fff; padding: var(--sp-6); }
+    .course-card + .course-card { margin-top: var(--sp-5); }
+    .course-card h3 { font-size: var(--sz-xl); margin-bottom: var(--sp-3); }
+    .course-card p, .course-card li { font-size: var(--sz-sm); color: var(--col-text-sec); line-height: 1.55; }
+    .course-card ul { list-style: square; padding-left: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2); }
+    .lesson { scroll-margin-top: calc(var(--nav-h) + var(--sp-8)); margin-bottom: var(--sp-20); }
+    .lesson:last-child { margin-bottom: 0; }
+    .lesson h2 { margin-bottom: var(--sp-4); }
+    .lesson > p { max-width: 780px; margin-bottom: var(--sp-6); font-size: var(--sz-lg); }
+    .lesson-panel { border: 1px solid var(--col-border); border-top: 4px solid var(--col-primary); background: #fff; padding: var(--sp-6); margin-bottom: var(--sp-5); }
+    .lesson-panel h3 { font-size: var(--sz-2xl); margin-bottom: var(--sp-3); }
+    .lesson-panel p, .lesson-panel li { color: var(--col-text-sec); line-height: 1.65; }
+    .lesson-panel ul, .lesson-panel ol { margin-top: var(--sp-3); padding-left: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2); }
+    .lesson-panel ul { list-style: square; }
+    .lesson-panel ol { list-style: decimal; }
+    .teacher-note { margin-top: var(--sp-4); padding: var(--sp-4); border-left: 4px solid var(--col-primary); background: var(--col-bg-alt); color: var(--col-text-sec); font-size: var(--sz-sm); line-height: 1.6; }
+    .dataset-wrap { overflow-x: auto; border: 1px solid var(--col-border); background: #fff; }
+    .dataset-table { width: 100%; min-width: 760px; border-collapse: collapse; }
+    .dataset-table th, .dataset-table td { padding: var(--sp-3); border-bottom: 1px solid var(--col-border); font-size: var(--sz-sm); text-align: left; }
+    .dataset-table th { background: var(--col-bg-alt); color: var(--col-text); font-weight: 800; }
+    .dataset-table td { color: var(--col-text-sec); }
+    .code-sample { margin: var(--sp-4) 0; padding: var(--sp-4); background: #111; color: #fff; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: var(--sz-sm); line-height: 1.6; }
+    .practice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); }
+    .practice-card { border: 1px solid var(--col-border); background: #fff; padding: var(--sp-6); }
+    .practice-card h3 { font-size: var(--sz-xl); margin-bottom: var(--sp-3); }
+    .practice-card ol { list-style: decimal; padding-left: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2); color: var(--col-text-sec); }
+    .answer { border: 1px solid var(--col-border); background: #fff; padding: var(--sp-5); margin-bottom: var(--sp-4); }
+    .answer summary { cursor: pointer; font-family: var(--font-body); font-size: var(--sz-sm); font-weight: 800; color: var(--col-text); text-transform: uppercase; letter-spacing: 0.08em; }
+    .answer div { margin-top: var(--sp-4); color: var(--col-text-sec); line-height: 1.65; }
+    .formula { display: block; margin: var(--sp-3) 0; padding: var(--sp-3) var(--sp-4); background: var(--col-bg-alt); border: 1px solid var(--col-border); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: var(--sz-sm); color: var(--col-text); overflow-x: auto; }
+    @media (max-width: 980px) {
+      .course-shell { grid-template-columns: 1fr; gap: var(--sp-10); }
+      .course-aside { position: static; }
+      .course-nav { flex-direction: row; flex-wrap: wrap; }
+      .course-nav a { border-right: 1px solid var(--col-border); }
+      .practice-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="about.html" class="nav__link">About</a></li>
+      <li><a href="team.html" class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Data Science <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="datascience.html" class="nav__dd-item" role="menuitem">Curriculum Hub</a>
+          <a href="python.html"      class="nav__dd-item" role="menuitem">Python Track</a>
+          <a href="rstudio.html"     class="nav__dd-item" role="menuitem">RStudio Track</a>
+        </div>
+      </li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html" class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html" class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="currentColor" stroke-width="1.5" fill="none"><circle cx="9.2" cy="9" r="8.5"></circle><path d="M14.85 14.64 L20.71 20.5"></path></g></svg>
+    </button>
+    <a href="register.html" class="nav__register">Register</a>
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html" class="nav__m-link">About</a>
+      <a href="team.html" class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Data Science</span>
+      <a href="datascience.html" class="nav__m-link">Curriculum Hub</a>
+      <a href="python.html"      class="nav__m-link">Python Track</a>
+      <a href="rstudio.html"     class="nav__m-link">RStudio Track</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html" class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html" class="nav__m-link">For Judges</a>
+      <a href="faq.html" class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta"><a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a></div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="datascience.html">Data Science</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Python Track</span>
+      </nav>
+      <span class="overline">Python Track</span>
+      <h1>pandas, NumPy, and SciPy for Biology Data</h1>
+      <p class="page-hero__desc">This page teaches the Python workflow directly: read a dataset, clean it, summarize groups, run statistical tests, and interpret the result for an EBS poster.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="course-shell">
+        <aside class="course-aside">
+          <nav class="course-nav" aria-label="Python lesson sections">
+            <a href="#mental-model">Mental Model</a>
+            <a href="#libraries">Libraries &amp; Commands</a>
+            <a href="#dataset">Dataset</a>
+            <a href="#pandas">pandas</a>
+            <a href="#numpy">NumPy</a>
+            <a href="#scipy">SciPy</a>
+            <a href="#practice">Practice</a>
+            <a href="#answers">Answer Key</a>
+          </nav>
+          <div class="course-card" style="margin-top: var(--sp-5);">
+            <h3>What you need</h3>
+            <ul>
+              <li>A place to run Python code</li>
+              <li>The dataset printed on this page</li>
+              <li>No outside Python tutorial</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div>
+          <section class="lesson reveal" id="mental-model">
+            <span class="overline">Lesson 1</span>
+            <h2>The Python Mental Model</h2>
+            <p>Python analysis is a conversation between a table and a question. Your job is to keep each step visible: load the data, inspect it, clean it, summarize it, test it, and write down what the result means.</p>
+            <div class="lesson-panel">
+              <h3>Three Libraries, Three Jobs</h3>
+              <ul>
+                <li><strong>pandas</strong> handles tables. A pandas table is called a DataFrame.</li>
+                <li><strong>NumPy</strong> handles numeric arrays and calculations.</li>
+                <li><strong>SciPy</strong> handles statistical tests and scientific computations.</li>
+              </ul>
+              <p class="teacher-note"><strong>Teacher note:</strong> Do not start with a statistical test. Start by asking, "What is one row? What does each column mean? Which rows should be compared?"</p>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="libraries">
+            <span class="overline">Command Reference</span>
+            <h2>Useful Python Libraries and Commands</h2>
+            <p>You do not need every Python library. For most EBS dry-lab projects, start with pandas for tables, NumPy for numeric calculations, and SciPy for statistics. Add other libraries only when the research question genuinely needs them.</p>
+
+            <div class="lesson-panel">
+              <h3>Which Libraries Are Useful?</h3>
+              <div class="dataset-wrap">
+                <table class="dataset-table">
+                  <thead>
+                    <tr><th>Library</th><th>Use it for</th><th>When it matters in biology research</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>pandas</strong></td><td>Tables, CSV files, cleaning, filtering, grouping, merging</td><td>Any project with sample metadata, public-health tables, experiment results, or spreadsheet-like data</td></tr>
+                    <tr><td><strong>NumPy</strong></td><td>Arrays, numeric calculations, means, standard deviations, percentiles</td><td>When columns need mathematical operations or you need clean numeric inputs for statistics</td></tr>
+                    <tr><td><strong>SciPy</strong></td><td>Statistical tests, correlations, probability distributions, scientific calculations</td><td>When you need a t-test, chi-square test, Mann-Whitney U test, correlation, or regression helper</td></tr>
+                    <tr><td><strong>matplotlib</strong></td><td>Core plotting</td><td>When you need a poster figure and want full control over labels, axes, and export size</td></tr>
+                    <tr><td><strong>seaborn</strong></td><td>Cleaner statistical plots built on matplotlib</td><td>When you want fast box plots, violin plots, scatter plots, and regression-style visual summaries</td></tr>
+                    <tr><td><strong>Biopython</strong></td><td>Sequence and biological file handling</td><td>When your project uses FASTA files, sequence records, or biological database formats</td></tr>
+                    <tr><td><strong>statsmodels</strong></td><td>More detailed statistical models</td><td>When you need regression tables, confidence intervals, or model diagnostics beyond SciPy basics</td></tr>
+                    <tr><td><strong>scikit-learn</strong></td><td>Machine learning</td><td>Only when prediction is truly part of the project; not needed for basic EBS statistics</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="teacher-note"><strong>Teacher note:</strong> If you are new, do not start with machine learning. Most strong beginner projects use pandas, NumPy, SciPy, and one clear figure.</p>
+            </div>
+
+            <div class="lesson-panel">
+              <h3>Most Useful pandas Commands</h3>
+              <div class="dataset-wrap">
+                <table class="dataset-table">
+                  <thead>
+                    <tr><th>Command</th><th>What it does</th><th>Example</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>pd.read_csv()</code></td><td>Loads a CSV file into a DataFrame</td><td><code>df = pd.read_csv("enzyme_activity.csv")</code></td></tr>
+                    <tr><td><code>df.head()</code></td><td>Shows the first rows so you can inspect the table</td><td><code>df.head()</code></td></tr>
+                    <tr><td><code>df.shape</code></td><td>Reports row and column count</td><td><code>df.shape</code></td></tr>
+                    <tr><td><code>df.columns</code></td><td>Lists column names</td><td><code>df.columns</code></td></tr>
+                    <tr><td><code>df.info()</code></td><td>Shows column types and missing-value counts</td><td><code>df.info()</code></td></tr>
+                    <tr><td><code>df.describe()</code></td><td>Summarizes numeric columns</td><td><code>df.describe()</code></td></tr>
+                    <tr><td><code>df["column"]</code></td><td>Selects one column</td><td><code>df["enzyme_activity"]</code></td></tr>
+                    <tr><td><code>df.loc[]</code></td><td>Selects rows and columns by label or condition</td><td><code>df.loc[df["condition"] == "control"]</code></td></tr>
+                    <tr><td><code>df.query()</code></td><td>Filters rows using a readable expression</td><td><code>df.query("temperature_c == 39")</code></td></tr>
+                    <tr><td><code>df.value_counts()</code></td><td>Counts categories or repeated values</td><td><code>df["condition"].value_counts()</code></td></tr>
+                    <tr><td><code>df.isna().sum()</code></td><td>Counts missing values by column</td><td><code>df.isna().sum()</code></td></tr>
+                    <tr><td><code>df.dropna()</code></td><td>Removes rows with missing data</td><td><code>df.dropna(subset=["enzyme_activity"])</code></td></tr>
+                    <tr><td><code>df.fillna()</code></td><td>Fills missing values when justified</td><td><code>df["ph"].fillna(df["ph"].median())</code></td></tr>
+                    <tr><td><code>df.rename()</code></td><td>Renames confusing columns</td><td><code>df.rename(columns={"ph": "pH"})</code></td></tr>
+                    <tr><td><code>df.astype()</code></td><td>Changes a column type</td><td><code>df["temperature_c"].astype(float)</code></td></tr>
+                    <tr><td><code>df.groupby()</code></td><td>Splits data into groups before summarizing</td><td><code>df.groupby("condition")["enzyme_activity"].mean()</code></td></tr>
+                    <tr><td><code>.agg()</code></td><td>Runs several summaries at once</td><td><code>.agg(["count", "mean", "std"])</code></td></tr>
+                    <tr><td><code>df.sort_values()</code></td><td>Sorts rows</td><td><code>df.sort_values("enzyme_activity")</code></td></tr>
+                    <tr><td><code>pd.merge()</code></td><td>Combines two tables by a shared key</td><td><code>pd.merge(samples, metadata, on="sample_id")</code></td></tr>
+                    <tr><td><code>df.to_csv()</code></td><td>Saves a cleaned table</td><td><code>clean.to_csv("cleaned.csv", index=False)</code></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="lesson-panel">
+              <h3>Most Useful NumPy Commands</h3>
+              <div class="dataset-wrap">
+                <table class="dataset-table">
+                  <thead>
+                    <tr><th>Command</th><th>What it does</th><th>Example</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>np.array()</code></td><td>Creates a numeric array</td><td><code>values = np.array([11.2, 10.8, 11.5])</code></td></tr>
+                    <tr><td><code>np.mean()</code></td><td>Calculates the mean</td><td><code>np.mean(control)</code></td></tr>
+                    <tr><td><code>np.median()</code></td><td>Calculates the median</td><td><code>np.median(control)</code></td></tr>
+                    <tr><td><code>np.std()</code></td><td>Calculates standard deviation</td><td><code>np.std(control, ddof=1)</code></td></tr>
+                    <tr><td><code>np.min()</code> / <code>np.max()</code></td><td>Finds smallest and largest values</td><td><code>np.max(treatment)</code></td></tr>
+                    <tr><td><code>np.percentile()</code></td><td>Finds percentile cutoffs</td><td><code>np.percentile(control, [25, 50, 75])</code></td></tr>
+                    <tr><td><code>np.where()</code></td><td>Creates conditional values</td><td><code>np.where(values &gt; 12, "high", "low")</code></td></tr>
+                    <tr><td><code>np.isnan()</code></td><td>Detects missing numeric values</td><td><code>np.isnan(values)</code></td></tr>
+                    <tr><td><code>np.unique()</code></td><td>Finds unique values and counts</td><td><code>np.unique(groups, return_counts=True)</code></td></tr>
+                    <tr><td><code>np.corrcoef()</code></td><td>Calculates a correlation matrix</td><td><code>np.corrcoef(temp, activity)</code></td></tr>
+                    <tr><td><code>np.random.seed()</code></td><td>Makes random work reproducible</td><td><code>np.random.seed(42)</code></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="lesson-panel">
+              <h3>Most Useful SciPy Commands</h3>
+              <div class="dataset-wrap">
+                <table class="dataset-table">
+                  <thead>
+                    <tr><th>Command</th><th>What it does</th><th>Example</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>stats.ttest_ind()</code></td><td>Compares two independent group means</td><td><code>stats.ttest_ind(control, treatment, equal_var=False)</code></td></tr>
+                    <tr><td><code>stats.ttest_rel()</code></td><td>Compares paired measurements</td><td><code>stats.ttest_rel(before, after)</code></td></tr>
+                    <tr><td><code>stats.mannwhitneyu()</code></td><td>Compares two groups without assuming normality</td><td><code>stats.mannwhitneyu(control, treatment)</code></td></tr>
+                    <tr><td><code>stats.chi2_contingency()</code></td><td>Tests association between categorical variables</td><td><code>stats.chi2_contingency(table)</code></td></tr>
+                    <tr><td><code>stats.fisher_exact()</code></td><td>Tests small 2x2 categorical tables</td><td><code>stats.fisher_exact(table)</code></td></tr>
+                    <tr><td><code>stats.pearsonr()</code></td><td>Measures linear correlation between two numeric variables</td><td><code>stats.pearsonr(temp, activity)</code></td></tr>
+                    <tr><td><code>stats.spearmanr()</code></td><td>Measures rank correlation</td><td><code>stats.spearmanr(dose, response)</code></td></tr>
+                    <tr><td><code>stats.linregress()</code></td><td>Fits a simple linear regression</td><td><code>stats.linregress(temp, activity)</code></td></tr>
+                    <tr><td><code>stats.shapiro()</code></td><td>Checks normality for small samples</td><td><code>stats.shapiro(control)</code></td></tr>
+                    <tr><td><code>stats.zscore()</code></td><td>Standardizes values or flags extreme values</td><td><code>stats.zscore(df["enzyme_activity"])</code></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="teacher-note"><strong>Decision rule:</strong> Use a t-test for two numeric groups, chi-square or Fisher's exact test for categorical counts, correlation for two numeric variables, and regression when one numeric variable is being used to predict another.</p>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="dataset">
+            <span class="overline">Lesson 2</span>
+            <h2>Practice Dataset: Enzyme Activity</h2>
+            <p>This invented dataset simulates a simple biology question: does a treatment condition increase enzyme activity compared with a control condition?</p>
+            <div class="dataset-wrap">
+              <table class="dataset-table">
+                <thead>
+                  <tr><th>sample_id</th><th>condition</th><th>temperature_c</th><th>ph</th><th>enzyme_activity</th><th>cell_viability</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>E01</td><td>control</td><td>37</td><td>7.2</td><td>11.2</td><td>96</td></tr>
+                  <tr><td>E02</td><td>control</td><td>37</td><td>7.2</td><td>10.8</td><td>95</td></tr>
+                  <tr><td>E03</td><td>control</td><td>37</td><td>7.1</td><td>11.5</td><td>94</td></tr>
+                  <tr><td>E04</td><td>control</td><td>37</td><td>7.3</td><td>10.9</td><td>97</td></tr>
+                  <tr><td>E05</td><td>control</td><td>37</td><td>7.2</td><td>11.0</td><td>96</td></tr>
+                  <tr><td>E06</td><td>control</td><td>37</td><td>7.1</td><td>11.3</td><td>95</td></tr>
+                  <tr><td>E07</td><td>treatment</td><td>39</td><td>7.2</td><td>14.1</td><td>93</td></tr>
+                  <tr><td>E08</td><td>treatment</td><td>39</td><td>7.2</td><td>13.7</td><td>92</td></tr>
+                  <tr><td>E09</td><td>treatment</td><td>39</td><td>7.1</td><td>14.5</td><td>91</td></tr>
+                  <tr><td>E10</td><td>treatment</td><td>39</td><td>7.3</td><td>15.0</td><td>90</td></tr>
+                  <tr><td>E11</td><td>treatment</td><td>39</td><td>7.2</td><td>13.9</td><td>92</td></tr>
+                  <tr><td>E12</td><td>treatment</td><td>39</td><td>7.1</td><td>14.3</td><td>93</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <pre class="code-sample"><code>sample_id,condition,temperature_c,ph,enzyme_activity,cell_viability
+E01,control,37,7.2,11.2,96
+E02,control,37,7.2,10.8,95
+E03,control,37,7.1,11.5,94
+E04,control,37,7.3,10.9,97
+E05,control,37,7.2,11.0,96
+E06,control,37,7.1,11.3,95
+E07,treatment,39,7.2,14.1,93
+E08,treatment,39,7.2,13.7,92
+E09,treatment,39,7.1,14.5,91
+E10,treatment,39,7.3,15.0,90
+E11,treatment,39,7.2,13.9,92
+E12,treatment,39,7.1,14.3,93</code></pre>
+          </section>
+
+          <section class="lesson reveal" id="pandas">
+            <span class="overline">Lesson 3</span>
+            <h2>pandas: Read, Inspect, Filter, Summarize</h2>
+            <p>A DataFrame is a table where each row is one observation and each column is one variable. For this dataset, each row is one enzyme sample.</p>
+            <div class="lesson-panel">
+              <h3>Core Commands</h3>
+              <pre class="code-sample"><code>import pandas as pd
+
+df = pd.read_csv("enzyme_activity.csv")
+
+print(df.head())
+print(df.shape)
+print(df.columns)
+print(df["condition"].value_counts())
+
+clean = df.dropna(subset=["condition", "enzyme_activity"])
+summary = clean.groupby("condition")["enzyme_activity"].agg(["count", "mean", "std"])
+print(summary)</code></pre>
+              <p>The important line is <code>groupby("condition")</code>. It tells pandas to split the table into control rows and treatment rows before calculating count, mean, and standard deviation.</p>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="numpy">
+            <span class="overline">Lesson 4</span>
+            <h2>NumPy: Numeric Thinking</h2>
+            <p>NumPy is useful when the analysis becomes more mathematical. It treats columns as arrays of numbers, which makes calculations predictable and fast.</p>
+            <div class="lesson-panel">
+              <h3>Mean, Difference, and Standard Deviation</h3>
+              <pre class="code-sample"><code>import numpy as np
+
+control = clean.loc[clean["condition"] == "control", "enzyme_activity"].to_numpy()
+treatment = clean.loc[clean["condition"] == "treatment", "enzyme_activity"].to_numpy()
+
+control_mean = np.mean(control)
+treatment_mean = np.mean(treatment)
+difference = treatment_mean - control_mean
+
+print(control_mean)
+print(treatment_mean)
+print(difference)
+print(np.std(control, ddof=1))
+print(np.std(treatment, ddof=1))</code></pre>
+              <p class="teacher-note"><strong>Teacher note:</strong> Use <code>ddof=1</code> for a sample standard deviation. Biology projects almost always measure samples, not every possible organism or molecule in the world.</p>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="scipy">
+            <span class="overline">Lesson 5</span>
+            <h2>SciPy: Statistical Tests</h2>
+            <p>The treatment mean is higher, but statistics asks whether the difference is large relative to the variation inside each group.</p>
+            <div class="lesson-panel">
+              <h3>Welch Two-Sample t-Test</h3>
+              <pre class="code-sample"><code>from scipy import stats
+
+test = stats.ttest_ind(control, treatment, equal_var=False)
+print(test.statistic)
+print(test.pvalue)</code></pre>
+              <p>Use <code>equal_var=False</code> because it does not assume the two groups have exactly the same variance. This is called Welch's t-test.</p>
+              <span class="formula">Interpretation template: The treatment group had a higher mean enzyme activity than the control group by X units. A Welch t-test gave p = Y, which is evidence that the groups differ in this sample. This does not prove the treatment is the only cause unless the experiment controlled other variables.</span>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="practice">
+            <span class="overline">Practice</span>
+            <h2>Exercises</h2>
+            <div class="practice-grid">
+              <div class="practice-card">
+                <h3>Skill Check A</h3>
+                <ol>
+                  <li>How many rows and columns are in the dataset?</li>
+                  <li>What is the mean enzyme activity for each condition?</li>
+                  <li>What is the treatment minus control difference?</li>
+                </ol>
+              </div>
+              <div class="practice-card">
+                <h3>Skill Check B</h3>
+                <ol>
+                  <li>What is the mean cell viability for each condition?</li>
+                  <li>Why should the lower treatment viability be mentioned as a limitation?</li>
+                  <li>Write one figure caption for a bar chart of enzyme activity by condition.</li>
+                </ol>
+              </div>
+            </div>
+          </section>
+
+          <section class="lesson reveal" id="answers">
+            <span class="overline">Answer Key</span>
+            <h2>Check Your Work</h2>
+            <details class="answer">
+              <summary>Skill Check A Answers</summary>
+              <div>
+                <p>The dataset has 12 rows and 6 columns. The control mean enzyme activity is about 11.12. The treatment mean is 14.25. The treatment group is higher by about 3.13 activity units.</p>
+              </div>
+            </details>
+            <details class="answer">
+              <summary>Statistical Test Answer</summary>
+              <div>
+                <p>A Welch t-test gives t = -14.39 and p = 5.79e-07 when the comparison is control minus treatment. The negative sign only reflects the order of subtraction. The practical interpretation is that treatment samples show much higher enzyme activity in this dataset.</p>
+              </div>
+            </details>
+            <details class="answer">
+              <summary>Skill Check B Answers</summary>
+              <div>
+                <p>Mean cell viability is 95.5 for control and 91.83 for treatment. That matters because a treatment that increases enzyme activity might also reduce cell viability. A fair poster would say: "Treatment samples showed higher enzyme activity than controls, but treatment samples also had lower cell viability, so follow-up work should test whether the activity change is independent of stress or toxicity."</p>
+              </div>
+            </details>
+            <div class="btn-group" style="margin-top: var(--sp-8);">
+              <a href="datascience.html" class="btn btn--secondary">Back to Curriculum</a>
+              <a href="rstudio.html" class="btn btn--primary">Compare RStudio Track</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

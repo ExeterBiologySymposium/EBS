@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A self-contained EBS data science curriculum hub for biology research, with separate RStudio and Python tracks.">
+  <title>Data Science Curriculum — Exeter Biology Symposium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .curriculum-shell {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: var(--sp-16);
+      align-items: start;
+    }
+    .curriculum-aside {
+      position: sticky;
+      top: calc(var(--nav-h) + var(--sp-8));
+    }
+    .curriculum-nav {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--col-border);
+      background: #fff;
+    }
+    .curriculum-nav a {
+      padding: var(--sp-3) var(--sp-4);
+      border-bottom: 1px solid var(--col-border);
+      color: var(--col-text-sec);
+      font-size: var(--sz-sm);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .curriculum-nav a:last-child { border-bottom: 0; }
+    .curriculum-nav a:hover {
+      background: var(--col-primary);
+      color: #fff;
+    }
+    .curriculum-card {
+      border: 1px solid var(--col-border);
+      background: #fff;
+      padding: var(--sp-6);
+    }
+    .curriculum-card + .curriculum-card { margin-top: var(--sp-5); }
+    .curriculum-card h3 {
+      font-size: var(--sz-xl);
+      margin-bottom: var(--sp-3);
+    }
+    .curriculum-card p,
+    .curriculum-card li {
+      font-size: var(--sz-sm);
+      color: var(--col-text-sec);
+    }
+    .curriculum-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+    .curriculum-list li {
+      position: relative;
+      padding-left: var(--sp-5);
+    }
+    .curriculum-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      background: var(--col-primary);
+    }
+    .curriculum-section {
+      scroll-margin-top: calc(var(--nav-h) + var(--sp-8));
+      margin-bottom: var(--sp-20);
+    }
+    .curriculum-section:last-child { margin-bottom: 0; }
+    .curriculum-section h2 {
+      margin-bottom: var(--sp-4);
+    }
+    .curriculum-section > p {
+      max-width: 760px;
+      margin-bottom: var(--sp-8);
+      font-size: var(--sz-lg);
+    }
+    .module-list {
+      display: grid;
+      gap: var(--sp-5);
+    }
+    .module {
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: var(--sp-5);
+      padding: var(--sp-6);
+      border: 1px solid var(--col-border);
+      border-left: 4px solid var(--col-primary);
+      background: #fff;
+    }
+    .module__num {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--col-primary);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: var(--sz-2xl);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .module h3 {
+      font-size: var(--sz-2xl);
+      margin-bottom: var(--sp-2);
+    }
+    .module__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2);
+      margin-bottom: var(--sp-4);
+    }
+    .module__meta span {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border: 1px solid var(--col-border-str);
+      color: var(--col-text-muted);
+      font-size: var(--sz-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .module__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-4);
+      margin-top: var(--sp-4);
+    }
+    .module__block {
+      background: var(--col-bg-alt);
+      padding: var(--sp-4);
+      border: 1px solid var(--col-border);
+    }
+    .module__block h4 {
+      font-family: var(--font-body);
+      font-size: var(--sz-sm);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--sp-2);
+    }
+    .module__block p,
+    .module__block li {
+      font-size: var(--sz-sm);
+      line-height: 1.55;
+      color: var(--col-text-sec);
+    }
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-6);
+    }
+    .track-card {
+      text-align: left;
+    }
+    .code-sample {
+      margin-top: var(--sp-4);
+      padding: var(--sp-4);
+      background: #111;
+      color: #fff;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: var(--sz-sm);
+      line-height: 1.6;
+    }
+    .deliverable-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--col-border);
+      background: #fff;
+    }
+    .deliverable-table th,
+    .deliverable-table td {
+      padding: var(--sp-4);
+      border-bottom: 1px solid var(--col-border);
+      text-align: left;
+      vertical-align: top;
+    }
+    .deliverable-table th {
+      background: var(--col-bg-alt);
+      font-size: var(--sz-sm);
+      color: var(--col-text);
+    }
+    .deliverable-table td {
+      color: var(--col-text-sec);
+      font-size: var(--sz-sm);
+      line-height: 1.55;
+    }
+    .deliverable-table tr:last-child td { border-bottom: 0; }
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-6);
+    }
+    .lesson {
+      border: 1px solid var(--col-border);
+      border-top: 4px solid var(--col-primary);
+      background: #fff;
+      padding: var(--sp-6);
+    }
+    .lesson h3 {
+      font-size: var(--sz-2xl);
+      margin-bottom: var(--sp-3);
+    }
+    .lesson p,
+    .lesson li {
+      color: var(--col-text-sec);
+      line-height: 1.65;
+    }
+    .lesson ul,
+    .lesson ol {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      margin-top: var(--sp-3);
+      padding-left: var(--sp-5);
+    }
+    .lesson ul { list-style: square; }
+    .lesson ol { list-style: decimal; }
+    .teacher-note {
+      margin-top: var(--sp-4);
+      padding: var(--sp-4);
+      border-left: 4px solid var(--col-primary);
+      background: var(--col-bg-alt);
+      color: var(--col-text-sec);
+      font-size: var(--sz-sm);
+      line-height: 1.6;
+    }
+    .dataset-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--col-border);
+      background: #fff;
+    }
+    .dataset-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+    }
+    .dataset-table th,
+    .dataset-table td {
+      padding: var(--sp-3);
+      border-bottom: 1px solid var(--col-border);
+      font-size: var(--sz-sm);
+      text-align: left;
+    }
+    .dataset-table th {
+      background: var(--col-bg-alt);
+      color: var(--col-text);
+      font-weight: 800;
+    }
+    .dataset-table td {
+      color: var(--col-text-sec);
+    }
+    .practice-card {
+      border: 1px solid var(--col-border);
+      background: #fff;
+      padding: var(--sp-6);
+    }
+    .practice-card h3 {
+      font-size: var(--sz-xl);
+      margin-bottom: var(--sp-3);
+    }
+    .practice-card ol {
+      list-style: decimal;
+      padding-left: var(--sp-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      color: var(--col-text-sec);
+    }
+    .answer {
+      border: 1px solid var(--col-border);
+      background: #fff;
+      padding: var(--sp-5);
+    }
+    .answer summary {
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: var(--sz-sm);
+      font-weight: 800;
+      color: var(--col-text);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .answer div {
+      margin-top: var(--sp-4);
+      color: var(--col-text-sec);
+      line-height: 1.65;
+    }
+    .formula {
+      display: block;
+      margin: var(--sp-3) 0;
+      padding: var(--sp-3) var(--sp-4);
+      background: var(--col-bg-alt);
+      border: 1px solid var(--col-border);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: var(--sz-sm);
+      color: var(--col-text);
+      overflow-x: auto;
+    }
+    @media (max-width: 980px) {
+      .curriculum-shell { grid-template-columns: 1fr; gap: var(--sp-10); }
+      .curriculum-aside { position: static; }
+      .curriculum-nav { flex-direction: row; flex-wrap: wrap; }
+      .curriculum-nav a { border-right: 1px solid var(--col-border); }
+      .module__grid,
+      .track-grid,
+      .lesson-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .module { grid-template-columns: 1fr; }
+      .module__num { width: 44px; height: 44px; font-size: var(--sz-xl); }
+      .deliverable-table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="about.html"     class="nav__link">About</a></li>
+      <li><a href="team.html"      class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Data Science <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="datascience.html" class="nav__dd-item" role="menuitem">Curriculum Hub</a>
+          <a href="python.html"      class="nav__dd-item" role="menuitem">Python Track</a>
+          <a href="rstudio.html"     class="nav__dd-item" role="menuitem">RStudio Track</a>
+        </div>
+      </li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html"     class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5" fill="none">
+          <circle cx="9.2" cy="9" r="8.5"></circle>
+          <path d="M14.85 14.64 L20.71 20.5"></path>
+        </g>
+      </svg>
+    </button>
+
+    <a href="register.html" class="nav__register">Register</a>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html"     class="nav__m-link">About</a>
+      <a href="team.html"      class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Data Science</span>
+      <a href="datascience.html" class="nav__m-link">Curriculum Hub</a>
+      <a href="python.html"      class="nav__m-link">Python Track</a>
+      <a href="rstudio.html"     class="nav__m-link">RStudio Track</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html"     class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html"      class="nav__m-link">For Judges</a>
+      <a href="faq.html"         class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta">
+        <a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Data Science</span>
+      </nav>
+      <span class="overline">Data Science Curriculum</span>
+      <h1>RStudio and Python for Biology Research</h1>
+      <p class="page-hero__desc">A full beginner curriculum for dry-lab biology projects: clean messy datasets, analyze them in RStudio or Python, and produce reproducible figures for an EBS poster.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="curriculum-shell">
+        <aside class="curriculum-aside">
+          <nav class="curriculum-nav" aria-label="Data science curriculum sections">
+            <a href="#outcomes">Outcomes</a>
+            <a href="#setup">Setup</a>
+            <a href="#modules">Curriculum</a>
+            <a href="#tracks">Track Pages</a>
+            <a href="#capstone">Capstone</a>
+          </nav>
+          <div class="curriculum-card" style="margin-top: var(--sp-5);">
+            <h3>Recommended pace</h3>
+            <p>10 modules across 8-10 weeks. Each module is designed for 60-90 minutes of practice plus one short research task.</p>
+          </div>
+          <div class="curriculum-card">
+            <h3>Course design</h3>
+            <ul class="curriculum-list">
+              <li>Core concepts live on this page</li>
+              <li>Python lessons live on the Python track page</li>
+              <li>R lessons live on the RStudio track page</li>
+              <li>No outside tutorials are required</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div>
+          <section class="curriculum-section reveal" id="outcomes">
+            <span class="overline">What You Will Learn</span>
+            <h2>Learning Outcomes</h2>
+            <p>By the end of this curriculum, students should be able to move from a biological question to a defensible, reproducible analysis.</p>
+            <div class="grid grid--2">
+              <div class="card">
+                <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-chart"/></svg></div>
+                <h3>Analyze Real Data</h3>
+                <p>Import CSV files, inspect variables, handle missing values, summarize groups, and choose appropriate statistical tests.</p>
+              </div>
+              <div class="card">
+                <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-laptop"/></svg></div>
+                <h3>Use Two Toolchains</h3>
+                <p>Work in RStudio for R-based statistics and in Python notebooks for pandas, NumPy, and SciPy workflows.</p>
+              </div>
+              <div class="card">
+                <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-book"/></svg></div>
+                <h3>Document Decisions</h3>
+                <p>Keep an analysis log that explains cleaning decisions, assumptions, test selection, and limitations.</p>
+              </div>
+              <div class="card">
+                <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-presentation"/></svg></div>
+                <h3>Make Poster-Ready Figures</h3>
+                <p>Create clear, labeled visualizations and export them with captions that state the result and interpretation.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="curriculum-section reveal" id="setup">
+            <span class="overline">Before Module 1</span>
+            <h2>Setup and Starter Dataset</h2>
+            <p>Students can choose either track first. The website teaches both workflows directly; the only outside step is opening the tool you want to use for running code.</p>
+            <div class="track-grid">
+              <div class="track-card">
+                <span class="track-card__label">RStudio Track</span>
+                <div class="track-card__icon"><svg width="32" height="32" aria-hidden="true"><use href="#icon-chart"/></svg></div>
+                <h3>R in RStudio</h3>
+                <p>Use RStudio when your project is centered on statistical tests, group summaries, and clean publication-style plots.</p>
+                <a href="rstudio.html" class="btn btn--secondary btn--sm" style="margin-top: var(--sp-4);">Start RStudio Track</a>
+              </div>
+              <div class="track-card">
+                <span class="track-card__label">Python Track</span>
+                <div class="track-card__icon"><svg width="32" height="32" aria-hidden="true"><use href="#icon-laptop"/></svg></div>
+                <h3>Python with pandas, NumPy, and SciPy</h3>
+                <p>Use Python when your project needs programmable data cleaning, custom calculations, or notebook-based analysis.</p>
+                <a href="python.html" class="btn btn--secondary btn--sm" style="margin-top: var(--sp-4);">Start Python Track</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="curriculum-section reveal" id="modules">
+            <span class="overline">Core Sequence</span>
+            <h2>Full Curriculum</h2>
+            <p>The sequence below works for an EBS research team, club workshop, or independent student. Each module includes a concept, a hands-on lab, and a checkpoint deliverable.</p>
+
+            <div class="module-list">
+              <article class="module">
+                <div class="module__num">1</div>
+                <div>
+                  <h3>Research Questions and Data Types</h3>
+                  <div class="module__meta"><span>Week 1</span><span>No code required</span></div>
+                  <p>Turn a biology interest into an analyzable question and identify whether the data are categorical, numeric, time-series, sequence-based, or text/literature-based.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>Variables, observations, population, sample, outcome, predictor, and confounder.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Rewrite three broad biology topics as testable data questions.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Submit one research question plus the public dataset you plan to use.</p></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module">
+                <div class="module__num">2</div>
+                <div>
+                  <h3>Spreadsheets, CSV Files, and Reproducibility</h3>
+                  <div class="module__meta"><span>Week 1</span><span>RStudio or Python</span></div>
+                  <p>Learn why analysis should happen in code instead of manual spreadsheet edits. Set up a folder structure for data, scripts, outputs, and notes.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>Tidy data, raw versus cleaned files, relative paths, and analysis logs.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Import a CSV, inspect column names, preview rows, and save a cleaned copy.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Create a project folder with a README explaining the dataset source.</p></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module">
+                <div class="module__num">3</div>
+                <div>
+                  <h3>Data Cleaning and Quality Checks</h3>
+                  <div class="module__meta"><span>Week 2</span><span>pandas / R data frames</span></div>
+                  <p>Identify missing values, duplicated rows, impossible values, inconsistent units, and mixed data types before running statistics.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>Missingness, outliers, data dictionaries, unit standardization, and audit trails.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Clean a messy biological dataset and record every transformation.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Submit before/after row counts and a three-sentence cleaning rationale.</p></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module">
+                <div class="module__num">4</div>
+                <div>
+                  <h3>Descriptive Statistics</h3>
+                  <div class="module__meta"><span>Week 3</span><span>NumPy / summary functions</span></div>
+                  <p>Summarize distributions with counts, proportions, mean, median, standard deviation, interquartile range, and grouped summaries.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>Central tendency, spread, skew, sample size, and biological interpretation.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Build a grouped summary table comparing two biological conditions.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Write one paragraph explaining the most important summary result.</p></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module">
+                <div class="module__num">5</div>
+                <div>
+                  <h3>Visualization for Biology</h3>
+                  <div class="module__meta"><span>Week 4</span><span>ggplot / matplotlib</span></div>
+                  <p>Choose figure types that fit the question: bar charts for counts, scatter plots for relationships, box plots for distributions, and line charts for time.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>Axes, labels, units, color, uncertainty, figure captions, and avoiding misleading scales.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Create three figure drafts from the same dataset and choose the clearest one.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Export one poster-ready figure with a caption.</p></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module">
+                <div class="module__num">6</div>
+                <div>
+                  <h3>Statistical Testing with SciPy and RStudio</h3>
+                  <div class="module__meta"><span>Week 5</span><span>SciPy / R tests</span></div>
+                  <p>Select and run basic tests: chi-square, t-test, Mann-Whitney U, correlation, and simple linear regression.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>Null hypothesis, p-values, effect size, confidence intervals, and assumptions.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Run two candidate tests and justify which one fits the data better.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Submit a test-selection note with assumptions and limitations.</p></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module">
+                <div class="module__num">7</div>
+                <div>
+                  <h3>Public Biological Datasets</h3>
+                  <div class="module__meta"><span>Week 6</span><span>NCBI / CDC / UniProt</span></div>
+                  <p>Find data from public repositories and evaluate whether the metadata are complete enough for analysis.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>Repository metadata, accession numbers, licensing, citation, and reproducibility.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Locate one dataset and write a short data provenance statement.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Add formal dataset citations to your analysis README.</p></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module">
+                <div class="module__num">8</div>
+                <div>
+                  <h3>Modeling and Prediction</h3>
+                  <div class="module__meta"><span>Week 7</span><span>Optional extension</span></div>
+                  <p>Use simple models carefully: regression for relationships, classification for categories, and simulation for biological systems.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>Training data, overfitting, validation, prediction versus explanation, and model limits.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Fit a simple regression model and compare predictions to observed values.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Explain whether your model supports a biological claim or only describes a pattern.</p></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module">
+                <div class="module__num">9</div>
+                <div>
+                  <h3>Interpretation, Bias, and Limitations</h3>
+                  <div class="module__meta"><span>Week 8</span><span>Research writing</span></div>
+                  <p>Connect results back to the biological question without overstating conclusions. Identify sampling bias, measurement limits, and alternative explanations.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>Correlation versus causation, confounding, multiple comparisons, and scope of inference.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Write a limitations section for a published or sample analysis.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Submit three limitations and one next experiment or next analysis.</p></div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="module">
+                <div class="module__num">10</div>
+                <div>
+                  <h3>Reproducible Research Package</h3>
+                  <div class="module__meta"><span>Week 9-10</span><span>Final assembly</span></div>
+                  <p>Organize the final project so another student can rerun the analysis and understand the result.</p>
+                  <div class="module__grid">
+                    <div class="module__block"><h4>Concept</h4><p>README files, commented code, output folders, citations, and figure exports.</p></div>
+                    <div class="module__block"><h4>Lab</h4><p>Clean your project directory and rerun the notebook or script from start to finish.</p></div>
+                    <div class="module__block"><h4>Checkpoint</h4><p>Submit a reproducibility checklist with your abstract and poster draft.</p></div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="curriculum-section reveal" id="tracks">
+            <span class="overline">Separate Track Pages</span>
+            <h2>Choose How You Want to Analyze</h2>
+            <p>The two tool tracks are now separate pages so each one can teach from first principles without crowding the course map.</p>
+            <div class="track-grid">
+              <div class="track-card">
+                <span class="track-card__label">Notebook workflow</span>
+                <div class="track-card__icon"><svg width="32" height="32" aria-hidden="true"><use href="#icon-laptop"/></svg></div>
+                <h3>Python Track</h3>
+                <p>Learn pandas for tables, NumPy for numeric arrays, and SciPy for statistical tests using an on-page biology dataset and guided exercises.</p>
+                <a href="python.html" class="btn btn--primary btn--sm" style="margin-top: var(--sp-4);">Open Python Track</a>
+              </div>
+              <div class="track-card">
+                <span class="track-card__label">RStudio workflow</span>
+                <div class="track-card__icon"><svg width="32" height="32" aria-hidden="true"><use href="#icon-chart"/></svg></div>
+                <h3>RStudio Track</h3>
+                <p>Learn R data frames, formulas, grouped summaries, t-tests, and base plotting using the same built-in dataset and answer checks.</p>
+                <a href="rstudio.html" class="btn btn--primary btn--sm" style="margin-top: var(--sp-4);">Open RStudio Track</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="curriculum-section reveal" id="capstone">
+            <span class="overline">Final Product</span>
+            <h2>Capstone Deliverables</h2>
+            <p>The curriculum ends with a small research package that can become the methods/results backbone of an EBS poster.</p>
+            <table class="deliverable-table">
+              <thead>
+                <tr>
+                  <th>Deliverable</th>
+                  <th>What It Must Include</th>
+                  <th>Quality Bar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Research question</td>
+                  <td>One sentence naming the biological system, variables, population, and expected analysis.</td>
+                  <td>Specific enough that another student could identify the needed dataset.</td>
+                </tr>
+                <tr>
+                  <td>Clean dataset</td>
+                  <td>Raw data source, cleaned file, and a note explaining exclusions or transformations.</td>
+                  <td>No hidden manual edits. Cleaning steps are reproducible in code.</td>
+                </tr>
+                <tr>
+                  <td>Analysis notebook or script</td>
+                  <td>Readable RStudio script or Python notebook with imports, cleaning, summaries, tests, and plots.</td>
+                  <td>Runs from top to bottom and produces the same result each time.</td>
+                </tr>
+                <tr>
+                  <td>Figure and caption</td>
+                  <td>One main result figure with labeled axes, units, legend if needed, and a caption.</td>
+                  <td>The caption states the pattern and avoids overstating causation.</td>
+                </tr>
+                <tr>
+                  <td>Interpretation paragraph</td>
+                  <td>Result, biological meaning, limitation, and one next step.</td>
+                  <td>Clear enough for a judge outside the exact subfield to follow.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="curriculum-section reveal" id="assessment">
+            <span class="overline">Readiness Check</span>
+            <h2>Before You Present</h2>
+            <p>Use this checklist before moving from analysis into poster design.</p>
+            <div class="checklist">
+              <div class="checklist__item"><svg aria-hidden="true"><use href="#icon-check-circle"/></svg><span>The research question can be answered by the dataset you actually used.</span></div>
+              <div class="checklist__item"><svg aria-hidden="true"><use href="#icon-check-circle"/></svg><span>All cleaning decisions are written down and justified.</span></div>
+              <div class="checklist__item"><svg aria-hidden="true"><use href="#icon-check-circle"/></svg><span>The chosen statistical test matches the data type and research question.</span></div>
+              <div class="checklist__item"><svg aria-hidden="true"><use href="#icon-check-circle"/></svg><span>Figures are readable without needing the full paper draft.</span></div>
+              <div class="checklist__item"><svg aria-hidden="true"><use href="#icon-check-circle"/></svg><span>The limitations section names what the analysis cannot prove.</span></div>
+            </div>
+            <div class="btn-group" style="margin-top: var(--sp-8);">
+              <a href="resources.html" class="btn btn--secondary">Back to Resources</a>
+              <a href="register.html" class="btn btn--primary">Register Interest</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
