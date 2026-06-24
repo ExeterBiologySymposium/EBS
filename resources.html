@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free research resources for EBS participants — guides on dry-lab biology, scientific literature, public databases, bioinformatics tools, and presentation tips.">
+  <title>Resources — Exeter Biology Symposium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
+    @media (max-width: 768px) { .tool-grid { grid-template-columns: 1fr; } }
+    .tool-link {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-4);
+      background: var(--col-bg-card);
+      border: 1px solid var(--col-border);
+      border-radius: var(--r-md);
+      text-decoration: none;
+      transition: all var(--ease-base);
+    }
+    .tool-link:hover {
+      border-color: var(--col-primary);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+    .tool-link__icon {
+      width: 36px;
+      height: 36px;
+      background: var(--col-crimson-10);
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--col-primary);
+    }
+    .tool-link__name  { font-size: var(--sz-sm); font-weight: 600; color: var(--col-text); display: block; }
+    .tool-link__desc  { font-size: var(--sz-xs); color: var(--col-text-muted); display: block; margin-top: var(--sp-1); line-height: 1.4; }
+    .resource-anchor { scroll-margin-top: calc(var(--nav-h) + 24px); }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="about.html"     class="nav__link">About</a></li>
+      <li><a href="team.html"      class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html"     class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5" fill="none">
+          <circle cx="9.2" cy="9" r="8.5"></circle>
+          <path d="M14.85 14.64 L20.71 20.5"></path>
+        </g>
+      </svg>
+    </button>
+
+    <a href="register.html" class="nav__register">Register</a>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html"     class="nav__m-link">About</a>
+      <a href="team.html"      class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html"     class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html"      class="nav__m-link">For Judges</a>
+      <a href="faq.html"         class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta">
+        <a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Resources</span>
+      </nav>
+      <span class="overline">Research Resources</span>
+      <h1>Start Your Research Journey</h1>
+      <p class="page-hero__desc">Everything you need to go from zero to a compelling research presentation — curated guides, databases, tools, and templates, all free and beginner-friendly.</p>
+    </div>
+  </section>
+
+  <!-- ── Jump Links ── -->
+  <section class="section--sm section--alt" style="padding-block: var(--sp-6);">
+    <div class="container">
+      <div style="display:flex; gap: var(--sp-3); flex-wrap:wrap; align-items:center;">
+        <span style="font-size: var(--sz-sm); font-weight:600; color: var(--col-text-muted);">Jump to:</span>
+        <a href="#drylab"     class="btn btn--secondary btn--sm">Dry-Lab Intro</a>
+        <a href="#literature" class="btn btn--secondary btn--sm">Scientific Literature</a>
+        <a href="#tools"      class="btn btn--secondary btn--sm">Research Tools</a>
+        <a href="#presenting" class="btn btn--secondary btn--sm">Presenting Research</a>
+        <a href="#templates"  class="btn btn--secondary btn--sm">Templates</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Dry-Lab Intro ── -->
+  <section class="section resource-anchor" id="drylab">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Getting Started</span>
+        <h2>Introduction to Dry-Lab Research</h2>
+        <p>You don't need a pipette to do biology. Dry-lab research uses computational and analytical methods to explore biological questions — and it's how many of the most important discoveries in modern biology are made.</p>
+      </div>
+
+      <div class="grid grid--2" style="gap: var(--sp-12); align-items: start;">
+        <div>
+          <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-6);" class="reveal">The 5-Step Research Process</h3>
+          <div class="steps reveal">
+            <div class="step">
+              <div class="step__num">1</div>
+              <div class="step__body">
+                <p class="step__title">Choose a Research Question</p>
+                <p>Start with something you genuinely want to know. Good questions in dry-lab biology are specific, answerable with publicly available data, and grounded in existing literature. Example: "Is there a correlation between BRCA1 mutation rates and breast cancer incidence across ethnic populations?"</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step__num">2</div>
+              <div class="step__body">
+                <p class="step__title">Review the Literature</p>
+                <p>Search PubMed, Google Scholar, or Semantic Scholar to understand what's already known. Read at least 5–10 papers on your topic before designing your study. Your research should build on existing knowledge, not repeat it.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step__num">3</div>
+              <div class="step__body">
+                <p class="step__title">Find and Prepare Your Data</p>
+                <p>Identify public datasets relevant to your question. Sources include NCBI, UCSC Genome Browser, TCGA, KEGG, UniProt, and the CDC. Download, clean, and organize your data before any analysis.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step__num">4</div>
+              <div class="step__body">
+                <p class="step__title">Analyze &amp; Interpret</p>
+                <p>Apply appropriate analytical methods — statistical tests, bioinformatics pipelines, or qualitative synthesis. Tools like R, Python (Biopython, Pandas), and Galaxy are beginner-friendly. Focus on what your results actually show, not what you hoped they'd show.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step__num">5</div>
+              <div class="step__body">
+                <p class="step__title">Communicate Your Findings</p>
+                <p>Write an abstract, build a poster or slides, and practice explaining your work clearly to both experts and non-experts. This is the core skill EBS helps you develop.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal--d2">
+          <div class="callout" style="margin-bottom: var(--sp-6);">
+            <p><strong>Not sure where to start?</strong> Choose a topic you're curious about — genetics, ecology, epidemiology, neuroscience — and ask: "What question about this topic could I answer using data that already exists?" Start broad, then narrow.</p>
+          </div>
+
+          <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-5);">Common Project Types</h3>
+          <div style="display:flex; flex-direction:column; gap: var(--sp-4);">
+            <div class="card">
+              <h5 style="font-family: var(--font-heading); margin-bottom: var(--sp-2);">Genomic / Bioinformatics Analysis</h5>
+              <p>Analyze publicly available genomic sequences, compare species, or investigate gene expression data from the NCBI or UCSC databases.</p>
+            </div>
+            <div class="card">
+              <h5 style="font-family: var(--font-heading); margin-bottom: var(--sp-2);">Epidemiological Data Study</h5>
+              <p>Use CDC, WHO, or NIH datasets to explore disease patterns, risk factors, or the effectiveness of public health interventions.</p>
+            </div>
+            <div class="card">
+              <h5 style="font-family: var(--font-heading); margin-bottom: var(--sp-2);">Systematic Literature Review</h5>
+              <p>Synthesize findings across multiple published studies to answer a broader biological question. Rigorous and highly publishable.</p>
+            </div>
+            <div class="card">
+              <h5 style="font-family: var(--font-heading); margin-bottom: var(--sp-2);">Computational Modeling</h5>
+              <p>Build a simple mathematical or agent-based model to simulate a biological process — protein folding, disease spread, population dynamics.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Scientific Literature ── -->
+  <section class="section section--alt resource-anchor" id="literature">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Scientific Literature</span>
+        <h2>Reading &amp; Citing Papers</h2>
+        <p>The ability to find, read, and properly cite scientific literature is foundational to any research project.</p>
+      </div>
+
+      <div class="grid grid--2" style="gap: var(--sp-10);">
+        <div class="reveal">
+          <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-5);">How to Read a Scientific Paper</h3>
+          <p style="margin-bottom: var(--sp-4);">Don't read a paper front-to-back on your first pass. Try this proven approach:</p>
+          <ol style="list-style: decimal; padding-left: var(--sp-6); display: flex; flex-direction: column; gap: var(--sp-3);">
+            <li style="color: var(--col-text-sec);">Read the <strong>Title and Abstract</strong> — understand the core claim</li>
+            <li style="color: var(--col-text-sec);">Skip to the <strong>Figures and Tables</strong> — visualize the data</li>
+            <li style="color: var(--col-text-sec);">Read the <strong>Introduction</strong> — understand context and motivation</li>
+            <li style="color: var(--col-text-sec);">Read the <strong>Results</strong> — understand what they found</li>
+            <li style="color: var(--col-text-sec);">Read the <strong>Discussion</strong> — understand what it means</li>
+            <li style="color: var(--col-text-sec);">Skim the <strong>Methods</strong> — understand how they did it</li>
+            <li style="color: var(--col-text-sec);">Note the <strong>References</strong> — follow citations for deeper reading</li>
+          </ol>
+        </div>
+
+        <div class="reveal reveal--d2">
+          <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-5);">Citation Formats</h3>
+          <p style="margin-bottom: var(--sp-4);">EBS accepts APA, MLA, or Vancouver citation formats. Use a reference manager to stay organized:</p>
+          <div style="display:flex; flex-direction:column; gap: var(--sp-3);">
+            <div class="card">
+              <h5 style="font-family: var(--font-heading); margin-bottom: var(--sp-1);">Zotero <span style="font-size: var(--sz-xs); color: var(--col-text-muted); font-family: var(--font-body);">(Free, recommended)</span></h5>
+              <p>Browser-based citation manager. One-click save from PubMed or Google Scholar. Auto-generates citations.</p>
+            </div>
+            <div class="card">
+              <h5 style="font-family: var(--font-heading); margin-bottom: var(--sp-1);">Mendeley</h5>
+              <p>Free citation manager by Elsevier. Includes PDF annotation and collaboration features.</p>
+            </div>
+            <div class="card">
+              <h5 style="font-family: var(--font-heading); margin-bottom: var(--sp-1);">Google Scholar</h5>
+              <p>Quick "Cite" button under each result generates APA, MLA, and Chicago formats instantly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Research Tools ── -->
+  <section class="section resource-anchor" id="tools">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Research Databases &amp; Tools</span>
+        <h2>Free Tools &amp; Databases</h2>
+        <p>Every tool listed here is free, publicly accessible, and used by professional researchers. No institutional login required for most resources.</p>
+      </div>
+
+      <div style="margin-bottom: var(--sp-10);" class="reveal">
+        <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-5);">Literature Databases</h3>
+        <div class="tool-grid">
+          <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-book"/></svg></div>
+            <div>
+              <span class="tool-link__name">PubMed / MEDLINE</span>
+              <span class="tool-link__desc">NLM's database of biomedical literature. 35M+ articles. Best for clinical and life sciences.</span>
+            </div>
+          </a>
+          <a href="https://scholar.google.com" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-book"/></svg></div>
+            <div>
+              <span class="tool-link__name">Google Scholar</span>
+              <span class="tool-link__desc">Broad academic search across all disciplines. Best starting point for any topic.</span>
+            </div>
+          </a>
+          <a href="https://www.semanticscholar.org" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-book"/></svg></div>
+            <div>
+              <span class="tool-link__name">Semantic Scholar</span>
+              <span class="tool-link__desc">AI-powered search with citation graphs and paper summaries.</span>
+            </div>
+          </a>
+          <a href="https://www.biorxiv.org" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-external"/></svg></div>
+            <div>
+              <span class="tool-link__name">bioRxiv / medRxiv</span>
+              <span class="tool-link__desc">Biology and medicine preprint servers. Free, open access, cutting-edge research.</span>
+            </div>
+          </a>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-book"/></svg></div>
+            <div>
+              <span class="tool-link__name">PubMed Central (PMC)</span>
+              <span class="tool-link__desc">Free full-text archive of biomedical and life sciences journals.</span>
+            </div>
+          </a>
+          <a href="https://www.connectedpapers.com" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-link"/></svg></div>
+            <div>
+              <span class="tool-link__name">Connected Papers</span>
+              <span class="tool-link__desc">Visual map of papers related to one article. Great for exploring a field.</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div style="margin-bottom: var(--sp-10);" class="reveal">
+        <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-5);">Biological Databases</h3>
+        <div class="tool-grid">
+          <a href="https://www.ncbi.nlm.nih.gov" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-dna"/></svg></div>
+            <div>
+              <span class="tool-link__name">NCBI</span>
+              <span class="tool-link__desc">National Center for Biotechnology Information. Gateway to GenBank, RefSeq, dbSNP, and more.</span>
+            </div>
+          </a>
+          <a href="https://genome.ucsc.edu" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-dna"/></svg></div>
+            <div>
+              <span class="tool-link__name">UCSC Genome Browser</span>
+              <span class="tool-link__desc">Interactive visualization of vertebrate genome sequences and annotations.</span>
+            </div>
+          </a>
+          <a href="https://www.uniprot.org" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-flask"/></svg></div>
+            <div>
+              <span class="tool-link__name">UniProt</span>
+              <span class="tool-link__desc">Comprehensive protein sequence and functional information database.</span>
+            </div>
+          </a>
+          <a href="https://www.kegg.jp" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-chart"/></svg></div>
+            <div>
+              <span class="tool-link__name">KEGG</span>
+              <span class="tool-link__desc">Biological pathways, diseases, and chemical compounds database.</span>
+            </div>
+          </a>
+          <a href="https://portal.gdc.cancer.gov" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-flask"/></svg></div>
+            <div>
+              <span class="tool-link__name">GDC (TCGA)</span>
+              <span class="tool-link__desc">Cancer Genome Atlas — genomic, clinical, and imaging data for 33 cancer types.</span>
+            </div>
+          </a>
+          <a href="https://www.cdc.gov/nchs" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-chart"/></svg></div>
+            <div>
+              <span class="tool-link__name">CDC / NCHS Data</span>
+              <span class="tool-link__desc">US public health surveillance data. NHANES, mortality records, disease registries.</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-5);">Analysis Tools</h3>
+        <div class="tool-grid">
+          <a href="https://usegalaxy.org" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-laptop"/></svg></div>
+            <div>
+              <span class="tool-link__name">Galaxy Platform</span>
+              <span class="tool-link__desc">Browser-based bioinformatics. No coding required for many analyses. Great for beginners.</span>
+            </div>
+          </a>
+          <a href="https://www.r-project.org" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-chart"/></svg></div>
+            <div>
+              <span class="tool-link__name">R / RStudio</span>
+              <span class="tool-link__desc">The standard for statistical analysis in biology. Free, powerful, and well-documented.</span>
+            </div>
+          </a>
+          <a href="https://colab.research.google.com" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-laptop"/></svg></div>
+            <div>
+              <span class="tool-link__name">Google Colab (Python)</span>
+              <span class="tool-link__desc">Free cloud-based Python notebooks. Great for data analysis and machine learning with Biopython/Pandas.</span>
+            </div>
+          </a>
+          <a href="https://blast.ncbi.nlm.nih.gov" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-dna"/></svg></div>
+            <div>
+              <span class="tool-link__name">BLAST</span>
+              <span class="tool-link__desc">Basic Local Alignment Search Tool. Align nucleotide or protein sequences against reference databases.</span>
+            </div>
+          </a>
+          <a href="https://www.ebi.ac.uk/Tools/msa/" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-dna"/></svg></div>
+            <div>
+              <span class="tool-link__name">EBI Clustal Omega</span>
+              <span class="tool-link__desc">Multiple sequence alignment tool. Compare protein or DNA sequences across species.</span>
+            </div>
+          </a>
+          <a href="https://www.statmethods.net" target="_blank" rel="noopener" class="tool-link">
+            <div class="tool-link__icon"><svg width="18" height="18" aria-hidden="true"><use href="#icon-book"/></svg></div>
+            <div>
+              <span class="tool-link__name">Quick-R Reference</span>
+              <span class="tool-link__desc">Clear, beginner-friendly R reference for statistical methods used in biology.</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Presenting ── -->
+  <section class="section section--alt resource-anchor" id="presenting">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Communication</span>
+        <h2>Presenting Your Research</h2>
+        <p>Science that isn't communicated doesn't count. Learn how to craft a poster and abstract that clearly conveys your work.</p>
+      </div>
+
+      <div class="grid grid--2" style="gap: var(--sp-12);">
+        <div class="reveal">
+          <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-5);">Writing an Abstract</h3>
+          <p style="margin-bottom: var(--sp-4);">Your abstract (150–250 words) is the first thing judges and attendees read. It must cover:</p>
+          <div class="checklist" style="margin-bottom: var(--sp-6);">
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check"/></svg>
+              <span><strong>Background:</strong> Why does this question matter? What's already known?</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check"/></svg>
+              <span><strong>Objective:</strong> What specific question are you answering?</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check"/></svg>
+              <span><strong>Methods:</strong> What data did you use and how did you analyze it?</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check"/></svg>
+              <span><strong>Results:</strong> What did you find? Include key numbers if possible.</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check"/></svg>
+              <span><strong>Conclusion:</strong> What does this mean and what are the limitations?</span>
+            </div>
+          </div>
+          <div class="callout">
+            <p><strong>Tip:</strong> Write your abstract last. It's much easier once you know what you've actually found. Every sentence should earn its place — cut anything a reader doesn't need to understand your work.</p>
+          </div>
+        </div>
+
+        <div class="reveal reveal--d2">
+          <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-5);">Poster Design Principles</h3>
+          <div style="display:flex; flex-direction:column; gap: var(--sp-4);">
+            <div class="res-card">
+              <div class="res-card__icon"><svg width="22" height="22" aria-hidden="true"><use href="#icon-presentation"/></svg></div>
+              <div>
+                <h4 style="font-family: var(--font-heading); font-size: var(--sz-lg); margin-bottom: var(--sp-1);">Flow &amp; Structure</h4>
+                <p>Readers should move top-to-bottom or left-to-right without confusion. Use clear section headers and a logical narrative arc.</p>
+              </div>
+            </div>
+            <div class="res-card">
+              <div class="res-card__icon"><svg width="22" height="22" aria-hidden="true"><use href="#icon-chart"/></svg></div>
+              <div>
+                <h4 style="font-family: var(--font-heading); font-size: var(--sz-lg); margin-bottom: var(--sp-1);">Visualize Your Data</h4>
+                <p>A clear figure beats a paragraph of text. Label all axes, include units, and write a descriptive caption. Avoid 3D charts.</p>
+              </div>
+            </div>
+            <div class="res-card">
+              <div class="res-card__icon"><svg width="22" height="22" aria-hidden="true"><use href="#icon-lightbulb"/></svg></div>
+              <div>
+                <h4 style="font-family: var(--font-heading); font-size: var(--sz-lg); margin-bottom: var(--sp-1);">The 90-Second Rule</h4>
+                <p>A judge should understand your key finding within 90 seconds of looking at your poster. Cut text ruthlessly. Use bullet points over paragraphs.</p>
+              </div>
+            </div>
+            <div class="res-card">
+              <div class="res-card__icon"><svg width="22" height="22" aria-hidden="true"><use href="#icon-users"/></svg></div>
+              <div>
+                <h4 style="font-family: var(--font-heading); font-size: var(--sz-lg); margin-bottom: var(--sp-1);">Practice Your Pitch</h4>
+                <p>Prepare a 2-minute verbal overview. Practice with a friend who knows nothing about your topic — if they understand it, you're ready.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Templates ── -->
+  <section class="section resource-anchor" id="templates">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline">Downloads</span>
+        <h2>Templates &amp; Guides</h2>
+        <p>Official EBS templates will be released when registration opens in Fall 2026. Register your interest to be notified first.</p>
+      </div>
+
+      <div class="grid grid--3 reveal">
+        <div class="card" style="text-align:center; opacity:0.6;">
+          <div class="card__icon" style="margin-inline:auto; background: var(--col-bg-alt);">
+            <svg width="24" height="24" aria-hidden="true"><use href="#icon-download"/></svg>
+          </div>
+          <h4>Poster Template</h4>
+          <p>PowerPoint and Google Slides template with EBS formatting guidelines and section structure.</p>
+          <span class="badge badge--primary" style="margin-top: var(--sp-4);">Available Fall 2026</span>
+        </div>
+        <div class="card" style="text-align:center; opacity:0.6;">
+          <div class="card__icon" style="margin-inline:auto; background: var(--col-bg-alt);">
+            <svg width="24" height="24" aria-hidden="true"><use href="#icon-download"/></svg>
+          </div>
+          <h4>Abstract Template</h4>
+          <p>Formatted abstract template with word count guidance, section prompts, and example abstract.</p>
+          <span class="badge badge--primary" style="margin-top: var(--sp-4);">Available Fall 2026</span>
+        </div>
+        <div class="card" style="text-align:center; opacity:0.6;">
+          <div class="card__icon" style="margin-inline:auto; background: var(--col-bg-alt);">
+            <svg width="24" height="24" aria-hidden="true"><use href="#icon-download"/></svg>
+          </div>
+          <h4>Research Planner</h4>
+          <p>Week-by-week research timeline template to keep your project on track from September to May.</p>
+          <span class="badge badge--primary" style="margin-top: var(--sp-4);">Available Fall 2026</span>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top: var(--sp-10);" class="reveal">
+        <a href="register.html" class="btn btn--primary btn--lg">
+          Register to Get Notified
+          <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

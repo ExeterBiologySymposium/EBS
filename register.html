@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register your interest in the Exeter Biology Symposium 2027. Students, schools, researchers, and judges welcome.">
+  <title>Register Interest — Exeter Biology Symposium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .reg-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-6);
+      margin-top: var(--sp-10);
+    }
+    @media (max-width: 768px) {
+      .reg-cards { grid-template-columns: 1fr; }
+    }
+    .reg-card {
+      border: 2px solid var(--col-border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-8);
+      background: var(--col-bg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-5);
+      transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+    }
+    .reg-card:hover {
+      border-color: var(--col-primary);
+      box-shadow: var(--shadow-md);
+    }
+    .reg-card__icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--r-md);
+      background: rgba(139,26,26,.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--col-primary);
+    }
+    .reg-card h3 { margin: 0; font-size: var(--sz-xl); }
+    .reg-card p  { margin: 0; color: var(--col-text-sec); flex: 1; }
+    .reg-card__status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-size: var(--sz-xs);
+      font-weight: 600;
+      color: var(--col-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .reg-card__dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #D4AF37;
+      display: inline-block;
+    }
+
+    /* Form */
+    .form-section {
+      background: var(--col-bg);
+      border: 1px solid var(--col-border);
+      border-radius: var(--r-xl);
+      padding: var(--sp-10);
+      max-width: 680px;
+      margin-inline: auto;
+    }
+    @media (max-width: 640px) { .form-section { padding: var(--sp-6); } }
+    .form-group {
+      margin-bottom: var(--sp-5);
+    }
+    .form-group label {
+      display: block;
+      font-size: var(--sz-sm);
+      font-weight: 600;
+      margin-bottom: var(--sp-2);
+      color: var(--col-text);
+    }
+    .form-group label .req {
+      color: var(--col-primary);
+      margin-left: 2px;
+    }
+    .form-control {
+      width: 100%;
+      padding: var(--sp-3) var(--sp-4);
+      border: 1.5px solid var(--col-border);
+      border-radius: var(--r-md);
+      background: var(--col-bg);
+      font-family: var(--font-body);
+      font-size: var(--sz-base);
+      color: var(--col-text);
+      transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+      box-sizing: border-box;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--col-primary);
+      box-shadow: 0 0 0 3px rgba(139,26,26,.12);
+    }
+    .form-control::placeholder { color: var(--col-text-muted); }
+    select.form-control { cursor: pointer; }
+    .form-hint {
+      margin-top: var(--sp-2);
+      font-size: var(--sz-xs);
+      color: var(--col-text-muted);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+    }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    .form-success {
+      display: none;
+      padding: var(--sp-6) var(--sp-8);
+      border-radius: var(--r-lg);
+      background: #f0faf0;
+      border: 1.5px solid #7cbf7c;
+      text-align: center;
+    }
+    .form-success svg { color: #3a9d3a; margin-bottom: var(--sp-3); }
+    .form-success h3 { color: #2a702a; margin-bottom: var(--sp-2); }
+    .form-success p  { color: #3a5a3a; margin: 0; }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="about.html"     class="nav__link">About</a></li>
+      <li><a href="team.html"      class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html"     class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5" fill="none">
+          <circle cx="9.2" cy="9" r="8.5"></circle>
+          <path d="M14.85 14.64 L20.71 20.5"></path>
+        </g>
+      </svg>
+    </button>
+
+    <a href="register.html" class="nav__register">Register</a>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html"     class="nav__m-link">About</a>
+      <a href="team.html"      class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html"     class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html"      class="nav__m-link">For Judges</a>
+      <a href="faq.html"         class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta">
+        <a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Register Interest</span>
+      </nav>
+      <span class="overline">EBS 2027</span>
+      <h1>Register Your Interest</h1>
+      <p class="page-hero__desc">Registration opens Fall 2026. Add your name to our interest list now and you'll be among the first notified when registration goes live.</p>
+    </div>
+  </section>
+
+  <!-- ── Track Cards ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Who Are You?</span>
+        <h2>Choose Your Track</h2>
+        <p>EBS welcomes participants across four tracks. Select the one that best describes you and fill in the interest form below.</p>
+      </div>
+
+      <div class="reg-cards">
+        <div class="reg-card reveal reveal--d1">
+          <div class="reg-card__icon">
+            <svg width="28" height="28" aria-hidden="true"><use href="#icon-graduate"/></svg>
+          </div>
+          <h3>Student / Researcher</h3>
+          <p>Phillips Exeter Academy students interested in presenting original dry-lab biological research at EBS 2027. No prior research experience required.</p>
+          <ul style="margin: 0; padding-left: var(--sp-5); color: var(--col-text-sec); font-size: var(--sz-sm);">
+            <li>Present a poster or short oral talk</li>
+            <li>Receive mentor matching</li>
+            <li>Access resource library</li>
+          </ul>
+          <div class="reg-card__status"><span class="reg-card__dot"></span> Registration Opens Fall 2026</div>
+        </div>
+
+        <div class="reg-card reveal reveal--d2">
+          <div class="reg-card__icon">
+            <svg width="28" height="28" aria-hidden="true"><use href="#icon-building"/></svg>
+          </div>
+          <h3>School / Educator</h3>
+          <p>Teachers, counselors, or administrators from Phillips Exeter Academy or partner schools who want to support student participation or explore institutional involvement.</p>
+          <ul style="margin: 0; padding-left: var(--sp-5); color: var(--col-text-sec); font-size: var(--sz-sm);">
+            <li>Receive school information packet</li>
+            <li>Learn about faculty advisor role</li>
+            <li>Future institutional partnerships</li>
+          </ul>
+          <div class="reg-card__status"><span class="reg-card__dot"></span> Registration Opens Fall 2026</div>
+        </div>
+
+        <div class="reg-card reveal reveal--d3">
+          <div class="reg-card__icon">
+            <svg width="28" height="28" aria-hidden="true"><use href="#icon-microscope"/></svg>
+          </div>
+          <h3>Researcher / Mentor</h3>
+          <p>Graduate students, postdocs, or working biologists interested in volunteering as mentors, guest speakers, or resource reviewers for EBS 2027.</p>
+          <ul style="margin: 0; padding-left: var(--sp-5); color: var(--col-text-sec); font-size: var(--sz-sm);">
+            <li>Mentor 1–3 students over 6 months</li>
+            <li>Guest speaker opportunity</li>
+            <li>Review curriculum materials</li>
+          </ul>
+          <div class="reg-card__status"><span class="reg-card__dot"></span> Registration Opens Fall 2026</div>
+        </div>
+
+        <div class="reg-card reveal reveal--d4">
+          <div class="reg-card__icon">
+            <svg width="28" height="28" aria-hidden="true"><use href="#icon-trophy"/></svg>
+          </div>
+          <h3>Judge</h3>
+          <p>Biological scientists and researchers who want to evaluate student presentations at the symposium using EBS's structured rubric. One-day commitment in Spring 2027.</p>
+          <ul style="margin: 0; padding-left: var(--sp-5); color: var(--col-text-sec); font-size: var(--sz-sm);">
+            <li>Evaluate 4–6 poster presentations</li>
+            <li>Provide written &amp; verbal feedback</li>
+            <li>Attend symposium day events</li>
+          </ul>
+          <div class="reg-card__status"><span class="reg-card__dot"></span> Registration Opens Fall 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Volunteer Roles ── -->
+  <section class="section section--alt" id="volunteer-roles">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">For Researchers &amp; Professionals</span>
+        <h2>Volunteer Roles</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. There are several ways to contribute to EBS — from a one-day commitment to a full semester of mentorship.</p>
+      </div>
+
+      <div class="grid grid--3">
+        <div class="aud-card card card--lift reveal reveal--d1">
+          <div class="aud-card__icon">
+            <svg width="32" height="32" aria-hidden="true"><use href="#icon-person"/></svg>
+          </div>
+          <h3>Research Mentor</h3>
+          <p>Matched with 1–3 students based on your area of expertise. Guide them through the research process across a 6-month period, meeting virtually approximately twice per month.</p>
+          <div>
+            <span class="badge badge--primary" style="margin-bottom: var(--sp-4);">~4–6 hrs/month</span>
+          </div>
+        </div>
+
+        <div class="aud-card card card--lift reveal reveal--d2">
+          <div class="aud-card__icon">
+            <svg width="32" height="32" aria-hidden="true"><use href="#icon-presentation"/></svg>
+          </div>
+          <h3>Guest Speaker</h3>
+          <p>Deliver a 20–30 minute talk at the symposium on your research area or career path in biology. One-time commitment on Symposium Day, Spring 2027.</p>
+          <div>
+            <span class="badge badge--primary" style="margin-bottom: var(--sp-4);">1-day commitment</span>
+          </div>
+        </div>
+
+        <div class="aud-card card card--lift reveal reveal--d3">
+          <div class="aud-card__icon">
+            <svg width="32" height="32" aria-hidden="true"><use href="#icon-book"/></svg>
+          </div>
+          <h3>Resource Contributor</h3>
+          <p>Help create and review beginner-friendly research guides, resource lists, and curriculum materials. Flexible, asynchronous — contribute on your own schedule.</p>
+          <div>
+            <span class="badge badge--primary" style="margin-bottom: var(--sp-4);">Flexible timing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Judging roles -->
+      <div class="divider" style="margin-top: var(--sp-16);"></div>
+      <div class="section-header reveal" style="margin-top: var(--sp-12);">
+        <span class="overline">For Scientists &amp; Professionals</span>
+        <h2>Judging</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Judges evaluate student research presentations on Symposium Day using a structured rubric calibrated for first-time researchers.</p>
+      </div>
+
+      <div class="grid grid--2" style="gap: var(--sp-6);">
+        <div class="card card--bordered-top reveal reveal--d1">
+          <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-clock"/></svg></div>
+          <h4>Time Commitment</h4>
+          <p>One-day commitment. Symposium Day runs approximately 9 AM – 5 PM. Judges may attend for a full or half day based on availability.</p>
+        </div>
+        <div class="card card--bordered-top reveal reveal--d2">
+          <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-info"/></svg></div>
+          <h4>Who Can Judge</h4>
+          <p>Judges should have at minimum an undergraduate degree in a biological science or related field. Graduate students, faculty, postdocs, and industry professionals all welcome.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--sp-8);">
+        <a href="judges.html" class="btn btn--secondary">
+          Learn More About Judging
+          <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Interest Form ── -->
+  <section class="section" id="form">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Interest Form</span>
+        <h2>Add Yourself to Our List</h2>
+        <p>Fill out this short form and we'll send you updates as EBS 2027 develops. No commitment required at this stage — just your contact info and interest area.</p>
+      </div>
+
+      <div class="reveal">
+        <div class="form-section">
+          <form id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reg-first">First Name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="reg-first" name="firstName" class="form-control" placeholder="Ada" required autocomplete="given-name">
+              </div>
+              <div class="form-group">
+                <label for="reg-last">Last Name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="reg-last" name="lastName" class="form-control" placeholder="Lovelace" required autocomplete="family-name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-email">Email Address <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="reg-email" name="email" class="form-control" placeholder="ada@example.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+              <label for="reg-role">I am a… <span class="req" aria-hidden="true">*</span></label>
+              <select id="reg-role" name="role" class="form-control" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="student">Student (Phillips Exeter Academy)</option>
+                <option value="educator">Teacher / Educator / Administrator</option>
+                <option value="researcher">Researcher / Graduate Student / Postdoc</option>
+                <option value="judge">Judge (faculty / industry professional)</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-affiliation">School / Institution <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="reg-affiliation" name="affiliation" class="form-control" placeholder="Phillips Exeter Academy / Harvard University / etc." required autocomplete="organization">
+            </div>
+
+            <div class="form-group">
+              <label for="reg-interest">Area of Interest or Research Field</label>
+              <input type="text" id="reg-interest" name="interest" class="form-control" placeholder="e.g. Genetics, Computational Biology, Ecology, Neuroscience…">
+              <p class="form-hint">Optional. Helps us match students with relevant mentors and judges.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-message">Anything else you'd like us to know?</label>
+              <textarea id="reg-message" name="message" class="form-control" rows="3" placeholder="Questions, ideas, or just hello…" style="resize: vertical;"></textarea>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: var(--sp-3); margin-bottom: var(--sp-6);">
+              <input type="checkbox" id="reg-consent" name="consent" required style="margin-top: 3px; accent-color: var(--col-primary);">
+              <label for="reg-consent" style="font-size: var(--sz-sm); color: var(--col-text-sec); cursor: pointer; font-weight: 400;">
+                I agree to receive EBS updates at the email address above. We will not share your information with third parties, and you may unsubscribe at any time. <span class="req" aria-hidden="true">*</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center; font-size: var(--sz-base);">
+              Submit Interest
+              <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+            </button>
+          </form>
+
+          <div class="form-success" id="form-success" role="alert" aria-live="polite">
+            <svg width="40" height="40" aria-hidden="true" style="display:block; margin: 0 auto var(--sp-3);"><use href="#icon-check-circle"/></svg>
+            <h3>You're on the list!</h3>
+            <p>Thank you for your interest in EBS 2027. We'll be in touch when registration opens in Fall 2026. Keep an eye on your inbox.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ teaser ── -->
+  <section class="section--sm" style="padding-bottom: var(--sp-24);">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline">Have Questions?</span>
+        <h2>We've Got Answers</h2>
+        <p>Check our FAQ for common questions about participation, eligibility, timeline, and more.</p>
+        <div class="btn-group" style="justify-content: center; margin-top: var(--sp-6);">
+          <a href="faq.html"     class="btn btn--primary btn--lg">Read the FAQ</a>
+          <a href="faq.html#contact" class="btn btn--secondary btn--lg">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Show success state after form submit (handled by main.js initContactForm)
+  // register.html overrides: show #form-success div, hide form
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+    if (!form || !success) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const btn = form.querySelector('[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      setTimeout(function () {
+        form.style.display = 'none';
+        success.style.display = 'block';
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 1200);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Volunteer as a judge at the Exeter Biology Symposium 2027. Evaluate student research posters and presentations.">
+  <title>For Judges — Exeter Biology Symposium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .rubric-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--sp-6);
+      font-size: var(--sz-sm);
+    }
+    .rubric-table th {
+      background: var(--col-primary);
+      color: #fff;
+      text-align: left;
+      padding: var(--sp-3) var(--sp-4);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: var(--sz-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .rubric-table td {
+      padding: var(--sp-3) var(--sp-4);
+      border-bottom: 1px solid var(--col-border);
+      vertical-align: top;
+      color: var(--col-text-sec);
+    }
+    .rubric-table tr:last-child td { border-bottom: none; }
+    .rubric-table tr:nth-child(even) td { background: var(--col-bg-alt); }
+    .rubric-table .weight {
+      font-weight: 700;
+      color: var(--col-primary);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="about.html"     class="nav__link">About</a></li>
+      <li><a href="team.html"      class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html"     class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5" fill="none">
+          <circle cx="9.2" cy="9" r="8.5"></circle>
+          <path d="M14.85 14.64 L20.71 20.5"></path>
+        </g>
+      </svg>
+    </button>
+
+    <a href="register.html" class="nav__register">Register</a>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html"     class="nav__m-link">About</a>
+      <a href="team.html"      class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html"     class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html"      class="nav__m-link">For Judges</a>
+      <a href="faq.html"         class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta">
+        <a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="#">Participate</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">For Judges</span>
+      </nav>
+      <span class="overline">Judging Panel</span>
+      <h1>For Judges</h1>
+      <p class="page-hero__desc">EBS judges evaluate student research presentations during the symposium. Your feedback, delivered directly to students, is often the most memorable part of the experience for them.</p>
+    </div>
+  </section>
+
+  <!-- ── Overview ── -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2" style="gap: var(--sp-16); align-items: start;">
+        <div class="reveal">
+          <span class="overline">Role Overview</span>
+          <h2 style="margin-top: var(--sp-3); margin-bottom: var(--sp-5);">What Judges Do</h2>
+          <p style="margin-bottom: var(--sp-4);">EBS judges attend the symposium on the day of the event and evaluate student research presentations using a structured rubric. Each judge evaluates 4–6 poster presentations and 1–2 oral presentations (depending on your availability).</p>
+          <p style="margin-bottom: var(--sp-5);">Judging at EBS is calibrated to the level of the participants — these are high school students doing dry-lab research for the first time. You are not evaluating the quality of a PhD defense. You are evaluating effort, understanding, and scientific thinking relative to the student's experience level.</p>
+          <div class="checklist">
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span>Attend a brief virtual orientation in the week before the symposium</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span>Attend Symposium Day at Phillips Exeter Academy (Spring 2027)</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span>Evaluate 4–6 poster sessions (~15 min each) using our scoring rubric</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span>Provide written and verbal feedback to each student presenter</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span>Submit completed scoresheets by end of event day</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal--d2">
+          <div class="grid" style="gap: var(--sp-4);">
+            <div class="card card--bordered-top">
+              <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-clock"/></svg></div>
+              <h4>Time Commitment</h4>
+              <p>One-day commitment. Symposium Day runs approximately 9 AM – 5 PM. Judges may attend for a full or half day based on availability.</p>
+            </div>
+            <div class="card card--bordered-top">
+              <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-location"/></svg></div>
+              <h4>Location</h4>
+              <p>Phillips Exeter Academy, Exeter, New Hampshire. Exact venue on campus TBD. Parking information provided to registered judges.</p>
+            </div>
+            <div class="card card--bordered-top">
+              <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-info"/></svg></div>
+              <h4>Background Required</h4>
+              <p>Judges should have at minimum an undergraduate degree in a biological science or related field. Graduate students, faculty, and industry professionals all welcome.</p>
+            </div>
+            <div class="card card--bordered-top">
+              <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-star"/></svg></div>
+              <h4>Recognition</h4>
+              <p>All judges are acknowledged in the EBS symposium program and on this website. We deeply appreciate your time and expertise.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Judging Rubric 
+  <section class="section section--alt" id="rubric">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Evaluation Criteria</span>
+        <h2>Judging Rubric</h2>
+        <p>All presentations are evaluated on the same  criteria to be decided by the faculty advisors in Fall 2026. The rubric will be designed for first-time researchers — reward growth and genuine understanding.</p>
+      </div>
+      <div class="reveal">
+        <div style="overflow-x: auto;">
+          <table class="rubric-table" aria-label="Judging rubric with criteria and point weights">
+            <thead>
+              <tr>
+                <th scope="col">Criterion</th>
+                <th scope="col">What to Evaluate</th>
+                <th scope="col" style="width: 80px;">Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Scientific Question &amp; Hypothesis</strong></td>
+                <td>Is the research question clear and specific? Does the student articulate a hypothesis or expected finding? Is the question appropriate for a dry-lab approach?</td>
+                <td class="weight">20%</td>
+              </tr>
+              <tr>
+                <td><strong>Literature Review &amp; Background</strong></td>
+                <td>Does the student demonstrate understanding of relevant prior research? Are sources credible and appropriately cited? Does background context support the research question?</td>
+                <td class="weight">20%</td>
+              </tr>
+              <tr>
+                <td><strong>Methodology &amp; Analysis</strong></td>
+                <td>Is the approach clearly described and logically sound? Are data sources, analytical tools, or computational methods appropriate? Does the student understand the limitations of their approach?</td>
+                <td class="weight">25%</td>
+              </tr>
+              <tr>
+                <td><strong>Results &amp; Interpretation</strong></td>
+                <td>Are findings presented clearly, with appropriate visualizations? Does the student interpret results accurately without overclaiming? Are alternative explanations considered?</td>
+                <td class="weight">20%</td>
+              </tr>
+              <tr>
+                <td><strong>Communication &amp; Presentation</strong></td>
+                <td>Can the student explain their work clearly to a non-specialist? Do they respond to questions thoughtfully? Is the poster or slide deck clear and well-organized?</td>
+                <td class="weight">15%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top: var(--sp-6);">
+          <p><strong>Scoring philosophy:</strong> A score of 3 (satisfactory) represents a solid first research effort from a student with no prior experience. Reserve scores of 5 (exceptional) for work that demonstrates genuine depth of understanding — not just polished visuals. Feedback is often more valuable than scores, so please take time to write a few sentences per presenter.</p>
+        </div>
+        
+      </div>
+            
+    </div>
+  </section>
+
+   ── Process 
+  <section class="section">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline">Day-of Schedule</span>
+        <h2>Symposium Day Overview</h2>
+        <p>Detailed schedule finalized and distributed to all registered judges in March 2027.</p>
+      </div>
+
+      <div class="steps reveal">
+        <div class="steps__item">
+          <div class="steps__num">1</div>
+          <div>
+            <h4>Morning: Judge Orientation</h4>
+            <p>Brief welcome session. Rubric walkthrough. Receive your judge packet with presenter assignments, scoring sheets, and venue map. Q&amp;A with the organizing committee.</p>
+          </div>
+        </div>
+        <div class="steps__item">
+          <div class="steps__num">2</div>
+          <div>
+            <h4>Late Morning: Poster Session</h4>
+            <p>First poster session. Visit your assigned presenters (~15 min each). Score each presentation and leave written feedback on the provided scoresheet.</p>
+          </div>
+        </div>
+        <div class="steps__item">
+          <div class="steps__num">3</div>
+          <div>
+            <h4>Midday: Lunch &amp; Oral Presentations</h4>
+            <p>Lunch provided for all judges. Optional attendance at student oral presentations (short-talk format, 10 min + Q&amp;A). Judges for the oral track are pre-assigned.</p>
+          </div>
+        </div>
+        <div class="steps__item">
+          <div class="steps__num">4</div>
+          <div>
+            <h4>Afternoon: Second Poster Session</h4>
+            <p>Second rotation of poster presentations. Continue scoring and providing feedback. Time for judges to revisit borderline presentations before final scoring.</p>
+          </div>
+        </div>
+        <div class="steps__item">
+          <div class="steps__num">5</div>
+          <div>
+            <h4>Late Afternoon: Awards &amp; Closing</h4>
+            <p>Scoresheets submitted. Judging committee meets briefly to finalize awards. Award ceremony and closing remarks. Judges acknowledged in the program.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  ── -->
+
+  <!-- ── Judging Categories 
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Award Categories</span>
+        <h2>What Judges Award</h2>
+        <p>EBS recognizes excellence across multiple dimensions so that diverse strengths are celebrated.</p>
+      </div>
+
+      <div class="grid grid--3">
+        <div class="track-card card reveal reveal--d1">
+          <div class="track-card__label">Best Overall</div>
+          <h3>Best Research Project</h3>
+          <p>Awarded to the project that best demonstrates scientific rigor, clear communication, and depth of understanding across all five rubric criteria.</p>
+          <span class="badge badge--primary">1 Award</span>
+        </div>
+        <div class="track-card card reveal reveal--d2">
+          <div class="track-card__label">Category Award</div>
+          <h3>Best in Track</h3>
+          <p>Awarded in each research track (e.g., genomics, ecology, epidemiology, neuroscience). Recognizes the strongest project within a subject area.</p>
+          <span class="badge badge--primary">Per Track</span>
+        </div>
+        <div class="track-card card reveal reveal--d3">
+          <div class="track-card__label">Special Award</div>
+          <h3>Most Innovative Approach</h3>
+          <p>Awarded to the project that demonstrates the most creative or novel research methodology — regardless of whether results were conclusive.</p>
+          <span class="badge badge--primary">1 Award</span>
+        </div>
+        <div class="track-card card reveal reveal--d1">
+          <div class="track-card__label">Special Award</div>
+          <h3>Best Presentation</h3>
+          <p>Awarded to the student who communicates their research most clearly and engagingly during the poster or oral session. Communication over complexity.</p>
+          <span class="badge badge--primary">1 Award</span>
+        </div>
+        <div class="track-card card reveal reveal--d2">
+          <div class="track-card__label">Special Award</div>
+          <h3>Best Visualization</h3>
+          <p>Awarded to the project with the most effective and well-designed data visualizations, figures, or poster layout. Clarity and insight rewarded.</p>
+          <span class="badge badge--primary">1 Award</span>
+        </div>
+        <div class="track-card card reveal reveal--d3">
+          <div class="track-card__label">Honorable Mention</div>
+          <h3>Judges' Choice</h3>
+          <p>Discretionary honorable mentions selected by the judging panel for projects that stood out in a way not captured by the formal rubric criteria.</p>
+          <span class="badge badge--primary">Variable</span>
+        </div>
+      </div>
+    </div>
+  </section>
+── -->
+  <!-- ── CTA ── -->
+  <section class="section--sm" style="padding-bottom: var(--sp-24);">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2>Ready to Judge?</h2>
+        <p>Judge applications open Fall 2026. Express your interest now — we'll confirm placement and send symposium details in early 2027.</p>
+        <div class="btn-group" style="justify-content:center;">
+          <a href="register.html" class="btn btn--white btn--lg">Express Judge Interest</a>
+          <a href="faq.html"      class="btn btn--white-outline btn--lg">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

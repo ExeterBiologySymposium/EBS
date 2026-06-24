@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frequently asked questions about the Exeter Biology Symposium 2027, including eligibility, research types, timeline, and how to get involved.">
+  <title>FAQ — Exeter Biology Symposium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .faq-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-10);
+    }
+    .faq-nav__link {
+      padding: var(--sp-2) var(--sp-4);
+      border-radius: 0;
+      border: 1.5px solid var(--col-border);
+      font-size: var(--sz-sm);
+      font-weight: 700;
+      color: var(--col-text);
+      background: #fff;
+      text-decoration: none;
+      transition: all var(--ease-fast);
+    }
+    .faq-nav__link:hover {
+      border-color: var(--col-primary);
+      color: #fff;
+      background: var(--col-primary);
+    }
+    .faq-section {
+      margin-bottom: var(--sp-16);
+      scroll-margin-top: calc(var(--nav-h) + var(--sp-8));
+    }
+    .faq-section__title {
+      font-size: var(--sz-2xl);
+      font-weight: 600;
+      color: var(--col-text);
+      margin-bottom: var(--sp-6);
+      padding-bottom: var(--sp-3);
+      border-bottom: 2px solid var(--col-border);
+    }
+
+    /* Contact form */
+    .contact-form-wrap {
+      background: var(--col-bg);
+      border: 1px solid var(--col-border);
+      border-radius: 0;
+      padding: var(--sp-10);
+    }
+    @media (max-width: 640px) { .contact-form-wrap { padding: var(--sp-6); } }
+    .form-group {
+      margin-bottom: var(--sp-5);
+    }
+    .form-group label {
+      display: block;
+      font-size: var(--sz-sm);
+      font-weight: 600;
+      margin-bottom: var(--sp-2);
+      color: var(--col-text);
+    }
+    .form-group label .req {
+      color: var(--col-primary);
+      margin-left: 2px;
+    }
+    .form-control {
+      width: 100%;
+      padding: var(--sp-3) var(--sp-4);
+      border: 1.5px solid var(--col-border);
+      border-radius: 0;
+      background: var(--col-bg);
+      font-family: var(--font-body);
+      font-size: var(--sz-base);
+      color: var(--col-text);
+      transition: border-color var(--ease-fast), box-shadow var(--ease-fast);
+      box-sizing: border-box;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--col-primary);
+      box-shadow: 0 0 0 3px rgba(139,26,26,.12);
+    }
+    .form-control::placeholder { color: var(--col-text-muted); }
+    select.form-control { cursor: pointer; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+    }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="about.html"     class="nav__link">About</a></li>
+      <li><a href="team.html"      class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html"     class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5" fill="none">
+          <circle cx="9.2" cy="9" r="8.5"></circle>
+          <path d="M14.85 14.64 L20.71 20.5"></path>
+        </g>
+      </svg>
+    </button>
+
+    <a href="register.html" class="nav__register">Register</a>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html"     class="nav__m-link">About</a>
+      <a href="team.html"      class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html"     class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html"      class="nav__m-link">For Judges</a>
+      <a href="faq.html"         class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta">
+        <a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">FAQ</span>
+      </nav>
+      <span class="overline">Frequently Asked Questions</span>
+      <h1>FAQ</h1>
+      <p class="page-hero__desc">Answers to common questions about EBS — who can participate, what the research looks like, how the process works, and how to get involved.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--layout-aside" style="display: grid; grid-template-columns: 1fr 280px; gap: var(--sp-16); align-items: start;">
+
+        <!-- Main FAQ content -->
+        <div>
+
+          <!-- Jump nav -->
+          <nav aria-label="Jump to FAQ section" class="reveal">
+            <div class="faq-nav">
+              <a href="#general"    class="faq-nav__link">General</a>
+              <a href="#students"   class="faq-nav__link">For Students</a>
+              <a href="#research"   class="faq-nav__link">Research &amp; Projects</a>
+              <a href="#mentors"    class="faq-nav__link">Mentors &amp; Support</a>
+              <a href="#symposium"  class="faq-nav__link">Symposium Day</a>
+              <a href="#schools"    class="faq-nav__link">Schools</a>
+              <a href="#judges"     class="faq-nav__link">Judges</a>
+            </div>
+          </nav>
+
+          <!-- General -->
+          <div class="faq-section reveal" id="general">
+            <h2 class="faq-section__title">General</h2>
+            <div class="accordion" role="list">
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="g1">
+                  What is the Exeter Biology Symposium?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="g1" role="region">
+                  <p>EBS is a student-organized research symposium hosted by the Genetics and Biotech Club at Phillips Exeter Academy. It gives students with little or no prior research experience the opportunity to conduct, present, and discuss original dry-lab biological research alongside peers, mentors, and judges. The inaugural event is planned for Spring 2027.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="g2">
+                  What is "dry-lab" research?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="g2" role="region">
+                  <p>Dry-lab research refers to research conducted without physical laboratory experiments or wet-lab techniques (pipettes, cell cultures, reagents, etc.). Instead, it uses computational analysis, publicly available datasets, literature synthesis, bioinformatics tools, and statistical modeling. Examples include genomics studies using publicly available sequence databases, meta-analyses of existing literature, disease modeling from epidemiological data, and computational protein structure prediction.</p>
+                  <p>Dry-lab research is ideal for high school students because it requires a standard laptop rather than specialized lab equipment, and many powerful tools and datasets are freely accessible online.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="g3">
+                  When and where is EBS 2027?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="g3" role="region">
+                  <p>EBS 2027 is planned for Spring 2027 — the target date is <strong>May 15, 2027</strong>, though this may be adjusted. The event will be held on the campus of Phillips Exeter Academy in Exeter, New Hampshire. The specific venue on campus will be confirmed and communicated to all registered participants in advance.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="g4">
+                  Who organizes EBS?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="g4" role="region">
+                  <p>EBS is organized entirely by students in the Genetics and Biotech Club at Phillips Exeter Academy, with guidance from faculty advisors. The co-heads are <strong>Adrian Chan</strong>, <strong>Jaiden Kim</strong>, <strong>Reya Satam</strong>, and <strong>Luke Wang</strong>. Faculty oversight is provided by <strong>Summer Morrill</strong> (Biology Department, Phillips Exeter Academy). The organizing committee also includes working groups covering research curriculum, outreach, logistics, media, and abstract review. See the <a href="team.html">Team page</a> for details.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="g5">
+                  Is there a cost to participate?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="g5" role="region">
+                  <p>EBS aims to be free for all student participants. There is no registration fee. Any travel to the symposium venue is the participant's own responsibility. We are actively seeking sponsors to provide financial support for students who need it. Volunteers (mentors, judges) participate at no cost.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- For Students -->
+          <div class="faq-section reveal" id="students">
+            <h2 class="faq-section__title">For Students</h2>
+            <div class="accordion" role="list">
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="s1">
+                  Do I need prior research experience to participate?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="s1" role="region">
+                  <p>No. EBS is specifically designed for students who have not done biological research before. The entire program — from our resource library to mentor matching — is built around helping beginners. If you have never read a scientific paper or used a research database, that is exactly the starting point EBS is built for.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="s2">
+                  Who is eligible to participate as a student?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="s2" role="region">
+                  <p>EBS 2027 is open to any current student at Phillips Exeter Academy, regardless of grade or prior science coursework. We may expand to partner schools in future years. If you attend a different school and are interested, contact us — we're tracking demand for future expansion.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="s3">
+                  How much time does participation require?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="s3" role="region">
+                  <p>Most participants spend 2–4 hours per week from October through May. This includes research time, mentor check-ins, and poster/presentation preparation. The time commitment peaks in February (abstract deadline) and May (presentation prep). EBS is designed to fit alongside a full academic schedule.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="s4">
+                  Can I work with a partner or team?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="s4" role="region">
+                  <p>Yes. Solo projects, pairs, and teams of up to three students are all accepted. Each team member must contribute meaningfully to the research and be prepared to discuss any part of the project during the poster session. All team members register individually.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="s5">
+                  Can I submit my EBS project to other competitions?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="s5" role="region">
+                  <p>Yes. EBS does not restrict students from submitting their work to other science fairs, competitions, or academic journals. We actively encourage students to share their research broadly. EBS is a launchpad, not an exclusive commitment.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Research & Projects -->
+          <div class="faq-section reveal" id="research">
+            <h2 class="faq-section__title">Research &amp; Projects</h2>
+            <div class="accordion" role="list">
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="r1">
+                  What kinds of research projects are accepted?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="r1" role="region">
+                  <p>Any original dry-lab biological research is eligible. This includes:</p>
+                  <ul>
+                    <li><strong>Literature synthesis / meta-analysis:</strong> Review and synthesize research on a biological question</li>
+                    <li><strong>Bioinformatics:</strong> Analyze genomic, proteomic, or transcriptomic datasets using online tools</li>
+                    <li><strong>Computational modeling:</strong> Build or apply models to simulate biological systems</li>
+                    <li><strong>Epidemiological analysis:</strong> Analyze disease spread, risk factors, or public health data</li>
+                    <li><strong>Ecological data analysis:</strong> Study population dynamics, biodiversity, or habitat data using existing datasets</li>
+                    <li><strong>Product design with a biological application:</strong> Design a tool, device, or system that addresses a real biological or health problem — supported with research on the problem space, existing solutions, and your design rationale</li>
+                  </ul>
+                  <p>The subject must be biology-adjacent — we interpret this broadly. If your project engages with a living system, human health, an ecosystem, or the interface between biology and technology, it almost certainly qualifies. When in doubt, reach out and we'll tell you.</p>
+                  <p>Projects must use publicly available tools and data (no proprietary or gated resources that reviewers can't verify). Wet-lab experiments are not accepted at EBS.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="r2">
+                  How do I choose a research topic?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="r2" role="region">
+                  <p>Start with something you're genuinely curious about. Think about biology topics that came up in class, news stories that caught your attention, or questions you've always had. A good EBS research question is: specific (not "what causes cancer" but "what genetic mutations are most common in pediatric glioblastoma"), answerable with public data, and biological in nature.</p>
+                  <p>Your assigned mentor will help you refine your question into something workable. See the <a href="resources.html">Resources page</a> for guides on forming research questions and finding datasets.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="r3">
+                  What tools and software will I use?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="r3" role="region">
+                  <p>All tools used in EBS research are free and browser-accessible. Common tools include: <strong>PubMed</strong> and <strong>Google Scholar</strong> for literature; <strong>NCBI</strong>, <strong>UCSC Genome Browser</strong>, and <strong>UniProt</strong> for biological databases; <strong>Galaxy</strong> and <strong>Google Colab</strong> for bioinformatics; <strong>R/RStudio</strong> for statistical analysis. No coding experience is required — EBS provides beginner guides for all tools in the resource library.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="r4">
+                  How are projects submitted and reviewed?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="r4" role="region">
+                  <p>Students submit a structured abstract in February 2027. Abstracts are reviewed by the EBS abstract review committee (composed of EBS organizing team members and volunteer reviewers). All students who submit a complete, original abstract in scope for EBS are expected to be accepted to present, though we may provide feedback for revision in borderline cases. Acceptance notifications go out in March 2027.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mentors & Support -->
+          <div class="faq-section reveal" id="mentors">
+            <h2 class="faq-section__title">Mentors &amp; Support</h2>
+            <div class="accordion" role="list">
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="m1">
+                  Will I be assigned a mentor?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="m1" role="region">
+                  <p>Yes. We aim to match every registered student with a volunteer researcher mentor who has expertise relevant to their research area. Matching takes place in October 2026. Mentors are matched based on stated research interests — if you haven't decided on a topic yet, that's okay, we'll do our best with preliminary interests.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="m2">
+                  What does a mentor do?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="m2" role="region">
+                  <p>Mentors meet with their matched students approximately twice per month via video call (~30 min each). They help students refine their research question, identify appropriate data sources and tools, review work in progress, give feedback on abstracts and posters, and help students prepare to talk about their work. Mentors are not expected to do the research for students — their role is to guide and advise.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="m3">
+                  What if I can't get matched with a mentor in my area?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="m3" role="region">
+                  <p>EBS will provide all students with access to the resource library and organizing team support regardless of mentor availability. If a close match is unavailable, we will assign you a mentor with adjacent expertise who can still help with research fundamentals. We will communicate transparently if matching constraints arise.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Symposium Day -->
+          <div class="faq-section reveal" id="symposium">
+            <h2 class="faq-section__title">Symposium Day</h2>
+            <div class="accordion" role="list">
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="sy1">
+                  What are the presentation formats?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="sy1" role="region">
+                  <p>EBS offers two presentation formats:</p>
+                  <ul>
+                    <li><strong>Poster Presentation:</strong> A printed or digital research poster displayed during one or both poster sessions. Students stand by their poster and explain their work to visiting judges and attendees (~15 min per judge visit). This is the primary format and is available to all accepted participants.</li>
+                    <li><strong>Short Talk (Oral Presentation):</strong> A 10-minute slide presentation followed by a 5-minute Q&amp;A. Available to a limited number of participants selected during abstract review.</li>
+                  </ul>
+                  <p>Students may indicate their presentation format preference in the abstract submission. EBS will do its best to honor preferences, subject to scheduling constraints.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="sy2">
+                  What should I bring to Symposium Day?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="sy2" role="region">
+                  <p>Poster presenters should bring their printed poster (size specifications will be provided). Oral presenters should bring a laptop with slides loaded (backup on USB recommended). Wear professional or business casual attire — you are presenting original research to professionals. All other materials will be provided at check-in.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="sy3">
+                  Will there be food at the symposium?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="sy3" role="region">
+                  <p>Yes. Lunch will be provided for all registered participants, judges, and volunteers. Light refreshments will be available throughout the day. Please indicate any dietary restrictions when you register — we will do our best to accommodate them.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="sy4">
+                  Will families and guests be allowed to attend?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="sy4" role="region">
+                  <p>We are planning for a limited guest list given venue constraints. Details on guest attendance will be communicated to registered participants in early 2027. At minimum, we expect to allow one family member or support person per student presenter.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Schools -->
+          <div class="faq-section reveal" id="schools">
+            <h2 class="faq-section__title">For Schools</h2>
+            <div class="accordion" role="list">
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="sc1">
+                  Can students from schools other than Exeter participate?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="sc1" role="region">
+                  <p>EBS 2027 is focused on Phillips Exeter Academy students. Expanding to include partner schools is something we're actively considering for future years. If you are an educator at another school who is interested in a future partnership, please contact us — we'd love to hear from you.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="sc2">
+                  What is the role of a faculty advisor?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="sc2" role="region">
+                  <p>Faculty advisors provide light oversight and institutional support — checking in on student progress, helping with any scheduling conflicts, and being a point of contact for the EBS organizing team. Faculty advisors are not expected to provide academic research mentorship (that's what our volunteer researchers do). This role typically requires under 1 hour per month.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Judges -->
+          <div class="faq-section reveal" id="judges">
+            <h2 class="faq-section__title">For Judges</h2>
+            <div class="accordion" role="list">
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="j1">
+                  What qualifications do judges need?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="j1" role="region">
+                  <p>Judges should have at minimum an undergraduate degree in a biological science or related STEM field. Graduate students, postdoctoral researchers, faculty members, and industry professionals are all welcome. Judges should be comfortable evaluating research methodology and scientific communication at a high school level.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="j2">
+                  How are judges briefed before the symposium?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="j2" role="region">
+                  <p>All judges receive a briefing packet before Symposium Day including: the judging rubric, abstract summaries of the projects they're assigned to evaluate, a venue map and schedule, and guidelines for providing constructive feedback to first-time student researchers. A brief virtual orientation is held the week before the event.</p>
+                </div>
+              </div>
+
+              <div class="accordion__item" role="listitem">
+                <button class="accordion__trigger" aria-expanded="false" aria-controls="j3">
+                  Can I judge remotely?
+                  <svg class="accordion__icon" aria-hidden="true"><use href="#icon-plus"/></svg>
+                </button>
+                <div class="accordion__body" id="j3" role="region">
+                  <p>For EBS 2027, we are planning for in-person judging only. Live poster Q&amp;A is core to the student experience, and remote evaluation would significantly reduce the quality of feedback students receive. We may explore hybrid options in future years.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sidebar quick links -->
+        <aside class="reveal" style="position: sticky; top: calc(var(--nav-h) + var(--sp-8));">
+          <div class="card" style="padding: var(--sp-6);">
+            <h4 style="margin-bottom: var(--sp-5); font-size: var(--sz-base);">Quick Links</h4>
+            <div style="display: flex; flex-direction: column; gap: var(--sp-3);">
+              <a href="about.html"       class="footer__link" style="font-size: var(--sz-sm);">About EBS</a>
+              <a href="schools.html"     class="footer__link" style="font-size: var(--sz-sm);">For Schools</a>
+              <a href="researchers.html" class="footer__link" style="font-size: var(--sz-sm);">For Researchers</a>
+              <a href="judges.html"      class="footer__link" style="font-size: var(--sz-sm);">For Judges</a>
+              <a href="resources.html"   class="footer__link" style="font-size: var(--sz-sm);">Resource Library</a>
+              <a href="register.html"    class="footer__link" style="font-size: var(--sz-sm);">Register Interest</a>
+            </div>
+            <div class="divider" style="margin: var(--sp-5) 0;"></div>
+            <p style="font-size: var(--sz-xs); color: var(--col-text-muted); margin-bottom: var(--sp-4);">Still have questions?</p>
+            <a href="#contact" class="btn btn--primary" style="width:100%; justify-content:center; font-size: var(--sz-sm);">Contact Us</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+<!-- ── Contact Form ── -->
+  <section class="section section--alt" id="contact">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline">Get in Touch</span>
+        <h2>Contact Us</h2>
+        <p>Can't find the answer you're looking for? Send us a message and the EBS organizing team will get back to you.</p>
+      </div>
+
+      <div class="container--narrow reveal" style="max-width: 640px; margin-inline: auto;">
+        <div class="contact-form-wrap">
+          <!-- Web3Forms properties added directly to the form tag -->
+          <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <!-- Web3Forms Access Key Hidden Input -->
+            <input type="hidden" name="access_key" value="2f40a3e9-3780-44bd-94c6-0762a55f64fb">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="c-name">Your Name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="c-name" name="name" class="form-control" placeholder="Ada Lovelace" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="c-email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input type="email" id="c-email" name="email" class="form-control" placeholder="ada@example.com" required autocomplete="email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="c-role">I am a…</label>
+              <select id="c-role" name="role" class="form-control">
+                <option value="" disabled selected>Select (optional)</option>
+                <option value="student">Student</option>
+                <option value="educator">Teacher / Educator</option>
+                <option value="researcher">Researcher / Mentor</option>
+                <option value="judge">Potential Judge</option>
+                <option value="parent">Parent / Guardian</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="c-subject">Subject <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="c-subject" name="subject" class="form-control" placeholder="Brief subject of your message" required>
+            </div>
+
+            <div class="form-group">
+              <label for="c-message">Message <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="c-message" name="message" class="form-control" rows="5" placeholder="Your question or message…" required style="resize: vertical;"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary" style="width:100%; justify-content:center; font-size: var(--sz-base);">
+              Send Message
+              <svg width="18" height="18" aria-hidden="true"><use href="#icon-mail"/></svg>
+            </button>
+          </form>
+
+          <!-- Success Message Container -->
+          <div id="form-success-msg" style="display:none; text-align:center; padding: var(--sp-8);" role="alert" aria-live="polite">
+            <svg width="40" height="40" aria-hidden="true" style="color: var(--col-primary); display:block; margin: 0 auto var(--sp-3);"><use href="#icon-check-circle"/></svg>
+            <h3 style="margin-bottom: var(--sp-2);">Message sent!</h3>
+            <p style="color: var(--col-text-sec);">Thank you for reaching out. The EBS organizing team will respond within a few business days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Contact form success state (main.js initContactForm targets #contact-form)
+  // Override to show our custom success element
+  (function () {
+    var form = document.getElementById('contact-form');
+    var msg  = document.getElementById('form-success-msg');
+    if (!form || !msg) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('[type="submit"]');
+      btn.disabled = true;
+      var orig = btn.innerHTML;
+      btn.innerHTML = 'Sending…';
+
+      setTimeout(function () {
+        form.style.display = 'none';
+        msg.style.display  = 'block';
+        msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 1200);
+    });
+  })();
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault(); // Stop standard redirect submission
+
+  const form = e.target;
+  const formData = new FormData(form);
+  const successMsg = document.getElementById('form-success-msg');
+  const submitButton = form.querySelector('button[type="submit"]');
+
+  // Change button state to indicate sending
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.innerText = "Sending...";
+  }
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: formData
+  })
+  .then(async (response) => {
+    let json = await response.json();
+    if (response.status === 200) {
+      // Hide form and show success message
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+    } else {
+      console.log(response);
+      alert(json.message || "Something went wrong.");
+      if (submitButton) submitButton.disabled = false;
+    }
+  })
+  .catch(error => {
+    console.log(error);
+    alert("Form submission failed. Please try again.");
+    if (submitButton) submitButton.disabled = false;
+  });
+});
+</script>
+</body>
+</html>

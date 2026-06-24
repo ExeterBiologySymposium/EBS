@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about the Exeter Biology Symposium — our mission, why we exist, the event format, and key dates for Spring 2027.">
+  <title>About — Exeter Biology Symposium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="about.html"     class="nav__link">About</a></li>
+      <li><a href="team.html"      class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html"     class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5" fill="none">
+          <circle cx="9.2" cy="9" r="8.5"></circle>
+          <path d="M14.85 14.64 L20.71 20.5"></path>
+        </g>
+      </svg>
+    </button>
+
+    <a href="register.html" class="nav__register">Register</a>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html"     class="nav__m-link">About</a>
+      <a href="team.html"      class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html"     class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html"      class="nav__m-link">For Judges</a>
+      <a href="faq.html"         class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta">
+        <a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ── Page Hero ── -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">EBS</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">About</span>
+      </nav>
+      <span class="overline">About EBS</span>
+      <h1>Our Mission &amp; Vision</h1>
+      <p class="page-hero__desc">The Exeter Biology Symposium is the launch pad that Exeter researchers wish they'd had — a community-built gateway into biological research for students at every level.</p>
+    </div>
+  </section>
+
+  <!-- ── Mission Statement ── -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="reveal">
+        <span class="overline">Why We Exist</span>
+        <h2 style="margin-top: var(--sp-3); margin-bottom: var(--sp-6);">The Problem We're Solving</h2>
+        <p style="margin-bottom: var(--sp-5);">Many students at Phillips Exeter Academy are deeply interested in biology and science, yet face a frustrating catch-22: research opportunities frequently require prior research experience to access. The very students who most need a first opportunity are the ones most systematically excluded from getting one.</p>
+        <p style="margin-bottom: var(--sp-5);">The Genetics and Biotech Club at Exeter heard this challenge from students across the school. We saw talented, curious peers who simply didn't know where to start — not because they lacked ability, but because no structured pathway existed for beginners.</p>
+        <p style="margin-bottom: var(--sp-8);">EBS is our answer. We've designed a symposium specifically for first-time researchers, built around the accessible and rigorous world of dry-lab biology: computational analysis, bioinformatics, statistical modeling, and systematic literature reviews.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── What is Dry-Lab Research ── -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="grid grid--2" style="gap: var(--sp-16); align-items: center;">
+        <div class="reveal">
+          <span class="overline">Our Format</span>
+          <h2 style="margin-top: var(--sp-3); margin-bottom: var(--sp-5);">What Is Dry-Lab Research?</h2>
+          <p style="margin-bottom: var(--sp-4);">Dry-lab research is biology conducted without a physical laboratory — using computers, databases, statistics, and published literature to answer scientific questions. It is rigorous, publishable, and increasingly essential in modern biology.</p>
+          <p style="margin-bottom: var(--sp-5);">We chose this format for EBS because it removes the primary barrier to entry for most students: access to physical lab equipment. Anyone with a computer and internet connection can begin doing meaningful biological research.</p>
+          <div class="checklist">
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span><strong>Bioinformatics</strong> — analyzing genomic, proteomic, or evolutionary data</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span><strong>Computational modeling</strong> — simulating biological systems or disease spread</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span><strong>Statistical analysis</strong> — working with public health or ecology datasets</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span><strong>Systematic literature review</strong> — synthesizing and analyzing published research</span>
+            </div>
+            <div class="checklist__item">
+              <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+              <span><strong>Meta-analysis</strong> — drawing quantitative conclusions from existing studies</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal--d2">
+          <div class="grid" style="gap: var(--sp-4);">
+            <div class="card card--bordered-top">
+              <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-laptop"/></svg></div>
+              <h4>No Lab Required</h4>
+              <p>All you need is a computer, an internet connection, and curiosity. We provide the rest.</p>
+            </div>
+            <div class="card card--bordered-top">
+              <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-chart"/></svg></div>
+              <h4>Real Science</h4>
+              <p>Dry-lab research leads to peer-reviewed publications and is the foundation of modern genomics and systems biology.</p>
+            </div>
+            <div class="card card--bordered-top">
+              <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-lightbulb"/></svg></div>
+              <h4>Your Own Question</h4>
+              <p>Students choose their own research question within any area of biology they find compelling.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Event Format ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="overline">Event Structure</span>
+        <h2>How the Symposium Works</h2>
+        <p>EBS is a one-day event combining research presentations, mentorship, and scientific discussion in a supportive, conference-style setting.</p>
+      </div>
+
+      <div class="grid grid--2" style="gap: var(--sp-12);">
+        <div class="steps reveal">
+          <div class="step">
+            <div class="step__num">1</div>
+            <div class="step__body">
+              <p class="step__title">Research & Preparation (Fall 2026 – Spring 2027)</p>
+              <p>Students receive resources, mentorship, and structured guidance to develop their research question, conduct their study, and prepare their presentation.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num">2</div>
+            <div class="step__body">
+              <p class="step__title">Abstract Submission (March 2027)</p>
+              <p>Participants submit a brief abstract summarizing their research question, methodology, and preliminary findings. All abstracts are reviewed before acceptance.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num">3</div>
+            <div class="step__body">
+              <p class="step__title">Symposium Day (Spring 2027)</p>
+              <p>Students present their work through poster presentations and/or short talks. Judges evaluate presentations and provide constructive written feedback.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num">4</div>
+            <div class="step__body">
+              <p class="step__title">Awards & Networking</p>
+              <p>The day concludes with an awards ceremony and open networking session, connecting students with researchers and industry professionals.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal reveal--d2">
+          <h3 style="font-size: var(--sz-2xl); margin-bottom: var(--sp-6);">Presentation Formats</h3>
+
+          <div style="display:flex; flex-direction:column; gap: var(--sp-4);">
+            <div class="card">
+              <h4 style="margin-bottom: var(--sp-2);">
+                <svg width="20" height="20" style="vertical-align:-4px; color: var(--col-primary); margin-right: var(--sp-2);" aria-hidden="true"><use href="#icon-presentation"/></svg>
+                Poster Presentation
+              </h4>
+              <p>Students display their research on a physical poster and discuss their work with judges, peers, and attendees during a dedicated poster session. This is the primary format for EBS 2027.</p>
+            </div>
+
+            <div class="card">
+              <h4 style="margin-bottom: var(--sp-2);">
+                <svg width="20" height="20" style="vertical-align:-4px; color: var(--col-primary); margin-right: var(--sp-2);" aria-hidden="true"><use href="#icon-chart"/></svg>
+                Selected Oral Presentations
+              </h4>
+              <p>A limited number of participants may be invited to deliver a 5-minute oral presentation to the full audience, based on abstract review.</p>
+            </div>
+
+            <div class="card">
+              <h4 style="margin-bottom: var(--sp-2);">
+                <svg width="20" height="20" style="vertical-align:-4px; color: var(--col-primary); margin-right: var(--sp-2);" aria-hidden="true"><use href="#icon-users"/></svg>
+                Panel Discussion
+              </h4>
+              <p>A moderated discussion featuring invited researchers and mentors speaking about pathways into biological research — open to all attendees.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Key Dates Timeline ── -->
+  <section class="section section--alt" id="dates">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline">Important Dates</span>
+        <h2>Key Dates &amp; Timeline</h2>
+        <p>Mark your calendar. All dates are tentative and subject to change — register your interest to receive updates.</p>
+      </div>
+
+      <div style="max-width: 560px; margin-inline: auto;" class="reveal reveal--d1">
+        <div class="timeline">
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__date">Fall 2026</div>
+            <div class="timeline__title">Registration Opens</div>
+            <p>Student registration and interest forms open. Resources and mentorship matching begins.</p>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__date">November 2026</div>
+            <div class="timeline__title">Mentor Matching</div>
+            <p>Students are paired with volunteer mentors and researchers. Regular check-ins and guidance sessions begin.</p>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__date">February 2027</div>
+            <div class="timeline__title">Abstract Submissions Open</div>
+            <p>Students submit research abstracts for review. All registered participants are eligible to submit.</p>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__date">March 2027</div>
+            <div class="timeline__title">Acceptance Notifications</div>
+            <p>Participants receive notification of abstract acceptance and presentation format assignment.</p>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__date">May 2027</div>
+            <div class="timeline__title">Exeter Biology Symposium</div>
+            <p>Symposium Day at Phillips Exeter Academy. Poster sessions, lightning talks, panel discussion, and awards.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Values ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline">Our Values</span>
+        <h2>What We Stand For</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card card--lift reveal reveal--d1" style="text-align:center;">
+          <h4>Accessibility</h4>
+          <p>Research should be open to everyone. We actively remove barriers — real and perceived — that prevent students from engaging with science.</p>
+        </div>
+        <div class="card card--lift reveal reveal--d2" style="text-align:center;">
+          <h4>Rigor</h4>
+          <p>We hold student work to real scientific standards while providing the support needed to meet them. Beginner-friendly does not mean less rigorous.</p>
+        </div>
+        <div class="card card--lift reveal reveal--d3" style="text-align:center;">
+          <h4>Community</h4>
+          <p>Science thrives through collaboration and discourse. EBS fosters a generous, collegial community where students learn as much from each other as from mentors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="section--sm" style="padding-bottom: var(--sp-24);">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2>Join Us in Spring 2027</h2>
+        <p>Whether you're ready to start your research journey or just curious to learn more, we'd love to hear from you.</p>
+        <div class="btn-group" style="justify-content:center;">
+          <a href="register.html" class="btn btn--white btn--lg">Register Your Interest</a>
+          <a href="team.html"     class="btn btn--white-outline btn--lg">Meet the Team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

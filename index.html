@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Exeter Biology Symposium (EBS) is a student-organized research symposium at Phillips Exeter Academy providing students new to biology research the opportunity to explore, present, and connect — Spring 2027.">
+  <title>Exeter Biology Symposium — Spring 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="about.html"     class="nav__link">About</a></li>
+      <li><a href="team.html"      class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html"     class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5" fill="none">
+          <circle cx="9.2" cy="9" r="8.5"></circle>
+          <path d="M14.85 14.64 L20.71 20.5"></path>
+        </g>
+      </svg>
+    </button>
+
+    <a href="register.html" class="nav__register">Register</a>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html"     class="nav__m-link">About</a>
+      <a href="team.html"      class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html"     class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html"      class="nav__m-link">For Judges</a>
+      <a href="faq.html"         class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta">
+        <a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ── Spotlight Hero (MIT-style) ── -->
+  <section class="spotlight">
+    <div class="spotlight__grid">
+      <aside class="spotlight__sidebar">
+        <label for="ebs-search" class="spotlight__search-label">Explore the symposium</label>
+        <div class="spotlight__search-box">
+          <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.5" fill="none">
+              <circle cx="9.2" cy="9" r="8.5"></circle>
+              <path d="M14.85 14.64 L20.71 20.5"></path>
+            </g>
+          </svg>
+          <input id="ebs-search" type="search" placeholder="What are you looking for?" autocomplete="off">
+        </div>
+
+        <h4 class="spotlight__resources-h">Get involved</h4>
+        <ul class="spotlight__resources-list" role="list">
+          <li><a href="schools.html">schools &amp; teachers</a></li>
+          <li><a href="researchers.html">student researchers</a></li>
+          <li><a href="judges.html">judges &amp; mentors</a></li>
+          <li><a href="resources.html">research resources</a></li>
+          <li><a href="register.html">register interest</a></li>
+          <li><a href="faq.html">all FAQs</a></li>
+        </ul>
+
+        <div class="spotlight__alert">
+          <a href="register.html" class="spotlight__alert-title">EBS 2027 — registration opening</a>
+          <p class="spotlight__alert-text">Be first to hear when student, mentor, and judge applications open.</p>
+        </div>
+
+        <div class="spotlight__sidebar-footer">
+          <p><strong>Phillips Exeter Academy</strong><br>20 Main Street, Exeter, NH, USA</p>
+          <div class="spotlight__sidebar-utility">
+            <a href="about.html">About</a>
+            <a href="team.html">Team</a>
+            <a href="faq.html#contact">Contact</a>
+          </div>
+        </div>
+      </aside>
+
+      <div class="spotlight__feature">
+        <div class="spotlight__feature-media">
+          <img src="EBS%20Cover%20Photo.png" alt="Student researcher at a microscope" loading="eager">
+        </div>
+        <div class="spotlight__feature-body">
+          <div class="spotlight__feature-eyebrow">
+            <svg viewBox="0 0 22 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9.058 1.219L1.203 9.074l7.855 7.855M1.5 9.074h20.005"></path>
+              </g>
+            </svg>
+            <span>Spotlight: Spring 2027</span>
+          </div>
+
+          <h1 class="spotlight__feature-h">
+            Starting on the green hills of Exeter, a new community of high-school researchers is taking <a href="about.html">its first step into biology</a>. The Exeter Biology Symposium opens dry-lab research to students with no prior experience — and connects them with mentors, peers, and judges who care.
+          </h1>
+
+          <div class="spotlight__feature-meta">
+            <h4 class="spotlight__feature-date">Spring 2027 · Phillips Exeter Academy</h4>
+            <a href="register.html" class="spotlight__feature-cta">Register interest →</a>
+            <a href="about.html" class="spotlight__feature-cta">Read the mission →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats Strip ── -->
+  <div class="stats-strip">
+    <div class="container">
+      <div class="stats-strip__grid">
+        <div class="stat reveal">
+          <div class="stat__num">2027</div>
+          <div class="stat__lbl">Inaugural Year</div>
+        </div>
+        <div class="stat reveal reveal--d1">
+          <div class="stat__num">100%</div>
+          <div class="stat__lbl">Beginner Friendly</div>
+        </div>
+        <div class="stat reveal reveal--d2">
+          <div class="stat__num">Dry-Lab</div>
+          <div class="stat__lbl">Research Format</div>
+        </div>
+        <div class="stat reveal reveal--d3">
+          <div class="stat__num">PEA</div>
+          <div class="stat__lbl">Phillips Exeter Academy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── What is EBS ── -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline">About the Event</span>
+        <h2>Breaking Into Biology, Together</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+
+      <div class="grid grid--3">
+        <div class="card card--lift card--bordered-top reveal reveal--d1">
+          <div class="card__icon">
+            <svg width="24" height="24" aria-hidden="true"><use href="#icon-graduate"/></svg>
+          </div>
+          <h3>Open to All Levels</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+
+        <div class="card card--lift card--bordered-top reveal reveal--d2">
+          <div class="card__icon">
+            <svg width="24" height="24" aria-hidden="true"><use href="#icon-laptop"/></svg>
+          </div>
+          <h3>Dry-Lab Focus</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+
+        <div class="card card--lift card--bordered-top reveal reveal--d3">
+          <div class="card__icon">
+            <svg width="24" height="24" aria-hidden="true"><use href="#icon-users"/></svg>
+          </div>
+          <h3>Peer and Mentor Network</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Who Can Participate ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header section-header--center reveal">
+        <span class="overline">Participation</span>
+        <h2>Who Is EBS For?</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+
+      <div class="grid grid--3">
+        <div class="aud-card card card--lift reveal reveal--d1">
+          <h3>Students</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+          <a href="resources.html" class="btn btn--secondary" style="margin-top:auto;">
+            Explore Resources
+            <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+          </a>
+        </div>
+
+        <div class="aud-card card card--lift reveal reveal--d2">
+          <h3>Researchers &amp; Mentors</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+          <a href="researchers.html" class="btn btn--secondary" style="margin-top:auto;">
+            Volunteer to Mentor
+            <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+          </a>
+        </div>
+
+        <div class="aud-card card card--lift reveal reveal--d3">
+          <h3>Judges</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+          <a href="judges.html" class="btn btn--secondary" style="margin-top:auto;">
+            Apply to Judge
+            <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About the Club ── -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="grid grid--2" style="gap: var(--sp-16); align-items: center;">
+        <div class="reveal">
+          <span class="overline">The Organizers</span>
+          <h2 style="margin-top: var(--sp-3); margin-bottom: var(--sp-5);">Genetics &amp; Biotech Club at Exeter</h2>
+          <p style="margin-bottom: var(--sp-4);">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <p style="margin-bottom: var(--sp-6);">
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
+          </p>
+          <div class="btn-group">
+            <a href="about.html"  class="btn btn--primary">Our Mission</a>
+            <a href="team.html"   class="btn btn--secondary">Meet the Team</a>
+          </div>
+        </div>
+
+        <div class="reveal reveal--d2">
+          <div class="card" style="padding: var(--sp-8);">
+            <h4 style="margin-bottom: var(--sp-5); font-family: var(--font-heading); font-size: var(--sz-2xl);">Why EBS Exists</h4>
+            <div class="checklist">
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Many Exeter students want to do research but don't know where to start</span>
+              </div>
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Traditional programs often require prior experience or lab access</span>
+              </div>
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Dry-lab research is just as rigorous and accessible without a laboratory</span>
+              </div>
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Scientific communication is a skill learned through practice and community</span>
+              </div>
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Connecting with professionals early opens doors for future research careers</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Resources Preview ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap: var(--sp-4);">
+        <div>
+          <span class="overline">Resources</span>
+          <h2 style="margin-top: var(--sp-3); margin-bottom: 0;">Start Your Research Journey</h2>
+        </div>
+        <a href="resources.html" class="btn btn--secondary">
+          All Resources
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+        </a>
+      </div>
+
+      <div class="grid grid--3">
+        <div class="card card--lift reveal reveal--d1">
+          <h4>Introduction to Dry-Lab Research</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          <a href="resources.html#drylab" class="btn btn--secondary btn--lg" style="margin-top: var(--sp-4); padding-inline: 0;">
+              Read Guide
+            <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+          </a>
+        </div>
+
+        <div class="card card--lift reveal reveal--d2">
+          <h4>Scientific Literature 101</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          <a href="resources.html#literature" class="btn btn--secondary btn--lg" style="margin-top: var(--sp-4); padding-inline: 0;">
+              Read Guide
+            <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+          </a>
+        </div>
+
+        <div class="card card--lift reveal reveal--d3">
+          <h4>Presenting Your Research</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+          <a href="resources.html#presenting" class="btn btn--secondary btn--lg" style="margin-top: var(--sp-4); padding-inline: 0;">
+              Read Guide
+            <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA Banner ── -->
+  <section class="section section--sm">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2>Ready to Begin?</h2>
+        <p>Whether you're a student, researcher, or interested judge — EBS 2027 has a place for you. Register your interest now and be the first to receive updates.</p>
+        <div class="btn-group" style="justify-content:center; margin-bottom: 0;">
+          <a href="register.html" class="btn btn--white btn--lg">Register Your Interest</a>
+          <a href="faq.html"      class="btn btn--white-outline btn--lg">Read the FAQ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet the student organizers and faculty advisors behind the Exeter Biology Symposium, organized by the Genetics and Biotech Club at Phillips Exeter Academy.">
+  <title>Team — Exeter Biology Symposium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .team-section-title {
+      font-family: var(--font-heading);
+      font-size: var(--sz-2xl);
+      font-weight: 600;
+      color: var(--col-text);
+      margin-bottom: var(--sp-8);
+      padding-bottom: var(--sp-4);
+      border-bottom: 2px solid var(--col-border);
+    }
+    .faculty-card {
+      display: flex;
+      gap: var(--sp-5);
+      align-items: flex-start;
+      padding: var(--sp-6);
+    }
+    .faculty-card__avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--r-full);
+      background: var(--col-bg-alt);
+      border: 2px solid var(--col-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .faculty-card__initials {
+      font-family: var(--font-heading);
+      font-size: var(--sz-xl);
+      font-weight: 700;
+      color: var(--col-primary);
+    }
+    .faculty-card__dept {
+      font-size: var(--sz-xs);
+      color: var(--col-text-muted);
+      margin-top: var(--sp-1);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main">
+    <a href="index.html" class="nav__logo" aria-label="Exeter Biology Symposium home">
+      <div class="nav__logo-mark"><span>EBS</span></div>
+      <div class="nav__logo-text">
+        <span class="nav__logo-title">Exeter Biology Symposium</span>
+        <span class="nav__logo-sub">Phillips Exeter Academy</span>
+      </div>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="about.html"     class="nav__link">About</a></li>
+      <li><a href="team.html"      class="nav__link">Team</a></li>
+      <li><a href="resources.html" class="nav__link">Resources</a></li>
+      <li class="nav__dd">
+        <button class="nav__dd-toggle" aria-expanded="false" aria-haspopup="true">
+          Participate <svg width="12" height="12" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="nav__dd-menu" role="menu">
+          <a href="schools.html"     class="nav__dd-item" role="menuitem">For Schools</a>
+          <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
+          <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
+        </div>
+      </li>
+      <li><a href="faq.html" class="nav__link">FAQ</a></li>
+    </ul>
+
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <button type="button" class="nav__search" aria-label="Search site" aria-haspopup="dialog" data-search-open>
+      <svg viewBox="0 0 23 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5" fill="none">
+          <circle cx="9.2" cy="9" r="8.5"></circle>
+          <path d="M14.85 14.64 L20.71 20.5"></path>
+        </g>
+      </svg>
+    </button>
+
+    <a href="register.html" class="nav__register">Register</a>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile">
+      <a href="about.html"     class="nav__m-link">About</a>
+      <a href="team.html"      class="nav__m-link">Team</a>
+      <a href="resources.html" class="nav__m-link">Resources</a>
+      <span class="nav__m-label">Participate</span>
+      <a href="schools.html"     class="nav__m-link">For Schools</a>
+      <a href="researchers.html" class="nav__m-link">For Researchers</a>
+      <a href="judges.html"      class="nav__m-link">For Judges</a>
+      <a href="faq.html"         class="nav__m-link">FAQ</a>
+      <div class="nav__m-cta">
+        <a href="register.html" class="btn btn--white" style="width:100%;justify-content:center;">Register Interest</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">EBS</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Team</span>
+      </nav>
+      <span class="overline">The People Behind EBS</span>
+      <h1>Meet Our Team</h1>
+      <p class="page-hero__desc">EBS is built and run entirely by students in the Genetics and Biotech Club at Phillips Exeter Academy. We are grateful for the support of our faculty advisors and the broader Exeter community.</p>
+    </div>
+  </section>
+
+  <!-- ── Leadership ── -->
+  <section class="section">
+    <div class="container">
+
+      <h2 class="team-section-title reveal">Executive Committee</h2>
+      <div class="grid grid--4 reveal">
+        <div class="team-card card card--lift">
+          <div class="team-card__avatar"><span class="team-card__initials">JK</span></div>
+          <h4>Jaiden Kim</h4>
+          <p class="role">Co-Head</p>
+          <p class="grade">Class of 2028</p>
+        </div>
+        <div class="team-card card card--lift">
+          <div class="team-card__avatar"><span class="team-card__initials">AC</span></div>
+          <h4>Adrian Chan</h4>
+          <p class="role">Co-Head</p>
+          <p class="grade">Class of 2028</p>
+        </div>
+        <div class="team-card card card--lift">
+          <div class="team-card__avatar"><span class="team-card__initials">RS</span></div>
+          <h4>Reya Satam</h4>
+          <p class="role">Co-Head</p>
+          <p class="grade">Class of 2028</p>
+        </div>
+        <div class="team-card card card--lift">
+          <div class="team-card__avatar"><span class="team-card__initials">LW</span></div>
+          <h4>Luke Wang</h4>
+          <p class="role">Co-Head</p>
+          <p class="grade">Class of 2027</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h2 class="team-section-title reveal">Organizing Committee and School Partners</h2>
+      <div class="grid grid--4">
+
+        <div class="team-card card card--lift reveal reveal--d3">
+          <div class="team-card__avatar"><span class="team-card__initials">MD</span></div>
+          <h4>Media Director</h4>
+          <p class="role">Design &amp; Social Media</p>
+          <p class="grade">Class of 2028</p>
+        </div>
+
+        <div class="team-card card card--lift reveal reveal--d2">
+          <div class="team-card__avatar"><span class="team-card__initials">AL</span></div>
+          <h4>Abstract Reviewer</h4>
+          <p class="role">Submissions &amp; Review</p>
+          <p class="grade">Class of 2028</p>
+        </div>
+
+        <div class="team-card card card--lift reveal reveal--d3">
+          <div class="team-card__avatar"><span class="team-card__initials">SP</span></div>
+          <h4>School Partner</h4>
+          <p class="role">Phillips Academy</p>
+          <p class="grade">Class of 2027</p>
+        </div>
+      </div>
+            <div class="callout reveal" style="margin-top: var(--sp-8);">
+        <p><strong>Note:</strong> Team member names and headshots will be added when the organizing committee is finalized in Fall 2026. If you are interested in joining the organizing team, see below.</p>
+      </div>
+
+
+      <div class="divider"></div>
+
+      <!-- ── Faculty Advisors ── -->
+      <h2 class="team-section-title reveal">Faculty Advisors</h2>
+      <p class="reveal" style="margin-bottom: var(--sp-8); max-width: 640px; font-size: var(--sz-lg); color: var(--col-text-sec);">EBS is supported by dedicated faculty at Phillips Exeter Academy who believe in student-led scientific inquiry and provide guidance, oversight, and institutional support.</p>
+
+      <div class="grid grid--2 reveal">
+        <div class="faculty-card card">
+          <div class="faculty-card__avatar"><span class="faculty-card__initials">SM</span></div>
+          <div>
+            <h4 style="margin-bottom: var(--sp-1);">Dr. Summer Morrill</h4>
+            <p class="role" style="font-size: var(--sz-sm); color: var(--col-primary); font-weight: 600;">Biology Department</p>
+            <p class="faculty-card__dept">Phillips Exeter Academy</p>
+          </div>
+        </div>
+        <div class="faculty-card card">
+          <div class="faculty-card__avatar"><span class="faculty-card__initials">FA</span></div>
+          <div>
+            <h4 style="margin-bottom: var(--sp-1);">Faculty Co-Advisor</h4>
+            <p class="role" style="font-size: var(--sz-sm); color: var(--col-primary); font-weight: 600;">Science Department</p>
+            <p class="faculty-card__dept">Phillips Exeter Academy</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ── Join the Team ── -->
+      <div class="grid grid--2" style="gap: var(--sp-12); align-items: center;">
+        <div class="reveal">
+          <span class="overline">Get Involved</span>
+          <h2 style="margin-top: var(--sp-3); margin-bottom: var(--sp-5);">Join the Organizing Team</h2>
+          <p style="margin-bottom: var(--sp-4);">The Genetics and Biotech Club is actively recruiting students to help organize EBS 2027. No prior event experience needed — just enthusiasm for biology, science communication, and making research accessible to your peers.</p>
+          <p style="margin-bottom: var(--sp-6);">We have roles in research curriculum development, outreach, design, logistics, and more. If you care about this mission, we want to hear from you.</p>
+          <a href="register.html" class="btn btn--primary">
+            Express Interest in Joining
+            <svg width="18" height="18" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+          </a>
+        </div>
+
+        <div class="reveal reveal--d2">
+          <div class="card" style="padding: var(--sp-8);">
+            <h4 style="margin-bottom: var(--sp-5);">Open Roles</h4>
+            <div class="checklist">
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Research curriculum developers</span>
+              </div>
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>School and community outreach coordinators</span>
+              </div>
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Graphic designers and social media managers</span>
+              </div>
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Abstract review committee members</span>
+              </div>
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Sponsorship and partnerships leads</span>
+              </div>
+              <div class="checklist__item">
+                <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
+                <span>Day-of logistics and volunteer coordinators</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--sm" style="padding-bottom: var(--sp-24);">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2>Built by Students, for Students</h2>
+        <p>Have a question or want to connect with the team? We'd love to hear from you.</p>
+        <div class="btn-group" style="justify-content:center;">
+          <a href="faq.html#contact" class="btn btn--white btn--lg">Contact the Team</a>
+          <a href="about.html"       class="btn btn--white-outline btn--lg">Our Mission</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__heading">Exeter Biology Symposium</p>
+        <div class="footer__email-row">
+          <svg width="16" height="16" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <a href="mailto:ebs@exeter.edu" class="footer__email">ebs@exeter.edu</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
