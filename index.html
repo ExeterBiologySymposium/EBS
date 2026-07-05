@@ -19,12 +19,12 @@
   <meta property="og:site_name" content="Exeter Biology Symposium">
   <meta property="og:title" content="Exeter Biology Symposium 2027 — Phillips Exeter Academy">
   <meta property="og:description" content="The Exeter Biology Symposium (EBS) is a student-organized research symposium at Phillips Exeter Academy providing students new to biology research the opportunity to explore, present, and connect.">
-  <meta property="og:image" content="https://exeterbiosymposium.vercel.app/EBS%20Cover%20Photo.png">
+  <meta property="og:image" content="https://exeterbiosymposium.vercel.app/EBS-Cover-Photo-1440.png">
   <meta property="og:url" content="https://exeterbiosymposium.vercel.app/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Exeter Biology Symposium 2027 — Phillips Exeter Academy">
   <meta name="twitter:description" content="The Exeter Biology Symposium (EBS) is a student-organized research symposium at Phillips Exeter Academy providing students new to biology research the opportunity to explore, present, and connect.">
-  <meta name="twitter:image" content="https://exeterbiosymposium.vercel.app/EBS%20Cover%20Photo.png">
+  <meta name="twitter:image" content="https://exeterbiosymposium.vercel.app/EBS-Cover-Photo-1440.png">
   <title>Exeter Biology Symposium 2027 — Phillips Exeter Academy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,7 +198,11 @@
 
       <div class="spotlight__feature">
         <div class="spotlight__feature-media">
-          <img src="EBS%20Cover%20Photo.png" alt="Student researcher at a microscope" loading="eager">
+          <picture>
+            <source type="image/avif" srcset="EBS-Cover-Photo-480.avif 480w, EBS-Cover-Photo-960.avif 960w, EBS-Cover-Photo-1440.avif 1440w, EBS-Cover-Photo-1920.avif 1920w" sizes="(max-width: 768px) 100vw, calc(100vw - 320px)">
+            <source type="image/webp" srcset="EBS-Cover-Photo-480.webp 480w, EBS-Cover-Photo-960.webp 960w, EBS-Cover-Photo-1440.webp 1440w, EBS-Cover-Photo-1920.webp 1920w" sizes="(max-width: 768px) 100vw, calc(100vw - 320px)">
+            <img src="EBS-Cover-Photo-1440.png" srcset="EBS-Cover-Photo-480.png 480w, EBS-Cover-Photo-960.png 960w, EBS-Cover-Photo-1440.png 1440w, EBS-Cover-Photo-1920.png 1920w" sizes="(max-width: 768px) 100vw, calc(100vw - 320px)" alt="Student researcher at a microscope" loading="eager" fetchpriority="high">
+          </picture>
         </div>
         <div class="spotlight__feature-body">
           <div class="spotlight__feature-eyebrow">
