@@ -60,7 +60,6 @@
           <a href="datascience.html" class="nav__dd-item" role="menuitem">Curriculum Hub</a>
           <a href="python.html"      class="nav__dd-item" role="menuitem">Python Track</a>
           <a href="rstudio.html"     class="nav__dd-item" role="menuitem">R Track</a>
-          <a href="opensource.html"     class="nav__dd-item" role="menuitem">EBS Open Source</a>
         </div>
       </li>
       <li class="nav__dd">
@@ -72,7 +71,7 @@
           <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
           <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
           <a href="student-signup.html" class="nav__dd-item" role="menuitem">Student Signup</a>
-          <a href="volunteer-signup.html" class="nav__dd-item" role="menuitem">Volunteer / Mentor Signup</a>
+          <a href="volunteer-signup.html" class="nav__dd-item" role="menuitem">Volunteer Signup</a>
         </div>
       </li>
       <li><a href="schedule.html" class="nav__link">Schedule</a></li>
@@ -112,7 +111,7 @@
       <a href="researchers.html" class="nav__m-link">For Researchers</a>
       <a href="judges.html"      class="nav__m-link">For Judges</a>
       <a href="student-signup.html" class="nav__m-link">Student Signup</a>
-      <a href="volunteer-signup.html" class="nav__m-link">Volunteer / Mentor Signup</a>
+      <a href="volunteer-signup.html" class="nav__m-link">Volunteer Signup</a>
       <a href="schedule.html"    class="nav__m-link">Schedule</a>
       <a href="faq.html"         class="nav__m-link">FAQ</a>
       <button type="button" class="nav__m-theme" aria-pressed="false" data-theme-toggle>
@@ -139,7 +138,7 @@
       </nav>
       <span class="overline">Symposium Day</span>
       <h1>Day-Of Schedule</h1>
-      <p class="page-hero__desc">Thursday, May 15, 2027 · Phillips Exeter Academy. All times below are in Eastern Time (EST) and subject to minor changes closer to the event.</p>
+      <p class="page-hero__desc">Thursday, May 15, 2027 · Phillips Exeter Academy, in-person and online. All times below are in Eastern Time (EST) and subject to minor changes closer to the event.</p>
     </div>
   </section>
 
@@ -156,7 +155,7 @@
                 <th scope="col">Location</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="schedule-body">
               <tr>
                 <td>8:00 – 9:00 AM</td>
                 <td>Registration</td>
@@ -203,7 +202,7 @@
   <!-- ── Quick Info ── -->
   <section class="section section--alt">
     <div class="container">
-      <div class="grid grid--3" style="gap: var(--sp-6);">
+      <div class="grid grid--4" id="session-info-grid" style="gap: var(--sp-6);">
         <div class="card card--bordered-top reveal reveal--d1">
           <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-calendar"/></svg></div>
           <h4>Date</h4>
@@ -215,9 +214,14 @@
           <p>Phillips Exeter Academy — Phelps Lobby, Forum, Grainger, and the New Dining Hall.</p>
         </div>
         <div class="card card--bordered-top reveal reveal--d3">
+          <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-laptop"/></svg></div>
+          <h4>Online Option</h4>
+          <p>Can't make it to campus? Join the livestreamed virtual track running alongside the in-person schedule throughout the day.</p>
+        </div>
+        <div class="card card--bordered-top reveal reveal--d4">
           <div class="card__icon"><svg width="24" height="24" aria-hidden="true"><use href="#icon-users"/></svg></div>
           <h4>Who Should Attend</h4>
-          <p>Presenting students, judges, mentors, guest speakers, and visiting school groups are all welcome throughout the day.</p>
+          <p>Presenting students, judges, volunteers, guest speakers, and visiting school groups are all welcome, in-person or online.</p>
         </div>
       </div>
     </div>
@@ -251,7 +255,7 @@
       </div>
       <div>
         <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
-        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school and middle school researchers.</p>
       </div>
     </div>
     <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>
@@ -259,5 +263,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/appwrite-content.js" defer></script>
 </body>
 </html>

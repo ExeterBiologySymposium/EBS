@@ -40,18 +40,24 @@
     "url": "https://exeterbiosymposium.vercel.app/",
     "startDate": "2027-05-15T08:00:00-04:00",
     "endDate": "2027-05-15T15:00:00-04:00",
-    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled",
-    "location": {
-      "@type": "Place",
-      "name": "Phillips Exeter Academy",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Exeter",
-        "addressRegion": "NH",
-        "addressCountry": "US"
+    "location": [
+      {
+        "@type": "Place",
+        "name": "Phillips Exeter Academy",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Exeter",
+          "addressRegion": "NH",
+          "addressCountry": "US"
+        }
+      },
+      {
+        "@type": "VirtualLocation",
+        "url": "https://exeterbiosymposium.vercel.app/schedule.html"
       }
-    },
+    ],
     "organizer": {
       "@type": "Organization",
       "name": "Exeter Biology Symposium",
@@ -86,7 +92,6 @@
           <a href="datascience.html" class="nav__dd-item" role="menuitem">Curriculum Hub</a>
           <a href="python.html"      class="nav__dd-item" role="menuitem">Python Track</a>
           <a href="rstudio.html"     class="nav__dd-item" role="menuitem">R Track</a>
-          <a href="opensource.html"     class="nav__dd-item" role="menuitem">EBS Open Source</a>
         </div>
       </li>
       <li class="nav__dd">
@@ -98,7 +103,7 @@
           <a href="researchers.html" class="nav__dd-item" role="menuitem">For Researchers</a>
           <a href="judges.html"      class="nav__dd-item" role="menuitem">For Judges</a>
           <a href="student-signup.html" class="nav__dd-item" role="menuitem">Student Signup</a>
-          <a href="volunteer-signup.html" class="nav__dd-item" role="menuitem">Volunteer / Mentor Signup</a>
+          <a href="volunteer-signup.html" class="nav__dd-item" role="menuitem">Volunteer Signup</a>
         </div>
       </li>
       <li><a href="schedule.html" class="nav__link">Schedule</a></li>
@@ -139,7 +144,7 @@
       <a href="researchers.html" class="nav__m-link">For Researchers</a>
       <a href="judges.html"      class="nav__m-link">For Judges</a>
       <a href="student-signup.html" class="nav__m-link">Student Signup</a>
-      <a href="volunteer-signup.html" class="nav__m-link">Volunteer / Mentor Signup</a>
+      <a href="volunteer-signup.html" class="nav__m-link">Volunteer Signup</a>
       <a href="schedule.html"    class="nav__m-link">Schedule</a>
       <a href="faq.html"         class="nav__m-link">FAQ</a>
       <button type="button" class="nav__m-theme" aria-pressed="false" data-theme-toggle>
@@ -175,7 +180,7 @@
         <ul class="spotlight__resources-list" role="list">
           <li><a href="schools.html">schools &amp; teachers</a></li>
           <li><a href="researchers.html">student researchers</a></li>
-          <li><a href="judges.html">judges &amp; mentors</a></li>
+          <li><a href="judges.html">judges &amp; volunteers</a></li>
           <li><a href="resources.html">research resources</a></li>
           <li><a href="register.html">register interest</a></li>
           <li><a href="faq.html">all FAQs</a></li>
@@ -183,7 +188,7 @@
 
         <div class="spotlight__alert">
           <a href="register.html" class="spotlight__alert-title">EBS 2027 — registration opening</a>
-          <p class="spotlight__alert-text">Be first to hear when student, mentor, and judge applications open.</p>
+          <p class="spotlight__alert-text">Be first to hear when student, volunteer, and judge applications open.</p>
         </div>
 
         <div class="spotlight__sidebar-footer">
@@ -234,7 +239,7 @@
       <div class="section-header section-header--center reveal">
         <span class="overline">About the Event</span>
         <h2>Breaking Into Biology, Together</h2>
-        <p>Hosted in Spring 2027 at Exeter's historic campus, Exeter Biology Symposium creates a platform for ambitious high schoolers nationwide to enter biological research and experience the rigor and exploration science research unlocks.</p>
+        <p>Hosted in Spring 2027 at Exeter's historic campus, Exeter Biology Symposium creates a platform for ambitious high schoolers and middle schoolers nationwide to enter biological research and experience the rigor and exploration science research unlocks.</p>
       </div>
 
       <div class="grid grid--3">
@@ -258,8 +263,8 @@
           <div class="card__icon">
             <svg width="24" height="24" aria-hidden="true"><use href="#icon-users"/></svg>
           </div>
-          <h3>Peer and Mentor Network</h3>
-          <p>Lean on a community of fellow students and experienced mentors nationwide to support and inspire you in your research.</p>
+          <h3>Peer Network</h3>
+          <p>Lean on a community of fellow students and experienced researchers nationwide to support and inspire you in your research.</p>
         </div>
       </div>
     </div>
@@ -279,26 +284,19 @@
             <div class="timeline__dot"></div>
             <div class="timeline__date">Fall 2026</div>
             <div class="timeline__title">Registration Opens</div>
-            <p>Student registration and interest forms open. Resources and mentorship matching begins.</p>
-          </div>
-
-          <div class="timeline__item">
-            <div class="timeline__dot"></div>
-            <div class="timeline__date">November 2026</div>
-            <div class="timeline__title">Mentor Matching</div>
-            <p>Students are paired with volunteer mentors and researchers. Regular check-ins and guidance sessions begin.</p>
-          </div>
-
-          <div class="timeline__item">
-            <div class="timeline__dot"></div>
-            <div class="timeline__date">February 2027</div>
-            <div class="timeline__title">Abstract Submissions Open</div>
-            <p>Students submit research abstracts for review. All registered participants are eligible to submit.</p>
+            <p>Student registration and interest forms open. Resource library access begins.</p>
           </div>
 
           <div class="timeline__item">
             <div class="timeline__dot"></div>
             <div class="timeline__date">March 2027</div>
+            <div class="timeline__title">Abstract Submissions Due</div>
+            <p>Students submit research abstracts for review. All registered participants are eligible to submit.</p>
+          </div>
+
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__date">April 2027</div>
             <div class="timeline__title">Acceptance Notifications</div>
             <p>Participants receive notification of abstract acceptance and presentation format assignment.</p>
           </div>
@@ -307,7 +305,7 @@
             <div class="timeline__dot"></div>
             <div class="timeline__date">May 2027</div>
             <div class="timeline__title">Exeter Biology Symposium</div>
-            <p>Symposium Day at Phillips Exeter Academy.</p>
+            <p>Symposium Day, in-person at Phillips Exeter Academy and online.</p>
           </div>
         </div>
       </div>
@@ -319,7 +317,7 @@
       <div class="section-header section-header--center reveal">
         <span class="overline">Participation</span>
         <h2>Who Is EBS For?</h2>
-        <p>Whether you are a student researcher looking to gain experience, a school hoping to provide research opportunities, or a mentor looking to give back to the next generation, EBS is for you.</p>
+        <p>Whether you are a student researcher looking to gain experience, a school hoping to provide research opportunities, or a volunteer looking to give back to the next generation, EBS is for you.</p>
       </div>
 
       <div class="grid grid--3">
@@ -334,7 +332,7 @@
 
         <div class="aud-card card card--lift reveal reveal--d2">
           <h3>Schools</h3>
-          <p>EBS is designed to help schools provide research opportunities to their students, regardless of the school's location or resources, with support from Phillips Exeter Academy students and faculty and our mentor network.</p>
+          <p>EBS is designed to help schools provide research opportunities to their students, regardless of the school's location or resources, with support from Phillips Exeter Academy students and faculty and our volunteer network.</p>
           <a href="schools.html" class="btn btn--secondary" style="margin-top:auto;">
             Partner with us
             <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
@@ -342,10 +340,10 @@
         </div>
 
         <div class="aud-card card card--lift reveal reveal--d3">
-          <h3>Mentors</h3>
-          <p>EBS is looking for researchers at different stages of their careers to mentor the next generation of student researchers.</p>
+          <h3>Volunteers</h3>
+          <p>EBS is looking for researchers at different stages of their careers to guest speak, judge, or review resources for the next generation of student researchers.</p>
           <a href="https://forms.gle/Z2qizT1xiPdGeRNp9" class="btn btn--secondary" style="margin-top:auto;" target="_blank" rel="noopener">
-            Volunteer to Mentor
+            Volunteer with EBS
             <svg width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
           </a>
         </div>
@@ -361,7 +359,7 @@
           <span class="overline">The Organizers</span>
           <h2 style="margin-top: var(--sp-3); margin-bottom: var(--sp-5);">Genetics &amp; Biotech Club at Exeter</h2>
           <p style="margin-bottom: var(--sp-4);">
-            It is difficult for high school students to enter biological research
+            It is difficult for high school and middle school students to enter biological research
 Traditional programs often require prior experience or lab access
 Dry-lab research is just as rigorous and accessible without a laboratory
 Scientific communication is a skill learned through practice and community
@@ -380,7 +378,7 @@ Connecting with professionals opens doors for future research opportunities
             <div class="checklist">
               <div class="checklist__item">
                 <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
-                <span>It is difficult for high school students to enter biological research</span>
+                <span>It is difficult for high school and middle school students to enter biological research</span>
               </div>
               <div class="checklist__item">
                 <svg aria-hidden="true"><use href="#icon-check-circle"/></svg>
@@ -475,7 +473,7 @@ Connecting with professionals opens doors for future research opportunities
       </div>
       <div>
         <p class="footer__aside-title">Spring 2027 · Phillips Exeter Academy</p>
-        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school researchers.</p>
+        <p class="footer__aside-text">Organized by the Genetics and Biotech Club. A student-run research symposium open to high school and middle school researchers.</p>
       </div>
     </div>
     <p class="footer__copy">© 2026 Exeter Biology Symposium · <a href="faq.html#contact" class="footer__link">Contact</a></p>

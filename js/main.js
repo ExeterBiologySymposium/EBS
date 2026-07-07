@@ -323,7 +323,7 @@ const SEARCH_INDEX = [
     title: 'Exeter Biology Symposium',
     url: 'index.html',
     description: 'Overview of EBS 2027, the dry-lab research symposium at Phillips Exeter Academy.',
-    keywords: 'home overview symposium spring 2027 biology research dry lab mentors judges students'
+    keywords: 'home overview symposium spring 2027 biology research dry lab judges students online in-person'
   },
   {
     title: 'About EBS',
@@ -370,8 +370,8 @@ const SEARCH_INDEX = [
   {
     title: 'For Researchers',
     url: 'researchers.html',
-    description: 'How students can participate, conduct dry-lab research, get mentorship, and present.',
-    keywords: 'students researchers present mentor mentorship timeline poster oral presentation'
+    description: 'How students can participate, conduct dry-lab research, and present, in-person or online.',
+    keywords: 'students researchers present timeline poster presentation'
   },
   {
     title: 'For Judges',
@@ -382,14 +382,14 @@ const SEARCH_INDEX = [
   {
     title: 'FAQ',
     url: 'faq.html',
-    description: 'Answers about eligibility, cost, dry-lab research, mentors, schools, judges, and symposium day.',
-    keywords: 'questions faq eligibility cost dry lab mentors schools judges contact registration'
+    description: 'Answers about eligibility, cost, dry-lab research, schools, judges, online attendance, and symposium day.',
+    keywords: 'questions faq eligibility cost dry lab schools judges online contact registration'
   },
   {
     title: 'Register Interest',
     url: 'register.html',
-    description: 'Register your interest as a student, school, mentor, volunteer, or judge.',
-    keywords: 'register registration interest apply application student school mentor judge volunteer'
+    description: 'Register your interest as a student, school, volunteer, or judge.',
+    keywords: 'register registration interest apply application student school judge volunteer'
   }
 ];
 
@@ -402,6 +402,8 @@ function escapeHTML(value) {
     "'": '&#39;'
   })[char]);
 }
+
+window.EBS = { escapeHTML };
 
 function getSearchResults(query, limit = 6) {
   const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
@@ -476,7 +478,7 @@ function initSiteSearch() {
     const query = input.value.trim();
     const results = getSearchResults(query);
     const emptyText = query
-      ? `No results found for "${query}". Try searching for registration, mentor, FAQ, resources, or judges.`
+      ? `No results found for "${query}". Try searching for registration, volunteer, FAQ, resources, or judges.`
       : 'Start typing to search the EBS site.';
     resultsEl.innerHTML = renderSearchResults(results, emptyText);
   };
