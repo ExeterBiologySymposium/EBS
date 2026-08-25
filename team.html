@@ -69,6 +69,53 @@
       color: var(--col-text-muted);
       margin-top: var(--sp-1);
     }
+    .team-photo {
+      margin: var(--sp-10) 0 0;
+      border: 1px solid var(--col-border);
+      background: var(--col-bg-card);
+    }
+    .team-photo img {
+      display: block;
+      width: 100%;
+      max-height: 460px;
+      object-fit: cover;
+      object-position: center 44%;
+    }
+    .team-photo figcaption {
+      padding: var(--sp-3) var(--sp-4);
+      color: var(--col-text-muted);
+      font-size: var(--sz-sm);
+    }
+    .team-card__details {
+      margin-top: var(--sp-5);
+      border-top: 1px solid var(--col-border);
+      text-align: left;
+    }
+    .team-card__details summary {
+      padding-top: var(--sp-4);
+      color: var(--col-primary);
+      cursor: pointer;
+      font-size: var(--sz-sm);
+      font-weight: 700;
+      list-style: none;
+    }
+    .team-card__details summary::-webkit-details-marker { display: none; }
+    .team-card__details summary::after { content: "+"; float: right; font-size: var(--sz-lg); line-height: 1; }
+    .team-card__details[open] summary::after { content: "−"; }
+    .team-card__details summary:focus-visible { outline: 2px solid var(--col-primary); outline-offset: 3px; }
+    .team-card__profile {
+      margin: var(--sp-4) 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .team-card__profile li {
+      margin-top: var(--sp-3);
+      color: var(--col-text-sec);
+      font-size: var(--sz-sm);
+      line-height: 1.5;
+    }
+    .team-card__profile li:first-child { margin-top: 0; }
+    .team-card__profile strong { color: var(--col-text); }
   </style>
 </head>
 <body>
@@ -183,30 +230,65 @@
       <h2 class="team-section-title reveal">Executive Committee</h2>
       <div class="grid grid--4 reveal">
         <div class="team-card card card--lift">
-          <div class="team-card__avatar"><span class="team-card__initials">JK</span></div>
+          <div class="team-card__avatar"><img src="images/team/luke-wang.jpg" alt="Jaiden Kim"></div>
           <h4>Jaiden Kim</h4>
           <p class="role">Co-Head</p>
           <p class="grade">Class of 2028</p>
+          <details class="team-card__details">
+            <summary>View profile</summary>
+            <ul class="team-card__profile">
+              <li><strong>USABO 2026 Semifinalist</strong></li>
+              <li><strong>Summer 2026 Research Intern, Rice University Department of Biosciences</strong><br><em>Elucidating Serotonin-Independent Pathways Underlying Sertraline-Mediated Lipid Loss and Protestasis</em></li>
+            </ul>
+          </details>
         </div>
         <div class="team-card card card--lift">
-          <div class="team-card__avatar"><span class="team-card__initials">AC</span></div>
+          <div class="team-card__avatar"><img src="images/team/adrian-chan.jpeg" alt="Adrian Chan working in a laboratory"></div>
           <h4>Adrian Chan</h4>
           <p class="role">Co-Head</p>
           <p class="grade">Class of 2028</p>
+          <details class="team-card__details">
+            <summary>View profile</summary>
+            <ul class="team-card__profile">
+              <li><strong>Team UK IBO Selection Candidate, 2024</strong></li>
+              <li><strong>Medical &amp; Scientific Intern, Hong Kong Genome Institute</strong><br>Contributed to whole-genome sequencing workflows with HKGI and Hong Kong Children’s Hospital, plus genomic literacy and policy work.</li>
+              <li><strong>SSTP 2026 Research Intern, University of Iowa Department of Pathology — Yang Lab</strong><br>Analyzed SETDB1 using ORIEN and TCGA datasets; assessed dFF-ChIP and total RNA-sequencing results; developed a CRISPR/Cas9-degron system in UCEC cell lines.</li>
+            </ul>
+          </details>
         </div>
         <div class="team-card card card--lift">
-          <div class="team-card__avatar"><span class="team-card__initials">RS</span></div>
+          <div class="team-card__avatar"><img src="images/team/reya-satam.jpeg" alt="Reya Satam"></div>
           <h4>Reya Satam</h4>
           <p class="role">Co-Head</p>
           <p class="grade">Class of 2028</p>
+          <details class="team-card__details">
+            <summary>View profile</summary>
+            <ul class="team-card__profile">
+              <li><strong>Presenter, Max Planck Florida Institute for Neuroscience Sunposium</strong><br>Presented research on genetic architecture of multiple sclerosis.</li>
+              <li><strong>Research Intern, UMass Chan Medical School</strong><br>Investigates how localized traumatic brain injury changes circadian rhythms in <em>Drosophila</em>.</li>
+              <li><strong>Neurogenetics researcher</strong><br>Completed a meta-analysis on genetic regulatory architecture of multiple sclerosis with University of Notre Dame faculty.</li>
+            </ul>
+          </details>
         </div>
         <div class="team-card card card--lift">
           <div class="team-card__avatar"><span class="team-card__initials">LW</span></div>
           <h4>Luke Wang</h4>
           <p class="role">Co-Head</p>
           <p class="grade">Class of 2027</p>
+          <details class="team-card__details">
+            <summary>View profile</summary>
+            <ul class="team-card__profile">
+              <li><strong>USABO 2025 &amp; 2026 Semifinalist</strong></li>
+              <li><strong>SSP Biochemistry, 2026 — Research Project</strong><br><em>Characterization of Setosphaeria turcica Cdc14 Phosphatase Activity and Development of Potential Inhibitors for Northern Corn Leaf Blight</em></li>
+            </ul>
+          </details>
         </div>
       </div>
+
+      <figure class="team-photo reveal">
+        <img src="images/team/ebs-team-broad-institute.jpg" alt="EBS team members visiting Broad Institute">
+        <figcaption>EBS team members at Broad Institute.</figcaption>
+      </figure>
 
       <div class="divider"></div>
 
@@ -247,7 +329,7 @@
 
       <div class="grid grid--2 reveal">
         <div class="faculty-card card">
-          <div class="faculty-card__avatar"><span class="faculty-card__initials">SM</span></div>
+          <div class="faculty-card__avatar" aria-label="Photo pending"></div>
           <div>
             <h4 style="margin-bottom: var(--sp-1);">Dr. Summer Morrill</h4>
             <p class="role" style="font-size: var(--sz-sm); color: var(--col-primary); font-weight: 600;">Biology Department</p>

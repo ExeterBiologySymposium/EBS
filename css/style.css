@@ -732,6 +732,9 @@ strong { color: var(--col-text); font-weight: 600; }
 .page-hero h1 { font-size: clamp(2rem, 4vw, var(--sz-4xl)); margin-bottom: var(--sp-4); }
 .page-hero__desc { font-size: var(--sz-lg); color: var(--col-text-sec); max-width: 640px; line-height: 1.7; }
 .page-hero .breadcrumb { margin-bottom: var(--sp-5); }
+.schools-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-4); margin-top: var(--sp-6); }
+.schools-hero__individual { color: var(--col-primary); font-size: var(--sz-sm); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.schools-hero__individual:hover { color: var(--col-primary-dk); }
 
 /* ── Breadcrumb ───────────────────────────────────────────────────────────── */
 .breadcrumb {
