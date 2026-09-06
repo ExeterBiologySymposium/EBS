@@ -1,0 +1,74 @@
+{
+  "resources": {
+    "code": [],
+    "tables": [],
+    "ids": [
+      "drylab",
+      "literature",
+      "tools",
+      "presenting",
+      "templates"
+    ]
+  },
+  "datascience": {
+    "code": [],
+    "tables": [
+      "Deliverable What It Must Include Quality Bar Research question One sentence naming the biological system, variables, population, and expected analysis. Specific enough that another student could identify the needed dataset. Clean dataset Raw data source, cleaned file, and a note explaining exclusions or transformations. No hidden manual edits. Cleaning steps are reproducible in code. Analysis notebook or script Readable RStudio script or Python notebook with imports, cleaning, summaries, tests, and plots. Runs from top to bottom and produces the same result each time. Figure and caption One main result figure with labeled axes, units, legend if needed, and a caption. The caption states the pattern and avoids overstating causation. Interpretation paragraph Result, biological meaning, limitation, and one next step. Clear enough for a judge outside the exact subfield to follow."
+    ],
+    "ids": [
+      "outcomes",
+      "setup",
+      "modules",
+      "tracks",
+      "capstone",
+      "assessment"
+    ]
+  },
+  "python": {
+    "code": [
+      "sample_id,condition,temperature_c,ph,enzyme_activity,cell_viability\nE01,control,37,7.2,11.2,96\nE02,control,37,7.2,10.8,95\nE03,control,37,7.1,11.5,94\nE04,control,37,7.3,10.9,97\nE05,control,37,7.2,11.0,96\nE06,control,37,7.1,11.3,95\nE07,treatment,39,7.2,14.1,93\nE08,treatment,39,7.2,13.7,92\nE09,treatment,39,7.1,14.5,91\nE10,treatment,39,7.3,15.0,90\nE11,treatment,39,7.2,13.9,92\nE12,treatment,39,7.1,14.3,93",
+      "import pandas as pd\n\ndf = pd.read_csv(\"enzyme_activity.csv\")\n\nprint(df.head())\nprint(df.shape)\nprint(df.columns)\nprint(df[\"condition\"].value_counts())\n\nclean = df.dropna(subset=[\"condition\", \"enzyme_activity\"])\nsummary = clean.groupby(\"condition\")[\"enzyme_activity\"].agg([\"count\", \"mean\", \"std\"])\nprint(summary)",
+      "import numpy as np\n\ncontrol = clean.loc[clean[\"condition\"] == \"control\", \"enzyme_activity\"].to_numpy()\ntreatment = clean.loc[clean[\"condition\"] == \"treatment\", \"enzyme_activity\"].to_numpy()\n\ncontrol_mean = np.mean(control)\ntreatment_mean = np.mean(treatment)\ndifference = treatment_mean - control_mean\n\nprint(control_mean)\nprint(treatment_mean)\nprint(difference)\nprint(np.std(control, ddof=1))\nprint(np.std(treatment, ddof=1))",
+      "from scipy import stats\n\ntest = stats.ttest_ind(control, treatment, equal_var=False)\nprint(test.statistic)\nprint(test.pvalue)"
+    ],
+    "tables": [
+      "Library Use it for When it matters in biology research pandas Tables, CSV files, cleaning, filtering, grouping, merging Any project with sample metadata, public-health tables, experiment results, or spreadsheet-like data NumPy Arrays, numeric calculations, means, standard deviations, percentiles When columns need mathematical operations or you need clean numeric inputs for statistics SciPy Statistical tests, correlations, probability distributions, scientific calculations When you need a t-test, chi-square test, Mann-Whitney U test, correlation, or regression helper matplotlib Core plotting When you need a poster figure and want full control over labels, axes, and export size seaborn Cleaner statistical plots built on matplotlib When you want fast box plots, violin plots, scatter plots, and regression-style visual summaries Biopython Sequence and biological file handling When your project uses FASTA files, sequence records, or biological database formats statsmodels More detailed statistical models When you need regression tables, confidence intervals, or model diagnostics beyond SciPy basics scikit-learn Machine learning Only when prediction is truly part of the project; not needed for basic EBS statistics",
+      "Command What it does Example pd.read_csv() Loads a CSV file into a DataFrame df = pd.read_csv(\"enzyme_activity.csv\") df.head() Shows the first rows so you can inspect the table df.head() df.shape Reports row and column count df.shape df.columns Lists column names df.columns df.info() Shows column types and missing-value counts df.info() df.describe() Summarizes numeric columns df.describe() df[\"column\"] Selects one column df[\"enzyme_activity\"] df.loc[] Selects rows and columns by label or condition df.loc[df[\"condition\"] == \"control\"] df.query() Filters rows using a readable expression df.query(\"temperature_c == 39\") df.value_counts() Counts categories or repeated values df[\"condition\"].value_counts() df.isna().sum() Counts missing values by column df.isna().sum() df.dropna() Removes rows with missing data df.dropna(subset=[\"enzyme_activity\"]) df.fillna() Fills missing values when justified df[\"ph\"].fillna(df[\"ph\"].median()) df.rename() Renames confusing columns df.rename(columns={\"ph\": \"pH\"}) df.astype() Changes a column type df[\"temperature_c\"].astype(float) df.groupby() Splits data into groups before summarizing df.groupby(\"condition\")[\"enzyme_activity\"].mean() .agg() Runs several summaries at once .agg([\"count\", \"mean\", \"std\"]) df.sort_values() Sorts rows df.sort_values(\"enzyme_activity\") pd.merge() Combines two tables by a shared key pd.merge(samples, metadata, on=\"sample_id\") df.to_csv() Saves a cleaned table clean.to_csv(\"cleaned.csv\", index=False)",
+      "Command What it does Example np.array() Creates a numeric array values = np.array([11.2, 10.8, 11.5]) np.mean() Calculates the mean np.mean(control) np.median() Calculates the median np.median(control) np.std() Calculates standard deviation np.std(control, ddof=1) np.min() / np.max() Finds smallest and largest values np.max(treatment) np.percentile() Finds percentile cutoffs np.percentile(control, [25, 50, 75]) np.where() Creates conditional values np.where(values > 12, \"high\", \"low\") np.isnan() Detects missing numeric values np.isnan(values) np.unique() Finds unique values and counts np.unique(groups, return_counts=True) np.corrcoef() Calculates a correlation matrix np.corrcoef(temp, activity) np.random.seed() Makes random work reproducible np.random.seed(42)",
+      "Command What it does Example stats.ttest_ind() Compares two independent group means stats.ttest_ind(control, treatment, equal_var=False) stats.ttest_rel() Compares paired measurements stats.ttest_rel(before, after) stats.mannwhitneyu() Compares two groups without assuming normality stats.mannwhitneyu(control, treatment) stats.chi2_contingency() Tests association between categorical variables stats.chi2_contingency(table) stats.fisher_exact() Tests small 2x2 categorical tables stats.fisher_exact(table) stats.pearsonr() Measures linear correlation between two numeric variables stats.pearsonr(temp, activity) stats.spearmanr() Measures rank correlation stats.spearmanr(dose, response) stats.linregress() Fits a simple linear regression stats.linregress(temp, activity) stats.shapiro() Checks normality for small samples stats.shapiro(control) stats.zscore() Standardizes values or flags extreme values stats.zscore(df[\"enzyme_activity\"])",
+      "sample_id condition temperature_c ph enzyme_activity cell_viability E01 control 37 7.2 11.2 96 E02 control 37 7.2 10.8 95 E03 control 37 7.1 11.5 94 E04 control 37 7.3 10.9 97 E05 control 37 7.2 11.0 96 E06 control 37 7.1 11.3 95 E07 treatment 39 7.2 14.1 93 E08 treatment 39 7.2 13.7 92 E09 treatment 39 7.1 14.5 91 E10 treatment 39 7.3 15.0 90 E11 treatment 39 7.2 13.9 92 E12 treatment 39 7.1 14.3 93"
+    ],
+    "ids": [
+      "mental-model",
+      "libraries",
+      "dataset",
+      "pandas",
+      "numpy",
+      "scipy",
+      "practice",
+      "answers"
+    ]
+  },
+  "rstudio": {
+    "code": [
+      "activity <- c(11.2, 10.8, 11.5)\nmean(activity)",
+      "sample_id,condition,temperature_c,ph,enzyme_activity,cell_viability\nE01,control,37,7.2,11.2,96\nE02,control,37,7.2,10.8,95\nE03,control,37,7.1,11.5,94\nE04,control,37,7.3,10.9,97\nE05,control,37,7.2,11.0,96\nE06,control,37,7.1,11.3,95\nE07,treatment,39,7.2,14.1,93\nE08,treatment,39,7.2,13.7,92\nE09,treatment,39,7.1,14.5,91\nE10,treatment,39,7.3,15.0,90\nE11,treatment,39,7.2,13.9,92\nE12,treatment,39,7.1,14.3,93",
+      "df <- read.csv(\"enzyme_activity.csv\")\n\nhead(df)\ndim(df)\nnames(df)\ntable(df$condition)\n\nclean <- subset(df, !is.na(condition) & !is.na(enzyme_activity))",
+      "aggregate(enzyme_activity ~ condition, clean, function(x) {\n  c(n = length(x), mean = mean(x), sd = sd(x))\n})\n\ncontrol <- subset(clean, condition == \"control\")$enzyme_activity\ntreatment <- subset(clean, condition == \"treatment\")$enzyme_activity\n\nmean(treatment) - mean(control)",
+      "result <- t.test(enzyme_activity ~ condition, data = clean)\nresult\nresult$p.value",
+      "boxplot(enzyme_activity ~ condition,\n        data = clean,\n        xlab = \"Condition\",\n        ylab = \"Enzyme activity\",\n        main = \"Treatment samples show higher enzyme activity\")"
+    ],
+    "tables": [
+      "sample_id condition temperature_c ph enzyme_activity cell_viability E01 control 37 7.2 11.2 96 E02 control 37 7.2 10.8 95 E03 control 37 7.1 11.5 94 E04 control 37 7.3 10.9 97 E05 control 37 7.2 11.0 96 E06 control 37 7.1 11.3 95 E07 treatment 39 7.2 14.1 93 E08 treatment 39 7.2 13.7 92 E09 treatment 39 7.1 14.5 91 E10 treatment 39 7.3 15.0 90 E11 treatment 39 7.2 13.9 92 E12 treatment 39 7.1 14.3 93"
+    ],
+    "ids": [
+      "mental-model",
+      "dataset",
+      "dataframes",
+      "summaries",
+      "tests",
+      "practice",
+      "answers"
+    ]
+  }
+}
