@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "data": {
+    "jobId": "01a07bbc-16e9-7494-ba58-805460a85075",
+    "url": "https://api.firecrawl.dev/v2/crawl/01a07bbc-16e9-7494-ba58-805460a85075",
+    "status": "processing"
+  }
+}

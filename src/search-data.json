@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Python Track",
+    "url": "python.html",
+    "description": "A self-contained Python data science track for biology research using pandas, NumPy, and SciPy."
+  },
+  {
+    "title": "Our Team",
+    "url": "team.html",
+    "description": "Meet the student organizers and faculty advisors behind the Exeter Biology Symposium, organized by the Genetics and Biotech Club at Phillips Exeter Academy."
+  },
+  {
+    "title": "Exeter Biology Symposium 2027",
+    "url": "index.html",
+    "description": "The Exeter Biology Symposium (EBS) is a student-organized research symposium at Phillips Exeter Academy providing students new to biology research the opportunity to explore, present, and connect."
+  },
+  {
+    "title": "About EBS",
+    "url": "about.html",
+    "description": "Learn about the Exeter Biology Symposium \u2014 our mission, why we exist, the event format, and key date April 24th, 2027."
+  },
+  {
+    "title": "Schedule",
+    "url": "schedule.html",
+    "description": "Full day-of schedule for the Exeter Biology Symposium 2027 \u2014 registration, poster sessions, lunch, judging, and the closing ceremony."
+  },
+  {
+    "title": "Register Interest",
+    "url": "register.html",
+    "description": "Register your interest in the Exeter Biology Symposium 2027. Students, schools, researchers, and judges welcome."
+  },
+  {
+    "title": "EBS Open Source",
+    "url": "opensource.html",
+    "description": "Explore EBS Open Source \u2014 open datasets, code, and curriculum materials from the Exeter Biology Symposium community."
+  },
+  {
+    "title": "For Researchers",
+    "url": "researchers.html",
+    "description": "Compete at the Exeter Biology Symposium 2027. Present original dry-lab biological research. No prior research experience required."
+  },
+  {
+    "title": "Resources",
+    "url": "resources.html",
+    "description": "Free research resources for EBS participants \u2014 guides on dry-lab biology, scientific literature, public databases, bioinformatics tools, and presentation tips."
+  },
+  {
+    "title": "Student Registration",
+    "url": "student-signup.html",
+    "description": "Student registration for the Exeter Biology Symposium 2027. Apply to present original dry-lab biological research."
+  },
+  {
+    "title": "For Schools",
+    "url": "schools.html",
+    "description": "Information for schools and educators interested in sending students to the Exeter Biology Symposium 2027."
+  },
+  {
+    "title": "Volunteer Signup",
+    "url": "volunteer-signup.html",
+    "description": "Volunteer and judge registration for the Exeter Biology Symposium 2027. Support student researchers as a speaker, reviewer, or judge, in-person or online."
+  },
+  {
+    "title": "Data Science Curriculum",
+    "url": "datascience.html",
+    "description": "A self-contained EBS data science curriculum hub for biology research, with separate RStudio and Python tracks."
+  },
+  {
+    "title": "FAQ",
+    "url": "faq.html",
+    "description": "Frequently asked questions about the Exeter Biology Symposium 2027, including eligibility, research types, timeline, and how to get involved."
+  },
+  {
+    "title": "RStudio Track",
+    "url": "rstudio.html",
+    "description": "A self-contained RStudio data science track for biology research using R data frames, summaries, plots, and statistical tests."
+  },
+  {
+    "title": "For Judges",
+    "url": "judges.html",
+    "description": "Volunteer as a judge at the Exeter Biology Symposium 2027. Evaluate student research posters and presentations."
+  }
+]

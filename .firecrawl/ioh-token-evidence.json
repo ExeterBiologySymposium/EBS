@@ -1,0 +1,110 @@
+{
+  "body": [
+    "body{margin:0}",
+    "body{color:#333;background-color:#fff;min-height:100%;margin:0;font-family:Arial,sans-serif;font-size:14px;line-height:20px}",
+    "body{background-color:var(--gray);color:var(--black);letter-spacing:-.015em;font-family:Lay Grotesk,Arial,sans-serif;font-size:1vw;line-height:1}"
+  ],
+  ".h1": [
+    ".h1{font-size:4em}",
+    ".h1{font-size:5em}",
+    ".h1{font-size:7em}",
+    ".h1{font-size:10.2em;line-height:1.1}"
+  ],
+  ".h2": [
+    ".h2{margin-top:0;margin-bottom:0;font-size:3.5em;line-height:1}",
+    ".h2{font-size:5em}",
+    ".h2{width:100%;font-size:9em}"
+  ],
+  ".h2.spec_hero": [
+    ".h2.spec_hero{font-size:4em}",
+    ".h2.spec_hero{font-size:5em}",
+    ".h2.spec_hero{font-size:6em}"
+  ],
+  ".h2.spec": [
+    ".h2.spec{font-size:4.3em}",
+    ".h2.spec{font-size:5em;line-height:1.05}",
+    ".h2.spec{font-size:6.2em;line-height:1.2}"
+  ],
+  ".h2.like_h1": [
+    ".h2.like_h1{color:var(--white);margin-bottom:0;font-size:5.4em;line-height:1}",
+    ".h2.like_h1{font-size:7em}",
+    ".h2.like_h1{font-size:8em}",
+    ".h2.like_h1{font-size:10em}"
+  ],
+  ".b_txt": [
+    ".b_txt{letter-spacing:0;font-size:.9em;font-weight:500;line-height:1.3}",
+    ".b_txt{font-size:1.5em}",
+    ".b_txt{font-size:2.15em}",
+    ".b_txt{font-size:3.7em}"
+  ],
+  ".wrapper_header": [
+    ".wrapper_header{padding:14px 32px}",
+    ".wrapper_header{padding:14px 20px}",
+    ".wrapper_header{padding:12px 16px}",
+    ".wrapper_header{padding:12px 16px}"
+  ],
+  ".header": [
+    ".header{z-index:99;position:fixed;inset:0% 0% auto}",
+    ".header{border-bottom:1px #24242433;width:100vw}",
+    ".header{border-bottom:1px #24242433;width:100vw;overflow:hidden}"
+  ],
+  ".wrapper_hero": [
+    ".wrapper_hero{z-index:10;flex-flow:column;width:100%;height:100%;padding:8em 32px 28px;display:flex;position:relative}",
+    ".wrapper_hero{padding:15em 20px 42px}",
+    ".wrapper_hero{padding:20em 16px 28px}",
+    ".wrapper_hero{height:100svh;padding:28em 16px 24px}"
+  ],
+  ".hero": [
+    ".hero{width:100vw;height:100vh;position:sticky;top:0;overflow:hidden}"
+  ],
+  ".hero_list": [
+    ".hero_list{grid-column-gap:32px;grid-row-gap:32px;flex-flow:column;width:25%;margin-left:auto;display:flex}",
+    ".hero_list{width:40%}",
+    ".hero_list{width:50%}",
+    ".hero_list{width:100%;position:relative}"
+  ],
+  ".wrapper": [
+    ".wrapper{padding:92px 32px}",
+    ".wrapper{padding:72px 20px}",
+    ".wrapper{padding:72px 16px}",
+    ".wrapper{padding:52px 16px 32px}"
+  ],
+  ".button_learn": [],
+  ".button_hero": [
+    ".button_hero{-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);color:var(--white);background-color:#f1f1f114;border:1px solid #f1f1f10d;border-radius:4px;flex-flow:column;padding:12px 12px 8px;font-size:.9em;display:flex;overflow:hidden}",
+    ".button_hero{font-size:1.4em}",
+    ".button_hero{font-size:2.15em}",
+    ".button_hero{width:100%;font-size:4em}"
+  ],
+  ".button_box": [],
+  ".button_contact": [
+    ".button_contact{grid-column-gap:8px;grid-row-gap:8px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--white);letter-spacing:0;background-color:#f1f1f126;border:1px #f1f1f10d;border-radius:5px;justify-content:flex-start;align-items:center;padding:14px 24px;font-size:.8em;display:flex}",
+    ".button_contact{grid-column-gap:6px;grid-row-gap:6px;padding:14px 16px 12px 15px;font-size:1.25em}"
+  ],
+  ".hamburger": [
+    ".dynamic_header,.hamburger{display:none}",
+    ".hamburger{grid-column-gap:8px;grid-row-gap:0px;justify-content:flex-start;align-items:center;display:flex}",
+    ".hamburger{grid-column-gap:8px;grid-row-gap:8px;justify-content:flex-start;align-items:center;margin-left:auto;display:flex}"
+  ],
+  ".links_header": [
+    ".links_header{grid-column-gap:24px;grid-row-gap:24px;justify-content:flex-start;align-items:center;margin-left:0;margin-right:0;display:flex}",
+    ".links_header{display:none}",
+    ".links_header{display:none}"
+  ],
+  ".right_side": [
+    ".right_side{grid-column-gap:24px;grid-row-gap:24px;justify-content:flex-start;align-items:center;margin-left:0;display:flex}",
+    ".right_side{display:none}",
+    ".right_side{display:none}"
+  ],
+  ":root": [
+    ":root{--gray:#e6e6e6;--black:#242424;--white:#f1f1f1}"
+  ],
+  ".button_black": [],
+  ".first": [
+    ".first{width:100%;position:absolute}"
+  ],
+  ".second": [],
+  ".third": [
+    ".third{position:absolute;inset:0%}"
+  ]
+}

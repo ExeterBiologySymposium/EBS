@@ -1,0 +1,13 @@
+sample_id,condition,temperature_c,ph,enzyme_activity,cell_viability
+E01,control,37,7.2,11.2,96
+E02,control,37,7.2,10.8,95
+E03,control,37,7.1,11.5,94
+E04,control,37,7.3,10.9,97
+E05,control,37,7.2,11.0,96
+E06,control,37,7.1,11.3,95
+E07,treatment,39,7.2,14.1,93
+E08,treatment,39,7.2,13.7,92
+E09,treatment,39,7.1,14.5,91
+E10,treatment,39,7.3,15.0,90
+E11,treatment,39,7.2,13.9,92
+E12,treatment,39,7.1,14.3,93

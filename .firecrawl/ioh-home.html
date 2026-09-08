@@ -1,0 +1,1742 @@
+<!DOCTYPE html><!-- Last Published: Thu May 21 2026 13:35:23 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="www.instituteofhealth.com" data-wf-page="69014634b3494c3d0ef79413" data-wf-site="69014633b3494c3d0ef793fc" lang="en-AU" class=" w-mod-js w-mod-ix"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+.wf-force-outline-none[tabindex="-1"]:focus { outline: none; }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+::-webkit-scrollbar-button { width: 0px; height: 0px; transition: all !important; }
+
+::-webkit-scrollbar-track { background: transparent; }
+
+::-webkit-scrollbar-thumb { border-radius: 0px; background: transparent; opacity: 0; }
+
+::-webkit-resizer { width: 0px; height: 0px; }
+
+::-webkit-scrollbar { width: 0px; }
+
+::selection { background-color: rgb(128, 128, 128); color: rgb(255, 255, 255); }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+.hero.first-screen { content-visibility: auto; contain-intrinsic-size: auto 100vh; }
+
+.hero { will-change: transform; }
+
+.splide__track { overflow: visible; }
+
+.my-slider-progress { background: rgba(36, 36, 36, 0.1); }
+
+.my-slider-progress-bar { background: rgb(36, 36, 36); height: 2px; transition: width 600ms; width: 0px; }
+
+.splide__pagination { display: none; }
+
+.slider_wrap { width: 100%; position: relative; }
+
+.seminar-header { margin: 0px auto 8px; display: flex; justify-content: space-between; gap: 8px; transition: width 0.45s; }
+
+.seminar-count { display: inline-flex; align-items: flex-end; gap: 0.25rem; }
+
+.seminar-count__ticker { overflow: hidden; height: 1em; display: inline-flex; }
+
+.seminar-count__value { display: inline-block; line-height: 1; transform: translateY(0px); opacity: 1; transition: transform 0.35s, opacity 0.35s; }
+
+.seminar-count__value.is-sliding-out { transform: translateY(-100%); opacity: 0; }
+
+.seminar-count__value.is-sliding-in { transform: translateY(0px); opacity: 1; }
+
+.scroll_gallery { display: flex; align-items: flex-start; gap: clamp(1.25rem, 3vw, 2.5rem); cursor: grab; touch-action: pan-y; opacity: 0; visibility: hidden; }
+
+.scroll_gallery.is-ready { opacity: 1; visibility: visible; transition: opacity 0.25s; }
+
+.scroll_gallery.is-grabbing { cursor: grabbing; }
+
+.slide_item { flex-shrink: 0; position: relative; opacity: 0.45; transition: opacity 0.55s; overflow: hidden; }
+
+.slide_item.is-active { opacity: 1; }
+
+.slide_image { border-radius: 16px; overflow: hidden; }
+
+.module_box { margin-top: 8px; background: rgb(255, 255, 255); border-radius: 12px; padding: 1rem; opacity: 0; transform: translateY(16px); transition: opacity 0.55s, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); pointer-events: none; }
+
+.slide_item.is-active .module_box { opacity: 1; transform: translateY(0px); pointer-events: auto; }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+:root { --plyr-color-main: var(--colors--player-color); }
+
+.plyr { border-radius: 8px !important; }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+@keyframes plyr-progress { 
+  100% { background-position: var(--plyr-progress-loading-size,25px) 0; }
+}
+
+@keyframes plyr-popup { 
+  0% { opacity: 0.5; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0px); }
+}
+
+@keyframes plyr-fade-in { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.plyr { -webkit-font-smoothing: antialiased; align-items: center; direction: ltr; display: flex; flex-direction: column; font-family: var(--plyr-font-family,inherit); font-variant-numeric: tabular-nums; font-weight: var(--plyr-font-weight-regular,400); line-height: var(--plyr-line-height,1.7); max-width: 100%; min-width: 200px; position: relative; text-shadow: none; transition: box-shadow 0.3s; z-index: 0; }
+
+.plyr audio, .plyr iframe, .plyr video { display: block; height: 100%; width: 100%; }
+
+.plyr button { font: inherit; width: auto; }
+
+.plyr:focus { outline: 0px; }
+
+.plyr--full-ui { box-sizing: border-box; }
+
+.plyr--full-ui *, .plyr--full-ui ::after, .plyr--full-ui ::before { box-sizing: inherit; }
+
+.plyr--full-ui a, .plyr--full-ui button, .plyr--full-ui input, .plyr--full-ui label { touch-action: manipulation; }
+
+.plyr__badge { background: var(--plyr-badge-background,#4a5464); border-radius: var(--plyr-badge-border-radius,2px); color: var(--plyr-badge-text-color,#fff); font-size: var(--plyr-font-size-badge,9px); line-height: 1; padding: 3px 4px; }
+
+.plyr--full-ui ::-webkit-media-text-track-container { display: none; }
+
+.plyr__captions { animation: 0.3s ease 0s 1 normal none running plyr-fade-in; bottom: 0px; display: none; font-size: var(--plyr-font-size-small,13px); left: 0px; padding: var(--plyr-control-spacing,10px); position: absolute; text-align: center; transition: transform 0.4s ease-in-out; width: 100%; }
+
+.plyr__captions span:empty { display: none; }
+
+@media (min-width: 480px) {
+  .plyr__captions { font-size: var(--plyr-font-size-base,15px); padding: calc(var(--plyr-control-spacing, 10px)*2); }
+}
+
+@media (min-width: 768px) {
+  .plyr__captions { font-size: var(--plyr-font-size-large,18px); }
+}
+
+.plyr--captions-active .plyr__captions { display: block; }
+
+.plyr:not(.plyr--hide-controls) .plyr__controls:not(:empty) ~ .plyr__captions { transform: translateY(calc(var(--plyr-control-spacing, 10px)*-4)); }
+
+.plyr__caption { background: var(--plyr-captions-background,#000c); border-radius: 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; color: var(--plyr-captions-text-color,#fff); line-height: 185%; padding: 0.2em 0.5em; white-space: pre-wrap; }
+
+.plyr__caption div { display: inline; }
+
+.plyr__control { background: rgba(0, 0, 0, 0); border: 0px; border-radius: var(--plyr-control-radius,4px); color: inherit; cursor: pointer; flex-shrink: 0; overflow: visible; padding: calc(var(--plyr-control-spacing, 10px)*.7); position: relative; transition: 0.3s; }
+
+.plyr__control svg { fill: currentcolor; display: block; height: var(--plyr-control-icon-size,18px); pointer-events: none; width: var(--plyr-control-icon-size,18px); }
+
+.plyr__control:focus { outline: 0px; }
+
+.plyr__control:focus-visible { outline: 2px dashed var(--plyr-focus-visible-color,var(--plyr-color-main,var(--plyr-color-main,#00b2ff))); outline-offset: 2px; }
+
+a.plyr__control { text-decoration: none; }
+
+.plyr__control.plyr__control--pressed .icon--not-pressed, .plyr__control.plyr__control--pressed .label--not-pressed, .plyr__control:not(.plyr__control--pressed) .icon--pressed, .plyr__control:not(.plyr__control--pressed) .label--pressed, a.plyr__control::after, a.plyr__control::before { display: none; }
+
+.plyr--full-ui ::-webkit-media-controls { display: none; }
+
+.plyr__controls { align-items: center; display: flex; justify-content: flex-end; text-align: center; }
+
+.plyr__controls .plyr__progress__container { flex: 1 1 0%; min-width: 0px; }
+
+.plyr__controls .plyr__controls__item { margin-left: calc(var(--plyr-control-spacing, 10px)/4); }
+
+.plyr__controls .plyr__controls__item:first-child { margin-left: 0px; margin-right: auto; }
+
+.plyr__controls .plyr__controls__item.plyr__progress__container { padding-left: calc(var(--plyr-control-spacing, 10px)/4); }
+
+.plyr__controls .plyr__controls__item.plyr__time { padding: 0 calc(var(--plyr-control-spacing, 10px)/2); }
+
+.plyr__controls .plyr__controls__item.plyr__progress__container:first-child, .plyr__controls .plyr__controls__item.plyr__time + .plyr__time, .plyr__controls .plyr__controls__item.plyr__time:first-child { padding-left: 0px; }
+
+.plyr [data-plyr="airplay"], .plyr [data-plyr="captions"], .plyr [data-plyr="fullscreen"], .plyr [data-plyr="pip"], .plyr__controls:empty { display: none; }
+
+.plyr--airplay-supported [data-plyr="airplay"], .plyr--captions-enabled [data-plyr="captions"], .plyr--fullscreen-enabled [data-plyr="fullscreen"], .plyr--pip-supported [data-plyr="pip"] { display: inline-block; }
+
+.plyr__menu { display: flex; position: relative; }
+
+.plyr__menu .plyr__control svg { transition: transform 0.3s; }
+
+.plyr__menu .plyr__control[aria-expanded="true"] svg { transform: rotate(90deg); }
+
+.plyr__menu .plyr__control[aria-expanded="true"] .plyr__tooltip { display: none; }
+
+.plyr__menu__container { animation: 0.2s ease 0s 1 normal none running plyr-popup; background: var(--plyr-menu-background,#ffffffe6); border-radius: var(--plyr-menu-radius,8px); bottom: 100%; box-shadow: var(--plyr-menu-shadow,0 1px 2px #00000026); color: var(--plyr-menu-color,#4a5464); font-size: var(--plyr-font-size-base,15px); margin-bottom: 10px; position: absolute; right: -3px; text-align: left; white-space: nowrap; z-index: 3; }
+
+.plyr__menu__container > div { overflow: hidden; transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+
+.plyr__menu__container::after { border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-left-color: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-top-color: var(--plyr-menu-background,#ffffffe6); content: ""; height: 0px; position: absolute; right: calc(var(--plyr-control-icon-size, 18px)/2 + var(--plyr-control-spacing, 10px)*.7 - var(--plyr-menu-arrow-size, 4px)/2); top: 100%; width: 0px; }
+
+.plyr__menu__container [role="menu"] { padding: calc(var(--plyr-control-spacing, 10px)*.7); }
+
+.plyr__menu__container [role="menuitem"], .plyr__menu__container [role="menuitemradio"] { margin-top: 2px; }
+
+.plyr__menu__container [role="menuitem"]:first-child, .plyr__menu__container [role="menuitemradio"]:first-child { margin-top: 0px; }
+
+.plyr__menu__container .plyr__control { align-items: center; color: var(--plyr-menu-color,#4a5464); display: flex; font-size: var(--plyr-font-size-menu,var(--plyr-font-size-small,13px)); padding: calc(var(--plyr-control-spacing, 10px)*.7/1.5) calc(var(--plyr-control-spacing, 10px)*.7*1.5); user-select: none; width: 100%; }
+
+.plyr__menu__container .plyr__control > span { align-items: inherit; display: flex; width: 100%; }
+
+.plyr__menu__container .plyr__control::after { border: var(--plyr-menu-item-arrow-size,4px) solid #0000; content: ""; position: absolute; top: 50%; transform: translateY(-50%); }
+
+.plyr__menu__container .plyr__control--forward { padding-right: calc(var(--plyr-control-spacing, 10px)*.7*4); }
+
+.plyr__menu__container .plyr__control--forward::after { border-left-color: var(--plyr-menu-arrow-color,#728197); right: calc(var(--plyr-control-spacing, 10px)*.7*1.5 - var(--plyr-menu-item-arrow-size, 4px)); }
+
+.plyr__menu__container .plyr__control--forward:focus-visible::after, .plyr__menu__container .plyr__control--forward:hover::after { border-left-color: initial; }
+
+.plyr__menu__container .plyr__control--back { font-weight: var(--plyr-font-weight-regular,400); margin-top: ; margin-right: ; margin-left: ; margin-bottom: calc(var(--plyr-control-spacing, 10px)*.7/2); padding-left: calc(var(--plyr-control-spacing, 10px)*.7*4); position: relative; width: calc(100% - var(--plyr-control-spacing, 10px)*.7*2); }
+
+.plyr__menu__container .plyr__control--back::after { border-right-color: var(--plyr-menu-arrow-color,#728197); left: calc(var(--plyr-control-spacing, 10px)*.7*1.5 - var(--plyr-menu-item-arrow-size, 4px)); }
+
+.plyr__menu__container .plyr__control--back::before { background: var(--plyr-menu-back-border-color,#dcdfe5); box-shadow: 0 1px 0 var(--plyr-menu-back-border-shadow-color,#fff); content: ""; height: 1px; left: 0px; margin-top: calc(var(--plyr-control-spacing, 10px)*.7/2); overflow: hidden; position: absolute; right: 0px; top: 100%; }
+
+.plyr__menu__container .plyr__control--back:focus-visible::after, .plyr__menu__container .plyr__control--back:hover::after { border-right-color: initial; }
+
+.plyr__menu__container .plyr__control[role="menuitemradio"] { padding-left: calc(var(--plyr-control-spacing, 10px)*.7); }
+
+.plyr__menu__container .plyr__control[role="menuitemradio"]::after, .plyr__menu__container .plyr__control[role="menuitemradio"]::before { border-radius: 100%; }
+
+.plyr__menu__container .plyr__control[role="menuitemradio"]::before { background: rgba(0, 0, 0, 0.1); content: ""; display: block; flex-shrink: 0; height: 16px; margin-right: var(--plyr-control-spacing,10px); transition: 0.3s; width: 16px; }
+
+.plyr__menu__container .plyr__control[role="menuitemradio"]::after { background: rgb(255, 255, 255); border: 0px; height: 6px; left: 12px; opacity: 0; top: 50%; transform: translateY(-50%) scale(0); transition: transform 0.3s, opacity 0.3s; width: 6px; }
+
+.plyr__menu__container .plyr__control[role="menuitemradio"][aria-checked="true"]::before { background: var(--plyr-control-toggle-checked-background,var(--plyr-color-main,var(--plyr-color-main,#00b2ff))); }
+
+.plyr__menu__container .plyr__control[role="menuitemradio"][aria-checked="true"]::after { opacity: 1; transform: translateY(-50%) scale(1); }
+
+.plyr__menu__container .plyr__control[role="menuitemradio"]:focus-visible::before, .plyr__menu__container .plyr__control[role="menuitemradio"]:hover::before { background: rgba(35, 40, 47, 0.1); }
+
+.plyr__menu__container .plyr__menu__value { align-items: center; display: flex; margin-left: auto; margin-right: calc(var(--plyr-control-spacing, 10px)*.7*-1 - -2px); overflow: hidden; padding-left: calc(var(--plyr-control-spacing, 10px)*.7*3.5); pointer-events: none; }
+
+.plyr--full-ui input[type="range"] { appearance: none; background: rgba(0, 0, 0, 0); border: 0px; border-radius: calc(var(--plyr-range-thumb-height, 13px)*2); color: var(--plyr-range-fill-background,var(--plyr-color-main,var(--plyr-color-main,#00b2ff))); display: block; height: calc(var(--plyr-range-thumb-active-shadow-width, 3px)*2 + var(--plyr-range-thumb-height, 13px)); margin: 0px; min-width: 0px; padding: 0px; transition: box-shadow 0.3s; width: 100%; }
+
+.plyr--full-ui input[type="range"]::-webkit-slider-runnable-track { background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); background-image: linear-gradient(to right,currentColor var(--value,0),#0000 var(--value,0)); border: 0px; border-radius: calc(var(--plyr-range-track-height, 5px)/2); height: var(--plyr-range-track-height,5px); transition: box-shadow 0.3s; user-select: none; }
+
+.plyr--full-ui input[type="range"]::-webkit-slider-thumb { appearance: none; background: var(--plyr-range-thumb-background,#fff); border: 0px; border-radius: 100%; box-shadow: var(--plyr-range-thumb-shadow,0 1px 1px #23282f26,0 0 0 1px #23282f33); height: var(--plyr-range-thumb-height,13px); margin-top: calc((var(--plyr-range-thumb-height, 13px) - var(--plyr-range-track-height, 5px))/2*-1); position: relative; transition: 0.2s; width: var(--plyr-range-thumb-height,13px); }
+
+.plyr--full-ui input[type="range"]:focus { outline: 0px; }
+
+.plyr--full-ui input[type="range"]:focus-visible::-webkit-slider-runnable-track { outline: 2px dashed var(--plyr-focus-visible-color,var(--plyr-color-main,var(--plyr-color-main,#00b2ff))); outline-offset: 2px; }
+
+.plyr__poster { background-color: var(--plyr-video-background,var(--plyr-video-background,#000)); background-position: 50% 50%; background-repeat: no-repeat; background-size: contain; height: 100%; left: 0px; opacity: 0; position: absolute; top: 0px; transition: opacity 0.2s; width: 100%; z-index: 1; }
+
+.plyr--stopped.plyr__poster-enabled .plyr__poster { opacity: 1; }
+
+.plyr--youtube.plyr--paused.plyr__poster-enabled:not(.plyr--stopped) .plyr__poster { display: none; }
+
+.plyr__time { font-size: var(--plyr-font-size-time,var(--plyr-font-size-small,13px)); }
+
+.plyr__time + .plyr__time::before { content: "⁄"; margin-right: var(--plyr-control-spacing,10px); }
+
+@media (max-width: 767px) {
+  .plyr__time + .plyr__time { display: none; }
+}
+
+.plyr__tooltip { background: var(--plyr-tooltip-background,#fff); border-radius: var(--plyr-tooltip-radius,5px); bottom: 100%; box-shadow: var(--plyr-tooltip-shadow,0 1px 2px #00000026); color: var(--plyr-tooltip-color,#4a5464); font-size: var(--plyr-font-size-small,13px); font-weight: var(--plyr-font-weight-regular,400); left: 50%; line-height: 1.3; margin-bottom: calc(var(--plyr-control-spacing, 10px)/2*2); opacity: 0; padding: calc(var(--plyr-control-spacing, 10px)/2) calc(var(--plyr-control-spacing, 10px)/2*1.5); pointer-events: none; position: absolute; transform: translate(-50%, 10px) scale(0.8); transform-origin: 50% 100%; transition: transform 0.2s 0.1s, opacity 0.2s 0.1s; white-space: nowrap; z-index: 2; }
+
+.plyr__tooltip::before { border-left: var(--plyr-tooltip-arrow-size,4px) solid #0000; border-right: var(--plyr-tooltip-arrow-size,4px) solid #0000; border-top: var(--plyr-tooltip-arrow-size,4px) solid var(--plyr-tooltip-background,#fff); bottom: calc(var(--plyr-tooltip-arrow-size, 4px)*-1); content: ""; height: 0px; left: 50%; position: absolute; transform: translateX(-50%); width: 0px; z-index: 2; }
+
+.plyr .plyr__control:focus-visible .plyr__tooltip, .plyr .plyr__control:hover .plyr__tooltip, .plyr__tooltip--visible { opacity: 1; transform: translate(-50%) scale(1); }
+
+.plyr .plyr__control:hover .plyr__tooltip { z-index: 3; }
+
+.plyr__controls > .plyr__control:first-child .plyr__tooltip, .plyr__controls > .plyr__control:first-child + .plyr__control .plyr__tooltip { left: 0px; transform: translateY(10px) scale(0.8); transform-origin: 0px 100%; }
+
+.plyr__controls > .plyr__control:first-child .plyr__tooltip::before, .plyr__controls > .plyr__control:first-child + .plyr__control .plyr__tooltip::before { left: calc(var(--plyr-control-icon-size, 18px)/2 + var(--plyr-control-spacing, 10px)*.7); }
+
+.plyr__controls > .plyr__control:last-child .plyr__tooltip { left: auto; right: 0px; transform: translateY(10px) scale(0.8); transform-origin: 100% 100%; }
+
+.plyr__controls > .plyr__control:last-child .plyr__tooltip::before { left: auto; right: calc(var(--plyr-control-icon-size, 18px)/2 + var(--plyr-control-spacing, 10px)*.7); transform: translateX(50%); }
+
+.plyr__controls > .plyr__control:first-child .plyr__tooltip--visible, .plyr__controls > .plyr__control:first-child + .plyr__control .plyr__tooltip--visible, .plyr__controls > .plyr__control:first-child + .plyr__control:focus-visible .plyr__tooltip, .plyr__controls > .plyr__control:first-child + .plyr__control:hover .plyr__tooltip, .plyr__controls > .plyr__control:first-child:focus-visible .plyr__tooltip, .plyr__controls > .plyr__control:first-child:hover .plyr__tooltip, .plyr__controls > .plyr__control:last-child .plyr__tooltip--visible, .plyr__controls > .plyr__control:last-child:focus-visible .plyr__tooltip, .plyr__controls > .plyr__control:last-child:hover .plyr__tooltip { transform: translate(0px) scale(1); }
+
+.plyr__progress { left: calc(var(--plyr-range-thumb-height, 13px)*.5); margin-right: var(--plyr-range-thumb-height,13px); position: relative; }
+
+.plyr__progress input[type="range"], .plyr__progress__buffer { margin-left: calc(var(--plyr-range-thumb-height, 13px)*-.5); margin-right: calc(var(--plyr-range-thumb-height, 13px)*-.5); width: calc(100% + var(--plyr-range-thumb-height, 13px)); }
+
+.plyr__progress input[type="range"] { position: relative; z-index: 2; }
+
+.plyr__progress .plyr__tooltip { left: 0px; max-width: 120px; overflow-wrap: break-word; }
+
+.plyr__progress__buffer { appearance: none; background: rgba(0, 0, 0, 0); border: 0px; border-radius: 100px; height: var(--plyr-range-track-height,5px); left: 0px; margin-top: calc((var(--plyr-range-track-height, 5px)/2)*-1); padding: 0px; position: absolute; top: 50%; }
+
+.plyr__progress__buffer::-webkit-progress-bar { background: rgba(0, 0, 0, 0); }
+
+.plyr__progress__buffer::-webkit-progress-value { background: currentcolor; border-radius: 100px; min-width: var(--plyr-range-track-height,5px); transition: width 0.2s; }
+
+.plyr--loading .plyr__progress__buffer { animation: 1s linear 0s infinite normal none running plyr-progress; background-image: linear-gradient(-45deg,var(--plyr-progress-loading-background,#23282f99) 25%,#0000 25%,#0000 50%,var(--plyr-progress-loading-background,#23282f99) 50%,var(--plyr-progress-loading-background,#23282f99) 75%,#0000 75%,#0000); background-repeat: repeat-x; background-size: var(--plyr-progress-loading-size,25px) var(--plyr-progress-loading-size,25px); color: rgba(0, 0, 0, 0); }
+
+.plyr--video.plyr--loading .plyr__progress__buffer { background-color: var(--plyr-video-progress-buffered-background,#ffffff40); }
+
+.plyr--audio.plyr--loading .plyr__progress__buffer { background-color: var(--plyr-audio-progress-buffered-background,#c1c8d199); }
+
+.plyr__progress__marker { background-color: var(--plyr-progress-marker-background,#fff); border-radius: 1px; height: var(--plyr-range-track-height,5px); position: absolute; top: 50%; transform: translate(-50%, -50%); width: var(--plyr-progress-marker-width,3px); z-index: 3; }
+
+.plyr__volume { align-items: center; display: flex; position: relative; }
+
+.plyr__volume input[type="range"] { margin-left: calc(var(--plyr-control-spacing, 10px)/2); margin-right: calc(var(--plyr-control-spacing, 10px)/2); max-width: 90px; min-width: 60px; position: relative; z-index: 2; }
+
+.plyr--audio { display: block; }
+
+.plyr--audio .plyr__controls { background: var(--plyr-audio-controls-background,#fff); border-radius: inherit; color: var(--plyr-audio-control-color,#4a5464); padding: var(--plyr-control-spacing,10px); }
+
+.plyr--audio .plyr__control:focus-visible, .plyr--audio .plyr__control:hover, .plyr--audio .plyr__control[aria-expanded="true"] { background: var(--plyr-audio-control-background-hover,var(--plyr-color-main,var(--plyr-color-main,#00b2ff))); color: var(--plyr-audio-control-color-hover,#fff); }
+
+.plyr--full-ui.plyr--audio input[type="range"]::-webkit-slider-runnable-track { background-color: var(--plyr-audio-range-track-background,var(--plyr-audio-progress-buffered-background,#c1c8d199)); }
+
+.plyr--full-ui.plyr--audio input[type="range"]:active::-webkit-slider-thumb { box-shadow: var(--plyr-range-thumb-shadow,0 1px 1px #23282f26,0 0 0 1px #23282f33),0 0 0 var(--plyr-range-thumb-active-shadow-width,3px) var(--plyr-audio-range-thumb-active-shadow-color,#23282f1a); }
+
+.plyr--audio .plyr__progress__buffer { color: var(--plyr-audio-progress-buffered-background,#c1c8d199); }
+
+.plyr--video { overflow: hidden; }
+
+.plyr--video.plyr--menu-open { overflow: visible; }
+
+.plyr__video-wrapper { background: var(--plyr-video-background,var(--plyr-video-background,#000)); border-radius: inherit; height: 100%; margin: auto; overflow: hidden; position: relative; width: 100%; }
+
+.plyr__video-embed, .plyr__video-wrapper--fixed-ratio { aspect-ratio: 16 / 9; }
+
+@supports not (aspect-ratio:16/9) {
+  .plyr__video-embed, .plyr__video-wrapper--fixed-ratio { height: 0px; padding-bottom: 56.25%; position: relative; }
+}
+
+.plyr__video-embed iframe, .plyr__video-wrapper--fixed-ratio video { border: 0px; height: 100%; left: 0px; position: absolute; top: 0px; width: 100%; }
+
+.plyr--full-ui .plyr__video-embed > .plyr__video-embed__container { padding-bottom: 240%; position: relative; transform: translateY(-38.2812%); }
+
+.plyr--video .plyr__controls { background: var(--plyr-video-controls-background,linear-gradient(#0000,#000000bf)); border-bottom-left-radius: inherit; border-bottom-right-radius: inherit; bottom: 0px; color: var(--plyr-video-control-color,#fff); left: 0px; padding-right: ; padding-bottom: ; padding-left: ; padding-top: calc(var(--plyr-control-spacing, 10px)*2); position: absolute; right: 0px; transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; z-index: 3; }
+
+@media (min-width: 480px) {
+  .plyr--video .plyr__controls { padding-right: ; padding-bottom: ; padding-left: ; padding-top: calc(var(--plyr-control-spacing, 10px)*3.5); }
+}
+
+.plyr--video.plyr--hide-controls .plyr__controls { opacity: 0; pointer-events: none; transform: translateY(100%); }
+
+.plyr--video .plyr__control:focus-visible, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded="true"] { background: var(--plyr-video-control-background-hover,var(--plyr-color-main,var(--plyr-color-main,#00b2ff))); color: var(--plyr-video-control-color-hover,#fff); }
+
+.plyr__control--overlaid { background: var(--plyr-video-control-background-hover,var(--plyr-color-main,var(--plyr-color-main,#00b2ff))); border: 0px; border-radius: 100%; color: var(--plyr-video-control-color,#fff); display: none; left: 50%; opacity: 0.9; padding: calc(var(--plyr-control-spacing, 10px)*1.5); position: absolute; top: 50%; transform: translate(-50%, -50%); transition: 0.3s; z-index: 2; }
+
+.plyr__control--overlaid svg { left: 2px; position: relative; }
+
+.plyr__control--overlaid:focus, .plyr__control--overlaid:hover { opacity: 1; }
+
+.plyr--playing .plyr__control--overlaid { opacity: 0; visibility: hidden; }
+
+.plyr--full-ui.plyr--video .plyr__control--overlaid { display: block; }
+
+.plyr--full-ui.plyr--video input[type="range"]::-webkit-slider-runnable-track { background-color: var(--plyr-video-range-track-background,var(--plyr-video-progress-buffered-background,#ffffff40)); }
+
+.plyr--full-ui.plyr--video input[type="range"]:active::-webkit-slider-thumb { box-shadow: var(--plyr-range-thumb-shadow,0 1px 1px #23282f26,0 0 0 1px #23282f33),0 0 0 var(--plyr-range-thumb-active-shadow-width,3px) var(--plyr-audio-range-thumb-active-shadow-color,#ffffff80); }
+
+.plyr--video .plyr__progress__buffer { color: var(--plyr-video-progress-buffered-background,#ffffff40); }
+
+.plyr:fullscreen { background: rgb(0, 0, 0); height: 100%; margin: 0px; width: 100%; border-radius: 0px !important; }
+
+.plyr:fullscreen video { height: 100%; }
+
+.plyr:fullscreen .plyr__control .icon--exit-fullscreen { display: block; }
+
+.plyr:fullscreen .plyr__control .icon--exit-fullscreen + svg { display: none; }
+
+.plyr:fullscreen.plyr--hide-controls { cursor: none; }
+
+@media (min-width: 1024px) {
+  .plyr:fullscreen .plyr__captions { font-size: var(--plyr-font-size-xlarge,21px); }
+}
+
+.plyr--fullscreen-fallback { background: rgb(0, 0, 0); inset: 0px; height: 100%; margin: 0px; position: fixed; width: 100%; z-index: 10000000; border-radius: 0px !important; }
+
+.plyr--fullscreen-fallback video { height: 100%; }
+
+.plyr--fullscreen-fallback .plyr__control .icon--exit-fullscreen { display: block; }
+
+.plyr--fullscreen-fallback .plyr__control .icon--exit-fullscreen + svg { display: none; }
+
+.plyr--fullscreen-fallback.plyr--hide-controls { cursor: none; }
+
+@media (min-width: 1024px) {
+  .plyr--fullscreen-fallback .plyr__captions { font-size: var(--plyr-font-size-xlarge,21px); }
+}
+
+.plyr__ads { border-radius: inherit; inset: 0px; cursor: pointer; overflow: hidden; position: absolute; z-index: -1; }
+
+.plyr__ads > div, .plyr__ads > div iframe { height: 100%; position: absolute; width: 100%; }
+
+.plyr__ads::after { background: rgb(35, 40, 47); border-radius: 2px; bottom: var(--plyr-control-spacing,10px); color: rgb(255, 255, 255); content: attr(data-badge-text); font-size: 11px; padding: 2px 6px; pointer-events: none; position: absolute; right: var(--plyr-control-spacing,10px); z-index: 3; }
+
+.plyr__ads:empty::after { display: none; }
+
+.plyr__cues { background: currentcolor; display: block; height: var(--plyr-range-track-height,5px); left: 0px; opacity: 0.8; position: absolute; top: 50%; transform: translateY(-50%); width: 3px; z-index: 3; }
+
+.plyr__preview-thumb { background-color: var(--plyr-tooltip-background,#fff); border-radius: var(--plyr-menu-radius,8px); bottom: 100%; box-shadow: var(--plyr-tooltip-shadow,0 1px 2px #00000026); margin-bottom: calc(var(--plyr-control-spacing, 10px)/2*2); opacity: 0; padding: 3px; pointer-events: none; position: absolute; transform: translateY(10px) scale(0.8); transform-origin: 50% 100%; transition: transform 0.2s 0.1s, opacity 0.2s 0.1s; z-index: 2; }
+
+.plyr__preview-thumb--is-shown { opacity: 1; transform: translate(0px) scale(1); }
+
+.plyr__preview-thumb::before { border-left: var(--plyr-tooltip-arrow-size,4px) solid #0000; border-right: var(--plyr-tooltip-arrow-size,4px) solid #0000; border-top: var(--plyr-tooltip-arrow-size,4px) solid var(--plyr-tooltip-background,#fff); bottom: calc(var(--plyr-tooltip-arrow-size, 4px)*-1); content: ""; height: 0px; left: calc(50% + var(--preview-arrow-offset)); position: absolute; transform: translateX(-50%); width: 0px; z-index: 2; }
+
+.plyr__preview-thumb__image-container { background: rgb(193, 200, 209); border-radius: calc(var(--plyr-menu-radius, 8px) - 1px); overflow: hidden; position: relative; z-index: 0; }
+
+.plyr__preview-thumb__image-container img, .plyr__preview-thumb__image-container::after { height: 100%; left: 0px; position: absolute; top: 0px; width: 100%; }
+
+.plyr__preview-thumb__image-container::after { border-radius: inherit; box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset; content: ""; pointer-events: none; }
+
+.plyr__preview-thumb__image-container img { max-height: none; max-width: none; }
+
+.plyr__preview-thumb__time-container { background: var(--plyr-video-controls-background,linear-gradient(#0000,#000000bf)); border-bottom-left-radius: calc(var(--plyr-menu-radius, 8px) - 1px); border-bottom-right-radius: calc(var(--plyr-menu-radius, 8px) - 1px); bottom: 0px; left: 0px; line-height: 1.1; padding: 20px 6px 6px; position: absolute; right: 0px; z-index: 3; }
+
+.plyr__preview-thumb__time-container span { color: rgb(255, 255, 255); font-size: var(--plyr-font-size-time,var(--plyr-font-size-small,13px)); }
+
+.plyr__preview-scrubbing { inset: 0px; filter: blur(1px); height: 100%; margin: auto; opacity: 0; overflow: hidden; pointer-events: none; position: absolute; transition: opacity 0.3s; width: 100%; z-index: 1; }
+
+.plyr__preview-scrubbing--is-shown { opacity: 1; }
+
+.plyr__preview-scrubbing img { height: 100%; left: 0px; max-height: none; max-width: none; object-fit: contain; position: absolute; top: 0px; width: 100%; }
+
+.plyr--no-transition { transition: none !important; }
+
+.plyr__sr-only { clip: rect(1px, 1px, 1px, 1px); overflow: hidden; border: 0px !important; height: 1px !important; padding: 0px !important; position: absolute !important; width: 1px !important; }
+
+.plyr [hidden] { display: none !important; }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+.header, .h-link div, .button_contact div, .button_contact { transition: 0.4s; }
+
+.header.is-light .h-link div, .header.is-light .button_contact div { color: rgb(255, 255, 255); }
+
+.header.is-light .button_contact { background-color: rgba(241, 241, 241, 0.15); }
+
+.header.is-light { background-color: transparent; }
+
+.header.is-dark .h-link div { color: rgb(36, 36, 36); }
+
+.header.is-dark .button_contact { background-color: rgb(36, 36, 36); }
+
+.header.is-dark .button_contact div { color: rgb(255, 255, 255); }
+
+.header.is-dark { background-color: rgb(241, 241, 241); }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+.number { opacity: 0; transition: opacity 0.2s; }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+.module_box a, .module_content a, .overview_text a { position: relative; z-index: 100; cursor: pointer; pointer-events: auto !important; }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+.cms_slider { position: relative; overflow: hidden; min-height: var(--mentorship-max-height, auto); }
+
+.mentorship-slide { position: absolute; inset: 0px; width: 100%; opacity: 0; pointer-events: none; will-change: opacity, filter; }
+
+.mentorship-slide.is-active { opacity: 1; pointer-events: auto; }
+
+.content_slider { perspective: 1200px; }
+
+.content_slider .headline_slide, .content_slider .description_mentorship, .content_slider .button_container { transform-style: preserve-3d; backface-visibility: hidden; will-change: opacity, transform, filter; }
+
+.content_slider .line { display: block; transform-style: preserve-3d; backface-visibility: hidden; will-change: opacity, transform, filter; }
+
+.title_bar_txt, .main_image { will-change: opacity, filter, transform; }
+
+.thumbnail_box { cursor: pointer; }
+
+.thumbnail_box.is-active { outline: rgba(255, 255, 255, 0.4) solid 1px; }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+.center_txt { perspective: 1000px; }
+
+.center_txt .line { display: block; text-align: center; transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity, filter; }
+
+.active_1 { background-color: rgb(255, 255, 255); transform-origin: left center; will-change: width; }
+
+.central_words .tag_flex { will-change: transform, opacity, filter; }</style><style rel="stylesheet" type="text/css">@charset "utf-8";
+
+.vimeo-hover-wrapper { pointer-events: none; overflow: hidden; }
+
+.vimeo-hover-wrapper .vimeo-player-container { pointer-events: none; overflow: hidden; }
+
+.vimeo-hover-wrapper .vimeo-player-container iframe { pointer-events: none; transform: scale(1.05); width: 105%; height: 105%; top: -5%; left: -5%; }
+
+.vimeo-sound-button { pointer-events: auto !important; }
+
+.vimeo-hover-wrapper.loaded .vimeo-thumbnail { opacity: 0 !important; pointer-events: none !important; }
+
+.vimeo-hover-wrapper.loaded .vimeo-player-container { opacity: 1 !important; }</style><link href="https://cdn.prod.website-files.com/" rel="preconnect" crossorigin="anonymous"><title>Institute of Health</title><meta content="Master functional blood work, advanced lab testing, and business mentorship. Join health leaders in functional medicine and nutrition education." name="description"><meta content="Institute of Health" property="og:title"><meta content="Master functional blood work, advanced lab testing, and business mentorship. Join health leaders in functional medicine and nutrition education." property="og:description"><meta content="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6939c84347d967000a1ef935_Home.avif" property="og:image"><meta content="Institute of Health" name="twitter:title"><meta content="Master functional blood work, advanced lab testing, and business mentorship. Join health leaders in functional medicine and nutrition education." name="twitter:description"><meta content="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6939c84347d967000a1ef935_Home.avif" name="twitter:image"><meta property="og:type" content="website"><meta content="summary_large_image" name="twitter:card"><meta content="width=device-width, initial-scale=1" name="viewport"><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-PFGV5V2"></script><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693975a41e9e5d0b49055353_32x32.png" rel="shortcut icon" type="image/x-icon"><link href="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693975a7bca7afe6dc337bb8_256x256.png" rel="apple-touch-icon"><link href="https://www.instituteofhealth.com/" rel="canonical"><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Institute of Health",
+  "description": "The only certification that combines functional blood work, advanced lab testing, and business mentorship — built for practitioners who prioritise implementation over information.",
+  "url": "/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/690673943f2464c805ad9a3c_d36f80ea84af77c938ea25597093de6a_logo.png"
+  },
+  "inLanguage": "en",
+  "telephone": "519-875-3382",
+  "email": "info@instituteofhealth.com",
+  "sameAs": [
+    "https://www.youtube.com/",
+    "https://www.instagram.com/",
+    "https://www.linkedin.com/"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Certification Programs",
+    "itemListElement": [
+      {
+        "@type": "Course",
+        "name": "Advanced Blood Work Module",
+        "description": "The following modules are from our mini, live teaching events in a dynamic environment with students attending live from over 20 countries, which cover a broad range of topic areas and operate as introductory modules to many aspects of functional health.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Autoimmunity Module",
+        "description": "Most practitioners only recognise autoimmunity once tissue damage is irreversible. This seminar shows you how to spot it earlier, use targeted assessments, and build nutrition and lifestyle strategies that keep clients stable, supported, and confident.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Women's Health Module",
+        "description": "This seminar trains you to time, test, and interpret women's hormones correctly, linking results to real symptoms. You'll cover contraception choices, subfertility, PCOS/endo, and perimenopause, then build clear nutrition and lifestyle plans that reduce cycle issues and support steady, predictable progress.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Advanced Gut Health Module",
+        "description": "Gut health isn't just about the microbiome. We map the entire system — from the vagus nerve and cephalic phase to permeability, gallbladder, and gut–brain–immune pathways. You'll see how to detect weak links early, then apply practical, test-driven strategies to restore function.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Mould & Mycotoxins Module",
+        "description": "From fatigue to brain fog, mold drives problems practitioners often miss. This seminar teaches you to spot the warning signs, run the right labs, and apply practical detox and nutrition strategies that restore resilience and protect against relapse.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Stress & Cortisol Module",
+        "description": "Learn the HPA axis, allostatic load, and how stress derails thyroid, sleep, glucose, gut, and brain. Use screening (HRV, cortisol), then apply stage-specific nutrition, minerals, adaptogens, training dose, and psychoemotional tools—so clients calm symptoms fast and rebuild real resilience.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Men's Health Module",
+        "description": "Men's hormones are falling, and it shows up as low energy, stubborn fat, low libido, and flat mood. This seminar gives you the playbook: read the HPG axis, interpret labs (T, free T, SHBG, prolactin, DHT), reduce endocrine disruptors, and deploy nutrition, training, and targeted supplements to restore drive, body composition, and fertility.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Thyroid Function Module",
+        "description": "We go beyond TSH to cover the full thyroid ecosystem — autoimmunity, conversion issues, cofactors, and functional blood patterns. You'll learn how to identify dysfunction years before conventional testing flags a problem and apply clear frameworks for support.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Organic Acid Testing Module",
+        "description": "This seminar breaks down OAT beyond lists of high and low markers, showing you how to interpret metabolic pathways, nutrient status, detoxification, and mitochondrial function. You'll learn how to connect the results into clear, practical steps for client care.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Visual Biofeedback Module",
+        "description": "Learn how to assess nails, skin, eyes, posture, and other non-invasive signs to identify deficiencies, dysfunctions, and health conditions. These markers give you faster personalisation of plans and a simple way to track progress between labs.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Mental Health Module",
+        "description": "Mental health isn't just chemical or emotional, it's the intersection of biology, experience, and environment. This seminar equips you to connect early life, trauma, hormones, diet, and lab markers with client stories, building strategies that move beyond surface-level symptom management.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Sleep Module",
+        "description": "This seminar covers the physiology of sleep, from circadian rhythm and neurotransmitters to hormones and recovery markers. You'll learn how to connect lab data with client symptoms and create strategies that restore deep, sustainable sleep.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Lyme and Co-Infections Module",
+        "description": "In live whiteboard sessions, we break down complex cases into simple, visual frameworks. You'll see how pathways connect across systems and leave with clear diagrams you can apply directly to client work.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Health Conditions Module",
+        "description": "Rather than teaching protocols in isolation, this seminar shows you how to connect lab data and clinical patterns across all major health conditions. From metabolic to autoimmune to hormonal, you'll learn frameworks that break down complexity and guide decision-making in real practice.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Energy Balance Module",
+        "description": "Energy balance becomes clear when viewed through physiology rather than willpower—shaped by metabolic rate, adaptive thermogenesis, hunger and satiety signalling, hormonal feedback, stress physiology, sleep, digestion, and the psychological realities of behaviour change.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Fat Soluble Vitamins Module",
+        "description": "Fat-soluble vitamins A, D, E, and K are deeply interconnected regulators of immunity, bone health, inflammation, hormonal balance, detoxification, and cellular signalling. This module teaches practitioners how these nutrients are absorbed, activated, and utilised—and how to restore balance by supporting digestion, bile flow, liver function, and nutrient synergy.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Water Soluble Vitamins Module",
+        "description": "Water-soluble vitamins power energy production, neurotransmitter synthesis, methylation, detoxification, immune defence, and cognitive performance. This module shows how B vitamins and vitamin C are absorbed, activated, and utilised—and how deficiencies arise from stress, gut dysfunction, medications, and increased metabolic demand.",
+        "timeRequired": "PT20H"
+      },
+      {
+        "@type": "Course",
+        "name": "Minerals Module",
+        "description": "Minerals are foundational regulators of energy, structure, signalling, and resilience—shaping enzyme activity, nerve transmission, fluid balance, bone strength, thyroid function, immunity, and detoxification. This module shows how mineral status depends on digestion, stomach acid, stress, nutrient synergy, and lifestyle—and teaches practitioners how to restore balance safely and effectively."
+      },
+      {
+        "@type": "Course",
+        "name": "Plant Based Diets Module",
+        "description": "Plant-based diets can be powerful when properly structured—but they require an understanding of nutrient bioavailability, protein quality, micronutrient risks, and anti-nutrient mitigation. This module teaches practitioners to optimise plant-based nutrition safely, sustainably, and without dogma."
+      },
+      {
+        "@type": "Course",
+        "name": "Carnivore Diets Module",
+        "description": "Carnivore diets offer high nutrient density, metabolic benefits, and therapeutic potential for autoimmune and digestive conditions—but also carry considerations around cardiovascular markers, microbiome diversity, and long-term sustainability."
+      },
+      {
+        "@type": "Course",
+        "name": "Flexible Diets Module",
+        "description": "Flexible dieting focuses on balance, not restriction—teaching clients to understand energy needs while prioritising whole foods, avoiding processed-food loopholes, and maintaining a healthy psychological relationship with food. This module shows practitioners how to apply flexibility responsibly, sustainably, and with nutritional integrity."
+      },
+      {
+        "@type": "Course",
+        "name": "Ketogenic Diets Module",
+        "description": "The ketogenic diet becomes powerful when understood through physiology, not trends — this module teaches you how to apply ketosis therapeutically, assess suitability, monitor biomarkers, and design safe, effective protocols tailored to metabolic and cognitive goals."
+      },
+      {
+        "@type": "Course",
+        "name": "Program Design Module",
+        "description": "Effective program design turns assessment into transformation — this module teaches you how to build structured, phased, outcome-driven programs that clients can follow, sustain, and succeed with, without overwhelm or guesswork."
+      },
+      {
+        "@type": "Course",
+        "name": "10 Pillars of Health Module",
+        "description": "The 10 Pillars framework brings clients back to biological basics — teaching foundational daily habits that restore circadian rhythm, energy, resilience, and long-term wellbeing far more effectively than supplements or advanced protocols."
+      },
+      {
+        "@type": "Course",
+        "name": "Supplements Module",
+        "description": "Teaches practitioners to use supplements with precision — selecting the right form, dose, timing, and sequence while avoiding excess, dependency, and overwhelming protocols."
+      }
+    ]
+  }
+}
+</script><link rel="preconnect" href="https://cdn.prod.website-files.com/" crossorigin="">
+<script async="" type="module" src="https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/attributes.js" fs-copyclip=""></script>
+<script type="text/javascript" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693f1b8ef8fce343e340ee38_dynamic-header.txt"></script>
+
+
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-2DMCMHB0P1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2DMCMHB0P1');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PFGV5V2');</script>
+<!-- End Google Tag Manager --><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.2.2/dist/css/splide-core.min.css">
+<script defer="" src="https://player.vimeo.com/api/player.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/lazy-load-video@latest/dist/custom-video.js" async=""></script></head><body style=""><nav class="header is-light" style="will-change: transform; transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><div class="wrapper_header"><div class="flexbox header_flex"><a href="https://www.instituteofhealth.com/" aria-current="page" class="logo w-inline-block w--current"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/690673943f2464c805ad9a3c_d36f80ea84af77c938ea25597093de6a_logo.png" loading="lazy" data-light-logo="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/690673943f2464c805ad9a3c_d36f80ea84af77c938ea25597093de6a_logo.png" data-dark-logo="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/690b8efd679353112d14fb1b_4308f326aefcc89691e7b8258775dc7e_logo_dark.png" alt="Insitute of Health, logo, white, png" class="logo_image"></a><div id="w-node-_3fe49b58-429d-5420-2c4c-c53826da8dc7-26da8dc2" class="links_header"><a href="https://www.instituteofhealth.com/courses" class="h-link w-inline-block"><div>Courses</div></a><a href="https://www.instituteofhealth.com/events" class="h-link w-inline-block"><div>Events</div></a><a href="https://www.instituteofhealth.com/testimonials" class="h-link w-inline-block"><div>Testimonials</div></a><a href="https://www.instituteofhealth.com/articles" class="h-link w-inline-block"><div>Articles</div></a><a href="https://www.instituteofhealth.com/faq" class="h-link w-inline-block"><div>FAQ</div></a></div><div id="w-node-_3fe49b58-429d-5420-2c4c-c53826da8dd1-26da8dc2" class="right_side"><a href="https://www.instituteofhealth.com/about" class="h-link w-inline-block"><div>About</div></a><a href="https://www.instituteofhealth.com/contact" class="h-link w-inline-block"><div>Contact</div></a><div class="button_box"><a href="https://student.instituteofhealth.com/" target="_blank" class="button_contact w-inline-block"><div class="arrow_icon"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" data-light-arrow="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" data-dark-arrow="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" alt="" class="image" width="300" height="150"></div><div>Student Login</div></a></div></div><div id="w-node-fad17cea-faaf-1446-824d-6388c530614e-26da8dc2" data-w-id="fad17cea-faaf-1446-824d-6388c530614e" class="hamburger"><a href="https://www.instituteofhealth.com/#" class="h-link w-inline-block"><div class="menu_open">Menu</div><div class="menu_close">Close</div></a><div class="hamb"><div class="line_f" style="background-color: rgb(255, 255, 255);"></div><div class="line_s" style="background-color: rgb(255, 255, 255);"></div></div></div></div></div><div class="dynamic_header w-embed"></div></nav><div class="mobile_menu"><div class="mobile_menu_wrapper"><div class="menu_list"><a href="https://www.instituteofhealth.com/" aria-current="page" class="menu_link w-inline-block w--current"><div>Home</div></a><a href="https://www.instituteofhealth.com/courses" class="menu_link w-inline-block"><div>Courses</div></a><a href="https://www.instituteofhealth.com/events" class="menu_link w-inline-block"><div>Events</div></a><a href="https://www.instituteofhealth.com/testimonials" class="menu_link w-inline-block"><div>Testimonials</div></a><a href="https://www.instituteofhealth.com/about" class="menu_link w-inline-block"><div>About</div></a><a href="https://www.instituteofhealth.com/articles" class="menu_link w-inline-block"><div>Articles</div></a><a href="https://www.instituteofhealth.com/contact" class="menu_link w-inline-block"><div>Contact</div></a></div><div class="follow_menu"><div class="title_menu">Follow Us</div><div class="socials_menu"><a href="https://www.instagram.com/instituteofhealth_/" target="_blank" class="social_link w-inline-block"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6909669dc77a91308606f6fc_instagram.png" loading="lazy" alt="Instagram app icon with a stylized camera on a dark rounded square background."></a><a href="https://www.linkedin.com/company/instituteofhealth/" target="_blank" class="social_link w-inline-block"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6909669dd08b57dfaa285f05_linkedin.png" loading="lazy" alt="LinkedIn logo"></a><a href="https://www.instituteofhealth.com/#" target="_blank" class="social_link w-inline-block"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6909669dd34631d353d10b08_youtube.png" loading="lazy" alt="YouTube play button icon."></a><a href="https://www.facebook.com/profile.php?id=100049240609606" target="_blank" class="social_link w-inline-block"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694048b7f8badf022a9e8218_fb_icon.png" loading="lazy" alt="Facebook social media icon."></a></div></div><div class="button_container"><a href="https://student.instituteofhealth.com/" target="_blank" class="button_general wh mobile_button w-inline-block"><div class="g_button_txt mobile_button"><div>Student Login</div></div><div class="arrow_button invert"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div><main><section data-header="light" class="hero first-screen"><div class="wrapper_hero"><div class="hero_list"><div class="first" style="opacity: 1; transform: translateY(0px); transition: opacity 0.8s ease-out, transform 0.8s ease-out;"><div class="bar_hero"><div class="bar_active" style="width: 100%; transition: width 1.5s ease-in-out;"></div></div><div class="bar_title">Course Units</div><div class="number_dots"><div data-target="966+" class="number" data-animating="true" style="opacity: 1;">0</div><div class="dots_flex"><div class="dot_small active" data-looping="true" data-timer="32"></div><div class="dot_small" data-looping="true"></div><div class="dot_small" data-looping="true"></div></div></div></div><div class="second" style="opacity: 0; transform: translateY(20px);"><div class="bar_hero"><div class="bar_active"></div></div><div class="bar_title">Countries Educated</div><div class="number_dots"><div data-target="46" class="number">0</div><div class="dots_flex"><div class="dot_small active"></div><div class="dot_small active"></div><div class="dot_small"></div></div></div></div><div class="third" style="opacity: 0; transform: translateY(20px);"><div class="bar_hero"><div class="bar_active"></div></div><div class="bar_title">Laboratory Tests</div><div class="number_dots"><div data-target="22" class="number">0</div><div class="dots_flex"><div class="dot_small active"></div><div class="dot_small active"></div><div class="dot_small active"></div></div></div></div><div class="bb_custom w-embed w-script">
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const blocks = Array.from(document.querySelectorAll(".first, .second, .third"));
+  const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+
+  const animateNumber = el => {
+    if (el.dataset.animating === "true") return;
+    el.dataset.animating = "true";
+
+    const raw = (el.dataset.target ?? el.textContent).trim();
+    const normalized = raw.replace(",", ".");
+    const decimals = (normalized.split(".")[1]?.length) ?? 0;
+    const target = Number.parseFloat(normalized) || 0;
+
+    el.textContent = (0).toFixed(decimals).replace(".", ",");
+    el.style.opacity = "1";
+
+    let start = null;
+    const duration = 2000;
+
+    const step = ts => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / duration, 1);
+      const v = target * easeOutCubic(p);
+      el.textContent = v.toFixed(decimals).replace(".", ",");
+      if (p < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target.toLocaleString("de-DE", {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        });
+        el.dataset.animating = "false";
+      }
+    };
+    requestAnimationFrame(step);
+  };
+
+  const animateDots = dots => {
+    if (!dots.length || dots[0].dataset.looping === "true") return;
+    dots.forEach(dot => (dot.dataset.looping = "true"));
+
+    let dir = 1, i = 0;
+    const tick = () => {
+      dots.forEach((d, idx) => d.classList.toggle("active", idx <= i));
+      i += dir;
+      if (i >= dots.length - 1) dir = -1;
+      else if (i <= 0) dir = 1;
+      dots[0].dataset.timer = setTimeout(tick, 400);
+    };
+    tick();
+  };
+
+  const stopDots = dots => {
+    const timer = dots[0]?.dataset.timer;
+    if (timer) {
+      clearTimeout(Number(timer));
+      dots.forEach(dot => {
+        dot.classList.remove("active");
+        delete dot.dataset.timer;
+        delete dot.dataset.looping;
+      });
+    }
+  };
+
+  const animateBars = bars => {
+    bars.forEach((bar, idx) => {
+      bar.style.width = "0%";
+      setTimeout(() => {
+        bar.style.transition = "width 1.5s ease-in-out";
+        bar.style.width = "100%";
+      }, idx * 600);
+    });
+  };
+
+  const playBlock = block => {
+    const bars = block.querySelectorAll(".bar_active");
+    const number = block.querySelector(".number");
+    const dots = block.querySelectorAll(".dot_small");
+
+    if (bars.length) animateBars(bars);
+    if (number) animateNumber(number);
+    if (dots.length) animateDots(dots);
+  };
+
+  const resetBlock = block => {
+    stopDots(block.querySelectorAll(".dot_small"));
+    block.style.opacity = "";
+    block.style.transform = "";
+    block.style.transition = "";
+    block.style.position = "";
+    block.style.top = "";
+    block.style.left = "";
+    block.style.right = "";
+  };
+
+  const setupMobile = () => {
+    let index = 0;
+    let cycleTimer = null;
+
+    const showBlock = i => {
+      blocks.forEach(b => {
+        b.style.opacity = "0";
+        stopDots(b.querySelectorAll(".dot_small"));
+      });
+      const current = blocks[i];
+      current.style.opacity = "1";
+      playBlock(current);
+    };
+
+    const cycle = () => {
+      showBlock(index);
+      index = (index + 1) % blocks.length;
+    };
+
+    blocks.forEach((b, i) => {
+      b.style.opacity = i === 0 ? "1" : "0";
+      b.style.transition = "opacity 0.8s ease";
+      b.style.position = "absolute";
+      b.style.top = "0";
+      b.style.left = "0";
+      b.style.right = "0";
+    });
+
+    cycle();
+    cycleTimer = setInterval(cycle, 5000);
+
+    return () => {
+      clearInterval(cycleTimer);
+      blocks.forEach(resetBlock);
+    };
+  };
+
+  const setupDesktop = () => {
+    blocks.forEach((block, i) => {
+      block.style.opacity = "0";
+      block.style.transform = "translateY(20px)";
+
+      setTimeout(() => {
+        block.style.transition = "opacity .8s ease-out, transform .8s ease-out";
+        block.style.opacity = "1";
+        block.style.transform = "translateY(0)";
+        setTimeout(() => playBlock(block), 500);
+      }, i * 1200);
+    });
+
+    return () => blocks.forEach(resetBlock);
+  };
+
+  let teardown = null;
+  const applyMode = () => {
+    if (teardown) {
+      teardown();
+      teardown = null;
+    }
+    teardown = window.innerWidth < 768 ? setupMobile() : setupDesktop();
+  };
+
+  applyMode();
+  window.addEventListener("resize", () => {
+    clearTimeout(applyMode.resizeTimer);
+    applyMode.resizeTimer = setTimeout(applyMode, 200);
+  });
+});
+</script></div></div><div class="bottom"><div class="left_side_hero"><div class="heading_hero"><h1 class="h1">Global leaders in functional medicine and nutrition</h1></div><div class="p_hero"><div class="paragraph_hero">The only integrative nutritional therapy certification combining functional blood work, nutrition and business mentorship.</div></div></div><div class="right_hero"><a href="https://www.instituteofhealth.com/#more" class="button_hero w-inline-block"><div class="text_button"><div>Learn More</div></div><div class="arrow_button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div><div class="background_video"><div class="overlay_video"></div><video data-lazy-load="true" data-src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc%2F6939a16cb78d37d4b631caeb_hero-video%20%28comp%29_mp4.mp4" autoplay="true" loop="" playsinline="true" muted="" poster="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69397bad81b7119f9c7f8526_826b7b65ef6edfb257275c206be5b06a_Hero-Stop.avif" class="video" disablepictureinpicture="">Institute of Health</video></div></section><section id="more" class="courses"><div class="wrapper_slider"><div class="headline"><div class="headline_box"><h2 class="h2 spec_hero">Comprehensive, evidence-based education across the full spectrum of health conditions.</h2></div><div class="button_container"><a href="https://www.instituteofhealth.com/courses" class="button_general w-inline-block"><div class="g_button_txt"><div>All Courses</div></div><div class="arrow_button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a><link rel="prerender" href="https://www.instituteofhealth.com/courses"></div></div></div><div class="slider_wrap"><div class="seminar-header"><div>Seminars</div><div class="seminar-count"><span class="seminar-count__value is-current">24</span> <span class="seminar-count__suffix">Units</span></div></div><div class="w-dyn-list"><div role="list" class="scroll_gallery w-dyn-items"><div data-units="134" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6918a1a8450242d8369c682e_15-min.avif" loading="lazy" alt="Advanced Blood Work" class="image" width="1" height="1"></div><div class="title_course">Advanced Blood Work</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Learn to analyse complex blood panels using functional ranges, pattern recognition, and clinical reasoning, equipping you to identify root causes that standard interpretations often miss.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/advanced-blood-work" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="26" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6918a1d56500147d041a9a80_2-min.avif" loading="lazy" alt="Autoimmunity" class="image" width="1" height="1"></div><div class="title_course">Autoimmunity</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Develop a structured framework to identify triggers, immune dysregulation, and inflammatory patterns, allowing you to build personalised, remission-focused strategies for autoimmune clients.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/autoimmunity" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="63" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6939bf214569ea47e3ee86ef_womens%20health-min.avif" loading="lazy" alt="Women’s Health" class="image"></div><div class="title_course">Women’s Health</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Map the menstrual-to-menopause continuum and translate symptoms, cycle data, and foundational labs into nutrition-first plans with targeted protocols.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/womens-health" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="44" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6918a23890ad3863d96d19b1_4-min%20(1).avif" loading="lazy" alt="Advanced Gut Health" class="image"></div><div class="title_course">Advanced Gut Health</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Develop a systems-based approach to gut dysfunction, interpreting digestive health using a top-down analysis to restore nutrient absorption, microbial health and barrier integrity.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/advanced-gut-health" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="23" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6918a25af33f5530dc960a70_2-min.avif" loading="lazy" alt="Mould &amp; Mycotoxins" class="image"></div><div class="title_course">Mould &amp; Mycotoxins</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Detecting and managing biotoxin exposure and mould illness, understanding its multi-system impacts and designing detoxification and environmental recovery protocols.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/mould-mycotoxins" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="79" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6918a26f89a71e853f6d5d4b_10-min.avif" loading="lazy" alt="Stress &amp; Cortisol" class="image"></div><div class="title_course">Stress &amp; Cortisol</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Identifying physiological and psychological stress patterns, that impact all healing processes of the body, allowing you to rebalance cortisol rhythms, nervous system tone, and recovery capacity.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/stress-cortisol" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="46" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6918a2905678e8395065439f_7-min.avif" loading="lazy" alt="Men’s Health" class="image"></div><div class="title_course">Men’s Health</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Learn to optimise male hormone health, energy, and performance, addressing key drivers such as testosterone decline, metabolic resistance, and modern stress exposure.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/mens-health" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="24" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6918a2d1ee8aac6905982be7_8-min.avif" loading="lazy" alt="Thyroid" class="image"></div><div class="title_course">Thyroid</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Distinguish low vs. high thyroid function patterns, conversion issues, and autoimmune drivers that impact energy, hormones, fertility and metabolic networks.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/thyroid" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="11" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/69189ee6aad09a9305ca2357_1-min-1.avif" loading="lazy" alt="Organic Acids (OAT)" class="image"></div><div class="title_course">Organic Acids (OAT)</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Interpret organic acid profiles, linking mitochondrial, microbial, neurological and detoxification pathways to tailor interventions for fatigue, cognition, and gut health.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/organic-acids-oat" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="7" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/69189f0404ac0e9a5a48061e_16-min.avif" loading="lazy" alt="Visual Biofeedback Markers" class="image"></div><div class="title_course">Visual Biofeedback Markers</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Systematically assess skin, nails, eyes, nose, mouth, tongue, and hair to spot patterns of deficiencies, toxicities, and dysfunctions, then translate findings into targeted next steps, whilst also providing the ability to track change over time.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/visual-biofeedback-markers" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="49" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/69189f1defdae6dd7474a918_11-min.avif" loading="lazy" alt="Mental Health" class="image"></div><div class="title_course">Mental Health</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Develop the ability to identify and address the biochemical, nutritional, and lifestyle roots of stress, anxiety, depression, and burnout, helping clients restore emotional stability and cognitive clarity.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/mental-health" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="22" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/69189f3af61847a5afbe1c5f_13-min.avif" loading="lazy" alt="Sleep" class="image"></div><div class="title_course">Sleep</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Gain the tools to uncover the physiological and behavioural causes of poor sleep, enabling you to rebuild circadian rhythm, hormone balance, and deep restorative rest for clients.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/sleep" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="14" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6925de4ded2e7902a4ec1e32_Screenshot%202025-11-13%20at%208.45.16%E2%80%AFam-min.avif" loading="lazy" alt="Lyme and Co-Infections" class="image"></div><div class="title_course">Lyme and Co-Infections</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Understand how to recognise chronic Lyme and co-infection patterns to manage stealth pathogens, immune dysfunction, and post-infectious fatigue through phase-based plans that disrupt biofilm and apply targeted microbials.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/lyme-and-co-infections" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="6" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6939bf135ecc69330c9d5626_conditions-min.avif" loading="lazy" alt="Conditions" class="image"></div><div class="title_course">Conditions</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Manage common metabolic, GI, hormonal, inflammatory, and fatigue conditions without guesswork and know when to escalate testing or refer.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/conditions" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="6" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6925df7dc3d051c27a2343b4_Screenshot%202025-11-13%20at%208.51.50%E2%80%AFam-min.avif" loading="lazy" alt="Energy Balance" class="image"></div><div class="title_course">Energy Balance</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Build precise calorie and macro targets with sustainable nutritional strategies to ensure continued fat loss or hypertrophy by offsetting metabolic-adaptation and working around psychology.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/energy-balance" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="4" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6925dfd43d4303a86b586e98_Screenshot%202025-11-13%20at%208.36.16%E2%80%AFam-min.avif" loading="lazy" alt="Fat-Soluble Vitamins" class="image"></div><div class="title_course">Fat-Soluble Vitamins</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Learn how to interpret and correct imbalances in vitamins A, D, E, and K to enhance hormonal, immune, and metabolic function through food and targeted supplementation.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/fat-soluble-vitamins" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="10" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6925e031a9b3887d566c05cc_Screenshot%202025-11-13%20at%208.35.47%E2%80%AFam-min.avif" loading="lazy" alt="Water-Soluble Vitamins" class="image"></div><div class="title_course">Water-Soluble Vitamins</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Identify deficiency patterns in B-complex and vitamin C pathways, optimising energy production, stress resilience, and methylation.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/water-soluble-vitamins" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="11" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6939bf3d5e2fe07c77cc4f01_minerals-min.avif" loading="lazy" alt="Minerals" class="image"></div><div class="title_course">Minerals</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Understand the synergistic and antagonistic relationships between key minerals, while checking interactions with medications and essential cofactors.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/minerals" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="13" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6925e10c527a97c7a16eb491_randy-fath-ZaLUzigr0mc-unsplash.avif" loading="lazy" alt="Plant-Based Diets" class="image"></div><div class="title_course">Plant-Based Diets</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Design a complete plant-based nutrition plan that meets protein needs via smart food pairing, while preventing common nutritional gaps and managing anti-nutrients.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/plant-based-diets" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="16" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6925e153cf3ae362366486a7_cristi-caval-3pCrvi2JH-M-unsplash.avif" loading="lazy" alt="Carnivore Diets" class="image"></div><div class="title_course">Carnivore Diets</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Understand the mechanisms, benefits, and risks of carnivore protocols, enabling you to identify when and how to apply them therapeutically, without compromising long-term health.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/carnivore-diets" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="7" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6925e19740519ce8c8bef564_jan-sedivy-3HE3B4r-A08-unsplash.avif" loading="lazy" alt="Flexible Diets" class="image"></div><div class="title_course">Flexible Diets</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Master how to structure personalised nutrition plans that achieve consistency without rigidity, blending scientific precision with behavioural flexibility for sustainable client outcomes.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/flexible-diets" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="15" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6925e1d2f8130555edf6adbd_jen-dries-daOWrzJqWuU-unsplash.avif" loading="lazy" alt="Ketogenic Diets" class="image"></div><div class="title_course">Ketogenic Diets</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Develop the skill to strategically implement and troubleshoot ketogenic approaches for metabolic, neurological, and body composition goals, based on biochemical individuality.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/ketogenic-diets" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="10" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6939bf301963600a4e5dbbe3_program%20design-min.avif" loading="lazy" alt="Program Design" class="image"></div><div class="title_course">Program Design</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Learn to build periodised, goal-driven nutrition programs that predict and prevent plateaus, due to integrating physiology, recovery, and psychology, delivering measurable client results every time.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/program-design" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="10" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/694213f4ae148cd47040228b_lifestyle-factors.avif" loading="lazy" alt="Lifestyle Factors" class="image"></div><div class="title_course">Lifestyle Factors</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Master the foundational prerequisites that underpin health, teaching you how to assess, prioritise, and implement low-cost, non-invasive habits that compound results over time.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/lifestyle-factors" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div><div data-units="11" role="listitem" class="slide_item w-dyn-item"><div class="course_ll"><div class="slide_image"><div class="box_image"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/6925e26a55b58e030615279c_Screenshot%202025-11-13%20at%208.36.50%E2%80%AFam-min.avif" loading="lazy" alt="Supplements" class="image"></div><div class="title_course">Supplements</div></div><div class="module_box"><div class="module_content"><div class="title_module">Module Overview</div><div class="overview_text">Build safe, effective supplement plans by matching deficiencies and symptoms to evidence‑based bioavailable nutrients, co-factors and timing.</div></div><div class="explore_box"><a href="https://www.instituteofhealth.com/courses/supplements" class="course_link_module w-inline-block"><div class="overview_text">Explore Course</div></a></div></div></div></div></div></div><div class="code_embed w-embed"></div></div></section></main><section class="white"><div class="wrapper"><div class="middle_headline"><h2 class="h2 spec sided">What makes our certification different</h2></div><div class="flex_slides"><div data-slider="mentorship" class="cms_slider" style="--mentorship-max-height: 326px; min-height: 326px;"><div class="controls"><div class="arrow-left"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69095b328c1ed1f42d098ac8_arrow-left.svg" loading="lazy" alt="" width="300" height="150"></div><div class="title_bar_txt">Clinical Mentorship</div><div class="arrow-right"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69095b333dd09a0978d79778_arrow-right.svg" loading="lazy" alt="" width="300" height="150"></div></div><div class="w-dyn-list"><div role="list" class="w-dyn-items"><div data-control-title="Clinical Mentorship" role="listitem" class="mentorship-slide w-dyn-item is-active"><div class="content_slider"><div class="headline_slide"><div class="mentorship-title">Live high-frequency mentorship with unmatched volume and depth</div></div><div class="description_mentorship"><div class="b_txt">A constantly growing library of clinical, psychological, and business calls. From lab cases to business acceleration, IOH offers over 7.5 hours of live calls per week across 5 distinct formats.</div></div><div class="button_container"><a href="https://www.instituteofhealth.com/courses" class="button_general w-inline-block"><div class="g_button_txt"><div>Explore Courses</div></div><div class="arrow_button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div><div data-control-title="Practitioner Support" role="listitem" class="mentorship-slide w-dyn-item"><div class="content_slider"><div class="headline_slide"><div class="mentorship-title">Practitioner-led community for real time answers and dedicated support</div></div><div class="description_mentorship"><div class="b_txt">Receive direct feedback on challenging client cases and hands-on business guidance, from leading practitioners, with a dedicated team providing real-time answers for 24/7 support.</div></div><div class="button_container"><a href="https://www.instituteofhealth.com/courses" class="button_general w-inline-block"><div class="g_button_txt"><div>Explore Courses</div></div><div class="arrow_button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div><div data-control-title="Global Impact" role="listitem" class="mentorship-slide w-dyn-item"><div class="content_slider"><div class="headline_slide"><div class="mentorship-title">6 and 7-figure business mentorship with scalable online systems</div></div><div class="description_mentorship"><div class="b_txt">We teach our students how to ethically scale online, building a fully compliant, client-centric health business using paid ads, high-retention offers, and team-based delivery.</div></div><div class="button_container"><a href="https://www.instituteofhealth.com/courses" class="button_general w-inline-block"><div class="g_button_txt"><div>Explore Courses</div></div><div class="arrow_button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div><div data-control-title="Evidence-Based" role="listitem" class="mentorship-slide w-dyn-item"><div class="content_slider"><div class="headline_slide"><div class="mentorship-title">Fortified by over 2,000 published medical journals</div></div><div class="description_mentorship"><div class="b_txt">We do the research that you don’t have the time for, so that you can focus on what you love most. Gain the clarity, confidence and certainty to create lasting results and stay ahead of the industry.</div></div><div class="button_container"><a href="https://www.instituteofhealth.com/courses" class="button_general w-inline-block"><div class="g_button_txt"><div>Explore Courses</div></div><div class="arrow_button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div></div></div></div><div class="image_collections"><div class="thumbnails_list"><div data-slider-thumb="mentorship" class="thumbnail_box is-active"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/690b8a1136cd0d6ef48842f3_img-1.avif" loading="lazy" alt="Smiling female dentist in a white coat showing a dental model to a seated patient." class="thumbnail_image"></div><div data-slider-thumb="mentorship" class="thumbnail_box"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/690b8a11db49a7507e75e463_0cb37c9f2b56ac419a550b4deb622569_img-2.avif" loading="lazy" alt="Man standing and presenting with a clipboard to four seated colleagues in a bright office with large windows." class="thumbnail_image" width="1" height="1"></div><div data-slider-thumb="mentorship" class="thumbnail_box"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6939b2f04920e85f6b887988_c886d6912a9c52c27690280a1c749739_testalize-me-9xHsWmh3m_4-unsplash%20%281%29-min.avif" loading="lazy" alt="Close-up of a robotic arm with tubing and mechanical parts inside a lab or manufacturing environment with blue lighting." class="thumbnail_image"></div><div data-slider-thumb="mentorship" class="thumbnail_box"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69420c32dfbbcb1ac808f638_Evidence-Based-min.avif" loading="lazy" alt="Low-angle view of a classical building facade featuring six tall Corinthian columns and detailed sculptural frieze under a clear blue sky, flanked by modern buildings." class="thumbnail_image" width="1" height="1"></div></div><div class="main_slide"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/690b8a1136cd0d6ef48842f3_img-1.avif" loading="lazy" alt="Smiling female dentist in a white coat showing a dental model to a seated patient." class="main_image"></div></div><div class="arrows_slides w-embed w-script"><script defer="">
+window.addEventListener("load", () => {
+  const component = document.querySelector(".flex_slides");
+  if (!component) return;
+
+  const slider =
+    component.querySelector(".cms_slider[data-slider='mentorship']") ||
+    component.querySelector(".cms_slider");
+  const slides = Array.from(component.querySelectorAll(".mentorship-slide"));
+  const thumbs = Array.from(component.querySelectorAll(".thumbnail_box"));
+  const mainImage = component.querySelector(".main_image");
+  const titleBar = component.querySelector(".title_bar_txt");
+  const next = component.querySelector(".arrow-right");
+  const prev = component.querySelector(".arrow-left");
+
+  if (!slider || !slides.length || !thumbs.length || !mainImage || !titleBar) return;
+
+  const AUTOPLAY_DELAY = 8000;
+  const BLUR_IN = "blur(18px)";
+  const BLUR_OUT = "blur(12px)";
+  const EASE_OUT = "power3.out";
+  const EASE_IN = "power3.inOut";
+
+  let current = 0;
+  let autoplayId = null;
+  let resizeTimeout = null;
+  let isAnimating = false;
+  let pendingIndex = null;
+
+  const lineCache = new WeakMap();
+  const partsCache = new WeakMap();
+
+  const slideMeta = slides.map((slide, index) => {
+    const thumbBox = thumbs[index] || thumbs[0];
+    const thumbImg = thumbBox?.querySelector("img");
+    return {
+      slide,
+      controlTitle:
+        slide.getAttribute("data-control-title") ||
+        thumbImg?.getAttribute("alt") ||
+        slide.querySelector(".mentorship-title")?.textContent.trim() ||
+        "",
+      imageSrc: thumbImg?.dataset.mainSrc || thumbImg?.currentSrc || thumbImg?.src || "",
+      imageSrcset: thumbImg?.dataset.mainSrcset || thumbImg?.getAttribute("srcset") || ""
+    };
+  });
+
+  const setSliderHeight = () => {
+    const maxHeight = Math.max(...slides.map(slide => slide.scrollHeight));
+    slider.style.setProperty("--mentorship-max-height", `${maxHeight}px`);
+    slider.style.minHeight = `${maxHeight}px`;
+  };
+
+  setSliderHeight();
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(setSliderHeight, 120);
+  });
+
+  function splitLines(slide) {
+    if (!slide) return [];
+    const cached = lineCache.get(slide);
+    if (cached) return cached;
+
+    const targets = [
+      slide.querySelector(".mentorship-title"),
+      slide.querySelector(".description_mentorship .b_txt")
+    ].filter(Boolean);
+
+    let lines = [];
+    if (typeof SplitType !== "undefined" && targets.length) {
+      const instances = targets.map(el => new SplitType(el, { types: "lines", tagName: "div" }));
+      lines = instances.flatMap(inst => inst.lines || []);
+    } else {
+      lines = targets;
+    }
+
+    lineCache.set(slide, lines);
+    return lines;
+  }
+
+  function getSlideParts(slide) {
+    if (!slide) return { lines: [], button: null };
+    const cached = partsCache.get(slide);
+    if (cached) return cached;
+
+    const parts = {
+      lines: splitLines(slide),
+      button: slide.querySelector(".button_container")
+    };
+
+    partsCache.set(slide, parts);
+    return parts;
+  }
+
+  function animateTitle(newIndex) {
+    const tl = gsap.timeline({ defaults: { duration: 0.32, ease: EASE_IN } });
+    tl.to(titleBar, { autoAlpha: 0, yPercent: 40 })
+      .add(() => {
+        titleBar.textContent = slideMeta[newIndex].controlTitle;
+      })
+      .to(titleBar, { autoAlpha: 1, yPercent: 0 });
+  }
+
+  function swapImage(newIndex) {
+    const { imageSrc, imageSrcset } = slideMeta[newIndex];
+    if (!imageSrc) return;
+
+    gsap.to(mainImage, {
+      autoAlpha: 0,
+      duration: 0.32,
+      ease: EASE_IN,
+      onComplete: () => {
+        mainImage.src = imageSrc;
+        if (imageSrcset) mainImage.srcset = imageSrcset;
+        gsap.to(mainImage, { autoAlpha: 1, duration: 0.34, ease: EASE_OUT });
+      }
+    });
+  }
+
+  function updateThumbs(newIndex) {
+    thumbs.forEach((thumb, idx) => thumb.classList.toggle("is-active", idx === newIndex));
+  }
+
+  function animateContentTransition(newIndex) {
+    if (isAnimating) {
+      pendingIndex = newIndex;
+      return false;
+    }
+
+    const outgoing = slides[current];
+    const incoming = slides[newIndex];
+    if (!outgoing || !incoming) return false;
+
+    const outgoingParts = getSlideParts(outgoing);
+    const incomingParts = getSlideParts(incoming);
+    isAnimating = true;
+
+    incoming.classList.add("is-active");
+    gsap.set(incoming, { autoAlpha: 0, yPercent: 6 });
+    gsap.set(incomingParts.lines, {
+      opacity: 0,
+      yPercent: 30,
+      z: -120,
+      rotateX: 10,
+      filter: BLUR_IN
+    });
+    if (incomingParts.button) {
+      gsap.set(incomingParts.button, {
+        opacity: 0,
+        yPercent: 35,
+        filter: BLUR_IN
+      });
+    }
+
+    const tl = gsap.timeline({
+      defaults: { ease: EASE_IN },
+      onComplete: () => {
+        outgoing.classList.remove("is-active");
+        gsap.set([...outgoingParts.lines, ...incomingParts.lines], { clearProps: "all" });
+        if (outgoingParts.button) gsap.set(outgoingParts.button, { clearProps: "all" });
+        if (incomingParts.button) gsap.set(incomingParts.button, { clearProps: "all" });
+        gsap.set(outgoing, { clearProps: "autoAlpha,yPercent" });
+        isAnimating = false;
+
+        if (pendingIndex !== null) {
+          const queuedIndex = pendingIndex;
+          pendingIndex = null;
+          showSlide(queuedIndex);
+        }
+      }
+    });
+
+    tl.to(outgoingParts.lines, {
+      opacity: 0,
+      yPercent: -25,
+      z: -140,
+      rotateX: -10,
+      filter: BLUR_OUT,
+      duration: 0.36,
+      stagger: 0.06
+    }, 0)
+      .to(outgoing, { autoAlpha: 0, duration: 0.28, ease: EASE_IN }, 0)
+      .to(outgoingParts.button, {
+        opacity: 0,
+        yPercent: -20,
+        filter: BLUR_OUT,
+        duration: 0.28
+      }, "<0.05")
+      .to(incoming, { autoAlpha: 1, yPercent: 0, duration: 0.32, ease: EASE_OUT }, 0.12)
+      .to(incomingParts.lines, {
+        opacity: 1,
+        yPercent: 0,
+        z: 0,
+        rotateX: 0,
+        filter: "blur(0px)",
+        duration: 0.48,
+        stagger: 0.06,
+        ease: EASE_OUT
+      }, "<0.04")
+      .to(incomingParts.button, {
+        opacity: 1,
+        yPercent: 0,
+        filter: "blur(0px)",
+        duration: 0.34,
+        ease: EASE_OUT
+      }, "<0.05");
+
+    return true;
+  }
+
+  function showSlide(newIndex) {
+    if (newIndex === current || !slides[newIndex]) return;
+    const started = animateContentTransition(newIndex);
+    if (!started) {
+      pendingIndex = newIndex;
+      return;
+    }
+
+    animateTitle(newIndex);
+    swapImage(newIndex);
+    updateThumbs(newIndex);
+    current = newIndex;
+    restartAutoplay();
+  }
+
+  function goNext() {
+    const nextIndex = (current + 1) % slides.length;
+    showSlide(nextIndex);
+  }
+
+  function goPrev() {
+    const prevIndex = (current - 1 + slides.length) % slides.length;
+    showSlide(prevIndex);
+  }
+
+  function startAutoplay() {
+    if (autoplayId) return;
+    autoplayId = window.setInterval(goNext, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    if (!autoplayId) return;
+    window.clearInterval(autoplayId);
+    autoplayId = null;
+  }
+
+  function restartAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  next?.addEventListener("click", () => {
+    stopAutoplay();
+    goNext();
+  });
+
+  prev?.addEventListener("click", () => {
+    stopAutoplay();
+    goPrev();
+  });
+
+  thumbs.forEach((thumb, index) => {
+    thumb.addEventListener("click", () => {
+      stopAutoplay();
+      showSlide(index);
+    });
+  });
+
+  slides[current].classList.add("is-active");
+  updateThumbs(current);
+  titleBar.textContent = slideMeta[current].controlTitle;
+  setSliderHeight();
+  startAutoplay();
+});
+</script>
+
+</div></div></div></section><section data-w-id="411a9579-e351-23e7-d635-c3ee5ac7c827" class="section_scroll"><div class="pin-spacer" style="order: 0; place-self: auto; grid-area: auto; z-index: auto; float: none; flex-shrink: 1; display: block; margin: 0px; inset: auto; position: relative; flex-basis: auto; overflow: visible; box-sizing: border-box; width: 1904px; height: 4216px; padding: 0px 0px 4000px;"><div class="fixed_scroll_section" style="translate: none; rotate: none; scale: none; inset: 0px auto auto 0px; margin: 0px; max-width: 1904px; width: 1904px; max-height: 216px; height: 216px; padding: 0px; transform: translate(0px, 0px);"><div class="top_side"><div class="number_circle"><div>1</div></div></div><section class="section-1"><div class="central_text"><div class="center_txt _1" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"><div text-split="" class="p_txt" style="opacity: 1;"><div class="line" style="display: block; text-align: start; width: 100%; translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0%, 50%) translate3d(0px, 0px, -200px) rotateX(10deg); opacity: 0;">If you’ve ever felt like you’re second-guessing every decision.</div><div class="line" style="display: block; text-align: start; width: 100%; translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0%, 50%) translate3d(0px, 0px, -200px) rotateX(10deg); opacity: 0;">You’re not alone.</div></div></div></div><div class="central_text"><div class="center_txt _2" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"><div text-split="" class="p_txt" style="opacity: 1;"><div class="line" style="display: block; text-align: start; width: 100%; translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0%, 50%) translate3d(0px, 0px, -200px) rotateX(10deg); opacity: 0;">We’ve taught thousands of practitioners who felt just like you ...</div></div></div></div><div class="central_words"><div class="tag_flex _1" style="translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0px, 20px); opacity: 0;"><div class="tag-3">Confused</div><div class="dot_small_interaction"></div></div><div class="tag_flex _1" style="translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0px, 20px); opacity: 0;"><div class="tag-3">Frustrated</div><div class="dot_small_interaction"></div></div><div class="tag_flex _1" style="translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0px, 20px); opacity: 0;"><div class="tag-3">Worried</div><div class="dot_small_interaction"></div></div><div class="tag_flex _1" style="translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0px, 20px); opacity: 0;"><div class="tag-3">Invisible</div><div class="dot_small_interaction"></div></div><div class="tag_flex _1" style="translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0px, 20px); opacity: 0;"><div class="tag-3">Unsure</div><div class="dot_small_interaction"></div></div><div class="tag_flex _1" style="translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0px, 20px); opacity: 0;"><div class="tag-3">Lacking</div><div class="dot_small_interaction"></div></div></div><div class="central_text"><div class="center_txt _3" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;"><div text-split="" class="p_txt" style="opacity: 1;"><div class="line" style="display: block; text-align: start; width: 100%; translate: none; rotate: none; scale: none; filter: blur(18px); transform: translate(0%, 50%) translate3d(0px, 0px, -200px) rotateX(10deg); opacity: 0;">What if everything changed the moment you followed a framework instead of doing it alone?</div></div></div></div></section><div class="fixed_loader"><div class="loader_1"><div class="active_1 _1" style="width: 0%;"></div><div class="passive"></div></div><div class="loader_1"><div class="active_1 _2" style="width: 0%;"></div><div class="passive"></div></div><div class="loader_1"><div class="active_1 _3" style="width: 0%;"></div><div class="passive"></div></div></div><div class="background_fix"><div class="overlay_bg"></div><img alt="Abstract red and pink swirling particles forming soft, flowing shapes." src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/690aadde7867c0ea4d30e440_e2f697c9ec5f5c8d5eb66278cb87208b_9cd32311-bb8b-42bd-ad9f-3be6c68e99bd.avif" loading="lazy" class="image-2" style="will-change: transform; transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" width="1" height="1"></div></div></div><div class="gsap_scroll w-embed w-script"><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/split-type"></script>
+
+<script defer="">
+document.addEventListener('DOMContentLoaded', () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  new SplitType('[text-split]', { types: 'lines', tagName: 'div' });
+  gsap.set('[text-split]', { opacity: 1 });
+
+  const master = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.section_scroll',
+      start: 'top top',
+      end: '+=4000',
+      scrub: true,
+      pin: '.fixed_scroll_section',
+    },
+  });
+
+  const blurIn = 'blur(18px)';
+  const blurOut = 'blur(14px)';
+
+  function add3DEffect(selector) {
+    master
+      .fromTo(
+        `${selector} .line`,
+        {
+          opacity: 0,
+          yPercent: 50,
+          z: -200,
+          rotateX: 10,
+          filter: blurIn,
+        },
+        {
+          opacity: 1,
+          yPercent: 0,
+          z: 0,
+          rotateX: 0,
+          filter: 'blur(0px)',
+          duration: 2,
+          stagger: 0.08,
+          ease: 'power3.out',
+        },
+        '<'
+      )
+      .to(
+        `${selector} .line`,
+        {
+          opacity: 0,
+          yPercent: -50,
+          z: -300,
+          rotateX: -12,
+          filter: blurOut,
+          duration: 2,
+          stagger: 0.08,
+          ease: 'power3.in',
+        },
+        '>0.5'
+      );
+  }
+
+  master.to('.center_txt._1', { opacity: 1, y: 0, duration: 0.2, ease: 'none' });
+  add3DEffect('.center_txt._1');
+
+  master.fromTo(
+    '.active_1._1',
+    { width: '0%' },
+    { width: '100%', ease: 'none', duration: 2 },
+    '<'
+  );
+
+  master.to('.center_txt._1', { opacity: 0, y: -20, duration: 0.2, ease: 'none' });
+
+  master
+    .to('.center_txt._2', { opacity: 1, y: 0, duration: 0.2, ease: 'none' })
+    .to(
+      '.number_circle div',
+      { textContent: 2, duration: 0.01, snap: { textContent: 1 } },
+      '<'
+    );
+  add3DEffect('.center_txt._2');
+
+  master.fromTo(
+    '.active_1._2',
+    { width: '0%' },
+    { width: '100%', ease: 'none', duration: 2 },
+    '<'
+  );
+
+  master.to('.center_txt._2', { opacity: 0, y: -20, duration: 0.2, ease: 'none' });
+
+  master
+    .fromTo(
+      ['.central_words .tag_flex:nth-child(3)', '.central_words .tag_flex:nth-child(4)'],
+      {
+        opacity: 0,
+        y: 20,
+        filter: blurIn,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 0.4,
+        ease: 'power3.out',
+      }
+    )
+    .fromTo(
+      ['.central_words .tag_flex:nth-child(2)', '.central_words .tag_flex:nth-child(5)'],
+      {
+        opacity: 0,
+        y: 20,
+        filter: blurIn,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 0.4,
+        ease: 'power3.out',
+      },
+      '>0.2'
+    )
+    .fromTo(
+      ['.central_words .tag_flex:nth-child(1)', '.central_words .tag_flex:nth-child(6)'],
+      {
+        opacity: 0,
+        y: 20,
+        filter: blurIn,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 0.4,
+        ease: 'power3.out',
+      },
+      '>0.2'
+    )
+    .to(['.central_words .tag_flex:nth-child(1)', '.central_words .tag_flex:nth-child(6)'], {
+      opacity: 0,
+      y: -20,
+      filter: blurOut,
+      duration: 0.3,
+      ease: 'power3.in',
+    })
+    .to(
+      ['.central_words .tag_flex:nth-child(2)', '.central_words .tag_flex:nth-child(5)'],
+      {
+        opacity: 0,
+        y: -20,
+        filter: blurOut,
+        duration: 0.3,
+        ease: 'power3.in',
+      },
+      '>0.15'
+    )
+    .to(
+      ['.central_words .tag_flex:nth-child(3)', '.central_words .tag_flex:nth-child(4)'],
+      {
+        opacity: 0,
+        y: -20,
+        filter: blurOut,
+        duration: 0.3,
+        ease: 'power3.in',
+      },
+      '>0.15'
+    );
+
+  master
+    .to('.center_txt._3', { opacity: 1, y: 0, duration: 0.2, ease: 'none' })
+    .to(
+      '.number_circle div',
+      { textContent: 3, duration: 0.01, snap: { textContent: 1 } },
+      '<'
+    );
+  add3DEffect('.center_txt._3');
+
+  master.fromTo(
+    '.active_1._3',
+    { width: '0%' },
+    { width: '100%', ease: 'none', duration: 2 },
+    '<'
+  );
+});
+</script>
+
+</div></section><section class="sides"><div class="flex_sides"><div class="left-side"><div class="headline_side"><div class="text-block">Built for the ones who care too much to settle.</div></div><div class="tags_flex home_specific"><div class="tag">Real Impact</div><div class="tag">Quiet Leaders</div><div class="tag">Build Differently</div></div></div><div class="right-side"><div class="md_headline"><div class="md_txt home_spec">At the Institute of Health, education isn’t about ticking boxes or memorising protocols. It’s about learning to think critically, lead confidently, and build something that actually lasts.</div></div><div class="button_container"><a href="https://www.instituteofhealth.com/about" class="button_general w-inline-block"><div class="g_button_txt"><div>About Us</div></div><div class="arrow_button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div></section><section class="testimonials"><div class="wrapper_slider testimonials"><div class="middle_headline md"><div class="caption_box"><div class="caption">Despite how far away this may feel</div></div><h2 class="h2 spec">You’re one step closer becoming the practitioner both you and your clients deserve</h2></div></div><div class="slider_wrap"><div class="container"><div class="splide slider1 splide--slide splide--ltr splide--draggable is-active is-initialized" id="splide01"><div class="splide__track w-dyn-list" id="splide01-track" style="padding-left: 0px; padding-right: 0px;"><div role="list" class="splide__list w-dyn-items" id="splide01-list" style="transform: translateX(0px);"><div role="listitem" class="splide__slide w-dyn-item is-active is-visible" id="splide01-slide01" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693edd3091c32f13a9f06b3b_Dr%20Wells%20Stop.avif" loading="lazy" alt="Dr Wells" class="image"></div><div class="name_prof"><div class="author_name">Dr Wells</div><div class="author_prof">Medical Doctor</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147518965" data-vimeo-hash="fb17fea249" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693edc1cf28e109be814317f_Dr%20Wells%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible is-next" id="splide01-slide02" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b55694951a7e97045e128_Dominic%20Wenner.avif" loading="lazy" alt="Dominic Wenner" class="image"></div><div class="name_prof"><div class="author_name">Dominic Wenner</div><div class="author_prof">Men’s Health Coach</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147520877" data-vimeo-hash="db459c2ed8" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/690fb938dc70d39c5e27d8da_videoframe_0.png" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide03" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b5b97fc6d636d76b1c840_470148721_18473705608018960_6035733065056294165_n.avif" loading="lazy" alt="Victoria Sissanes" class="image"></div><div class="name_prof"><div class="author_name">Victoria Sissanes</div><div class="author_prof">Sonographer</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147531441" data-vimeo-hash="cf4d6a402f" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693b5dbc840992c154265e29_Victoria%20Stop-Frame.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide04" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b6b6a545a17c3cd71997f_573583347_18536713255016790_6853857891570500299_n.avif" loading="lazy" alt="Simon Dutton" class="image"></div><div class="name_prof"><div class="author_name">Simon Dutton</div><div class="author_prof">Personal Trainer</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147527996" data-vimeo-hash="814b832795" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693b6b49479c5f5aeb97c30a_Simon%20Dutton%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide05" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693edd461b9dd23ce4ed52d2_Dr%20Stephanie%20Stop.avif" loading="lazy" alt="Dr Stephanie" class="image"></div><div class="name_prof"><div class="author_name">Dr Stephanie</div><div class="author_prof">Medical Doctor</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528042" data-vimeo-hash="83019d175a" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693edc1c81f6a3f97fb5d272_Dr%20Stephanie%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide06" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b6efec6814727584ae8a8_Dr%20Ailina.avif" loading="lazy" alt="Dr Ailina" class="image"></div><div class="name_prof"><div class="author_name">Dr Ailina</div><div class="author_prof">Medical Doctor</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528079" data-vimeo-hash="c4778dc6aa" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c23b8ba143a4432dcd4d4_Ailina%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide07" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b6f40643f7d482a2da166_Tom%20Harries.avif" loading="lazy" alt="Tom Harries" class="image"></div><div class="name_prof"><div class="author_name">Tom Harries</div><div class="author_prof">Movement Specialist</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528130" data-vimeo-hash="e79ab56559" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c28211d035ba29f8277e2_Tom%20Harries%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide08" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b6fd8866624f3748e6305_Mandy%20Hopper.avif" loading="lazy" alt="Mandy Hopper" class="image"></div><div class="name_prof"><div class="author_name">Mandy Hopper</div><div class="author_prof">Gym Owner</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528165" data-vimeo-hash="2c06f3f9cf" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c24903913cad98755002c_Mandy%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide09" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b70618ec8778988ef00fa_Terezia%20Borcsok.avif" loading="lazy" alt="Terezia Borcsok" class="image"></div><div class="name_prof"><div class="author_name">Terezia Borcsok</div><div class="author_prof">Dietician</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528213" data-vimeo-hash="5e6a175cf6" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c2867bf7f675024be6d1e_Terezia%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide10" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b7084e52bf07c0ed9f256_Thierry%20Cry-Lafleur.avif" loading="lazy" alt="Thierry Cry-Lafleur" class="image"></div><div class="name_prof"><div class="author_name">Thierry Cry-Lafleur</div><div class="author_prof">Pharmacologist</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528246" data-vimeo-hash="d6d82cfece" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c2a4525424adb27964a4a_Thierry%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide11" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b70a14475e39e9de905b8_Liza%20Glanville.avif" loading="lazy" alt="Liza Glanville" class="image"></div><div class="name_prof"><div class="author_name">Liza Glanville</div><div class="author_prof">Health Coach</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528283" data-vimeo-hash="409f5d07d4" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c2abb41c14ea02523cf20_Liza%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide12" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b7179935971da1079e408_Martin%20Fenn.avif" loading="lazy" alt="Martin Fenn" class="image"></div><div class="name_prof"><div class="author_name">Martin Fenn</div><div class="author_prof">Functional Neurologist</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528321" data-vimeo-hash="c1d7699a9f" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c2ee6d7f91b929d34752d_Martin%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide13" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693c3012829d5f0d78b92629_Mark%20Dini.avif" loading="lazy" alt="Mark Dini" class="image"></div><div class="name_prof"><div class="author_name">Mark Dini</div><div class="author_prof">Biohacker &amp; Keynote Speaker</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528358" data-vimeo-hash="d05f99353c" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c2ee6bb4eb3f4c4e8ac69_Mark%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide14" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b71bb294727e9c1983283_Helle%20Tonts.avif" loading="lazy" alt="Helle Tonts" class="image"></div><div class="name_prof"><div class="author_name">Helle Tonts</div><div class="author_prof">Nutrition Coach</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528389" data-vimeo-hash="f25a693adc" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c338efeff4d179ba308c7_Helle%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide15" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b728ac088e6682ddfcd82_Anna%20Mangan.avif" loading="lazy" alt="Anna Mangan" class="image"></div><div class="name_prof"><div class="author_name">Anna Mangan</div><div class="author_prof">Health Coach</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528420" data-vimeo-hash="c5d02997a9" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c338e1a1b5c983f60a5f9_Anna%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide16" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693edd51cfae390d12bf2c6b_Dr%20Beatty%20Stop.avif" loading="lazy" alt="Dr Beatty" class="image"></div><div class="name_prof"><div class="author_name">Dr Beatty</div><div class="author_prof">Medical Doctor</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528455" data-vimeo-hash="47ea18f46b" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693edc1c7502eaefaecb0e4e_Dr%20Beatty%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide17" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b72cc76cd329af8e01964_Jordan%20Briggs.avif" loading="lazy" alt="Jordan Briggs" class="image"></div><div class="name_prof"><div class="author_name">Jordan Briggs</div><div class="author_prof">Gut Health Coach</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528482" data-vimeo-hash="47d858e692" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c338f3b552ddc86155dfe_Jordan%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide18" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b730cd32dd0118d5b4abd_Chris%20McClarence.avif" loading="lazy" alt="Chris McClarence" class="image"></div><div class="name_prof"><div class="author_name">Chris McClarence</div><div class="author_prof">Close Protection Specialist</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528511" data-vimeo-hash="6b3ba447b7" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c38a4a7e8de0071961b1a_Chris%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide19" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693edd59bed897e6bc5b6770_Dr%20Sumner%20Stop.avif" loading="lazy" alt="Dr Sumner" class="image"></div><div class="name_prof"><div class="author_name">Dr Sumner</div><div class="author_prof">Functional Medicine Physician</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528547" data-vimeo-hash="442d0ac366" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693edc9d6aed9f5d2a776b6e_Dr%20Sumner%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide20" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/69404336142cb59a580b25df_Afshan%20Stop.avif" loading="lazy" alt="Afshan Hussain" class="image"></div><div class="name_prof"><div class="author_name">Afshan Hussain</div><div class="author_prof">Fertility Specialist</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528570" data-vimeo-hash="05c83b9b40" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c38a4c2e62483656e5e06_Afshan%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide21" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b73b63f97b14e8d066a80_Josh%20McLaughlan.avif" loading="lazy" alt="Josh McLaughlan" class="image"></div><div class="name_prof"><div class="author_name">Josh McLaughlan</div><div class="author_prof">Calisthenics Gym Owner</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528590" data-vimeo-hash="8ca9135130" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c38a4022b4a3852cb7a4a_Josh%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div><div role="listitem" class="splide__slide w-dyn-item is-visible" id="splide01-slide22" style="margin-right: 12px; width: calc(28.5714% - 8.57143px);" tabindex="0"><div class="box_inside"><div class="box_author"><div class="box_white"><div class="photo_circle"><img src="https://cdn.prod.website-files.com/69067b98a6134b9d94c59662/693b743c885bb670e27a6049_Izzy%20Beeston.avif" loading="lazy" alt="Izzy Beeston" class="image"></div><div class="name_prof"><div class="author_name">Izzy Beeston</div><div class="author_prof">Women’s Body Comp Coach</div></div></div></div><div class="vimeo-sound-button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" loading="lazy" data-src-on="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361992ff3a9a77eb1c7ee_a36f414e10ec9c8a8c72442b2d40703d_volume-on.png" data-src-off="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694361990b7e500d2165b057_7bca27f42d37de9cb3033808d74c8b99_volume-off.png" alt="Muted speaker icon with a cross indicating volume off." class="image vimeo-sound-icon"></div><div class="vimeo_embed w-embed"><div class="vimeo-hover-wrapper" data-vimeo-id="1147528615" data-vimeo-hash="5e482bdd94" style="padding:133.89% 0 0 0;position:relative;cursor:pointer;background:#000;overflow:hidden;">
+    
+    <img class="vimeo-thumbnail" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/693c3a82aab8690f42fef174_Izzy%20Stop.avif" alt="Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;" loading="lazy"> 
+    <div class="vimeo-player-container" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity 0.3s;"></div>
+</div></div></div></div></div></div><div id="progress" class="my-slider-progress"><div class="my-slider-progress-bar" style="width: 0%;"></div></div><div class="splide__arrows"><div role="button" class="splide__arrow splide__arrow--prev" aria-controls="splide01-track" aria-label="Previous slide"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69095b328c1ed1f42d098ac8_arrow-left.svg" loading="lazy" alt="" width="300" height="150"></div><div role="button" class="splide__arrow splide__arrow--next" aria-controls="splide01-track" aria-label="Next slide"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69095b333dd09a0978d79778_arrow-right.svg" loading="lazy" alt="" width="300" height="150"></div></div><div class="hover_src w-embed w-script"><script>
+/**
+ * Vimeo hover player — lazy init: runs only when a .vimeo-hover-wrapper enters viewport.
+ * Saves work when the video block is below the fold or never seen.
+ */
+(function () {
+  "use strict";
+
+  const ROOT_MARGIN = "150px";
+  const THRESHOLD = 0;
+
+  function initVimeoPlayer(wrapper) {
+    if (wrapper.hasAttribute("data-initialized")) return;
+    const vimeoId = wrapper.dataset.vimeoId;
+    const vimeoHash = wrapper.dataset.vimeoHash || "";
+    if (!vimeoId || vimeoId.trim() === "") return;
+
+    wrapper.setAttribute("data-initialized", "true");
+    const container = wrapper.querySelector(".vimeo-player-container");
+    const thumbnail = wrapper.querySelector(".vimeo-thumbnail");
+    const parentItem =
+      wrapper.closest(".box_inside") || wrapper.closest(".splide__slide");
+    const soundButton = parentItem
+      ? parentItem.querySelector(".vimeo-sound-button")
+      : null;
+    const soundIcon = soundButton
+      ? soundButton.querySelector(".vimeo-sound-icon")
+      : null;
+    if (!container) return;
+
+    let player = null;
+    let iframe = null;
+    let isPlaying = false;
+    let isMuted = true;
+    let hasLoaded = false;
+    let userHasEnabledSound = false;
+
+    function updateSoundIcon() {
+      if (soundIcon) {
+        const srcOn = soundIcon.getAttribute("data-src-on");
+        const srcOff = soundIcon.getAttribute("data-src-off");
+        if (isMuted) {
+          if (srcOff) soundIcon.src = srcOff;
+        } else {
+          if (srcOn) soundIcon.src = srcOn;
+        }
+      }
+    }
+
+    function hideThumbnail() {
+      if (thumbnail) {
+        thumbnail.style.opacity = "0";
+        thumbnail.style.pointerEvents = "none";
+      }
+      wrapper.classList.add("loaded");
+    }
+
+    async function startVideo() {
+      if (!player || isPlaying) return;
+      try {
+        const shouldMute = !userHasEnabledSound;
+        await player.setMuted(shouldMute);
+        await player.play();
+        isPlaying = true;
+        isMuted = shouldMute;
+        updateSoundIcon();
+      } catch (e) {
+        console.error("Ошибка воспроизведения:", e);
+      }
+    }
+
+    function loadPlayer() {
+      if (hasLoaded) return;
+      hasLoaded = true;
+      const params = [
+        "badge=0",
+        "autopause=0",
+        "muted=1",
+        "autoplay=0",
+        "controls=0",
+        "byline=0",
+        "title=0",
+        "portrait=0",
+        "background=0",
+      ];
+      if (vimeoHash) params.unshift(`h=${vimeoHash}`);
+      const videoUrl = `https://player.vimeo.com/video/${vimeoId}?${params.join("&")}`;
+      iframe = document.createElement("iframe");
+      iframe.src = videoUrl;
+      iframe.setAttribute("frameborder", "0");
+      iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
+      iframe.style.cssText =
+        "position:absolute;top:0;left:0;width:100%;height:100%;";
+      iframe.className = "vimeo-iframe";
+      container.appendChild(iframe);
+      container.style.opacity = "1";
+      iframe.onload = function () {
+        try {
+          player = new Vimeo.Player(iframe);
+          updateSoundIcon();
+          if (
+            wrapper.matches(":hover") ||
+            (parentItem && parentItem.matches(":hover"))
+          ) {
+            startVideo();
+          }
+        } catch (e) {
+          console.error("Ошибка инициализации Vimeo плеера:", e);
+        }
+      };
+    }
+
+    const hoverArea = parentItem || wrapper;
+
+    hoverArea.addEventListener("mouseenter", function () {
+      if (!hasLoaded) {
+        loadPlayer();
+        hideThumbnail();
+        const checkPlayer = setInterval(() => {
+          if (player) {
+            clearInterval(checkPlayer);
+            startVideo();
+          }
+        }, 10);
+      } else {
+        if (player) startVideo();
+      }
+    });
+
+    hoverArea.addEventListener("mouseleave", function (e) {
+      const relatedTarget = e.relatedTarget;
+      if (relatedTarget && hoverArea.contains(relatedTarget)) return;
+      if (isPlaying && player) {
+        player.pause();
+        isPlaying = false;
+      }
+    });
+
+    if (soundButton) {
+      soundButton.addEventListener("click", async function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!hasLoaded) {
+          loadPlayer();
+          hideThumbnail();
+          const checkPlayer = setInterval(() => {
+            if (player) {
+              clearInterval(checkPlayer);
+              (async function () {
+                try {
+                  await player.setMuted(false);
+                  await player.play();
+                  isPlaying = true;
+                  isMuted = false;
+                  userHasEnabledSound = true;
+                  updateSoundIcon();
+                } catch (err) {
+                  console.error("Ошибка включения звука:", err);
+                }
+              })();
+            }
+          }, 10);
+        } else {
+          try {
+            if (isMuted) {
+              await player.setMuted(false);
+              isMuted = false;
+              userHasEnabledSound = true;
+            } else {
+              await player.setMuted(true);
+              isMuted = true;
+              userHasEnabledSound = false;
+            }
+            updateSoundIcon();
+            if (!isPlaying) {
+              await player.play();
+              isPlaying = true;
+            }
+          } catch (err) {
+            console.error("Ошибка переключения звука:", err);
+          }
+        }
+      });
+    }
+
+    hoverArea.addEventListener(
+      "mouseenter",
+      function () {
+        if (!hasLoaded) {
+          loadPlayer();
+          hideThumbnail();
+        }
+      },
+      { once: true }
+    );
+  }
+
+  function initAllPlayers() {
+    const wrappers = document.querySelectorAll(
+      ".vimeo-hover-wrapper:not([data-initialized])"
+    );
+    wrappers.forEach(initVimeoPlayer);
+  }
+
+  let startInitCalled = false;
+
+  function startInit() {
+    if (startInitCalled) return;
+    startInitCalled = true;
+    initAllPlayers();
+    const observer = new MutationObserver(function () {
+      initAllPlayers();
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  function runWhenReady() {
+    const wrappers = document.querySelectorAll(".vimeo-hover-wrapper");
+    if (wrappers.length === 0) {
+      const mo = new MutationObserver(function () {
+        const first = document.querySelector(".vimeo-hover-wrapper");
+        if (first) {
+          mo.disconnect();
+          observeForViewport(first, startInit);
+        }
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+      return;
+    }
+    observeForViewport(wrappers[0], startInit);
+  }
+
+  function observeForViewport(element, callback) {
+    if (!element) return;
+    const io = new IntersectionObserver(
+      function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        callback();
+      },
+      { rootMargin: ROOT_MARGIN, threshold: THRESHOLD }
+    );
+    io.observe(element);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", runWhenReady);
+  } else {
+    runWhenReady();
+  }
+
+  window.addEventListener("load", function () {
+    if (startInitCalled) initAllPlayers();
+  });
+})();
+</script>
+</div><ul class="splide__pagination"><li><button class="splide__pagination__page is-active" type="button" aria-controls="splide01-slide01" aria-label="Go to slide 1" aria-current="true"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide02" aria-label="Go to slide 2"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide03" aria-label="Go to slide 3"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide04" aria-label="Go to slide 4"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide05" aria-label="Go to slide 5"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide06" aria-label="Go to slide 6"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide07" aria-label="Go to slide 7"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide08" aria-label="Go to slide 8"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide09" aria-label="Go to slide 9"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide10" aria-label="Go to slide 10"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide11" aria-label="Go to slide 11"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide12" aria-label="Go to slide 12"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide13" aria-label="Go to slide 13"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide14" aria-label="Go to slide 14"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide15" aria-label="Go to slide 15"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide16" aria-label="Go to slide 16"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide17" aria-label="Go to slide 17"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide18" aria-label="Go to slide 18"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide19" aria-label="Go to slide 19"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide20" aria-label="Go to slide 20"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide21" aria-label="Go to slide 21"></button></li><li><button class="splide__pagination__page" type="button" aria-controls="splide01-slide22" aria-label="Go to slide 22"></button></li></ul></div></div></div></section><section class="faq"><div class="wrapper_general"><div class="faq_sides"><div class="left_faq"><div class="sticky_box"><div class="headline_faq"><h2 class="h2 spec">Answers that help you<br>decide with confidence</h2></div><div class="help_box only_desktop"><div class="b_txt">Need help?<br>Get in touch with us</div><div class="button_container special_faq"><a href="https://www.instituteofhealth.com/contact" class="button_general w-inline-block"><div class="g_button_txt"><div>Contact Us</div></div><div class="arrow_button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div></div><div class="right_qa"><div class="w-dyn-list"><div role="list" class="w-dyn-items"><div role="listitem" class="accordion-item is--first w-dyn-item"><div class="accordion_head-wrapper"><div class="item_head"><div class="title_wrapper"><div class="item_title">What does an Integrative Nutritional Therapist do?</div><div class="icon_wrapper"><div class="plus_icon"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69095fce65d6c0ce2e282276_plus_icon.svg" loading="lazy" alt="Plus icon, svg, dark" class="image"></div></div></div></div></div><div class="item_content-wrapper" style="height: 0px;"><div class="accordion_paragraph"><div class="item_paragraph w-richtext" style="opacity: 0; transform: translate3d(0px, 20%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><p>An Integrative Nutritional Therapist utilises the latest evidence-based research to create an integrative approach to optimising each client’s health and wellbeing.</p><p>They design bio-individual nutrition plans, personalise supplementation where appropriate, and interpret functional laboratory data, including blood work, to gain deeper insights, achieve better accuracy and tailor every intervention to the individual.</p></div></div></div></div><div role="listitem" class="accordion-item is--first w-dyn-item"><div class="accordion_head-wrapper"><div class="item_head"><div class="title_wrapper"><div class="item_title">How is functional medicine different from conventional medicine?</div><div class="icon_wrapper"><div class="plus_icon"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69095fce65d6c0ce2e282276_plus_icon.svg" loading="lazy" alt="Plus icon, svg, dark" class="image"></div></div></div></div></div><div class="item_content-wrapper" style="height: 0px;"><div class="accordion_paragraph"><div class="item_paragraph w-richtext" style="opacity: 0; transform: translate3d(0px, 20%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><p>Conventional medicine often waits until a disease is clearly present before intervention begins. Treatment is focused on managing or suppressing a diagnosed condition.</p><p>Functional medicine looks upstream. It assesses the early drivers of dysfunction and works to prevent disease from developing in the first place, or restore balance in the body. It uses a whole-systems view of the body, then applies personalised, preventative nutrition and lifestyle interventions to support long-term health rather than only reacting once things have gone wrong.</p></div></div></div></div><div role="listitem" class="accordion-item is--first w-dyn-item"><div class="accordion_head-wrapper"><div class="item_head"><div class="title_wrapper"><div class="item_title">What will be my scope of practice after completing this certification?</div><div class="icon_wrapper"><div class="plus_icon"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69095fce65d6c0ce2e282276_plus_icon.svg" loading="lazy" alt="Plus icon, svg, dark" class="image"></div></div></div></div></div><div class="item_content-wrapper" style="height: 0px;"><div class="accordion_paragraph"><div class="item_paragraph w-richtext" style="opacity: 0; transform: translate3d(0px, 20%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><p>After completing the certification, you will be recognised and insured as a Integrative Nutritional Therapist inclusive of Nutritional Therapy and Functional Blood Work, with a clearly defined scope of practice.</p><p>You will be trained and insured to:</p><ul role="list"><li>Design bio-individual nutrition plans</li><li>Recommend and prescribe over-the-counter supplementation up to safe, optimal intake thresholds</li><li>Utilise functional blood work from a wellness perspective to guide your reasoning and recommendations</li><li>Collaborate with and refer to medical professionals when red flags, pathology or out-of-scope conditions are identified</li></ul><p>Our scope of practice has been aligned with nutritional therapy standards and externally audited, so you can work with confidence and clarity.</p></div></div></div></div><div role="listitem" class="accordion-item is--first w-dyn-item"><div class="accordion_head-wrapper"><div class="item_head"><div class="title_wrapper"><div class="item_title">Is your course accredited?</div><div class="icon_wrapper"><div class="plus_icon"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69095fce65d6c0ce2e282276_plus_icon.svg" loading="lazy" alt="Plus icon, svg, dark" class="image"></div></div></div></div></div><div class="item_content-wrapper" style="height: 0px;"><div class="accordion_paragraph"><div class="item_paragraph w-richtext" style="opacity: 0; transform: translate3d(0px, 20%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><p>Yes. Our certifications are accredited by multiple independent professional bodies, including the International Institute for Complementary Therapists (IICT) and the Complementary Medical Association (CMA).</p><p>To receive these accreditations, our curriculum undergoes forensic external auditing to ensure every component is up to date, evidence-informed, ethically delivered and aligned with recognised Nutritional Therapy and Functional Health standards. This includes rigorous evaluation of our academic content, assessments, delivery methods and scope of practice frameworks.</p><p>This external oversight gives you confidence that the qualification you are investing in is credible, robust and widely recognised within the industry, with clear pathways for insurance, professional membership and global practice.</p></div></div></div></div><div role="listitem" class="accordion-item is--first w-dyn-item"><div class="accordion_head-wrapper"><div class="item_head"><div class="title_wrapper"><div class="item_title">Will I be able to practise internationally?</div><div class="icon_wrapper"><div class="plus_icon"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69095fce65d6c0ce2e282276_plus_icon.svg" loading="lazy" alt="Plus icon, svg, dark" class="image"></div></div></div></div></div><div class="item_content-wrapper" style="height: 0px;"><div class="accordion_paragraph"><div class="item_paragraph w-richtext" style="opacity: 0; transform: translate3d(0px, 20%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"><p>Yes. Our graduates are eligible for insurance through IICT that is recognised across 36 countries, including:</p><p>Australia, Austria, Belgium, Bulgaria, Canada, Croatia, Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Italy, Latvia, Liechtenstein, Lithuania, Luxembourg, Malta, Netherlands, New Zealand, Norway, Poland, Portugal, Romania, Slovakia, Slovenia, South Africa, Spain, Sweden &amp; United Kingdom.</p><p>This allows you to work with clients internationally, including in online practice, provided you respect local regulations and the scope of practice defined by your insurer and professional associations.</p></div></div></div></div></div></div></div><div class="help_box only_mobile"><div class="b_txt">Need help?<br>Get in touch with us</div><div class="button_container special_faq"><a href="https://www.instituteofhealth.com/contact" class="button_general contact_faq w-inline-block"><div class="g_button_txt"><div>Contact Us</div></div><div class="arrow_button"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div></div></section><section class="just_beginning"><div class="content_cta"><div class="cap_middle"><div class="cp_middle">Clarity, confidence, and real results start with one conversation. Let’s map your next chapter — together.</div></div><div class="middle_h1"><h2 class="h2 like_h1">Blood work is just<br>the beginning</h2><div class="button_container"><a href="https://www.instituteofhealth.com/contact" class="button_general wh w-inline-block"><div class="g_button_txt"><div>Book your career pathway call</div></div><div class="arrow_button invert"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6906744bc45e42ad5fe6cd95_arrow_header.svg" loading="lazy" alt="" class="image" width="300" height="150"></div></a></div></div></div><div class="background_video"><div class="overlay_cta"></div><video data-lazy-load="true" data-src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc%2F6939a1734bef183b44666b2b_cta%20%28loop-comp%29_mp4.mp4" autoplay="true" loop="" playsinline="true" muted="" poster="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/69398b9dcff9ea66022dbdcc_CTA-Stop.avif" class="video" disablepictureinpicture=""></video></div></section><footer class="footer"><div class="wrapper_footer"><div class="flexbox_footer"><div class="logo_left"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/690673943f2464c805ad9a3c_d36f80ea84af77c938ea25597093de6a_logo.png" loading="lazy" alt="Insitute of Health, logo, white, png" class="logo_image"></div><div class="menu_footer"><div class="menu_side"><div class="title_footer">Discover</div><div class="links_list"><a href="https://www.instituteofhealth.com/courses" class="f_link w-inline-block"><div>Courses</div></a><link rel="prerender" href="https://www.instituteofhealth.com/courses"><a href="https://www.instituteofhealth.com/events" class="f_link w-inline-block"><div>Events</div></a><a href="https://www.instituteofhealth.com/testimonials" class="f_link w-inline-block"><div>Testimonials</div></a><a href="https://www.instituteofhealth.com/about" class="f_link w-inline-block"><div>About</div></a><a href="https://www.instituteofhealth.com/contact" class="f_link w-inline-block"><div>Contact</div></a><a href="https://www.instituteofhealth.com/articles" class="f_link w-inline-block"><div>News</div></a><a href="https://www.instituteofhealth.com/faq" class="f_link w-inline-block"><div>FAQ</div></a></div></div><div class="menu_side"><div class="title_footer">Legals</div><div class="links_list"><a href="https://www.instituteofhealth.com/privacy-policy" class="f_link w-inline-block"><div>Privacy Policy</div></a><a href="https://www.instituteofhealth.com/cookie-policy" class="f_link w-inline-block"><div>Cookie Policy</div></a><a href="https://www.instituteofhealth.com/terms-conditions" class="f_link w-inline-block"><div>Terms &amp;&nbsp;Conditions</div></a></div></div><div id="w-node-a5f3e08f-c69b-0f8f-20dd-e073e1433cd9-e1433cb3" class="socials_box"><a href="https://www.instagram.com/instituteofhealth_/" target="_blank" class="social_link w-inline-block"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6909669dc77a91308606f6fc_instagram.png" loading="lazy" alt="Instagram app icon with a stylized camera on a dark rounded square background."></a><a href="https://www.linkedin.com/company/instituteofhealth/" target="_blank" class="social_link w-inline-block"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6909669dd08b57dfaa285f05_linkedin.png" loading="lazy" alt="LinkedIn logo"></a><a href="https://www.youtube.com/@theinstituteofhealth" target="_blank" class="social_link w-inline-block"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/6909669dd34631d353d10b08_youtube.png" loading="lazy" alt="YouTube play button icon."></a><a href="https://www.facebook.com/profile.php?id=100049240609606" target="_blank" class="social_link w-inline-block"><img src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/694048b7f8badf022a9e8218_fb_icon.png" loading="lazy" alt="Facebook social media icon."></a></div><div id="w-node-a5f3e08f-c69b-0f8f-20dd-e073e1433ce0-e1433cb3" class="menu_side"><div class="title_footer">Contact</div><div class="links_list"><a fs-copyclip-message="Phone copied!" fs-copyclip-element="click" href="https://www.instituteofhealth.com/#" class="f_link w-inline-block"><div>+61 408-937-444</div></a><a fs-copyclip-message="E-mail copieed!" fs-copyclip-element="click" href="https://www.instituteofhealth.com/#" class="f_link w-inline-block"><div>hello@instituteofhealth.com</div></a></div></div></div></div><div class="big_ioh"><div>Institute of Health</div></div><div class="divider"></div><div class="last_line"><div class="b_txt wh op">2026 © Institute of Health</div><div class="b_txt wh op">Website by <a href="https://artemiilebedev.com/" target="_blank" class="credits_footer">Artemii Lebedev</a></div></div></div></footer><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=69014633b3494c3d0ef793fc" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/js/webflow.c589648b.cbcb68fdc67ad34c.js" type="text/javascript" integrity="sha384-G7eh3Sww61NIYUZkPZZS5Lt2emlGbiz9tCHkb9WuNGrsypwqalj3D3GrNdj+n7Zn" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/ScrollTrigger.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/SplitText.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/Draggable.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/ScrollToPlugin.min.js" type="text/javascript"></script><script type="text/javascript">gsap.registerPlugin(ScrollTrigger,SplitText,Draggable,ScrollToPlugin);</script><script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@0.2.28/bundled/lenis.js"></script>
+
+<script>
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  direction: 'vertical', // vertical, horizontal
+  gestureDirection: 'vertical', // vertical, horizontal, both
+  smooth: true,
+  mouseMultiplier: 1,
+  smoothTouch: false,
+  touchMultiplier: 2,
+  infinite: false,
+})
+
+//get scroll value
+lenis.on('scroll', ({ scroll, limit, velocity, direction, progress }) => {
+})
+
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+</script>
+
+
+<script defer="" type="text/javascript" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/699fbf08c11305ccb1e24314_d5cee6ecf57b90064785f194899d764d_video-plyr-ioh.txt"></script>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFGV5V2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<script>
+let mm = gsap.matchMedia();
+
+mm.add(
+  {
+    isDesktop: "(min-width: 800px)",
+    reduceMotion: "(prefers-reduced-motion: reduce)"
+  },
+  (context) => {
+    let { isDesktop, reduceMotion } = context.conditions;
+
+    gsap.to(".box", {
+      x: isDesktop ? 400 : 200,
+      duration: reduceMotion ? 0 : 1,
+      opacity: 1
+    });
+  }
+);
+</script><script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.2.2/dist/js/splide.min.js"></script>
+<script defer="" type="text/javascript" src="https://cdn.prod.website-files.com/69014633b3494c3d0ef793fc/699fbf08dd1486b0004c8c11_lazy-carousel.txt"></script>
+
+
+<script>
+(function () {
+  const SLIDER_SELECTOR = '.slider1';
+  const PROGRESS_BAR_SELECTOR = '.my-slider-progress-bar';
+
+  const options = {
+    perPage: 3.5,
+    perMove: 1,
+    focus: 0,
+    type: 'slide',
+    gap: '12px',
+    arrows: 'slider',
+    pagination: 'slider',
+    speed: 800,
+    dragAngleThreshold: 60,
+    autoWidth: false,
+    rewind: false,
+    rewindSpeed: 400,
+    waitForTransition: false,
+    updateOnMove: true,
+    trimSpace: false,
+    breakpoints: {
+      991: { perPage: 2, gap: '12px' },
+      767: { perPage: 1, gap: '8px' },
+      479: { perPage: 1, gap: '8px' },
+    },
+  };
+
+  const initSlider = (sliderEl) => {
+    const progressBar = sliderEl.closest('.slider_wrap')?.querySelector(PROGRESS_BAR_SELECTOR);
+    const splide = new Splide(sliderEl, options);
+
+    const updateProgress = () => {
+      if (!progressBar) {
+        return;
+      }
+      const controller = splide.Components.Controller;
+      const end = controller.getEnd();
+      if (end <= 0) {
+        progressBar.style.width = '100%';
+        return;
+      }
+      const index = controller.getIndex();
+      const progress = Math.min(Math.max(index / end, 0), 1) * 100;
+      progressBar.style.width = `${progress}%`;
+    };
+
+    splide.on('mounted move resize updated', updateProgress);
+    splide.mount();
+    updateProgress();
+  };
+
+  const init = () => {
+    document.querySelectorAll(SLIDER_SELECTOR).forEach(initSlider);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();
+</script></body></html>

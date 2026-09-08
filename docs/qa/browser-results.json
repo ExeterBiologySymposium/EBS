@@ -1,0 +1,498 @@
+{
+  "viewports": [
+    {
+      "route": "index.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "about.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "datascience.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "faq.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "judges.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "opensource.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "python.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "register.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "researchers.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "resources.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "rstudio.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "schedule.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "schools.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "student-signup.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "team.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "volunteer-signup.html",
+      "width": 320,
+      "overflow": 0
+    },
+    {
+      "route": "index.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "about.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "datascience.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "faq.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "judges.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "opensource.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "python.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "register.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "researchers.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "resources.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "rstudio.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "schedule.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "schools.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "student-signup.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "team.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "volunteer-signup.html",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "route": "index.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "about.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "datascience.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "faq.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "judges.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "opensource.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "python.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "register.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "researchers.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "resources.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "rstudio.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "schedule.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "schools.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "student-signup.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "team.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "volunteer-signup.html",
+      "width": 768,
+      "overflow": 0
+    },
+    {
+      "route": "index.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "about.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "datascience.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "faq.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "judges.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "opensource.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "python.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "register.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "researchers.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "resources.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "rstudio.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "schedule.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "schools.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "student-signup.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "team.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "volunteer-signup.html",
+      "width": 1024,
+      "overflow": 0
+    },
+    {
+      "route": "index.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "about.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "datascience.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "faq.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "judges.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "opensource.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "python.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "register.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "researchers.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "resources.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "rstudio.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "schedule.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "schools.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "student-signup.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "team.html",
+      "width": 1440,
+      "overflow": 0
+    },
+    {
+      "route": "volunteer-signup.html",
+      "width": 1440,
+      "overflow": 0
+    }
+  ],
+  "interactions": [
+    "Carousel actually moves cards",
+    "Carousel selection follows position",
+    "Guidance changes content",
+    "Hero controls update fact",
+    "Home FAQ opens real answer",
+    "Search finds coding route",
+    "Native search dialog closes with Escape",
+    "Theme updates DOM",
+    "Theme survives reload",
+    "Mobile menu opens",
+    "Mobile menu Escape closes",
+    "FAQ deep link opens answer",
+    "FAQ has no quick-link sidebar",
+    "Copy controls match code blocks",
+    "Denied clipboard selects actual code",
+    "Rejected contact preserves input",
+    "Rejected contact never reports success",
+    "Only provider-confirmed success hides form",
+    "Mocked submissions only",
+    "Valid schedule renders in React",
+    "Remote date filtered",
+    "Invalid schedule retains complete fallback",
+    "Blocked storage theme remains usable",
+    "Narrow desktop reflow remains within viewport",
+    "No-JS content: index.html",
+    "No-JS content: about.html",
+    "No-JS content: datascience.html",
+    "No-JS content: faq.html",
+    "No-JS content: judges.html",
+    "No-JS content: opensource.html",
+    "No-JS content: python.html",
+    "No-JS content: register.html",
+    "No-JS content: researchers.html",
+    "No-JS content: resources.html",
+    "No-JS content: rstudio.html",
+    "No-JS content: schedule.html",
+    "No-JS content: schools.html",
+    "No-JS content: student-signup.html",
+    "No-JS content: team.html",
+    "No-JS content: volunteer-signup.html",
+    "Scroll advances pinned story stage"
+  ],
+  "errors": [],
+  "screenshots": [
+    "docs/qa/index-390.png",
+    "docs/qa/index-390-full.png",
+    "docs/qa/about-390.png",
+    "docs/qa/about-390-full.png",
+    "docs/qa/datascience-390.png",
+    "docs/qa/faq-390.png",
+    "docs/qa/faq-390-full.png",
+    "docs/qa/judges-390.png",
+    "docs/qa/opensource-390.png",
+    "docs/qa/python-390.png",
+    "docs/qa/python-390-full.png",
+    "docs/qa/register-390.png",
+    "docs/qa/register-390-full.png",
+    "docs/qa/researchers-390.png",
+    "docs/qa/resources-390.png",
+    "docs/qa/resources-390-full.png",
+    "docs/qa/rstudio-390.png",
+    "docs/qa/schedule-390.png",
+    "docs/qa/schools-390.png",
+    "docs/qa/schools-390-full.png",
+    "docs/qa/student-signup-390.png",
+    "docs/qa/team-390.png",
+    "docs/qa/team-390-full.png",
+    "docs/qa/volunteer-signup-390.png",
+    "docs/qa/index-1440.png",
+    "docs/qa/index-1440-full.png",
+    "docs/qa/about-1440.png",
+    "docs/qa/about-1440-full.png",
+    "docs/qa/datascience-1440.png",
+    "docs/qa/faq-1440.png",
+    "docs/qa/faq-1440-full.png",
+    "docs/qa/judges-1440.png",
+    "docs/qa/opensource-1440.png",
+    "docs/qa/python-1440.png",
+    "docs/qa/python-1440-full.png",
+    "docs/qa/register-1440.png",
+    "docs/qa/register-1440-full.png",
+    "docs/qa/researchers-1440.png",
+    "docs/qa/resources-1440.png",
+    "docs/qa/resources-1440-full.png",
+    "docs/qa/rstudio-1440.png",
+    "docs/qa/schedule-1440.png",
+    "docs/qa/schools-1440.png",
+    "docs/qa/schools-1440-full.png",
+    "docs/qa/student-signup-1440.png",
+    "docs/qa/team-1440.png",
+    "docs/qa/team-1440-full.png",
+    "docs/qa/volunteer-signup-1440.png"
+  ]
+}
