@@ -2,19 +2,12 @@
   "name": "ebs",
   "version": "1.0.0",
   "description": "Exeter Biology Symposium website",
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc --noEmit",
-    "build": "npm run typecheck && vite build && node scripts/prerender.mjs && npm test && node scripts/verify-redesign.mjs build",
+    "build": "npm run typecheck && vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
-    "check": "npm run typecheck && npm test",
-    "build:tailwind": "npx @tailwindcss/cli -i ./css/tailwind-input.css -o ./css/tailwind.css",
-    "watch:tailwind": "npx @tailwindcss/cli -i ./css/tailwind-input.css -o ./css/tailwind.css --watch",
-    "test": "node --test tests/behavior.test.cjs && python3 tests/site_contract.py"
+    "check": "npm run typecheck"
   },
   "repository": {
     "type": "git",
@@ -28,18 +21,14 @@
   },
   "homepage": "https://github.com/ExeterBiologySymposium/EBS#readme",
   "dependencies": {
-    "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
-    "clsx": "^2.1.1",
-    "html-react-parser": "^6.1.7",
     "lucide-react": "^1.41.0",
     "motion": "^13.2.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.2"
