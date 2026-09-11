@@ -36,6 +36,14 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"curriculum-section"} id={"outcomes"}>
 <h2>{"Learning Outcomes"}</h2>
 <p>{"By the end of this curriculum, students should be able to move from a biological question to a defensible, reproducible analysis."}</p>
+<figure className="context-media context-media--analysis"><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.08.31 PM.png" alt="Bar chart from a biological data analysis" loading="lazy" /></figure>
+<div className="analysis-gallery" aria-label="Examples of biological data analysis outputs">
+<figure><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.12.44 PM.png" alt="Cancer genomic alteration frequency chart" loading="lazy" /></figure>
+<figure><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.12.52 PM.png" alt="Survival analysis plot" loading="lazy" /></figure>
+<figure><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.13.15 PM.png" alt="Cancer genomic alteration frequency chart" loading="lazy" /></figure>
+<figure><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.14.34 PM.png" alt="Gene cooccurrence chart across species" loading="lazy" /></figure>
+<figure><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.14.56 PM.png" alt="Protein expression overview chart" loading="lazy" /></figure>
+</div>
 <div className={"grid columns-2"}>
 <div className={"text-block"}>
 <h3>{"Analyze Real Data"}</h3>

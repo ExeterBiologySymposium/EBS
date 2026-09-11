@@ -4,7 +4,7 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"page-heading"}>
 <div className={"shell"}>
 <h1>{"Our team"}</h1>
-<p className={"lead"}>{"EBS is built and run entirely by students in the Genetics and Biotech Club at Phillips Exeter Academy. We are grateful for the support of our faculty advisors and the broader Exeter community."}</p>
+<p className={"lead"}>{"EBS is built and run entirely by students in the Genetics and Biotech Club at Phillips Exeter Academy (PEA). We are grateful for the support of our faculty advisors and the broader Exeter community."}</p>
 </div>
 </section>
 <section className={"section"}>
@@ -12,7 +12,7 @@ export default function PageContent() { return <div className="page-layout layou
 <h2 className={"team-section-title"}>{"Executive Committee"}</h2>
 <div className={"grid columns-4"}>
 <div className={"person text-block"}>
-<div aria-label={"Photo not provided"} className={"portrait"} role={"img"}></div>
+<div className={"portrait"}><img alt={"Jaiden Kim"} decoding={"async"} height={"668"} loading={"lazy"} src={"/images/team/jaiden-kim.png"} width={"514"} /></div>
 <h3>{"Jaiden Kim"}</h3>
 <p className={"role"}>{"Co-Head"}</p>
 <p className={"grade"}>{"Class of 2028"}</p>
@@ -67,8 +67,11 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 </div>
 <figure className={"group-photo"}>
-<img alt={"EBS team members visiting Broad Institute"} decoding={"async"} height={"2752"} loading={"lazy"} src={"images/team/ebs-team-broad-institute.jpg"} width={"4128"} />
+<img alt={"EBS team members visiting Broad Institute"} decoding={"async"} height={"2752"} loading={"lazy"} src={"/images/team/ebs-team-broad-institute.jpg"} width={"4128"} />
 <figcaption>{"EBS team members at Broad Institute."}</figcaption>
+</figure>
+<figure className={"group-photo"}>
+<img alt={"Students from the Genetics and Biotech Club visiting the Broad Institute"} decoding={"async"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 3.jpg"} />
 </figure>
 <h2 className={"team-section-title"}>{"Organizing Committee and School Partners"}</h2>
 <div className={"grid columns-4"}>
@@ -97,8 +100,8 @@ export default function PageContent() { return <div className="page-layout layou
 <h2 className={"team-section-title"}>{"Faculty Advisors"}</h2>
 <p>{"EBS is supported by dedicated faculty at Phillips Exeter Academy who believe in student-led scientific inquiry and provide guidance, oversight, and institutional support."}</p>
 <div className={"grid columns-2"}>
-<div className={"faculty text-block"}>
-<div aria-label={"Photo pending"} className={"portrait"}></div>
+<div className={"faculty faculty--morrill text-block"}>
+<div className={"portrait"}><img alt={"Dr. Summer Morrill teaching biology students"} decoding={"async"} height={"683"} loading={"lazy"} src={"images/team/Dr. Morrill.jpg"} width={"1024"} /></div>
 <div>
 <h3>{"Dr. Summer Morrill"}</h3>
 <p className={"role"}>{"Biology Department"}</p>

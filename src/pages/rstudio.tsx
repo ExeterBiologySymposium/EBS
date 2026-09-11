@@ -33,6 +33,7 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"lesson"} id={"mental-model"}>
 <h2>{"The RStudio Mental Model"}</h2>
 <p>{"RStudio helps you keep a research project organized. Think in four parts: a script where your instructions live, a console where code runs, an environment where objects appear, and files/plots where outputs are stored."}</p>
+<figure className="context-media context-media--workspace"><img src="/images/Data Analysis/R Studio.png" alt="RStudio displaying a biological dataset" loading="lazy" /></figure>
 <div className={"lesson-panel"}>
 <h3>{"R Objects"}</h3>
 <p>{"In R, you usually create an object and then ask questions about it. The assignment operator is "}<code>{"<-"}</code>{". Read it as \"gets.\""}</p>

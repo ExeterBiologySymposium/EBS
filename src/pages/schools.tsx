@@ -8,6 +8,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"actions"}><a className={"button"} href={"https://forms.gle/wXrjJJb6XEtWvqEu8"} rel={"noopener noreferrer"} target={"_blank"}>{"Register your school"}</a></div><p className={"external-form-note"}>{"Application opens in a new tab. Completion happens in Google Forms."}</p>
 <p className={"small"}><a href={"https://forms.gle/vgtVrsBm1UbBhwtv9"} rel={"noopener noreferrer"} target={"_blank"}>{"Not a teacher or administrator? Register individually"}</a></p>
 </section>
+<figure className="context-media context-media--schools"><img src="/images/Genetics Club Photos/EGBC Yearbook Photo.jpg" alt="Students from the Genetics and Biotech Club together at school" loading="lazy" /></figure>
 <div className={"school-layout"}>
 <section className={"reading"}>
 <h2>{"Research that fits your school"}</h2><p>{"Students can investigate biology through computational or literature-based projects. A standard laptop and an internet connection are enough to get started."}</p><p>{"Research guides and lectures can be completed asynchronously, so each student or classroom can set their own pace. Students practise literature reading, data analysis, scientific writing, and oral communication, and receive feedback from biologists, graduate students, and industry professionals."}</p>

@@ -8,7 +8,7 @@ export default function PageContent() { return <div className="page-layout layou
 <p className={"lead"}>{"A free introduction to dry-lab biology research, organized by students in the Genetics and Biotech Club at Phillips Exeter Academy."}</p>
 </div>
 </section>
-<img className="about-cover" src="/images/team/ebs-team-broad-institute.jpg" alt="EBS students visiting the Broad Institute" />
+<img className="about-cover" src="/images/Genetics Club Photos/EGBC 2.jpg" alt="Students from the Genetics and Biotech Club at the Broad Institute" />
 <section className={"section"}>
 <div className={"shell reading"}>
 <div>

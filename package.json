@@ -7,7 +7,8 @@
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
-    "check": "npm run typecheck"
+    "check": "npm run typecheck",
+    "seo:update": "node scripts/update-seo.mjs"
   },
   "repository": {
     "type": "git",

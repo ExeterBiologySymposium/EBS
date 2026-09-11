@@ -1,0 +1,260 @@
+{
+  "siteName": "Exeter Biology Symposium",
+  "siteUrl": "https://exeterbiosymposium.vercel.app",
+  "defaultImage": "/images/team/ebs-team-broad-institute-1440.jpg",
+  "selectedTerms": [
+    "free biology research opportunities for high school students",
+    "free biology research opportunities for middle school students",
+    "biology research opportunities with no experience",
+    "biology research programs for beginners",
+    "free student research programs",
+    "biology research opportunities for teens",
+    "Exeter Biology Symposium",
+    "Exeter Biology Symposium 2027",
+    "Exeter biology symposium for middle and high school students",
+    "independent biology research for high school students",
+    "independent biology research for middle school students",
+    "biology research without a lab",
+    "research opportunities without prior experience",
+    "student research without laboratory access",
+    "biology research using a laptop",
+    "free biology research competition for students",
+    "high school biology poster competition",
+    "middle school biology poster competition",
+    "genetics research projects for high school students",
+    "genomics projects for beginners",
+    "neuroscience research projects without a lab",
+    "ecology research using public datasets",
+    "epidemiology research projects for students",
+    "evolutionary biology research projects for students",
+    "public health data analysis projects for students",
+    "computational molecular biology projects for beginners",
+    "biology research symposium for high school students",
+    "biology research symposium for middle school students",
+    "online student research symposium",
+    "where to present high school biology research",
+    "free online biology research opportunities for students",
+    "Exeter Biology Symposium online participation",
+    "free biology research opportunities for schools",
+    "research opportunities for high school biology clubs",
+    "middle school science club research opportunities",
+    "student research symposium for schools",
+    "biology enrichment opportunities for students",
+    "free biology research resources for teachers",
+    "independent biology research projects for schools",
+    "biology research programs without lab facilities",
+    "Exeter Biology Symposium school registration",
+    "how to start biology research in high school",
+    "how to start biology research in middle school",
+    "biology research ideas for beginners",
+    "biology research projects without a lab",
+    "how to do independent biology research",
+    "how to turn a biology interest into a research project",
+    "biology literature review projects for students",
+    "bioinformatics projects for high school students",
+    "bioinformatics projects for middle school students",
+    "computational biology projects for beginners",
+    "dry-lab biology research for students",
+    "Python for biology research beginners",
+    "RStudio for biology research beginners",
+    "student biology research conference 2027",
+    "New Hampshire student biology research symposium",
+    "New England student biology research symposium",
+    "Exeter NH biology research symposium",
+    "Exeter Biology Symposium registration",
+    "student biology symposium at Phillips Exeter Academy",
+    "Phillips Exeter Academy biology symposium",
+    "PEA biology symposium",
+    "Exeter student research symposium",
+    "Phillips Exeter Academy student research symposium",
+    "PEA student research symposium",
+    "student-led biology symposium at Phillips Exeter Academy",
+    "biology research opportunities at Phillips Exeter Academy",
+    "Phillips Exeter Academy Genetics and Biotech Club",
+    "PEA Genetics and Biotech Club",
+    "Exeter Genetics and Biotech Club",
+    "volunteer to judge student biology research",
+    "student research symposium judge opportunities",
+    "biology outreach opportunities for researchers",
+    "volunteer to support high school biology research"
+  ],
+  "pages": {
+    "index.html": {
+      "title": "Exeter Biology Symposium | Student Biology Research",
+      "description": "Free student research at Exeter Biology Symposium for middle and high school students. Explore dry-lab projects, present work, and connect with researchers.",
+      "terms": [
+        "free biology research opportunities for high school students",
+        "free biology research opportunities for middle school students",
+        "biology research opportunities with no experience",
+        "biology research programs for beginners",
+        "free student research programs",
+        "biology research opportunities for teens",
+        "Exeter Biology Symposium",
+        "Exeter Biology Symposium 2027",
+        "Exeter biology symposium for middle and high school students"
+      ]
+    },
+    "about.html": {
+      "title": "About EBS | Student Biology at Phillips Exeter Academy",
+      "description": "EBS, organized by Phillips Exeter Academy's Genetics and Biotech Club, opens free dry-lab biology research to all middle and high school students.",
+      "terms": [
+        "student biology symposium at Phillips Exeter Academy",
+        "Phillips Exeter Academy biology symposium",
+        "PEA biology symposium",
+        "Exeter student research symposium",
+        "Phillips Exeter Academy student research symposium",
+        "PEA student research symposium",
+        "student-led biology symposium at Phillips Exeter Academy",
+        "biology research opportunities at Phillips Exeter Academy"
+      ]
+    },
+    "team.html": {
+      "title": "EBS Team | Phillips Exeter Academy Genetics and Biotech Club",
+      "description": "Meet the Phillips Exeter Academy (PEA) students in the Genetics and Biotech Club who organize EBS, plus faculty advisors supporting first-time researchers.",
+      "terms": [
+        "Phillips Exeter Academy Genetics and Biotech Club",
+        "PEA Genetics and Biotech Club",
+        "Exeter Genetics and Biotech Club"
+      ]
+    },
+    "schedule.html": {
+      "title": "2027 Exeter Biology Symposium Schedule | EBS",
+      "description": "Explore the April 24, 2027 Exeter Biology Symposium schedule: student posters, judging, and scientific discussion at Phillips Exeter Academy or online.",
+      "terms": [
+        "student biology research conference 2027",
+        "New Hampshire student biology research symposium",
+        "New England student biology research symposium",
+        "Exeter NH biology research symposium"
+      ]
+    },
+    "resources.html": {
+      "title": "Biology Research Guides and Tools | EBS",
+      "description": "Use free EBS research guides for dry-lab biology, scientific literature, public databases, bioinformatics, and scientific poster presentation.",
+      "terms": [
+        "how to start biology research in high school",
+        "how to start biology research in middle school",
+        "biology research ideas for beginners",
+        "biology research projects without a lab",
+        "how to do independent biology research",
+        "how to turn a biology interest into a research project",
+        "biology literature review projects for students"
+      ]
+    },
+    "datascience.html": {
+      "title": "RStudio and Python for Biology Research | EBS",
+      "description": "Learn RStudio and Python data analysis for biology research with beginner-friendly EBS lessons, public datasets, plots, and statistical tests.",
+      "terms": [
+        "bioinformatics projects for high school students",
+        "bioinformatics projects for middle school students",
+        "computational biology projects for beginners",
+        "dry-lab biology research for students"
+      ]
+    },
+    "python.html": {
+      "title": "Python for Biology Data | EBS Track",
+      "description": "Learn pandas, NumPy, and SciPy through a free Python track for biology data analysis and student dry-lab research projects.",
+      "terms": [
+        "Python for biology research beginners"
+      ]
+    },
+    "rstudio.html": {
+      "title": "RStudio for Biology Data Analysis | EBS",
+      "description": "Learn RStudio data frames, summaries, plots, and statistical tests through a free biology data analysis track for students.",
+      "terms": [
+        "RStudio for biology research beginners"
+      ]
+    },
+    "opensource.html": {
+      "title": "Open Biology Research Resources | EBS",
+      "description": "Explore open datasets, code, and curriculum materials from the Exeter Biology Symposium community. Start a biology research project with open tools.",
+      "terms": []
+    },
+    "schools.html": {
+      "title": "For Schools | Free Student Biology Research | EBS",
+      "description": "Register your school for EBS, a free biology research symposium organized by Phillips Exeter Academy students. All middle and high school students welcome.",
+      "terms": [
+        "free biology research opportunities for schools",
+        "research opportunities for high school biology clubs",
+        "middle school science club research opportunities",
+        "student research symposium for schools",
+        "biology enrichment opportunities for students",
+        "free biology research resources for teachers",
+        "independent biology research projects for schools",
+        "biology research programs without lab facilities",
+        "Exeter Biology Symposium school registration"
+      ]
+    },
+    "researchers.html": {
+      "title": "Student Researchers | Exeter Biology Symposium",
+      "description": "Present original dry-lab biological research at Exeter Biology Symposium. No prior research experience required; all middle and high school students welcome.",
+      "terms": [
+        "independent biology research for high school students",
+        "independent biology research for middle school students",
+        "biology research without a lab",
+        "research opportunities without prior experience",
+        "student research without laboratory access",
+        "biology research using a laptop",
+        "free biology research competition for students",
+        "high school biology poster competition",
+        "middle school biology poster competition",
+        "genetics research projects for high school students",
+        "genomics projects for beginners",
+        "neuroscience research projects without a lab",
+        "ecology research using public datasets",
+        "epidemiology research projects for students",
+        "evolutionary biology research projects for students",
+        "public health data analysis projects for students",
+        "computational molecular biology projects for beginners"
+      ]
+    },
+    "judges.html": {
+      "title": "Volunteer as a Research Judge | EBS",
+      "description": "Judge student biology research posters and presentations at the Exeter Biology Symposium 2027, in person or online. Support first-time student researchers.",
+      "terms": [
+        "volunteer to judge student biology research",
+        "student research symposium judge opportunities"
+      ]
+    },
+    "student-signup.html": {
+      "title": "Student Registration | Exeter Biology Symposium",
+      "description": "Register to present original dry-lab biology research at Exeter Biology Symposium 2027. Participation is free for all middle and high school students.",
+      "terms": [
+        "biology research symposium for high school students",
+        "biology research symposium for middle school students",
+        "online student research symposium",
+        "where to present high school biology research"
+      ]
+    },
+    "volunteer-signup.html": {
+      "title": "Volunteer and Judge Signup | EBS",
+      "description": "Volunteer as a speaker, reviewer, or judge for student biology research at Exeter Biology Symposium 2027. Share feedback in person or online.",
+      "terms": [
+        "biology outreach opportunities for researchers",
+        "volunteer to support high school biology research"
+      ]
+    },
+    "register.html": {
+      "title": "Register for Exeter Biology Symposium",
+      "description": "Choose student, school, volunteer, or judge registration for Exeter Biology Symposium 2027. In-person and online participation planned.",
+      "terms": [
+        "Exeter Biology Symposium registration"
+      ]
+    },
+    "faq.html": {
+      "title": "FAQ | Exeter Biology Symposium",
+      "description": "Answers about Exeter Biology Symposium 2027: eligibility, dry-lab research, timelines, presentations, registration, and ways to get involved.",
+      "terms": [
+        "free online biology research opportunities for students",
+        "Exeter Biology Symposium online participation"
+      ]
+    }
+  },
+  "excludedTerms": [
+    "biology research from home",
+    "biology research without a teacher supervisor",
+    "flexible biology research opportunities for students",
+    "how to choose a biology research question",
+    "how to conduct research using public datasets",
+    "public biology datasets for student research"
+  ]
+}

@@ -9,6 +9,7 @@ export default function PageContent() { return <div className="page-layout layou
 </section>
 <section className={"section"}>
 <div className={"shell"}>
+<figure className="context-media context-media--research"><img src="/images/Studying/Screenshot 2026-09-10 at 6.02.51 PM.png" alt="Student working on research at a laptop" loading="lazy" /></figure>
 <div className={"grid columns-2"}>
 <div>
 <h2>{"Dry-Lab Research"}</h2>

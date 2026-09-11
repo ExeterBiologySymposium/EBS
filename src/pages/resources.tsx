@@ -72,6 +72,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"text-block"}>
 <h5>{"Genomic / Bioinformatics Analysis"}</h5>
 <p>{"Analyze publicly available genomic sequences, compare species, or investigate gene expression data from the NCBI or UCSC databases."}</p>
+<figure className="context-media context-media--genome"><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.14.02 PM.png" alt="Genome browser tracks showing regulatory data" loading="lazy" /></figure>
 </div>
 <div className={"text-block"}>
 <h5>{"Epidemiological Data Study"}</h5>
@@ -84,6 +85,10 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"text-block"}>
 <h5>{"Computational Modeling"}</h5>
 <p>{"Build a simple mathematical or agent-based model to simulate a biological process — protein folding, disease spread, population dynamics."}</p>
+<div className="research-pair">
+<figure><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.13.34 PM.png" alt="Protein structure target tractability display" loading="lazy" /></figure>
+<figure><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.14.14 PM.png" alt="Protein structure visualization" loading="lazy" /></figure>
+</div>
 </div>
 </div>
 </div>
@@ -292,6 +297,7 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 <div>
 <h3>{"Poster Design Principles"}</h3>
+<div className="poster-pair"><figure className="context-media context-media--poster"><img src="/images/Poster/Luke Poster.jpeg" alt="Student research poster about fungal enzyme inhibitors" loading="lazy" /><figcaption>Luke Wang — fungal enzyme inhibitors</figcaption></figure><figure className="context-media context-media--poster"><img src="/images/Poster/Reya Poster.png" alt="Student research poster about circadian clock genes and traumatic brain injury" loading="lazy" /><figcaption>Reya Satam — circadian clock genes and traumatic brain injury</figcaption></figure></div>
 <div>
 <div className={"resource-link"}>
 <div>
