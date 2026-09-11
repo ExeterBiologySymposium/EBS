@@ -108,14 +108,6 @@ export default function PageContent() { return <div className="page-layout layou
 <p className={"faculty-card__dept"}>{"Phillips Exeter Academy"}</p>
 </div>
 </div>
-<div className={"faculty text-block"}>
-<div aria-label={"Photo not provided"} className={"portrait"} role={"img"}><span className={"portrait-placeholder"}></span></div>
-<div>
-<h3>{"Faculty Co-Advisor"}</h3>
-<p className={"role"}>{"Science Department"}</p>
-<p className={"faculty-card__dept"}>{"Phillips Exeter Academy"}</p>
-</div>
-</div>
 </div>
 <div className={"grid columns-2"}>
 <div>
