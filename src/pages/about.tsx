@@ -73,7 +73,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"step"}>
 <div className={"step__num"}>{"1"}</div>
 <div className={"step__body"}>
-<p className={"step__title"}>{"Research & Preparation (Fall 2026 – April 24th, 2027)"}</p>
+<p className={"step__title"}>{"Research & Preparation (Fall 2026 – April 25th, 2027)"}</p>
 <p>{"Students receive resources and structured guidance to develop their research question, conduct their study, and prepare their presentation."}</p>
 </div>
 </div>
@@ -87,7 +87,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"step"}>
 <div className={"step__num"}>{"3"}</div>
 <div className={"step__body"}>
-<p className={"step__title"}>{"Symposium Day (April 24th, 2027)"}</p>
+<p className={"step__title"}>{"Symposium Day (April 25th, 2027)"}</p>
 <p>{"Students present their work through poster presentations, in-person or online. Judges evaluate presentations and provide constructive written feedback."}</p>
 </div>
 </div>
@@ -139,7 +139,7 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"section"}>
 <div className={"shell"}>
 <div className={"next-step"}>
-<h2>{"Take part on April 24th, 2027"}</h2>
+<h2>{"Take part on April 25th, 2027"}</h2>
 <p>{"Whether you're ready to start your research journey or just curious to learn more, we'd love to hear from you."}</p>
 <div className={"actions"}>
 <a className={"button primary"} href={"register.html"}>{"Register Your Interest"}</a>

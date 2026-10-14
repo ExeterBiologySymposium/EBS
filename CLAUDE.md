@@ -1,7 +1,7 @@
 # Project: Exeter Biology Symposium (EBS)
 
 ## About
-Student-run research symposium website for middle and high school students. 100% free. Event: April 24th, 2027. Organized by the Genetics and Biotech Club. Website is a multi-page marketing/registration site with static generation.
+Student-run research symposium website for middle and high school students. 100% free. Event: April 25th, 2027. Organized by the Genetics and Biotech Club. Website is a multi-page marketing/registration site with static generation.
 
 ## Tech Stack
 - **Frontend**: React 19 + TypeScript
@@ -136,7 +136,7 @@ public/
 - **Email**: exeterbiologysymposium@gmail.com (in footer)
 
 ## Current Focus
-- **Site**: Live marketing + registration for April 24, 2027 event
+- **Site**: Live marketing + registration for April 25, 2027 event
 - **Next**: Monitor registrations, add more resources/team bios as event approaches
 
 ## Deployment
@@ -161,4 +161,3 @@ public/
 
 **Generated**: 2026-09-10 by Claude Code  
 **Last updated**: —
-

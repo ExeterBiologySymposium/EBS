@@ -19,7 +19,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div><dt>{"Cost"}</dt><dd>{"Participation is free. Participants cover their own travel costs; online presentation is available."}</dd></div>
 <div><dt>{"Time"}</dt><dd>{"Most students spend 1–2 hours per week throughout the year, at their own pace."}</dd></div>
 <div><dt>{"Supervision"}</dt><dd>{"A teacher supervisor is not required. EBS guides students from learning dry-lab skills to writing abstracts."}</dd></div>
-<div><dt>{"Timing"}</dt><dd>{"April 24th, 2027."}</dd></div>
+<div><dt>{"Timing"}</dt><dd>{"April 25th, 2027."}</dd></div>
 </dl></aside>
 </div>
 <section className={"content-section"}>
@@ -28,7 +28,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div><dt>{"Fall 2026"}</dt><dd><strong>{"Student registration"}</strong><p>{"Individual students register and receive access to the EBS resource library."}</p></dd></div>
 <div><dt>{"Fall–winter 2026–27"}</dt><dd><strong>{"Research period"}</strong><p>{"Students work on projects with support from the organizing team and resource library."}</p></dd></div>
 <div><dt>{"March–April 2027"}</dt><dd><strong>{"Abstract review"}</strong><p>{"Students submit abstracts in March; acceptance notifications follow in April."}</p></dd></div>
-<div><dt>{"April 24th, 2027"}</dt><dd><strong>{"Symposium day"}</strong><p>{"Students present at Phillips Exeter Academy or online; registered schools receive logistics details."}</p></dd></div>
+<div><dt>{"April 25th, 2027"}</dt><dd><strong>{"Symposium day"}</strong><p>{"Students present at Phillips Exeter Academy or online; registered schools receive logistics details."}</p></dd></div>
 </dl>
 </section>
 <section className={"school-questions reading"}>

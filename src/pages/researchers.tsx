@@ -55,7 +55,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"shell"}>
 <div className={"section-header"}>
 <h2>{"Timeline"}</h2>
-<p>{"The research cycle runs from October 2026 through Symposium Day on April 24th, 2027."}</p>
+<p>{"The research cycle runs from October 2026 through Symposium Day on April 25th, 2027."}</p>
 </div>
 <div className={"grid columns-2"}>
 <div className={"timeline"}>
@@ -87,7 +87,7 @@ export default function PageContent() { return <div className="page-layout layou
 <p>{"Prepare your poster presentation. Receive feedback from the organizing team. Practice Q&A with peers."}</p>
 </div>
 <div className={"timeline__item"}>
-<div className={"timeline__date"}>{"April 24th, 2027"}</div>
+<div className={"timeline__date"}>{"April 25th, 2027"}</div>
 <div className={"timeline__title"}>{"Symposium Day"}</div>
 <p>{"Present your research in-person at Phillips Exeter Academy or online. Receive judge feedback, attend guest speaker talks, and connect with the broader EBS community."}</p>
 </div>

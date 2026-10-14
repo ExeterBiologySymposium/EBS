@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { ArrowDownRight, Check, Copy } from 'lucide-react';
+import { scheduleLocation, symposiumVenue } from './schedule-details';
 
 export function CodeBlock({ text }: { text: string }) {
   const pre = useRef<HTMLPreElement>(null);
@@ -68,9 +69,9 @@ function useCollection(name: 'schedule_items'|'session_info') {
 }
 export function RemoteSchedule({children}:{children:ReactNode}) {
   const rows=useCollection('schedule_items');
-  return rows ? <tbody id="schedule-body">{rows.map((row,i)=><tr key={i}><td>{row.time}</td><td>{row.event}</td><td>{row.location}</td></tr>)}</tbody> : children;
+  return rows ? <tbody id="schedule-body">{rows.map((row,i)=><tr key={i}><td>{row.time}</td><td>{row.event}</td><td>{scheduleLocation(row.location)}</td></tr>)}</tbody> : children;
 }
 export function RemoteSessions({children}:{children:ReactNode}) {
   const rows=useCollection('session_info');
-  return rows ? <div id="session-info-grid" className="session-grid">{rows.map((row,i)=><section key={i}><h3>{row.title}</h3><p>{row.description}</p></section>)}</div> : children;
+  return rows ? <div id="session-info-grid" className="session-grid">{rows.map((row,i)=><section key={i}><h3>{row.title}</h3><p>{row.title.trim().toLowerCase()==='venue'?symposiumVenue:row.description}</p></section>)}</div> : children;
 }

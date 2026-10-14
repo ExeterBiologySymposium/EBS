@@ -19,7 +19,7 @@ export default function PageContent() { return <div className="page-layout layou
 <span>{"Attend a brief virtual orientation in the week before the symposium"}</span>
 </div>
 <div className={"checklist__item"}>
-<span>{"Attend Symposium Day at Phillips Exeter Academy (April 24th, 2027)"}</span>
+<span>{"Attend Symposium Day at Phillips Exeter Academy (April 25th, 2027)"}</span>
 </div>
 <div className={"checklist__item"}>
 <span>{"Evaluate 4–6 poster sessions (~15 min each) using our scoring rubric"}</span>
@@ -59,7 +59,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"shell"}>
 <div className={"next-step"}>
 <h2>{"Register as a judge"}</h2>
-<p>{"Judge applications are open now. Express your interest and we'll confirm placement and send symposium details ahead of April 24th, 2027."}</p>
+<p>{"Judge applications are open now. Express your interest and we'll confirm placement and send symposium details ahead of April 25th, 2027."}</p>
 <div className={"actions"}>
 <a className={"button primary"} href={"https://docs.google.com/forms/d/e/1FAIpQLScEdi8TnCtiIfO9cD0fGQkLRkPcPeik3xHIPaZi87brvRiY2g/viewform?usp=dialog"} rel={"noopener noreferrer"} target={"_blank"}>{"Express Judge Interest"}</a>
 <a className={"button secondary"} href={"faq.html"}>{"FAQ"}</a>

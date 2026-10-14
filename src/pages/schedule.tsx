@@ -1,10 +1,11 @@
 import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
+import { symposiumVenue } from '../schedule-details';
 
 export default function PageContent() { return <div className="page-layout layout-schedule">
 <section className={"page-heading"}>
 <div className={"shell"}>
 <h1>{"Symposium schedule"}</h1>
-<p className={"lead"}>{"April 24th, 2027 · Phillips Exeter Academy and online. All times below are Eastern Time; sessions and locations are provisional."}</p>
+<p className={"lead"}>{"April 25th, 2027 · Phillips Exeter Academy and online. All times below are Eastern Time; sessions and locations are provisional."}</p>
 </div>
 </section>
 <section className={"section"}>
@@ -28,7 +29,7 @@ export default function PageContent() { return <div className="page-layout layou
 <tr>
 <td>{"9:00 – 9:30 AM"}</td>
 <td>{"Opening Ceremony"}</td>
-<td>{"Forum"}</td>
+<td>{"Grainger"}</td>
 </tr>
 <tr>
 <td>{"9:30 – 11:30 AM"}</td>
@@ -38,7 +39,7 @@ export default function PageContent() { return <div className="page-layout layou
 <tr>
 <td>{"11:30 AM – 12:30 PM"}</td>
 <td>{"Lunch"}</td>
-<td>{"New Dining Hall"}</td>
+<td>{"Grainger"}</td>
 </tr>
 <tr>
 <td>{"12:30 – 2:00 PM"}</td>
@@ -53,7 +54,7 @@ export default function PageContent() { return <div className="page-layout layou
 <tr>
 <td>{"2:30 – 3:00 PM"}</td>
 <td>{"Closing Ceremony"}</td>
-<td>{"Forum"}</td>
+<td>{"Grainger"}</td>
 </tr>
 </tbody></RemoteSchedule>
 </table>
@@ -67,7 +68,7 @@ export default function PageContent() { return <div className="page-layout layou
 <RemoteSessions><div className={"grid columns-4"} id={"session-info-grid"}>
 <div className={"session-item"}>
 <h3>{"Venue"}</h3>
-<p>{"Phillips Exeter Academy — Phelps Lobby, Forum, Grainger, and the New Dining Hall."}</p>
+<p>{symposiumVenue}</p>
 </div>
 <div className={"session-item"}>
 <h3>{"Online Option"}</h3>

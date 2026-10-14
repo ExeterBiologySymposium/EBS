@@ -28,7 +28,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"What is the Exeter Biology Symposium?"}</summary>
 <div id={"g1"}>
-<p>{"EBS is a student-organized research symposium hosted by the Genetics and Biotech Club at Phillips Exeter Academy. It gives students with little or no prior research experience the opportunity to conduct, present, and discuss original dry-lab biological research alongside peers and judges. The inaugural event is planned for April 24th, 2027, with both in-person and online attendance options available the same day."}</p>
+<p>{"EBS is a student-organized research symposium hosted by the Genetics and Biotech Club at Phillips Exeter Academy. It gives students with little or no prior research experience the opportunity to conduct, present, and discuss original dry-lab biological research alongside peers and judges. The inaugural event is planned for April 25th, 2027, with both in-person and online attendance options available the same day."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
@@ -41,7 +41,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"When and where is EBS 2027?"}</summary>
 <div id={"g3"}>
-<p>{"EBS 2027 will take place on April 24th, 2027, at Phillips Exeter Academy in Exeter, New Hampshire, with online participation available the same day."}</p>
+<p>{"EBS 2027 will take place on April 25th, 2027, at Phillips Exeter Academy in Exeter, New Hampshire, with online participation available the same day."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
@@ -53,7 +53,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"Is there a cost to participate?"}</summary>
 <div id={"g5"}>
-<p>{"No! EBS is completely free for all interested participants. Transportation costs for the April 24th, 2027 symposium are the responsibility of participants, but those who cannot attend in-person are welcome to present online."}</p>
+<p>{"No! EBS is completely free for all interested participants. Transportation costs for the April 25th, 2027 symposium are the responsibility of participants, but those who cannot attend in-person are welcome to present online."}</p>
 </div>
 </details>
 </div>
@@ -128,7 +128,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"How are projects submitted and reviewed?"}</summary>
 <div id={"r4"}>
-<p>{"Students submit a structured abstract in March 2027. Abstracts are reviewed by the EBS abstract review committee (composed of EBS organizing team members and volunteer reviewers). All students who submit a complete, original abstract in scope for EBS are expected to be accepted to present, though we may provide feedback for revision in borderline cases. Acceptance notifications go out before April 24th, 2027."}</p>
+<p>{"Students submit a structured abstract in March 2027. Abstracts are reviewed by the EBS abstract review committee (composed of EBS organizing team members and volunteer reviewers). All students who submit a complete, original abstract in scope for EBS are expected to be accepted to present, though we may provide feedback for revision in borderline cases. Acceptance notifications go out before April 25th, 2027."}</p>
 </div>
 </details>
 </div>
