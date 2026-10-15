@@ -97,10 +97,11 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .fact-controls .autoplay-control{display:none}
 .hero-squaremark{display:block;width:144px;height:auto;margin:0 0 24px auto;background:transparent;object-fit:contain}
 .hero-registration{display:flex;flex-direction:column;align-items:flex-end;gap:24px;width:220px;max-width:100%;flex-shrink:0}
-.hero-registration .hero-squaremark{margin:0}
+.hero-registration .hero-squaremark{width:100%;height:auto;aspect-ratio:1;margin:0}
 .hero-registration>.button{width:100%;min-height:62px}
 @media(max-width:767px){.hero-registration{width:100%;margin-top:22px;gap:20px}.hero-registration>.button{min-height:58px}}
 @media(max-width:767px){.home-hero{min-height:1060px}.hero-facts{top:88px;left:auto;right:var(--gutter);width:210px;padding-top:0}.hero-squaremark{width:104px;margin-bottom:20px}.hero-facts strong{min-height:62px}}
+@media(max-width:767px){.home-hero{height:auto;padding-top:300px}.hero-bottom{position:relative;inset:auto;margin-inline:var(--gutter);padding-bottom:24px}}
 .story-sequence{background:#f0f0f0;color:#424242}.story-sticky h2{color:var(--harkness)}.story-sticky li{border-color:#c2c3c5;color:#63666a}.story-sticky li.is-active{color:var(--harkness);border-color:var(--crimson)}
 .mission-split{position:relative;isolation:isolate;display:block;overflow:hidden;background:var(--bg)}.mission-split .mission-label{font-size:18px;color:var(--muted);margin-bottom:30px}.mission-split>div{max-width:none;position:relative}.mission-split h2:not(.mission-label){color:var(--harkness)}.mission-split p{max-width:none}.mission-split .seal{position:absolute;right:var(--gutter);top:50%;transform:translateY(-50%);width:clamp(280px,35vw,480px);height:auto;opacity:.13;z-index:-1;pointer-events:none}
 .closing-scene{background:#63666a;color:#fff}.closing-scene>img{opacity:1;mix-blend-mode:normal;object-fit:cover;background:none}.closing-scene:before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:1}.closing-scene>div{z-index:2}.closing-scene .media-button{background:var(--crimson);border-color:var(--crimson);color:#fff;backdrop-filter:none}.closing-scene .media-button:hover{background:var(--harkness)}
