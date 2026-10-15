@@ -104,8 +104,8 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 </div>
 <figure className={"group-photo"}>
-<img alt={"EBS team members visiting Broad Institute"} decoding={"async"} height={"2752"} loading={"lazy"} src={"/images/team/ebs-team-broad-institute.jpg"} width={"4128"} />
-<figcaption>{"EBS team members at Broad Institute."}</figcaption>
+<img alt={"EGBC club members visiting Broad Institute"} decoding={"async"} height={"2752"} loading={"lazy"} src={"/images/team/ebs-team-broad-institute.jpg"} width={"4128"} />
+<figcaption>{"EGBC club members at Broad Institute."}</figcaption>
 </figure>
 <figure className={"group-photo"}>
 <img alt={"EGBC students with Exeter alumni during a research lunch in Boston"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 3.jpg"} width={"6048"} />
