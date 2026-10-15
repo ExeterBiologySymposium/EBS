@@ -144,3 +144,9 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 @media(max-width:360px){.organizing-team-grid{grid-template-columns:1fr}}
 .header-right .button,.button{white-space:normal}
 @media(min-width:768px) and (max-width:900px){.desktop-nav{gap:12px}.site-header{gap:18px}.header-right .button{min-width:112px;padding-inline:12px}}
+/* 44px minimum touch targets for text links and hero fact dots. */
+.desktop-nav a,.nav-search,.school-link,.section-introduction>a:not(.button),.story-sticky>a{display:inline-flex;align-items:center;min-height:44px}
+.nav-search{min-width:44px;justify-content:center}
+.fact-controls{gap:0}.fact-controls button{width:44px;height:44px;padding:0;display:grid;place-items:center}
+.footer-top a{padding:10px 0;margin:0}
+.wordmark,.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}
