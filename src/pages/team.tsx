@@ -66,41 +66,30 @@ export default function PageContent() { return <div className="page-layout layou
 </details>
 </div>
 </div>
-<figure className={"group-photo"}>
-<img alt={"EBS team members visiting Broad Institute"} decoding={"async"} height={"2752"} loading={"lazy"} src={"/images/team/ebs-team-broad-institute.jpg"} width={"4128"} />
-<figcaption>{"EBS team members at Broad Institute."}</figcaption>
-</figure>
-<figure className={"group-photo"}>
-<img alt={"EGBC students with Exeter alumni during a research lunch in Boston"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 3.jpg"} width={"6048"} />
-<figcaption>{"EGBC students with Exeter alumni during a research lunch in Boston."}</figcaption>
-</figure>
-<figure className={"group-photo"}>
-<img alt={"EGBC students at the Koch Institute during the 2026 Cambridge Science Festival"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 4.jpg"} width={"6048"} />
-<figcaption>{"EGBC students at the Koch Institute for Integrative Cancer Research during the 2026 Cambridge Science Festival."}</figcaption>
-</figure>
-<h2 className={"team-section-title"}>{"Organizing Committee and School Partners"}</h2>
-<div className={"grid columns-4"}>
-<div className={"person text-block"}>
-<div aria-label={"Photo not provided"} className={"portrait"} role={"img"}><span className={"portrait-placeholder"}></span></div>
-<h3>{"Media Associate"}</h3>
-<p className={"role"}>{"Design, media & social communication"}</p>
-<p className={"grade"}>{"Class of 2028"}</p>
-</div>
-<div className={"person text-block"}>
-<div aria-label={"Photo not provided"} className={"portrait"} role={"img"}><span className={"portrait-placeholder"}></span></div>
-<h3>{"Research Associate"}</h3>
-<p className={"role"}>{"Research curriculum & review"}</p>
-<p className={"grade"}>{"Class of 2028"}</p>
-</div>
-<div className={"person text-block"}>
-<div aria-label={"Photo not provided"} className={"portrait"} role={"img"}><span className={"portrait-placeholder"}></span></div>
-<h3>{"Outreach Associate"}</h3>
-<p className={"role"}>{"Schools & community partnerships"}</p>
-<p className={"grade"}>{"Class of 2027"}</p>
-</div>
-</div>
-<div className={"callout"}>
-<p><strong>{"Note:"}</strong>{" Team member names and headshots will be added when the organizing committee is finalized in Fall 2026."}</p>
+<h2 className={"team-section-title"}>{"Associate Members"}</h2>
+<div className={"grid columns-3"}>
+<section className={"text-block"}>
+<h3>{"Outreach Associates"}</h3>
+<ul>
+<li>{"Esther Kim ’29"}</li>
+<li>{"Derek Geng ’30"}</li>
+<li>{"Margaux Morgan ’29"}</li>
+</ul>
+</section>
+<section className={"text-block"}>
+<h3>{"Research Associates"}</h3>
+<ul>
+<li>{"Scarlett Reddy ’29"}</li>
+<li>{"Dowan Kim ’29"}</li>
+<li>{"Avni Murarka ’28"}</li>
+</ul>
+</section>
+<section className={"text-block"}>
+<h3>{"Social Media Associate"}</h3>
+<ul>
+<li>{"Olivia Wang ’29"}</li>
+</ul>
+</section>
 </div>
 <h2 className={"team-section-title"}>{"Faculty Advisors"}</h2>
 <p>{"EBS is supported by dedicated faculty at Phillips Exeter Academy who believe in student-led scientific inquiry and provide guidance, oversight, and institutional support."}</p>
@@ -114,6 +103,18 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 </div>
 </div>
+<figure className={"group-photo"}>
+<img alt={"EBS team members visiting Broad Institute"} decoding={"async"} height={"2752"} loading={"lazy"} src={"/images/team/ebs-team-broad-institute.jpg"} width={"4128"} />
+<figcaption>{"EBS team members at Broad Institute."}</figcaption>
+</figure>
+<figure className={"group-photo"}>
+<img alt={"EGBC students with Exeter alumni during a research lunch in Boston"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 3.jpg"} width={"6048"} />
+<figcaption>{"EGBC students with Exeter alumni during a research lunch in Boston."}</figcaption>
+</figure>
+<figure className={"group-photo"}>
+<img alt={"EGBC students at the Koch Institute during the 2026 Cambridge Science Festival"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 4.jpg"} width={"6048"} />
+<figcaption>{"EGBC students at the Koch Institute for Integrative Cancer Research during the 2026 Cambridge Science Festival."}</figcaption>
+</figure>
 </div>
 </section>
 <section className={"section"}>
