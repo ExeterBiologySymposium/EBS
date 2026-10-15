@@ -71,7 +71,12 @@ export default function PageContent() { return <div className="page-layout layou
 <figcaption>{"EBS team members at Broad Institute."}</figcaption>
 </figure>
 <figure className={"group-photo"}>
-<img alt={"Students from the Genetics and Biotech Club visiting the Broad Institute"} decoding={"async"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 3.jpg"} />
+<img alt={"EGBC students with Exeter alumni during a research lunch in Boston"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 3.jpg"} width={"6048"} />
+<figcaption>{"EGBC students with Exeter alumni during a research lunch in Boston."}</figcaption>
+</figure>
+<figure className={"group-photo"}>
+<img alt={"EGBC students at the Koch Institute during the 2026 Cambridge Science Festival"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 4.jpg"} width={"6048"} />
+<figcaption>{"EGBC students at the Koch Institute for Integrative Cancer Research during the 2026 Cambridge Science Festival."}</figcaption>
 </figure>
 <h2 className={"team-section-title"}>{"Organizing Committee and School Partners"}</h2>
 <div className={"grid columns-4"}>
