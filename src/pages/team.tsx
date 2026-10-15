@@ -1,10 +1,12 @@
 const organizingTeam = [
-  {name:'Esther Kim',role:'Outreach Associate',year:'2029',initials:'EK'},
+  {name:'Cici Chen',role:'Research Associate',year:'2028',initials:'CC'},
+  {name:'Oliver Choi',role:'Research Associate',year:'2029',initials:'OC'},
   {name:'Derek Geng',role:'Outreach Associate',year:'2030',initials:'DG'},
-  {name:'Margaux Morgan',role:'Outreach Associate',year:'2029',initials:'MM'},
-  {name:'Scarlett Reddy',role:'Research Associate',year:'2029',initials:'SR'},
   {name:'Dowan Kim',role:'Research Associate',year:'2029',initials:'DK'},
+  {name:'Esther Kim',role:'Outreach Associate',year:'2029',initials:'EK'},
+  {name:'Margaux Morgan',role:'Outreach Associate',year:'2029',initials:'MM'},
   {name:'Avni Murarka',role:'Research Associate',year:'2028',initials:'AM'},
+  {name:'Scarlett Reddy',role:'Research Associate',year:'2029',initials:'SR'},
   {name:'Olivia Wang',role:'Social Media Associate',year:'2029',initials:'OW'}
 ];
 
@@ -20,19 +22,6 @@ export default function PageContent() { return <div className="page-layout layou
 <h2 className={"team-section-title"}>{"Leadership"}</h2>
 <div className={"grid columns-4"}>
 <div className={"person text-block"}>
-<div className={"portrait"}><img alt={"Jaiden Kim"} decoding={"async"} height={"668"} loading={"lazy"} src={"/images/team/jaiden-kim.png"} width={"514"} /></div>
-<h3>{"Jaiden Kim"}</h3>
-<p className={"role"}>{"Co-Head"}</p>
-<p className={"grade"}>{"Class of 2028"}</p>
-<details className={"team-card__details"}>
-<summary>{"View profile"}</summary>
-<ul className={"team-card__profile"}>
-<li><strong>{"USABO 2026 Semifinalist"}</strong></li>
-<li><strong>{"Summer 2026 Research Intern, Rice University Department of Biosciences"}</strong><br /><em>{"Elucidating Serotonin-Independent Pathways Underlying Sertraline-Mediated Lipid Loss and Protestasis"}</em></li>
-</ul>
-</details>
-</div>
-<div className={"person text-block"}>
 <div className={"portrait"}><img alt={"Adrian Chan working in a laboratory"} decoding={"async"} height={"5120"} loading={"lazy"} src={"images/team/adrian-chan.jpeg"} width={"3840"} /></div>
 <h3>{"Adrian Chan"}</h3>
 <p className={"role"}>{"Co-Head"}</p>
@@ -43,6 +32,19 @@ export default function PageContent() { return <div className="page-layout layou
 <li><strong>{"Team UK IBO Selection Candidate, 2024"}</strong></li>
 <li><strong>{"Medical & Scientific Intern, Hong Kong Genome Institute"}</strong><br />{"Contributed to whole-genome sequencing workflows with HKGI and Hong Kong Children’s Hospital, plus genomic literacy and policy work."}</li>
 <li><strong>{"SSTP 2026 Research Intern, University of Iowa Department of Pathology — Yang Lab"}</strong><br />{"Analyzed SETDB1 using ORIEN and TCGA datasets; assessed dFF-ChIP and total RNA-sequencing results; developed a CRISPR/Cas9-degron system in UCEC cell lines."}</li>
+</ul>
+</details>
+</div>
+<div className={"person text-block"}>
+<div className={"portrait"}><img alt={"Jaiden Kim"} decoding={"async"} height={"668"} loading={"lazy"} src={"/images/team/jaiden-kim.png"} width={"514"} /></div>
+<h3>{"Jaiden Kim"}</h3>
+<p className={"role"}>{"Co-Head"}</p>
+<p className={"grade"}>{"Class of 2028"}</p>
+<details className={"team-card__details"}>
+<summary>{"View profile"}</summary>
+<ul className={"team-card__profile"}>
+<li><strong>{"USABO 2026 Semifinalist"}</strong></li>
+<li><strong>{"Summer 2026 Research Intern, Rice University Department of Biosciences"}</strong><br /><em>{"Elucidating Serotonin-Independent Pathways Underlying Sertraline-Mediated Lipid Loss and Protestasis"}</em></li>
 </ul>
 </details>
 </div>
