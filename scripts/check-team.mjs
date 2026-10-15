@@ -6,6 +6,7 @@ const file=built?'../dist/team.html':'../src/pages/team.tsx';
 const team=(await readFile(new URL(file,import.meta.url),'utf8')).replace(/<!--[\s\S]*?-->/g,'');
 const members=[['Esther Kim','Outreach Associate','2029'],['Derek Geng','Outreach Associate','2030'],['Margaux Morgan','Outreach Associate','2029'],['Scarlett Reddy','Research Associate','2029'],['Dowan Kim','Research Associate','2029'],['Avni Murarka','Research Associate','2028'],['Olivia Wang','Social Media Associate','2029']];
 members.push(['Cici Chen','Research Associate','2028'],['Oliver Choi','Research Associate','2029']);
+members.push(['Adaeze Acholonu','Outreach Associate','2029']);
 const byLastName=(a,b)=>a.split(' ').at(-1).localeCompare(b.split(' ').at(-1))||a.localeCompare(b);
 for(const [name] of members)assert.ok(team.includes(name),`Missing organizing-team member: ${name}`);
 const leadership=team.indexOf('Leadership');
@@ -30,4 +31,4 @@ if(built){
     assert.deepEqual(names,[...names].sort(byLastName),`${label} must be alphabetical by last name, then first name`);
   }
 }
-console.log(`PASS: ${built?'built':'source'} team headings/order, nine profiles, faculty credentials, and two club photos.`);
+console.log(`PASS: ${built?'built':'source'} team headings/order, ${members.length} profiles, faculty credentials, and two club photos.`);

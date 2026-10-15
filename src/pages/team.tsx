@@ -1,4 +1,5 @@
 const organizingTeam = [
+  {name:'Adaeze Acholonu',role:'Outreach Associate',year:'2029',initials:'AA'},
   {name:'Cici Chen',role:'Research Associate',year:'2028',initials:'CC'},
   {name:'Oliver Choi',role:'Research Associate',year:'2029',initials:'OC'},
   {name:'Derek Geng',role:'Outreach Associate',year:'2030',initials:'DG'},
