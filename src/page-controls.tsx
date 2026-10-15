@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { ArrowDownRight, Check, Copy } from 'lucide-react';
-import { scheduleLocation, symposiumVenue } from './schedule-details';
+import { ensureKeynote, scheduleLocation, symposiumVenue, type ScheduleRow } from './schedule-details';
 
 export function CodeBlock({ text }: { text: string }) {
   const pre = useRef<HTMLPreElement>(null);
@@ -39,7 +39,7 @@ export function ContactForm({ action, accessKey }: { action: string; accessKey: 
   return <><form id="contact-form" action={action} method="POST" onSubmit={submit} aria-busy={state==='sending'} hidden={state==='sent'}>
     <input type="hidden" name="access_key" value={accessKey} />
     <div className="form-row"><label htmlFor="c-name">Your name<input id="c-name" name="name" autoComplete="name" required /></label><label htmlFor="c-email">Email<input id="c-email" name="email" type="email" autoComplete="email" required /></label></div>
-    <label htmlFor="c-role">I am a…<select id="c-role" name="role" defaultValue=""><option value="">Select (optional)</option>{['Student','Teacher / Educator','Researcher / Volunteer','Potential Judge','Parent / Guardian','Other'].map(role=><option key={role}>{role}</option>)}</select></label>
+    <label htmlFor="c-role">I am a…<select id="c-role" name="role" defaultValue=""><option value="">Select (optional)</option>{['Student','Teacher / Educator','Researcher / Professional','Potential Judge','Parent / Guardian','Other'].map(role=><option key={role}>{role}</option>)}</select></label>
     <label htmlFor="c-subject">Subject<input id="c-subject" name="subject" required /></label>
     <label htmlFor="c-message">Message<textarea id="c-message" name="message" rows={5} required /></label>
     <button className="button" type="submit" disabled={state==='sending'}>{state==='sending'?'Sending…':'Send message'}<ArrowDownRight size={18}/></button>
@@ -69,7 +69,8 @@ function useCollection(name: 'schedule_items'|'session_info') {
 }
 export function RemoteSchedule({children}:{children:ReactNode}) {
   const rows=useCollection('schedule_items');
-  return rows ? <tbody id="schedule-body">{rows.map((row,i)=><tr key={i}><td>{row.time}</td><td>{row.event}</td><td>{scheduleLocation(row.location)}</td></tr>)}</tbody> : children;
+  const scheduleRows = rows ? ensureKeynote(rows as ScheduleRow[]) : null;
+  return scheduleRows ? <tbody id="schedule-body">{scheduleRows.map((row,i)=><tr key={i}><td>{row.time}</td><td>{row.event}</td><td>{scheduleLocation(row.location)}</td></tr>)}</tbody> : children;
 }
 export function RemoteSessions({children}:{children:ReactNode}) {
   const rows=useCollection('session_info');

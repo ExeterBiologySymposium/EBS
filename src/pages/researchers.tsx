@@ -121,7 +121,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div>
 <h2>{"Research support"}</h2>
 <p>{"Every registered researcher gets full access to the EBS resource library and organizing team support — no prior research experience needed to get started."}</p>
-<p>{"The organizing team is available throughout the research cycle, whether you're presenting in-person or online, from October through Symposium Day in May."}</p>
+<p>{"The organizing team is available throughout the research cycle, whether you're presenting in-person or online, from October through Symposium Day on April 25th."}</p>
 <a className={"button primary"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"} rel={"noopener noreferrer"} target={"_blank"}>{"\n            Register Your Interest\n\n"}</a>
 </div>
 <div>

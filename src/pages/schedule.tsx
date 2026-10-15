@@ -27,32 +27,42 @@ export default function PageContent() { return <div className="page-layout layou
 <td>{"Phelps Lobby"}</td>
 </tr>
 <tr>
-<td>{"9:00 – 9:30 AM"}</td>
-<td>{"Opening Ceremony"}</td>
+<td>{"9:00 – 9:10 AM"}</td>
+<td>{"Symposium Orientation & Logistics"}</td>
 <td>{"Grainger"}</td>
 </tr>
 <tr>
-<td>{"9:30 – 11:30 AM"}</td>
+<td>{"9:10 – 9:15 AM"}</td>
+<td>{"Faculty Welcome Address"}</td>
+<td>{"Grainger"}</td>
+</tr>
+<tr>
+<td>{"9:15 – 10:15 AM"}</td>
+<td>{"Opening Keynote Presentation"}</td>
+<td>{"Grainger"}</td>
+</tr>
+<tr>
+<td>{"10:15 AM – 12:15 PM"}</td>
 <td>{"Morning Poster Session"}</td>
 <td>{"Grainger"}</td>
 </tr>
 <tr>
-<td>{"11:30 AM – 12:30 PM"}</td>
+<td>{"12:15 – 1:15 PM"}</td>
 <td>{"Lunch"}</td>
 <td>{"Grainger"}</td>
 </tr>
 <tr>
-<td>{"12:30 – 2:00 PM"}</td>
+<td>{"1:15 – 2:45 PM"}</td>
 <td>{"Afternoon Poster Session"}</td>
 <td>{"Grainger"}</td>
 </tr>
 <tr>
-<td>{"2:00 – 2:30 PM"}</td>
+<td>{"2:45 – 3:15 PM"}</td>
 <td>{"Cleanup / Judging Deliberation"}</td>
 <td>{"Grainger"}</td>
 </tr>
 <tr>
-<td>{"2:30 – 3:00 PM"}</td>
+<td>{"3:15 – 3:45 PM"}</td>
 <td>{"Closing Ceremony"}</td>
 <td>{"Grainger"}</td>
 </tr>
@@ -76,7 +86,7 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 <div className={"session-item"}>
 <h3>{"Who Should Attend"}</h3>
-<p>{"Presenting students, judges, volunteers, guest speakers, and visiting school groups are all welcome, in-person or online."}</p>
+<p>{"Presenting students, judges, guest speakers, and visiting school groups are all welcome, in-person or online."}</p>
 </div>
 </div></RemoteSessions>
 </div>

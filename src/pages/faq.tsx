@@ -128,7 +128,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"How are projects submitted and reviewed?"}</summary>
 <div id={"r4"}>
-<p>{"Students submit a structured abstract in March 2027. Abstracts are reviewed by the EBS abstract review committee (composed of EBS organizing team members and volunteer reviewers). All students who submit a complete, original abstract in scope for EBS are expected to be accepted to present, though we may provide feedback for revision in borderline cases. Acceptance notifications go out before April 25th, 2027."}</p>
+<p>{"Students submit a structured abstract in March 2027. Abstracts are reviewed by the EBS abstract review committee (composed of EBS organizing team members and reviewers). All students who submit a complete, original abstract in scope for EBS are expected to be accepted to present, though we may provide feedback for revision in borderline cases. Acceptance notifications go out before April 25th, 2027."}</p>
 </div>
 </details>
 </div>
@@ -154,13 +154,13 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"What should I bring to Symposium Day?"}</summary>
 <div id={"sy2"}>
-<p>{"Poster presenters should bring their printed poster (size specifications will be provided). Oral presenters should bring a laptop with slides loaded (backup on USB recommended). Wear professional or business casual attire — you are presenting original research to professionals. All other materials will be provided at check-in."}</p>
+<p>{"Poster presenters should bring their printed poster (size specifications will be provided). Students presenting online should also have a reliable camera and microphone for the live poster walkthrough. Wear professional or business casual attire — you are presenting original research to professionals. All other materials will be provided at check-in."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"Will there be food at the symposium?"}</summary>
 <div id={"sy3"}>
-<p>{"Yes. Lunch will be provided for all registered participants, judges, and volunteers. Light refreshments will be available throughout the day. Please indicate any dietary restrictions when you register — we will do our best to accommodate them."}</p>
+<p>{"Yes. Lunch will be provided for all registered participants, judges, and event staff. Light refreshments will be available throughout the day. Please indicate any dietary restrictions when you register — we will do our best to accommodate them."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>

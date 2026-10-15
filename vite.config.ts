@@ -10,7 +10,7 @@ const routes = [
   'about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html',
   'opensource.html', 'python.html', 'register.html', 'researchers.html',
   'resources.html', 'rstudio.html', 'schedule.html', 'schools.html',
-  'student-signup.html', 'team.html', 'volunteer-signup.html'
+  'student-signup.html', 'team.html'
 ];
 
 function reactShell() {

@@ -19,7 +19,7 @@ Student-run research symposium website for middle and high school students. 100%
 - Custom `reactShell` plugin transforms HTML files into React pages
 - `appType: 'mpa'` for multi-page setup
 - Prerender script generates static HTML at build time
-- Entry points: 15 pages (about, datascience, faq, index, judges, opensource, python, register, researchers, resources, rstudio, schedule, schools, student-signup, team, volunteer-signup)
+- Entry points: 15 pages (about, datascience, faq, index, judges, opensource, python, register, researchers, resources, rstudio, schedule, schools, student-signup, team)
 
 ### File Structure
 ```
@@ -49,7 +49,7 @@ public/
 - **Python, RStudio**: Language-specific resources
 - **Judges, Researchers, Schools**: Participant guides
 - **Register**: Registration page
-- **Student-signup, Volunteer-signup**: Forms (Google Forms links)
+- **Student-signup**: Student registration form (Google Forms link)
 - **Open source**: Open source policy page
 
 ## Key Features
@@ -76,12 +76,12 @@ public/
 
 ## Domain Model
 - **Pages**: Static content + interactive components
-- **Users**: Visitors (students, teachers, judges, volunteers)
+- **Users**: Visitors (students, teachers, and judges)
 - **Data**: Mostly static HTML/React content + search index
-- **Forms**: Google Forms embedded (register, student-signup, volunteer-signup)
+- **Forms**: Google Forms embedded (register and student-signup)
 
 ## External Integrations
-- **Google Forms**: Used for registration (register.html, student-signup.html, volunteer-signup.html)
+- **Google Forms**: Used for registration (register.html, student-signup.html)
 - **Images**: Stored in public/images/ (team photos, resource photos, event images)
 - **SEO**: seo.config.json for meta tags, robots.txt, sitemap.xml
 
@@ -132,7 +132,7 @@ public/
 
 ## External Resources
 - **Images**: All stored in public/images/ (team, data analysis, posters, planning)
-- **Google Forms**: Student registration, volunteer registration, school registration (embedded in pages)
+- **Google Forms**: Student registration and school registration (embedded in pages)
 - **Email**: exeterbiologysymposium@gmail.com (in footer)
 
 ## Current Focus

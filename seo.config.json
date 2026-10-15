@@ -73,10 +73,8 @@
     "Phillips Exeter Academy Genetics and Biotech Club",
     "PEA Genetics and Biotech Club",
     "Exeter Genetics and Biotech Club",
-    "volunteer to judge student biology research",
-    "student research symposium judge opportunities",
-    "biology outreach opportunities for researchers",
-    "volunteer to support high school biology research"
+    "biology research judging opportunities",
+    "student research symposium judge opportunities"
   ],
   "pages": {
     "index.html": {
@@ -208,10 +206,10 @@
       ]
     },
     "judges.html": {
-      "title": "Volunteer as a Research Judge | EBS",
+      "title": "Become an EBS Research Judge | EBS",
       "description": "Judge student biology research posters and presentations at the Exeter Biology Symposium 2027, in person or online. Support first-time student researchers.",
       "terms": [
-        "volunteer to judge student biology research",
+        "biology research judging opportunities",
         "student research symposium judge opportunities"
       ]
     },
@@ -225,17 +223,9 @@
         "where to present high school biology research"
       ]
     },
-    "volunteer-signup.html": {
-      "title": "Volunteer and Judge Signup | EBS",
-      "description": "Volunteer as a speaker, reviewer, or judge for student biology research at Exeter Biology Symposium 2027. Share feedback in person or online.",
-      "terms": [
-        "biology outreach opportunities for researchers",
-        "volunteer to support high school biology research"
-      ]
-    },
     "register.html": {
       "title": "Register for Exeter Biology Symposium",
-      "description": "Choose student, school, volunteer, or judge registration for Exeter Biology Symposium 2027. In-person and online participation planned.",
+      "description": "Choose student, school, or judge registration for Exeter Biology Symposium 2027. In-person and online participation planned.",
       "terms": [
         "Exeter Biology Symposium registration"
       ]

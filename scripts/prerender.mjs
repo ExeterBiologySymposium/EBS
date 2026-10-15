@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
-const routes = ['about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html', 'opensource.html', 'python.html', 'register.html', 'researchers.html', 'resources.html', 'rstudio.html', 'schedule.html', 'schools.html', 'student-signup.html', 'team.html', 'volunteer-signup.html'];
+const routes = ['about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html', 'opensource.html', 'python.html', 'register.html', 'researchers.html', 'resources.html', 'rstudio.html', 'schedule.html', 'schools.html', 'student-signup.html', 'team.html'];
 const serverOut = resolve(root, '.vite-ssr');
 
 await build({ root, configFile: false, plugins: [react()], build: { ssr: 'src/entry-server.tsx', outDir: serverOut, emptyOutDir: true } });

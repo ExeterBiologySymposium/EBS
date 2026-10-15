@@ -27,7 +27,7 @@
   {
     "title": "Register Interest",
     "url": "register.html",
-    "description": "Register your interest in the Exeter Biology Symposium 2027. Students, schools, researchers, and judges welcome."
+    "description": "Register your interest in the Exeter Biology Symposium 2027. Students, schools, and judges welcome."
   },
   {
     "title": "EBS Open Source",
@@ -55,11 +55,6 @@
     "description": "Information for schools and educators interested in sending students to the Exeter Biology Symposium 2027."
   },
   {
-    "title": "Volunteer Signup",
-    "url": "volunteer-signup.html",
-    "description": "Volunteer and judge registration for the Exeter Biology Symposium 2027. Support student researchers as a speaker, reviewer, or judge, in-person or online."
-  },
-  {
     "title": "Data Science Curriculum",
     "url": "datascience.html",
     "description": "A self-contained EBS data science curriculum hub for biology research, with separate RStudio and Python tracks."
@@ -77,6 +72,6 @@
   {
     "title": "For Judges",
     "url": "judges.html",
-    "description": "Volunteer as a judge at the Exeter Biology Symposium 2027. Evaluate student research posters and presentations."
+    "description": "Join the judge team at the Exeter Biology Symposium 2027. Evaluate student research posters and presentations."
   }
 ]

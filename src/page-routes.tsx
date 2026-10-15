@@ -12,7 +12,6 @@ import schedule from './pages/schedule';
 import schools from './pages/schools';
 import studentSignup from './pages/student-signup';
 import team from './pages/team';
-import volunteerSignup from './pages/volunteer-signup';
 export const pageComponents = {
   'about.html': about,
   'datascience.html': datascience,
@@ -28,5 +27,4 @@ export const pageComponents = {
   'schools.html': schools,
   'student-signup.html': studentSignup,
   'team.html': team,
-  'volunteer-signup.html': volunteerSignup
 };

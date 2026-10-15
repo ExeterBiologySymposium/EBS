@@ -77,25 +77,25 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"grid columns-4"}>
 <div className={"person text-block"}>
 <div aria-label={"Photo not provided"} className={"portrait"} role={"img"}><span className={"portrait-placeholder"}></span></div>
-<h3>{"Media Director"}</h3>
-<p className={"role"}>{"Design & Social Media"}</p>
+<h3>{"Media Associate"}</h3>
+<p className={"role"}>{"Design, media & social communication"}</p>
 <p className={"grade"}>{"Class of 2028"}</p>
 </div>
 <div className={"person text-block"}>
 <div aria-label={"Photo not provided"} className={"portrait"} role={"img"}><span className={"portrait-placeholder"}></span></div>
-<h3>{"Abstract Reviewer"}</h3>
-<p className={"role"}>{"Submissions & Review"}</p>
+<h3>{"Research Associate"}</h3>
+<p className={"role"}>{"Research curriculum & review"}</p>
 <p className={"grade"}>{"Class of 2028"}</p>
 </div>
 <div className={"person text-block"}>
 <div aria-label={"Photo not provided"} className={"portrait"} role={"img"}><span className={"portrait-placeholder"}></span></div>
-<h3>{"School Partner"}</h3>
-<p className={"role"}>{"Phillips Academy"}</p>
+<h3>{"Outreach Associate"}</h3>
+<p className={"role"}>{"Schools & community partnerships"}</p>
 <p className={"grade"}>{"Class of 2027"}</p>
 </div>
 </div>
 <div className={"callout"}>
-<p><strong>{"Note:"}</strong>{" Team member names and headshots will be added when the organizing committee is finalized in Fall 2026. If you are interested in joining the organizing team, see below."}</p>
+<p><strong>{"Note:"}</strong>{" Team member names and headshots will be added when the organizing committee is finalized in Fall 2026."}</p>
 </div>
 <h2 className={"team-section-title"}>{"Faculty Advisors"}</h2>
 <p>{"EBS is supported by dedicated faculty at Phillips Exeter Academy who believe in student-led scientific inquiry and provide guidance, oversight, and institutional support."}</p>
@@ -106,39 +106,6 @@ export default function PageContent() { return <div className="page-layout layou
 <h3>{"Dr. Summer Morrill"}</h3>
 <p className={"role"}>{"Biology Department"}</p>
 <p className={"faculty-card__dept"}>{"Phillips Exeter Academy"}</p>
-</div>
-</div>
-</div>
-<div className={"grid columns-2"}>
-<div>
-<h2>{"Join the Organizing Team"}</h2>
-<p>{"The Genetics and Biotech Club is actively recruiting students to help organize EBS 2027. No prior event experience needed — just enthusiasm for biology, science communication, and making research accessible to your peers."}</p>
-<p>{"We have roles in research curriculum development, outreach, design, logistics, and more. If you care about this mission, we want to hear from you."}</p>
-<a className={"button primary"} href={"register.html"}>{"\n            Express Interest in Joining\n\n"}</a>
-</div>
-<div>
-<div className={"text-block"}>
-<h3>{"Open Roles"}</h3>
-<div className={"checklist"}>
-<div className={"checklist__item"}>
-<span>{"Research curriculum developers"}</span>
-</div>
-<div className={"checklist__item"}>
-<span>{"School and community outreach coordinators"}</span>
-</div>
-<div className={"checklist__item"}>
-<span>{"Graphic designers and social media managers"}</span>
-</div>
-<div className={"checklist__item"}>
-<span>{"Abstract review committee members"}</span>
-</div>
-<div className={"checklist__item"}>
-<span>{"Sponsorship and partnerships leads"}</span>
-</div>
-<div className={"checklist__item"}>
-<span>{"Day-of logistics and volunteer coordinators"}</span>
-</div>
-</div>
 </div>
 </div>
 </div>
