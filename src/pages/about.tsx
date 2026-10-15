@@ -3,13 +3,15 @@ import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-
 export default function PageContent() { return <div className="page-layout layout-about">
 <section className={"page-heading"}>
 <div className={"shell"}>
+<img className="about-exeter-mark" src="/Phillips Exeter Academy-selected-assets/PEA_ExeterMark_Red_Lg.png" alt="Exeter" width={2400} height={779} decoding="async" />
 <p className="eyebrow">About EBS</p>
 <h1>Opening biology research<br/>to its next generation.</h1>
 <p className={"lead"}>{"A free dry-lab biology research program and symposium, organized by students in the Genetics and Biotechnology Club at Phillips Exeter Academy."}</p>
 </div>
 </section>
 <img className="about-cover" src="/images/Genetics Club Photos/EGBC 2.jpg" alt="Students from the Genetics and Biotechnology Club at the Broad Institute" />
-<section className={"section"}>
+<section className={"section about-origin"}>
+<img className="about-origin-seal" src="/Phillips Exeter Academy-selected-assets/PEA_Seal_LtGray_Lg.png" alt="" aria-hidden="true" loading="lazy" decoding="async" />
 <div className={"shell reading"}>
 <div>
 <h2>{"Why we started EBS"}</h2>
@@ -136,7 +138,7 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 </div>
 </section>
-<section className={"section"}>
+<section className={"section about-register"}>
 <div className={"shell"}>
 <div className={"next-step"}>
 <h2>{"Take part on April 25th, 2027"}</h2>
