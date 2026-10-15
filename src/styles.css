@@ -114,5 +114,7 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .page-layout .button:not(.secondary):hover{background:var(--harkness)}
 .page-layout code,.page-layout pre,.page-layout pre code{font-size:16px}
 .page-layout h5{font-size:18px;line-height:1.35}
+.portrait--initials{display:grid;place-items:center;color:var(--muted);background:var(--bg)}
+.portrait--initials span{font-size:clamp(36px,5vw,64px);line-height:1;letter-spacing:-.04em}
 .header-right .button,.button{white-space:normal}
 @media(min-width:768px) and (max-width:900px){.desktop-nav{gap:12px}.site-header{gap:18px}.header-right .button{min-width:112px;padding-inline:12px}}

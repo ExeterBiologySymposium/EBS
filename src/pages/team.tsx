@@ -1,4 +1,12 @@
-import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
+const organizingTeam = [
+  {name:'Esther Kim',role:'Outreach Associate',year:'2029',initials:'EK'},
+  {name:'Derek Geng',role:'Outreach Associate',year:'2030',initials:'DG'},
+  {name:'Margaux Morgan',role:'Outreach Associate',year:'2029',initials:'MM'},
+  {name:'Scarlett Reddy',role:'Research Associate',year:'2029',initials:'SR'},
+  {name:'Dowan Kim',role:'Research Associate',year:'2029',initials:'DK'},
+  {name:'Avni Murarka',role:'Research Associate',year:'2028',initials:'AM'},
+  {name:'Olivia Wang',role:'Social Media Associate',year:'2029',initials:'OW'}
+];
 
 export default function PageContent() { return <div className="page-layout layout-team">
 <section className={"page-heading"}>
@@ -9,7 +17,7 @@ export default function PageContent() { return <div className="page-layout layou
 </section>
 <section className={"section"}>
 <div className={"shell"}>
-<h2 className={"team-section-title"}>{"Executive Committee"}</h2>
+<h2 className={"team-section-title"}>{"Leadership"}</h2>
 <div className={"grid columns-4"}>
 <div className={"person text-block"}>
 <div className={"portrait"}><img alt={"Jaiden Kim"} decoding={"async"} height={"668"} loading={"lazy"} src={"/images/team/jaiden-kim.png"} width={"514"} /></div>
@@ -66,31 +74,6 @@ export default function PageContent() { return <div className="page-layout layou
 </details>
 </div>
 </div>
-<h2 className={"team-section-title"}>{"Associate Members"}</h2>
-<div className={"grid columns-3"}>
-<section className={"text-block"}>
-<h3>{"Outreach Associates"}</h3>
-<ul>
-<li>{"Esther Kim ’29"}</li>
-<li>{"Derek Geng ’30"}</li>
-<li>{"Margaux Morgan ’29"}</li>
-</ul>
-</section>
-<section className={"text-block"}>
-<h3>{"Research Associates"}</h3>
-<ul>
-<li>{"Scarlett Reddy ’29"}</li>
-<li>{"Dowan Kim ’29"}</li>
-<li>{"Avni Murarka ’28"}</li>
-</ul>
-</section>
-<section className={"text-block"}>
-<h3>{"Social Media Associate"}</h3>
-<ul>
-<li>{"Olivia Wang ’29"}</li>
-</ul>
-</section>
-</div>
 <h2 className={"team-section-title"}>{"Faculty Advisors"}</h2>
 <p>{"EBS is supported by dedicated faculty at Phillips Exeter Academy who believe in student-led scientific inquiry and provide guidance, oversight, and institutional support."}</p>
 <div className={"grid columns-2"}>
@@ -98,10 +81,21 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"portrait"}><img alt={"Dr. Summer Morrill teaching biology students"} decoding={"async"} height={"683"} loading={"lazy"} src={"images/team/Dr. Morrill.jpg"} width={"1024"} /></div>
 <div>
 <h3>{"Dr. Summer Morrill"}</h3>
-<p className={"role"}>{"Biology Department"}</p>
+<p className={"role"}>{"Biology Instructor"}</p>
+<p className={"faculty-card__dept"}>{"Alfred H. Hayes ’25 and Jean M. Hayes Teaching Chair in Science"}</p>
+<p className={"faculty-card__dept"}>{"MIT Ph.D. Biology ’20"}</p>
 <p className={"faculty-card__dept"}>{"Phillips Exeter Academy"}</p>
 </div>
 </div>
+</div>
+<h2 className={"team-section-title"}>{"Organizing Team"}</h2>
+<div className={"grid columns-4"}>
+{organizingTeam.map(member=><div className="person text-block" key={member.name}>
+<div className="portrait portrait--initials" aria-hidden="true"><span>{member.initials}</span></div>
+<h3>{member.name}</h3>
+<p className="role">{member.role}</p>
+<p className="grade">Class of {member.year}</p>
+</div>)}
 </div>
 <figure className={"group-photo"}>
 <img alt={"EGBC club members visiting Broad Institute"} decoding={"async"} height={"2752"} loading={"lazy"} src={"/images/team/ebs-team-broad-institute.jpg"} width={"4128"} />
