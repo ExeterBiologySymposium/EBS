@@ -70,9 +70,9 @@
     "PEA student research symposium",
     "student-led biology symposium at Phillips Exeter Academy",
     "biology research opportunities at Phillips Exeter Academy",
-    "Phillips Exeter Academy Genetics and Biotech Club",
-    "PEA Genetics and Biotech Club",
-    "Exeter Genetics and Biotech Club",
+    "Phillips Exeter Academy Genetics and Biotechnology Club",
+    "PEA Genetics and Biotechnology Club",
+    "Exeter Genetics and Biotechnology Club",
     "biology research judging opportunities",
     "student research symposium judge opportunities"
   ],
@@ -94,7 +94,7 @@
     },
     "about.html": {
       "title": "About EBS | Student Biology at Phillips Exeter Academy",
-      "description": "EBS, organized by Phillips Exeter Academy's Genetics and Biotech Club, opens free dry-lab biology research to all middle and high school students.",
+      "description": "EBS, organized by Phillips Exeter Academy's Genetics and Biotechnology Club, opens free dry-lab biology research to all middle and high school students.",
       "terms": [
         "student biology symposium at Phillips Exeter Academy",
         "Phillips Exeter Academy biology symposium",
@@ -107,12 +107,12 @@
       ]
     },
     "team.html": {
-      "title": "EBS Team | Phillips Exeter Academy Genetics and Biotech Club",
-      "description": "Meet the Phillips Exeter Academy (PEA) students in the Genetics and Biotech Club who organize EBS, plus faculty advisors supporting first-time researchers.",
+      "title": "EBS Team | Phillips Exeter Academy Genetics and Biotechnology Club",
+      "description": "Meet the Phillips Exeter Academy (PEA) students in the Genetics and Biotechnology Club who organize EBS, plus faculty advisors supporting first-time researchers.",
       "terms": [
-        "Phillips Exeter Academy Genetics and Biotech Club",
-        "PEA Genetics and Biotech Club",
-        "Exeter Genetics and Biotech Club"
+        "Phillips Exeter Academy Genetics and Biotechnology Club",
+        "PEA Genetics and Biotechnology Club",
+        "Exeter Genetics and Biotechnology Club"
       ]
     },
     "schedule.html": {

@@ -14,7 +14,7 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"page-heading"}>
 <div className={"shell"}>
 <h1>{"Our team"}</h1>
-<p className={"lead"}>{"EBS is built and run entirely by students in the Genetics and Biotech Club at Phillips Exeter Academy (PEA). We are grateful for the support of our faculty advisors and the broader Exeter community."}</p>
+<p className={"lead"}>{"EBS is built and run entirely by students in the Genetics and Biotechnology Club at Phillips Exeter Academy (PEA). We are grateful for the support of our faculty advisors and the broader Exeter community."}</p>
 </div>
 </section>
 <section className={"section"}>
@@ -91,6 +91,7 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 </div>
 <h2 className={"team-section-title"}>{"Organizing Team"}</h2>
+<p>{"The organizing team supports research curriculum, outreach, logistics, and media."}</p>
 <div className={"grid organizing-team-grid"}>
 {organizingTeam.map(member=><div className="person text-block" key={member.name}>
 <div className="portrait portrait--initials" aria-hidden="true"><span>{member.initials}</span></div>
@@ -112,7 +113,7 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"section"}>
 <div className={"shell"}>
 <div className={"next-step"}>
-<h2>{"The Genetics and Biotech Club"}</h2>
+<h2>{"The Genetics and Biotechnology Club"}</h2>
 <p>{"Have a question or want to connect with the team? We'd love to hear from you."}</p>
 <div className={"actions"}>
 <a className={"button primary"} href={"faq.html#contact"}>{"Contact the Team"}</a>

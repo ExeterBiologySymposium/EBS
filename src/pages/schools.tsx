@@ -8,12 +8,12 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"actions"}><a className={"button"} href={"https://forms.gle/wXrjJJb6XEtWvqEu8"} rel={"noopener noreferrer"} target={"_blank"}>{"Register your school"}</a></div><p className={"external-form-note"}>{"Application opens in a new tab. Completion happens in Google Forms."}</p>
 <p className={"small"}><a href={"https://forms.gle/vgtVrsBm1UbBhwtv9"} rel={"noopener noreferrer"} target={"_blank"}>{"Not a teacher or administrator? Register individually"}</a></p>
 </section>
-<figure className="context-media context-media--schools"><img src="/images/Genetics Club Photos/EGBC Yearbook Photo.jpg" alt="Students from the Genetics and Biotech Club together at school" loading="lazy" /></figure>
+<figure className="context-media context-media--schools"><img src="/images/Genetics Club Photos/EGBC Yearbook Photo.jpg" alt="Students from the Genetics and Biotechnology Club together at school" loading="lazy" /></figure>
 <div className={"school-layout"}>
 <section className={"reading"}>
 <h2>{"Research that fits your school"}</h2><p>{"Students can investigate biology through computational or literature-based projects. A standard laptop and an internet connection are enough to get started."}</p><p>{"Research guides and lectures can be completed asynchronously, so each student or classroom can set their own pace. Students practise literature reading, data analysis, scientific writing, and oral communication, and receive feedback from biologists, graduate students, and industry professionals."}</p>
 <h2>{"Who can participate"}</h2><ul className={"plain-list"}><li>{"All middle and high school students, with no prior research experience required."}</li><li>{"Individual projects or teams of up to three students."}</li><li>{"All areas of biology, including genetics, ecology, neuroscience, and epidemiology."}</li><li>{"Original research that is dry-lab in nature."}</li></ul>
-<h2>{"What students receive"}</h2><p>{"Students gain experience presenting a biological study and discussing it with reviewers. Participants receive a certificate of participation; top presenters receive awards recognized by the Phillips Exeter Academy Genetics and Biotech Club."}</p>
+<h2>{"What students receive"}</h2><p>{"Students gain experience presenting a biological study and discussing it with reviewers. Participants receive a certificate of participation; top presenters receive awards recognized by the Phillips Exeter Academy Genetics and Biotechnology Club."}</p>
 </section>
 <aside aria-labelledby={"practical-title"} className={"school-practical"}><h2 id={"practical-title"}>{"Practical details"}</h2><dl>
 <div><dt>{"Cost"}</dt><dd>{"Participation is free. Participants cover their own travel costs; online presentation is available."}</dd></div>

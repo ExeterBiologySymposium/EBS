@@ -28,14 +28,14 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"What is the Exeter Biology Symposium?"}</summary>
 <div id={"g1"}>
-<p>{"EBS is a student-organized research symposium hosted by the Genetics and Biotech Club at Phillips Exeter Academy. It gives students with little or no prior research experience the opportunity to conduct, present, and discuss original dry-lab biological research alongside peers and judges. The inaugural event is planned for April 25th, 2027, with both in-person and online attendance options available the same day."}</p>
+<p>{"EBS is a student-organized research symposium hosted by the Genetics and Biotechnology Club at Phillips Exeter Academy. It gives students with little or no prior research experience the opportunity to conduct, present, and discuss original dry-lab biological research alongside peers and judges. The inaugural event is planned for April 25th, 2027, with both in-person and online attendance options available the same day."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"What is \"dry-lab\" research?"}</summary>
 <div id={"g2"}>
 <p>{"Dry-lab research refers to research conducted without physical laboratory experiments or wet-lab techniques (pipettes, cell cultures, reagents, etc.). Instead, it uses computational analysis, publicly available datasets, literature synthesis, bioinformatics tools, and statistical modeling. Examples include genomics studies using publicly available sequence databases, meta-analyses of existing literature, disease modeling from epidemiological data, and computational protein structure prediction."}</p>
-<p>{"Dry-lab research is ideal for high school and middle school students because it requires a standard laptop rather than specialized lab equipment, and many powerful tools and datasets are freely accessible online."}</p>
+<p>{"Dry-lab research is ideal for high school and middle school students because it requires only a standard laptop rather than specialized lab equipment, and many powerful tools and datasets are freely accessible online."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
@@ -47,7 +47,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"Who organizes EBS?"}</summary>
 <div id={"g4"}>
-<p>{"EBS is organized entirely by students in the Genetics and Biotech Club at Phillips Exeter Academy, with guidance from faculty advisors. The co-heads are "}<strong>{"Adrian Chan"}</strong>{", "}<strong>{"Jaiden Kim"}</strong>{", "}<strong>{"Reya Satam"}</strong>{", and "}<strong>{"Luke Wang"}</strong>{". Faculty oversight is provided by "}<strong>{"Summer Morrill"}</strong>{" (Biology Department, Phillips Exeter Academy). The organizing committee also includes working groups covering research curriculum, outreach, logistics, media, and abstract review. See the "}<a href={"team.html"}>{"Team page"}</a>{" for details."}</p>
+<p>{"EBS is organized entirely by students in the Genetics and Biotechnology Club at Phillips Exeter Academy, with guidance from faculty advisors. The co-heads are "}<strong>{"Adrian Chan"}</strong>{", "}<strong>{"Jaiden Kim"}</strong>{", "}<strong>{"Reya Satam"}</strong>{", and "}<strong>{"Luke Wang"}</strong>{". Faculty oversight is provided by "}<strong>{"Summer Morrill"}</strong>{" (Biology Department, Phillips Exeter Academy). The organizing team supports research curriculum, outreach, logistics, and media. See the "}<a href={"team.html"}>{"Team page"}</a>{" for details."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
@@ -64,7 +64,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"Do I need prior research experience to participate?"}</summary>
 <div id={"s1"}>
-<p>{"No. EBS is specifically designed for students who have not done biological research before. The entire program — from our resource library to organizing team support — is built around helping beginners. If you have never read a scientific paper or used a research database, that is exactly the starting point EBS is built for."}</p>
+<p>{"No. EBS is specifically designed for students who have not done biological research before. The entire program — from our resource library to organizing team support — is built around helping new researchers. If you have never read a scientific paper or used a research database, that is exactly the starting point EBS is built for."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
@@ -128,7 +128,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"How are projects submitted and reviewed?"}</summary>
 <div id={"r4"}>
-<p>{"Students submit a structured abstract in March 2027. Abstracts are reviewed by the EBS abstract review committee (composed of EBS organizing team members and reviewers). All students who submit a complete, original abstract in scope for EBS are expected to be accepted to present, though we may provide feedback for revision in borderline cases. Acceptance notifications go out before April 25th, 2027."}</p>
+<p>{"Students submit a structured abstract in March 2027. Abstracts are reviewed by EBS leadership. All students who submit a complete, original abstract in scope for EBS are expected to be accepted to present, though we may provide feedback for revision in borderline cases. Acceptance notifications go out before April 25th, 2027."}</p>
 </div>
 </details>
 </div>

@@ -5,16 +5,16 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"shell"}>
 <p className="eyebrow">About EBS</p>
 <h1>Opening biology research<br/>to its next generation.</h1>
-<p className={"lead"}>{"A free introduction to dry-lab biology research, organized by students in the Genetics and Biotech Club at Phillips Exeter Academy."}</p>
+<p className={"lead"}>{"A free dry-lab biology research program and symposium, organized by students in the Genetics and Biotechnology Club at Phillips Exeter Academy."}</p>
 </div>
 </section>
-<img className="about-cover" src="/images/Genetics Club Photos/EGBC 2.jpg" alt="Students from the Genetics and Biotech Club at the Broad Institute" />
+<img className="about-cover" src="/images/Genetics Club Photos/EGBC 2.jpg" alt="Students from the Genetics and Biotechnology Club at the Broad Institute" />
 <section className={"section"}>
 <div className={"shell reading"}>
 <div>
 <h2>{"Why we started EBS"}</h2>
 <p>{"Across the nation, talented high school and middle school students with a passion for biology   face a frustrating catch-22 when trying to enter research: the already-rare research opportunities often end up in the hands of those with prior research experience. In other words,  the very students who need a first opportunity are excluded from getting one.\n"}</p>
-<p>{"We saw talented, curious peers who simply didn't know where to start — not because they lacked ability, but because no structured pathway existed for beginners. To remedy that, the Exeter Genetics and Biotech Club founded EBS:  a symposium specifically for beginner researchers, built around the accessible and rigorous world of dry-lab biology: computational analysis, bioinformatics, statistical modeling, and systematic literature reviews.\n"}</p>
+<p>{"We saw talented, curious peers who simply didn't know where to start — not because they lacked ability, but because no structured pathway existed for beginners. To remedy that, the Exeter Genetics and Biotechnology Club founded EBS:  a symposium specifically for beginner researchers, built around the accessible and rigorous world of dry-lab biology: computational analysis, bioinformatics, statistical modeling, and systematic literature reviews.\n"}</p>
 </div>
 </div>
 </section>
@@ -30,7 +30,7 @@ export default function PageContent() { return <div className="page-layout layou
 <span><strong>{"Bioinformatics"}</strong>{" — analyzing genomic, proteomic, or evolutionary data"}</span>
 </div>
 <div className={"checklist__item"}>
-<span><strong>{"Computational modeling"}</strong>{" — simulating biological systems or disease spread"}</span>
+<span><strong>{"Computational modeling"}</strong>{" — simulating biological systems or disease outbreaks"}</span>
 </div>
 <div className={"checklist__item"}>
 <span><strong>{"Statistical analysis"}</strong>{" — working with public health or ecology datasets"}</span>
@@ -47,7 +47,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"grid"}>
 <div className={"text-block"}>
 <h3>{"No Lab Required"}</h3>
-<p>{"All you need is a computer, an internet connection, and curiosity."}</p>
+<p>{"All you need is a computer, an internet connection, and a question."}</p>
 </div>
 <div className={"text-block"}>
 <h3>{"Real Science"}</h3>
@@ -74,14 +74,14 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"step__num"}>{"1"}</div>
 <div className={"step__body"}>
 <p className={"step__title"}>{"Research & Preparation (Fall 2026 – April 25th, 2027)"}</p>
-<p>{"Students receive resources and structured guidance to develop their research question, conduct their study, and prepare their presentation."}</p>
+<p>{"Students receive resources and structured guidance from the EBS leadership and Organizing Team to develop their research question, conduct their study, and prepare their presentation."}</p>
 </div>
 </div>
 <div className={"step"}>
 <div className={"step__num"}>{"2"}</div>
 <div className={"step__body"}>
 <p className={"step__title"}>{"Abstract Submission (March 2027)"}</p>
-<p>{"Participants submit a brief abstract summarizing their research question, methodology, and preliminary findings. All abstracts are reviewed before acceptance."}</p>
+<p>{"Participants submit a brief abstract summarizing their research question, methodology, and preliminary findings. All abstracts are reviewed by EBS leadership in preparation for the symposium."}</p>
 </div>
 </div>
 <div className={"step"}>
@@ -95,7 +95,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"step__num"}>{"4"}</div>
 <div className={"step__body"}>
 <p className={"step__title"}>{"Awards & Networking"}</p>
-<p>{"The day concludes with an awards ceremony and open networking session, connecting students with researchers and industry professionals."}</p>
+<p>{"The day concludes with an awards ceremony."}</p>
 </div>
 </div>
 </div>
@@ -104,11 +104,11 @@ export default function PageContent() { return <div className="page-layout layou
 <div>
 <div className={"text-block"}>
 <h3>{"\n\n                Poster Presentation\n              "}</h3>
-<p>{"Students display their research on a physical poster and discuss their work with judges, peers, and attendees during a dedicated poster session. This is the primary format for EBS 2027."}</p>
+<p>{"Students display their research on a physical poster and discuss their work with judges, peers, and attendees during dedicated poster sessions. This is the primary format for EBS 2027."}</p>
 </div>
 <div className={"text-block"}>
-<h3>{"\n\n                Panel Discussion\n              "}</h3>
-<p>{"A moderated discussion featuring invited researchers speaking about pathways into biological research — open to all attendees."}</p>
+<h3>{"\n\n                Keynote Speaker\n              "}</h3>
+<p>{"A distinguished keynote speaker will speak on their research experience then hold a moderated discussion with Symposium participants."}</p>
 </div>
 </div>
 </div>
@@ -123,15 +123,15 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"grid columns-3"}>
 <div className={"text-block"}>
 <h3>{"Accessibility"}</h3>
-<p>{"Research should be open to everyone. We actively remove barriers — real and perceived — that prevent students from engaging with science."}</p>
+<p>{"Research should be open to everyone. We hope that through this program we are able to remove the physical and perceptual barriers to starting your first research project."}</p>
 </div>
 <div className={"text-block"}>
 <h3>{"Rigor"}</h3>
-<p>{"We hold student work to real scientific standards while providing the support needed to meet them. Beginner-friendly does not mean less rigorous."}</p>
+<p>{"We aim for every researcher to leave EBS with a rigorous research poster graded by professional researchers. We will ensure that every participant will have the support they need to create a professional poster."}</p>
 </div>
 <div className={"text-block"}>
 <h3>{"Community"}</h3>
-<p>{"Science thrives through collaboration and discourse. EBS fosters a generous, collegial community where students learn as much from each other as from the researchers who take part."}</p>
+<p>{"Science thrives through collaboration and discourse. As present at Exeter, EBS fosters a generous, scholarly community where students learn from both our team and their fellow researchers."}</p>
 </div>
 </div>
 </div>

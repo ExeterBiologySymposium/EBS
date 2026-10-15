@@ -4,7 +4,7 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"page-heading"}>
 <div className={"shell"}>
 <h1>{"RStudio and Python for Biology Research"}</h1>
-<p className={"lead"}>{"A full beginner curriculum for dry-lab biology projects: clean messy datasets, analyze them in RStudio or Python, and produce reproducible figures for an EBS poster."}</p>
+<p className={"lead"}>{"Using either R or Python, EBS offers a full beginner curriculum to the coding tools needed to conduct dry-lab biology projects from data analysis to producing reproducible figures for an EBS poster."}</p>
 </div>
 </section>
 <section className={"section"}>
@@ -28,14 +28,13 @@ export default function PageContent() { return <div className="page-layout layou
 <li>{"Core concepts live on this page"}</li>
 <li>{"Python lessons live on the Python track page"}</li>
 <li>{"R lessons live on the RStudio track page"}</li>
-<li>{"No outside tutorials are required"}</li>
 </ul>
 </div>
 </details></aside>
 <div>
 <section className={"curriculum-section"} id={"outcomes"}>
 <h2>{"Learning Outcomes"}</h2>
-<p>{"By the end of this curriculum, students should be able to move from a biological question to a defensible, reproducible analysis."}</p>
+<p>{"By the end of this curriculum, students should be able to investigate a biological question using defensible, reproducible data analysis."}</p>
 <figure className="context-media context-media--analysis"><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.08.31 PM.png" alt="Bar chart from a biological data analysis" loading="lazy" /></figure>
 <div className="analysis-gallery" aria-label="Examples of biological data analysis outputs">
 <figure><img src="/images/Data Analysis/Screenshot 2026-09-10 at 6.12.44 PM.png" alt="Cancer genomic alteration frequency chart" loading="lazy" /></figure>
@@ -50,7 +49,7 @@ export default function PageContent() { return <div className="page-layout layou
 <p>{"Import CSV files, inspect variables, handle missing values, summarize groups, and choose appropriate statistical tests."}</p>
 </div>
 <div className={"text-block"}>
-<h3>{"Use Two Toolchains"}</h3>
+<h3>{"Two languages, similar skills"}</h3>
 <p>{"Work in RStudio for R-based statistics and in Python notebooks for pandas, NumPy, and SciPy workflows."}</p>
 </div>
 <div className={"text-block"}>
@@ -76,7 +75,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"track-card"}>
 <span className={"track-card__label"}>{"Python Track"}</span>
 <h3>{"Python with pandas, NumPy, and SciPy"}</h3>
-<p>{"Use Python when your project needs programmable data cleaning, custom calculations, or notebook-based analysis."}</p>
+<p>{"Use Python when your project needs larger programmable data cleaning, custom calculations, or notebook-based analysis."}</p>
 <a className={"button secondary"} href={"python.html"}>{"Start Python Track"}</a>
 </div>
 </div>
