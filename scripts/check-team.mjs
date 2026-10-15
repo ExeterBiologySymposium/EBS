@@ -17,7 +17,9 @@ assert.doesNotMatch(team,/Executive Committee|Associate Members/);
 assert.ok(team.indexOf('Dr. Summer Morrill')<photos,'Dr. Morrill must precede club photos');
 for(const credential of ['Biology Instructor','Alfred H. Hayes ’25 and Jean M. Hayes Teaching Chair in Science','MIT Ph.D. Biology ’20'])assert.ok(team.includes(credential),`Missing faculty credential: ${credential}`);
 assert.doesNotMatch(team,/Photo not provided|Team member names and headshots will be added/);
-assert.equal((team.match(/class(?:Name)?=(?:\{)?"group-photo"/g)||[]).length,3,'Keep all three club photographs');
+assert.doesNotMatch(team,/EGBC 3\.jpg|research lunch|with Exeter alumni/,'Remove the alumni photo and caption');
+assert.equal((team.match(/class(?:Name)?=(?:\{)?"group-photo"/g)||[]).length,2,'Keep the Broad and Koch Institute club photographs');
+assert.ok(team.includes('organizing-team-grid'),'Use a dedicated organizing-team grid');
 if(built){
   const roster=team.slice(organizing,photos);
   assert.equal((roster.match(/class="person text-block"/g)||[]).length,members.length,'Every organizing-team member must use the Leadership card style');
@@ -28,4 +30,4 @@ if(built){
     assert.deepEqual(names,[...names].sort(byLastName),`${label} must be alphabetical by last name, then first name`);
   }
 }
-console.log(`PASS: ${built?'built':'source'} team headings/order, nine profiles, faculty credentials, and three club photos.`);
+console.log(`PASS: ${built?'built':'source'} team headings/order, nine profiles, faculty credentials, and two club photos.`);

@@ -91,7 +91,7 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 </div>
 <h2 className={"team-section-title"}>{"Organizing Team"}</h2>
-<div className={"grid columns-4"}>
+<div className={"grid organizing-team-grid"}>
 {organizingTeam.map(member=><div className="person text-block" key={member.name}>
 <div className="portrait portrait--initials" aria-hidden="true"><span>{member.initials}</span></div>
 <h3>{member.name}</h3>
@@ -102,10 +102,6 @@ export default function PageContent() { return <div className="page-layout layou
 <figure className={"group-photo"}>
 <img alt={"EGBC club members visiting Broad Institute"} decoding={"async"} height={"2752"} loading={"lazy"} src={"/images/team/ebs-team-broad-institute.jpg"} width={"4128"} />
 <figcaption>{"EGBC club members at Broad Institute."}</figcaption>
-</figure>
-<figure className={"group-photo"}>
-<img alt={"EGBC students with Exeter alumni during a research lunch in Boston"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 3.jpg"} width={"6048"} />
-<figcaption>{"EGBC students with Exeter alumni during a research lunch in Boston."}</figcaption>
 </figure>
 <figure className={"group-photo"}>
 <img alt={"EGBC students at the Koch Institute during the 2026 Cambridge Science Festival"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 4.jpg"} width={"6048"} />
