@@ -150,3 +150,6 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .fact-controls{gap:0}.fact-controls button{width:44px;height:44px;padding:0;display:grid;place-items:center}
 .footer-top a{padding:10px 0;margin:0}
 .wordmark,.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}
+@media(max-width:767px){.hero-registration .hero-squaremark{width:80%;align-self:flex-end}}
+/* Keep hero copy legible over the busy group photo. */
+.hero-shade{background:linear-gradient(90deg,#0008 0%,#0004 30%,#0000 52%),linear-gradient(180deg,#0004 0%,#0002 35%,#000a 100%)}
