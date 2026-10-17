@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useReducedMotion } from 'motion/react';
 import { ArrowDownRight, ArrowLeft, ArrowRight, Search, X } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import { pageComponents } from './page-routes';
 import searchPages from './search-data.json';
 
@@ -47,5 +48,5 @@ function Home(){return <div className="home-page"><Hero/><Guidance/><Story/><sec
 export function App({page}:{page:string}){
   const Content=pageComponents[page as keyof typeof pageComponents];
   useEffect(()=>{const reveal=()=>{let id;try{id=decodeURIComponent(location.hash.slice(1));}catch{return;}if(!id)return;const target=document.getElementById(id);if(!target)return;let parent=target.closest('details');while(parent){parent.open=true;parent=parent.parentElement?.closest('details')??null;}requestAnimationFrame(()=>{target.scrollIntoView();if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true});});};reveal();window.addEventListener('hashchange',reveal);return()=>window.removeEventListener('hashchange',reveal);},[page]);
-  return <><Header page={page}/><main id="main" tabIndex={-1}>{page==='index.html'?<Home/>:Content?<Content/>:<section className="page-heading"><h1>Page not found</h1><a href="index.html">Return home</a></section>}</main><Footer/></>;
+  return <><Header page={page}/><main id="main" tabIndex={-1}>{page==='index.html'?<Home/>:Content?<Content/>:<section className="page-heading"><h1>Page not found</h1><a href="index.html">Return home</a></section>}</main><Footer/><Analytics /></>;
 }
