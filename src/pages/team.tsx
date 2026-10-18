@@ -1,16 +1,16 @@
 const organizingTeam = [
   {name:'Adaeze Acholonu',role:'Outreach and Media Associate',year:'2029',initials:'AA'},
-  {name:'Cici Chen',role:'Research Associate',year:'2028',initials:'CC'},
+  {name:'Cici Chen',role:'Research Associate',year:'2028',initials:'CC',photo:'/images/team/cici-chen.jpg'},
   {name:'Oliver Choi',role:'Research Associate',year:'2029',initials:'OC'},
-  {name:'Derek Geng',role:'Outreach Associate',year:'2030',initials:'DG'},
+  {name:'Derek Geng',role:'Outreach Associate',year:'2030',initials:'DG',photo:'/images/team/derek-geng.jpg'},
   {name:'Dowan Kim',role:'Research Associate',year:'2029',initials:'DK'},
-  {name:'Esther Kim',role:'Outreach and Research Associate',year:'2029',initials:'EK'},
+  {name:'Esther Kim',role:'Outreach and Research Associate',year:'2029',initials:'EK',photo:'/images/team/esther-kim.jpg'},
   {name:'Margaux Morgan',role:'Outreach and Media Associate',year:'2029',initials:'MM'},
   {name:'Avni Murarka',role:'Research Associate',year:'2028',initials:'AM'},
-  {name:'Elaine Fan',role:'Research Associate',year:'2029',initials:'EF'},
+  {name:'Elaine Fan',role:'Research Associate',year:'2029',initials:'EF',photo:'/images/team/elaine-fan.jpg'},
   {name:'Jessica Fan',role:'Research Associate',year:'2029',initials:'JF'},
   {name:'Scarlett Reddy',role:'Research Associate',year:'2029',initials:'SR'},
-  {name:'Olivia Wang',role:'Social Media Associate',year:'2029',initials:'OW'}
+  {name:'Olivia Wang',role:'Social Media Associate',year:'2029',initials:'OW',photo:'/images/team/olivia-wang.jpg'}
 ];
 
 export default function PageContent() { return <div className="page-layout layout-team">
@@ -38,7 +38,7 @@ export default function PageContent() { return <div className="page-layout layou
 </details>
 </div>
 <div className={"person text-block"}>
-<div className={"portrait"}><img alt={"Jaiden Kim"} decoding={"async"} height={"668"} loading={"lazy"} src={"/images/team/jaiden-kim.png"} width={"514"} /></div>
+<div className={"portrait"}><img alt={"Jaiden Kim"} decoding={"async"} height={"6048"} loading={"lazy"} src={"/images/team/jaiden-kim.jpg"} width={"4032"} /></div>
 <h3>{"Jaiden Kim"}</h3>
 <p className={"role"}>{"Co-Head"}</p>
 <p className={"grade"}>{"Class of 2028"}</p>
@@ -64,7 +64,7 @@ export default function PageContent() { return <div className="page-layout layou
 </details>
 </div>
 <div className={"person text-block"}>
-<div aria-label={"Photo of Luke Wang"} className={"portrait"} role={"img"}><img alt={"Luke Wang"} decoding={"async"} height={"4032"} loading={"lazy"} src={"images/team/luke-wang.jpg"} width={"6048"} /></div>
+<div aria-label={"Photo of Luke Wang"} className={"portrait"} role={"img"}><img alt={"Luke Wang"} decoding={"async"} height={"4014"} loading={"lazy"} src={"images/team/luke-wang.jpg"} width={"4804"} /></div>
 <h3>{"Luke Wang"}</h3>
 <p className={"role"}>{"Co-Head"}</p>
 <p className={"grade"}>{"Class of 2027"}</p>
@@ -94,7 +94,7 @@ export default function PageContent() { return <div className="page-layout layou
 <p>{"The organizing team supports research curriculum, outreach, logistics, and media."}</p>
 <div className={"grid organizing-team-grid"}>
 {organizingTeam.map(member=><div className="person text-block" key={member.name}>
-<div className="portrait portrait--initials" aria-hidden="true"><span>{member.initials}</span></div>
+<div className={`portrait${member.photo ? '' : ' portrait--initials'}`} aria-hidden={!member.photo}>{member.photo ? <img alt={member.name} decoding="async" height="6048" loading="lazy" src={member.photo} width="4032" /> : <span>{member.initials}</span>}</div>
 <h3>{member.name}</h3>
 <p className="role">{member.role}</p>
 <p className="grade">Class of {member.year}</p>

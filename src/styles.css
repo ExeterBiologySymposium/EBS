@@ -142,6 +142,8 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 @media(max-width:1000px){.organizing-team-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:767px){.organizing-team-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 14px}}
 @media(max-width:360px){.organizing-team-grid{grid-template-columns:1fr}}
+.layout-team .columns-4 .portrait,.organizing-team-grid .portrait{aspect-ratio:2/3}
+.layout-team .columns-4 .portrait img,.organizing-team-grid .portrait img{object-fit:contain;object-position:center;background:var(--surface)}
 .header-right .button,.button{white-space:normal}
 @media(min-width:768px) and (max-width:900px){.desktop-nav{gap:12px}.site-header{gap:18px}.header-right .button{min-width:112px;padding-inline:12px}}
 /* 44px minimum touch targets for text links and hero fact dots. */

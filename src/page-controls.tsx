@@ -20,13 +20,15 @@ export function CodeBlock({ text }: { text: string }) {
 }
 
 export function ContactForm({ action, accessKey }: { action: string; accessKey: string }) {
-  const [state, setState] = useState<'idle'|'sending'|'sent'|'failed'>('idle');
+  const [state, setState] = useState<'idle'|'sending'|'sent'|'failed'|'captcha'>('idle');
   const request = useRef<AbortController | null>(null);
   useEffect(() => () => request.current?.abort(), []);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     if (request.current || !form.reportValidity()) return;
+    const captchaResponse = form.querySelector<HTMLTextAreaElement>('textarea[name="h-captcha-response"]');
+    if (!captchaResponse?.value.trim()) { setState('captcha'); return; }
     const controller = new AbortController(); request.current = controller; setState('sending');
     const timer = window.setTimeout(() => controller.abort(),15000);
     try {
@@ -42,8 +44,9 @@ export function ContactForm({ action, accessKey }: { action: string; accessKey: 
     <label htmlFor="c-role">I am a…<select id="c-role" name="role" defaultValue=""><option value="">Select (optional)</option>{['Student','Teacher / Educator','Researcher / Professional','Potential Judge','Parent / Guardian','Other'].map(role=><option key={role}>{role}</option>)}</select></label>
     <label htmlFor="c-subject">Subject<input id="c-subject" name="subject" required /></label>
     <label htmlFor="c-message">Message<textarea id="c-message" name="message" rows={5} required /></label>
+    <div className="h-captcha" data-captcha="true" />
     <button className="button" type="submit" disabled={state==='sending'}>{state==='sending'?'Sending…':'Send message'}<ArrowDownRight size={18}/></button>
-  </form><p id="contact-status" role="status">{state==='sent'?'Message sent. Thank you for contacting EBS.':state==='failed'?'We could not send your message. Your text is still here; retry or email us.':''}</p><div id="form-success-msg" hidden={state!=='sent'} tabIndex={-1}><h3>Message sent</h3><p>Your message has been sent to the EBS organizing team.</p></div><p className="contact-email">Prefer email? <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a></p></>;
+  </form><p id="contact-status" role="status">{state==='sent'?'Message sent. Thank you for contacting EBS.':state==='failed'?'We could not send your message. Your text is still here; retry or email us.':state==='captcha'?'Please complete the CAPTCHA before sending your message.':''}</p><div id="form-success-msg" hidden={state!=='sent'} tabIndex={-1}><h3>Message sent</h3><p>Your message has been sent to the EBS organizing team.</p></div><p className="contact-email">Prefer email? <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a></p></>;
 }
 
 type RemoteRow = Record<string,string>;
