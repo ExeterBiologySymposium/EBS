@@ -72,21 +72,26 @@ export default function PageContent() { return <div className="page-layout layou
 <p>{"Orientation session covering how EBS works. Narrow your research question using the EBS resource library and organizing team support."}</p>
 </div>
 <div className={"timeline__item"}>
-<div className={"timeline__date"}>{"October – January"}</div>
+<div className={"timeline__date"}>{"October – March"}</div>
 <div className={"timeline__title"}>{"Active Research Period"}</div>
 <p>{"Literature review, data collection or analysis, and iterative development of your project, with support from the resource library and organizing team."}</p>
+</div>
+<div className={"timeline__item"}>
+<div className={"timeline__date"}>{"Friday, December 18, 2026"}</div>
+<div className={"timeline__title"}>{"Check 1: Idea and Research Plan"}</div>
+<p>{"Submit your project idea and research plan."}</p>
 </div>
 </div>
 <div className={"timeline"}>
 <div className={"timeline__item"}>
-<div className={"timeline__date"}>{"March 2027"}</div>
-<div className={"timeline__title"}>{"Abstract Submission"}</div>
-<p>{"Submit a 250-word abstract describing your research question, methodology, findings, and conclusions."}</p>
+<div className={"timeline__date"}>{"Friday, March 12, 2027"}</div>
+<div className={"timeline__title"}>{"Check 2: Abstract and Code"}</div>
+<p>{"Submit a 250-word abstract describing your research question, methodology, findings, and conclusions, plus your code or exported workflow. Every abstract is read in full, and every project's code is checked for completeness."}</p>
 </div>
 <div className={"timeline__item"}>
-<div className={"timeline__date"}>{"April 2027"}</div>
-<div className={"timeline__title"}>{"Presentation Preparation"}</div>
-<p>{"Prepare your poster presentation. Receive feedback from the organizing team. Practice Q&A with peers."}</p>
+<div className={"timeline__date"}>{"Friday, April 9, 2027"}</div>
+<div className={"timeline__title"}>{"Check 3: Final Poster"}</div>
+<p>{"Submit your final poster. We check format, completeness, and that the numbers match your abstract and logs. Accepted posters will be allowed to present at the symposia."}</p>
 </div>
 <div className={"timeline__item"}>
 <div className={"timeline__date"}>{"April 25th, 2027"}</div>

@@ -82,8 +82,8 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"step"}>
 <div className={"step__num"}>{"2"}</div>
 <div className={"step__body"}>
-<p className={"step__title"}>{"Abstract Submission (March 2027)"}</p>
-<p>{"Participants submit a brief abstract summarizing their research question, methodology, and preliminary findings. All abstracts are reviewed by EBS leadership in preparation for the symposium."}</p>
+<p className={"step__title"}>{"Three Checkpoints (December 2026 – April 2027)"}</p>
+<p>{"Check 1 (December 18, 2026): project idea and research plan. Check 2 (March 12, 2027): abstract and code, with every abstract read in full and every project's code checked for completeness. Check 3 (April 9, 2027): final poster, checked for format, completeness, and numbers matching the abstract and logs. Accepted posters present at the symposium."}</p>
 </div>
 </div>
 <div className={"step"}>

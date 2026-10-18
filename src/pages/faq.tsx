@@ -20,6 +20,7 @@ export default function PageContent() { return <div className="page-layout layou
 <a className={"faq-nav__link"} href={"#students"}>{"For Students"}</a>
 <a className={"faq-nav__link"} href={"#research"}>{"Research & Projects"}</a>
 <a className={"faq-nav__link"} href={"#symposium"}>{"Symposium Day"}</a>
+<a className={"faq-nav__link"} href={"#international"}>{"International Students"}</a>
 <a className={"faq-nav__link"} href={"#schools"}>{"Schools"}</a>
 <a className={"faq-nav__link"} href={"#judges"}>{"Judges"}</a>
 </div>
@@ -55,7 +56,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"Is there a cost to participate?"}</summary>
 <div id={"g5"}>
-<p>{"No! EBS is completely free for all interested participants. Transportation costs for the April 25th, 2027 symposium are the responsibility of participants, but those who cannot attend in-person are welcome to present online."}</p>
+<p>{"No! EBS is completely free for all interested participants. EBS prints posters for all participants at no charge. Travel, lodging, and meals outside the symposium are the responsibility of participants, but those who cannot attend in person are welcome to present online."}</p>
 </div>
 </details>
 </div>
@@ -73,6 +74,18 @@ export default function PageContent() { return <div className="page-layout layou
 <li>Complete and submit the Google Form. Creating an EBS account or opening the form does not submit your application.</li>
 </ol>
 <p>Each student team member registers individually. You can submit your application while your account is Pending; Accepted access is required only for the resource library and coding lessons.</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"What happens after I submit the application?"}</summary>
+<div id={"application-process"}>
+<ol>
+<li><strong>Submit the Google Form.</strong> Each student completes the form individually, including the in-person or online question (see below).</li>
+<li><strong>Team review.</strong> The EBS organizing team reviews every application.</li>
+<li><strong>Confirmation email.</strong> If your application is approved, we email you a confirmation.</li>
+<li><strong>Access granted.</strong> Once approved, your account is set to Accepted and you gain access to the website's resources, coding lessons, and materials.</li>
+</ol>
+<p>Use the same email address on the form and for your EBS account so we can match them. If you have not heard back within a week or two, check your spam folder, then <a href="#contact">contact the EBS team</a>.</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
@@ -169,7 +182,13 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"How are projects submitted and reviewed?"}</summary>
 <div id={"r4"}>
-<p>{"Students submit a structured abstract in March 2027. Abstracts are reviewed by EBS leadership. All students who submit a complete, original abstract in scope for EBS are expected to be accepted to present, though we may provide feedback for revision in borderline cases. Acceptance notifications go out before April 25th, 2027."}</p>
+<p>{"Projects go through three checkpoints:"}</p>
+<ul>
+<li><strong>{"Check 1, Friday, December 18, 2026: project idea and research plan."}</strong></li>
+<li><strong>{"Check 2, Friday, March 12, 2027: abstract and code."}</strong>{" Submit your abstract plus the code or exported workflow. Every abstract is read in full, and every project's code is checked for completeness."}</li>
+<li><strong>{"Check 3, Friday, April 9, 2027: final poster."}</strong>{" We check format, completeness, and that the numbers match the abstract and logs."}</li>
+</ul>
+<p>{"Accepted posters will be allowed to present at the symposia."}</p>
 </div>
 </details>
 </div>
@@ -184,18 +203,37 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
+<summary>{"Who should attend in person?"}</summary>
+<div id={"sy-inperson"}>
+<p>{"On the application form you will be asked whether you plan to attend in person. Please only answer Yes if you either live within a two-hour drive of the school or would be willing to travel to Exeter and are able to cover all travel costs."}</p>
+<p>{"Everyone else is encouraged to choose the online option, which offers the same presenting, judging, and Q&A experience. Choosing online has no effect on whether you are accepted."}</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"Do in-person presenters need a chaperone?"}</summary>
+<div id={"sy-chaperone"}>
+<p>{"Yes. Every in-person presenter must be accompanied by a chaperone, such as a parent, guardian, or teacher. The detailed chaperone policy is still being finalized. We will share the full requirements with registered participants and update this page as soon as it is set."}</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"Will posters be printed for participants?"}</summary>
+<div id={"sy-print"}>
+<p>{"Yes. EBS will print posters for participants at no cost. You submit your poster as a digital file by the deadline, and we handle printing for the in-person event. Poster size specifications and templates will be provided."}</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
 <summary>{"What are the presentation formats?"}</summary>
 <div id={"sy1"}>
 <p>{"EBS uses a single presentation format:"}</p>
 <ul>
-<li><strong>{"Poster Presentation:"}</strong>{" A printed or digital research poster displayed during one or both poster sessions. Students stand by their poster and explain their work to visiting judges and attendees (~15 min per judge visit). Students joining online present their poster over video during the same sessions."}</li>
+<li><strong>{"Poster Presentation:"}</strong>{" A research poster displayed during one or both poster sessions. EBS prints posters for in-person presenters; online presenters share a digital copy. Students stand by their poster and explain their work to visiting judges and attendees (~15 min per judge visit). Students joining online present their poster over video during the same sessions."}</li>
 </ul>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"What should I bring to Symposium Day?"}</summary>
 <div id={"sy2"}>
-<p>{"Poster presenters should bring their printed poster (size specifications will be provided). Students presenting online should also have a reliable camera and microphone for the live poster walkthrough. Wear professional or business casual attire — you are presenting original research to professionals. All other materials will be provided at check-in."}</p>
+<p>{"You do not need to print your poster. EBS prints posters for all in-person presenters from the digital file you submit, and they will be set up at your session. In-person presenters should also bring their chaperone (see above). Students presenting online should also have a reliable camera and microphone for the live poster walkthrough. Wear professional or business casual attire — you are presenting original research to professionals. All other materials will be provided at check-in."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
@@ -205,9 +243,50 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
+<summary>{"Can I switch between in-person and online after applying?"}</summary>
+<div id={"sy-switch"}>
+<p>{"Probably, within limits. Email the EBS team as early as you can if your plans change. Moving from in person to online is generally easy. Moving from online to in person depends on remaining venue capacity and on having a chaperone arranged."}</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"Is housing or travel assistance available?"}</summary>
+<div id={"sy-travel"}>
+<p>{"EBS does not currently provide travel funding or lodging. Exeter, New Hampshire is about an hour from Boston, and we will share directions, parking, and a list of nearby hotels with registered in-person participants. If cost is a barrier, please present online."}</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
 <summary>{"Will families and guests be allowed to attend?"}</summary>
 <div id={"sy4"}>
 <p>{"We are planning for a limited in-person guest list given venue constraints. Details on guest attendance will be communicated to registered participants in early 2027. At minimum, we expect to allow one family member or support person per student presenter. Guests joining the online track are not subject to this limit."}</p>
+</div>
+</details>
+</div>
+</div>
+<div className={"faq-section"} id={"international"}>
+<h2 className={"faq-section__title"}>{"International Students"}</h2>
+<div className={"accordion"} role={"list"}>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"Can international students participate?"}</summary>
+<div id={"i1"}>
+<p>{"Yes, with one limit for 2027: international students are currently eligible to apply solely for the online symposium. In-person attendance at Phillips Exeter Academy is not available to international applicants this year."}</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"What does the online experience include?"}</summary>
+<div id={"i2"}>
+<p>{"Online participants go through the same application and review process, get the same resources and coding lessons, present their poster over video during the live sessions, and receive judging and Q&A. Posters are shared digitally."}</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"Do I need to present in English? What about time zones?"}</summary>
+<div id={"i3"}>
+<p>{"Presentations and judging are conducted in English. The symposium runs on Eastern Time on April 25th, 2027. We will publish the session schedule in advance so you can check the local time where you live, and we will do our best to place online presenters in sessions that are reasonable for their time zone."}</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"Will in-person attendance open to international students in the future?"}</summary>
+<div id={"i4"}>
+<p>{"We hope so. Visa and travel logistics are the main obstacle for a first-year, student-run event. Any change will be announced on this page and to registered participants."}</p>
 </div>
 </details>
 </div>
