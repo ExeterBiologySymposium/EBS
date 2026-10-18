@@ -9,7 +9,7 @@ assert.ok(hero.indexOf('class="hero-squaremark"')<hero.indexOf('Participation'),
 const people=home.slice(home.indexOf('class="people-grid"'),home.indexOf('class="home-faq"'));
 const names=Array.from(people.matchAll(/<h3>([^<]+)<\/h3>/g),m=>m[1]);
 assert.deepEqual(names,['Adrian Chan','Jaiden Kim','Reya Satam','Luke Wang']);
-assert.match(people,/jaiden-kim\.png/);
+assert.match(people,/jaiden-kim\.jpg/);
 assert.match(about,/class="about-exeter-mark"[^>]+PEA_ExeterMark_Red_Lg\.png/);
 assert.match(about,/class="about-origin-seal"[^>]+PEA_Seal_LtGray_Lg\.png[^>]+aria-hidden="true"/);
 assert.match(about,/class="section about-origin"/);
