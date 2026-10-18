@@ -28,7 +28,9 @@ export default function PageContent() { return <div className="page-layout layou
 <dl className={"schedule-list"}>
 <div><dt>{"Fall 2026"}</dt><dd><strong>{"Student registration"}</strong><p>{"Individual students register and receive access to the EBS resource library."}</p></dd></div>
 <div><dt>{"Fall–winter 2026–27"}</dt><dd><strong>{"Research period"}</strong><p>{"Students work on projects with support from the organizing team and resource library."}</p></dd></div>
-<div><dt>{"March–April 2027"}</dt><dd><strong>{"Abstract review"}</strong><p>{"Students submit abstracts in March; acceptance notifications follow in April."}</p></dd></div>
+<div><dt>{"December 18, 2026"}</dt><dd><strong>{"Check 1: idea and research plan"}</strong><p>{"Students submit their project idea and research plan."}</p></dd></div>
+<div><dt>{"March 12, 2027"}</dt><dd><strong>{"Check 2: abstract and code"}</strong><p>{"Students submit an abstract plus their code or exported workflow. Every abstract is read in full and every project's code is checked for completeness."}</p></dd></div>
+<div><dt>{"April 9, 2027"}</dt><dd><strong>{"Check 3: final poster"}</strong><p>{"Posters are checked for format, completeness, and numbers matching the abstract and logs. Accepted posters present at the symposia."}</p></dd></div>
 <div><dt>{"April 25th, 2027"}</dt><dd><strong>{"Symposium day"}</strong><p>{"Students present at Phillips Exeter Academy or online; registered schools receive logistics details."}</p></dd></div>
 </dl>
 </section>

@@ -210,7 +210,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"module__grid"}>
 <div className={"module__block"}><h3>{"Concept"}</h3><p>{"README files, commented code, output folders, citations, and figure exports."}</p></div>
 <div className={"module__block"}><h3>{"Lab"}</h3><p>{"Clean your project directory and rerun the notebook or script from start to finish."}</p></div>
-<div className={"module__block"}><h3>{"Checkpoint"}</h3><p>{"Submit a reproducibility checklist with your abstract and poster draft."}</p></div>
+<div className={"module__block"}><h3>{"Checkpoint"}</h3><p>{"Submit a reproducibility checklist with your Check 2 abstract and code (March 12, 2027)."}</p></div>
 </div>
 </div>
 </article>
