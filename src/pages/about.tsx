@@ -90,7 +90,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"step__num"}>{"3"}</div>
 <div className={"step__body"}>
 <p className={"step__title"}>{"Symposium Day (April 25th, 2027)"}</p>
-<p>{"Students present their work through poster presentations, in-person or online. Judges evaluate presentations and provide constructive written feedback."}</p>
+<p>{"A keynote speaker opens the day. Students present their work through poster presentations, in-person or online. Judges evaluate presentations and provide constructive written feedback."}</p>
 </div>
 </div>
 <div className={"step"}>
@@ -107,10 +107,6 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"text-block"}>
 <h3>{"\n\n                Poster Presentation\n              "}</h3>
 <p>{"Students display their research on a physical poster and discuss their work with judges, peers, and attendees during dedicated poster sessions. This is the primary format for EBS 2027."}</p>
-</div>
-<div className={"text-block"}>
-<h3>{"\n\n                Keynote Speaker\n              "}</h3>
-<p>{"A distinguished keynote speaker will speak on their research experience then hold a moderated discussion with Symposium participants."}</p>
 </div>
 </div>
 </div>

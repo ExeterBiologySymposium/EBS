@@ -32,7 +32,6 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"team-card__details"}>
 <summary>{"View profile"}</summary>
 <ul className={"team-card__profile"}>
-<li><strong>{"Team UK IBO Selection Candidate, 2024"}</strong></li>
 <li><strong>{"Medical & Scientific Intern, Hong Kong Genome Institute"}</strong><br />{"Contributed to whole-genome sequencing workflows with HKGI and Hong Kong Children’s Hospital, plus genomic literacy and policy work."}</li>
 <li><strong>{"SSTP 2026 Research Intern, University of Iowa Department of Pathology — Yang Lab"}</strong><br />{"Analyzed SETDB1 using ORIEN and TCGA datasets; assessed dFF-ChIP and total RNA-sequencing results; developed a CRISPR/Cas9-degron system in UCEC cell lines."}</li>
 </ul>
@@ -46,7 +45,6 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"team-card__details"}>
 <summary>{"View profile"}</summary>
 <ul className={"team-card__profile"}>
-<li><strong>{"USABO 2026 Semifinalist"}</strong></li>
 <li><strong>{"Summer 2026 Research Intern, Rice University Department of Biosciences"}</strong><br /><em>{"Elucidating Serotonin-Independent Pathways Underlying Sertraline-Mediated Lipid Loss and Protestasis"}</em></li>
 </ul>
 </details>
@@ -73,7 +71,6 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"team-card__details"}>
 <summary>{"View profile"}</summary>
 <ul className={"team-card__profile"}>
-<li><strong>{"USABO 2025 & 2026 Semifinalist"}</strong></li>
 <li><strong>{"SSP Biochemistry, 2026 — Research Project"}</strong><br /><em>{"Characterization of Setosphaeria turcica Cdc14 Phosphatase Activity and Development of Potential Inhibitors for Northern Corn Leaf Blight"}</em></li>
 </ul>
 </details>

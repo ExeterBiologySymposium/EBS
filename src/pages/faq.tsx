@@ -222,12 +222,17 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
+<summary>{"Will there be a keynote speaker?"}</summary>
+<div id={"sy-keynote"}>
+<p>{"Yes. A distinguished keynote speaker will open the day by speaking on their research experience, followed by a moderated discussion with symposium participants. Speaker details will be announced closer to the event."}</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
 <summary>{"What are the presentation formats?"}</summary>
 <div id={"sy1"}>
-<p>{"Students present in one format, and the day also includes a keynote:"}</p>
+<p>{"EBS uses a single presentation format:"}</p>
 <ul>
 <li><strong>{"Poster Presentation:"}</strong>{" A research poster displayed during one or both poster sessions. EBS prints posters for in-person presenters; online presenters share a digital copy. Students stand by their poster and explain their work to visiting judges and attendees (~15 min per judge visit). Students joining online present their poster over video during the same sessions."}</li>
-<li><strong>{"Keynote Speaker:"}</strong>{" A distinguished keynote speaker opens the day by speaking on their research experience, followed by a moderated discussion with symposium participants. The keynote is open to all registered participants and is streamed to online attendees."}</li>
 </ul>
 </div>
 </details>

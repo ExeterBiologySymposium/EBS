@@ -2,7 +2,7 @@
   {
     "title": "Python Track",
     "url": "python.html",
-    "description": "A self-contained Python data science track for biology research using pandas, NumPy, and SciPy."
+    "description": "Python coding lessons are coming soon."
   },
   {
     "title": "Our Team",
@@ -17,12 +17,12 @@
   {
     "title": "About EBS",
     "url": "about.html",
-    "description": "Learn about the Exeter Biology Symposium \u2014 our mission, why we exist, the event format, and key date April 25th, 2027."
+    "description": "Learn about the Exeter Biology Symposium — our mission, why we exist, the event format, and key date April 25th, 2027."
   },
   {
     "title": "Schedule",
     "url": "schedule.html",
-    "description": "Full day-of schedule for the Exeter Biology Symposium 2027 \u2014 registration, poster sessions, lunch, judging, and the closing ceremony."
+    "description": "Full day-of schedule for the Exeter Biology Symposium 2027 — registration, poster sessions, lunch, judging, and the closing ceremony."
   },
   {
     "title": "Register Interest",
@@ -32,7 +32,7 @@
   {
     "title": "EBS Open Source",
     "url": "opensource.html",
-    "description": "Explore EBS Open Source \u2014 open datasets, code, and curriculum materials from the Exeter Biology Symposium community."
+    "description": "Explore EBS Open Source — open datasets, code, and curriculum materials from the Exeter Biology Symposium community."
   },
   {
     "title": "For Researchers",
@@ -42,7 +42,7 @@
   {
     "title": "Resources",
     "url": "resources.html",
-    "description": "Free research resources for EBS participants \u2014 guides on dry-lab biology, scientific literature, public databases, bioinformatics tools, and presentation tips."
+    "description": "Resources are coming soon. Example posters from the organizing team."
   },
   {
     "title": "Student Registration",
@@ -57,7 +57,7 @@
   {
     "title": "Data Science Curriculum",
     "url": "datascience.html",
-    "description": "A self-contained EBS data science curriculum hub for biology research, with separate RStudio and Python tracks."
+    "description": "Coding lessons are coming soon."
   },
   {
     "title": "FAQ",
@@ -67,7 +67,7 @@
   {
     "title": "RStudio Track",
     "url": "rstudio.html",
-    "description": "A self-contained RStudio data science track for biology research using R data frames, summaries, plots, and statistical tests."
+    "description": "RStudio coding lessons are coming soon."
   },
   {
     "title": "For Judges",
