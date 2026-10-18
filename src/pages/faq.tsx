@@ -1,3 +1,4 @@
+import { LearningLink } from '../auth';
 import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
 
 export default function PageContent() { return <div className="page-layout layout-faq">
@@ -15,6 +16,7 @@ export default function PageContent() { return <div className="page-layout layou
 <nav aria-label={"Jump to FAQ section"}>
 <div className={"faq-nav"}>
 <a className={"faq-nav__link"} href={"#general"}>{"General"}</a>
+<a className={"faq-nav__link"} href={"#registration"}>{"Registration & Access"}</a>
 <a className={"faq-nav__link"} href={"#students"}>{"For Students"}</a>
 <a className={"faq-nav__link"} href={"#research"}>{"Research & Projects"}</a>
 <a className={"faq-nav__link"} href={"#symposium"}>{"Symposium Day"}</a>
@@ -54,6 +56,45 @@ export default function PageContent() { return <div className="page-layout layou
 <summary>{"Is there a cost to participate?"}</summary>
 <div id={"g5"}>
 <p>{"No! EBS is completely free for all interested participants. Transportation costs for the April 25th, 2027 symposium are the responsibility of participants, but those who cannot attend in-person are welcome to present online."}</p>
+</div>
+</details>
+</div>
+</div>
+<div className={"faq-section"} id={"registration"}>
+<h2 className={"faq-section__title"}>{"Registration & Resource Access"}</h2>
+<div className={"accordion"} role={"list"}>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"How do I register for EBS?"}</summary>
+<div id={"registration-steps"}>
+<ol>
+<li>Open <a href="register.html">Register</a> and choose student registration, school registration, or judge recruitment.</li>
+<li>Sign in or create an EBS account. You must be signed in to open an application.</li>
+<li>On your chosen registration page, open the application. It opens in a new Google Forms tab.</li>
+<li>Complete and submit the Google Form. Creating an EBS account or opening the form does not submit your application.</li>
+</ol>
+<p>Each student team member registers individually. You can submit your application while your account is Pending; Accepted access is required only for the resource library and coding lessons.</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"Where are the resources and coding lessons?"}</summary>
+<div id={"finding-resources"}>
+<p>Once your account is Accepted, sign in and look for <strong>Resources</strong> and <strong>Coding</strong> in the top navigation. On a smaller screen, open <strong>Menu</strong> to find them.</p>
+<p><strong>Resources</strong> contains research guides, tools, databases, and presentation guidance. <strong>Coding</strong> contains the biology data-analysis curriculum and links to the Python and RStudio tracks, practice data, and exercises.</p>
+<p>These links and pages are available only to Accepted accounts. If you cannot see them, visit <a href="register.html">Register</a> to check your account's access status.</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"Why is my account Pending after I sign in?"}</summary>
+<div id={"pending-access"}>
+<p>New signed-in accounts join Pending while the EBS team reviews access. Signing in or submitting a registration form does not automatically grant access to resources and coding lessons. The EBS team must approve your account as Accepted.</p>
+<p>While Pending, you can still register and explore public symposium information. Opening a restricted lesson directly takes you to the registration page with your access status.</p>
+</div>
+</details>
+<details className={"disclosure"} role={"listitem"}>
+<summary>{"What should I do after my resource access is approved?"}</summary>
+<div id={"approved-access"}>
+<p>Sign in with the same account the EBS team approved. Return to <a href="register.html">Register</a> and select <strong>Check access again</strong>. When your status says <strong>Your account is accepted</strong>, use the Resources or Coding links there or in the navigation.</p>
+<p>If your status is still Pending or the access check is unavailable, try again or <a href="#contact">contact the EBS team</a> for help.</p>
 </div>
 </details>
 </div>
@@ -116,7 +157,7 @@ export default function PageContent() { return <div className="page-layout layou
 <summary>{"How do I choose a research topic?"}</summary>
 <div id={"r2"}>
 <p>{"Start with something you're genuinely curious about. Think about biology topics that came up in class, news stories that caught your attention, or questions you've always had. A good EBS research question is: specific (not \"what causes cancer\" but \"what genetic mutations are most common in pediatric glioblastoma\"), answerable with public data, and biological in nature."}</p>
-<p>{"Our resource library and organizing team are available to help you refine your question into something workable. See the "}<a href={"resources.html"}>{"Resources page"}</a>{" for guides on forming research questions and finding datasets."}</p>
+<p>{"Our resource library and organizing team are available to help you refine your question into something workable. See the "}<LearningLink href={"resources.html"}>{"Resources page"}</LearningLink>{" for guides on forming research questions and finding datasets."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>

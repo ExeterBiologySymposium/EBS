@@ -1,3 +1,5 @@
+import { LearningLink } from '../auth';
+import { RegistrationLink } from '../auth';
 import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
 
 export default function PageContent() { return <div className="page-layout layout-researchers">
@@ -122,7 +124,7 @@ export default function PageContent() { return <div className="page-layout layou
 <h2>{"Research support"}</h2>
 <p>{"Every registered researcher gets full access to the EBS resource library and organizing team support — no prior research experience needed to get started."}</p>
 <p>{"The organizing team is available throughout the research cycle, whether you're presenting in-person or online, from October through Symposium Day on April 25th."}</p>
-<a className={"button primary"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"} rel={"noopener noreferrer"} target={"_blank"}>{"\n            Register Your Interest\n\n"}</a>
+<RegistrationLink className={"button primary"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"}>{"\n            Register Your Interest\n\n"}</RegistrationLink>
 </div>
 <div>
 <div className={"text-block"}>
@@ -155,8 +157,8 @@ export default function PageContent() { return <div className="page-layout layou
 <h2>{"Register as a student"}</h2>
 <p>{"Student registration is open now. Fill out the form and we'll be in touch as the research cycle begins."}</p>
 <div className={"actions"}>
-<a className={"button primary"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"} rel={"noopener noreferrer"} target={"_blank"}>{"Register Interest"}</a>
-<a className={"button secondary"} href={"resources.html"}>{"Browse Resources"}</a>
+<RegistrationLink className={"button primary"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"}>{"Register Interest"}</RegistrationLink>
+<LearningLink className={"button secondary"} href={"resources.html"}>{"Browse Resources"}</LearningLink>
 </div>
 </div>
 </div>
