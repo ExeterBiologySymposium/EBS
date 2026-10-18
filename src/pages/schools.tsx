@@ -1,3 +1,4 @@
+import { RegistrationLink } from '../auth';
 import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
 
 export default function PageContent() { return <div className="page-layout layout-schools">
@@ -5,8 +6,8 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"page-heading"}>
 <h1>{"100% Free."}<br />{"Open to your students."}</h1>
 <p className={"lead"}>{"EBS welcomes all middle and high school students. No prior research programme or lab facilities required."}</p>
-<div className={"actions"}><a className={"button"} href={"https://forms.gle/wXrjJJb6XEtWvqEu8"} rel={"noopener noreferrer"} target={"_blank"}>{"Register your school"}</a></div><p className={"external-form-note"}>{"Application opens in a new tab. Completion happens in Google Forms."}</p>
-<p className={"small"}><a href={"https://forms.gle/vgtVrsBm1UbBhwtv9"} rel={"noopener noreferrer"} target={"_blank"}>{"Not a teacher or administrator? Register individually"}</a></p>
+<div className={"actions"}><RegistrationLink className={"button"} href={"https://forms.gle/wXrjJJb6XEtWvqEu8"}>{"Register your school"}</RegistrationLink></div><p className={"external-form-note"}>{"Sign in to open the application in a new tab. Complete your registration in Google Forms."}</p>
+<p className={"small"}><a href={"student-signup.html"}>{"Not a teacher or administrator? Register individually"}</a></p>
 </section>
 <figure className="context-media context-media--schools"><img src="/images/Genetics Club Photos/EGBC Yearbook Photo.jpg" alt="Students from the Genetics and Biotechnology Club together at school" loading="lazy" /></figure>
 <div className={"school-layout"}>

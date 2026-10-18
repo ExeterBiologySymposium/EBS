@@ -2,3 +2,8 @@ node_modules/
 dist/
 .vite/
 .vite-ssr/
+.env
+.env.*
+!.env.example
+.clerk/
+.vercel/

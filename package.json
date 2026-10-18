@@ -8,6 +8,8 @@
     "build": "npm run typecheck && vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
     "check": "npm run typecheck",
+    "test:auth": "node scripts/check-auth.mjs",
+    "test:clerk-config": "node scripts/check-clerk-config.mjs",
     "seo:update": "node scripts/update-seo.mjs"
   },
   "repository": {
@@ -22,6 +24,7 @@
   },
   "homepage": "https://github.com/ExeterBiologySymposium/EBS#readme",
   "dependencies": {
+    "@clerk/react": "^6.17.8",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",

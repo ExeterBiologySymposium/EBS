@@ -1,3 +1,4 @@
+import { RegistrationLink } from '../auth';
 import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
 
 export default function PageContent() { return <div className="page-layout layout-judges">
@@ -61,7 +62,7 @@ export default function PageContent() { return <div className="page-layout layou
 <h2>{"Register as a judge"}</h2>
 <p>{"Judge applications are open now. Express your interest and we'll confirm placement and send symposium details ahead of April 25th, 2027."}</p>
 <div className={"actions"}>
-<a className={"button primary"} href={"https://docs.google.com/forms/d/e/1FAIpQLScEdi8TnCtiIfO9cD0fGQkLRkPcPeik3xHIPaZi87brvRiY2g/viewform?usp=dialog"} rel={"noopener noreferrer"} target={"_blank"}>{"Express Judge Interest"}</a>
+<RegistrationLink className={"button primary"} href={"https://docs.google.com/forms/d/e/1FAIpQLScEdi8TnCtiIfO9cD0fGQkLRkPcPeik3xHIPaZi87brvRiY2g/viewform?usp=dialog"}>{"Express Judge Interest"}</RegistrationLink>
 <a className={"button secondary"} href={"faq.html"}>{"FAQ"}</a>
 </div>
 </div>

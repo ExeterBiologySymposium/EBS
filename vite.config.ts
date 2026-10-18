@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { basename, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { clerkBuildDefines } from './scripts/clerk-config';
 
 const root = dirname(fileURLToPath(import.meta.url));
 
@@ -38,6 +39,7 @@ function reactShell() {
 
 export default defineConfig({
   appType: 'mpa',
+  define: clerkBuildDefines(process.env),
   plugins: [react(), tailwindcss(), reactShell()],
   build: {
     rollupOptions: {
