@@ -199,14 +199,14 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"Is there an online / virtual option?"}</summary>
 <div id={"sy0"}>
-<p>{"Yes. EBS 2027 runs as a hybrid event — in-person at Phillips Exeter Academy and online, both on the same day. Students who can't travel to campus can present their poster and take part in judging and Q&A through a livestreamed virtual track running alongside the in-person schedule."}</p>
+<p>{"Yes. EBS 2027 runs as a hybrid event — in-person at Phillips Exeter Academy and online, both on the same day. Students who can't travel to campus can present their poster and take part in judging through a livestreamed virtual track running alongside the in-person schedule."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"Who should attend in person?"}</summary>
 <div id={"sy-inperson"}>
 <p>{"On the application form you will be asked whether you plan to attend in person. Please only answer Yes if you either live within a two-hour drive of the school or would be willing to travel to Exeter and are able to cover all travel costs."}</p>
-<p>{"Everyone else is encouraged to choose the online option, which offers the same presenting, judging, and Q&A experience. Choosing online has no effect on whether you are accepted."}</p>
+<p>{"Everyone else is encouraged to choose the online option, which offers the same poster presentation and judging experience. Choosing online has no effect on whether you are accepted."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>
@@ -224,9 +224,10 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"What are the presentation formats?"}</summary>
 <div id={"sy1"}>
-<p>{"EBS uses a single presentation format:"}</p>
+<p>{"Students present in one format, and the day also includes a keynote:"}</p>
 <ul>
 <li><strong>{"Poster Presentation:"}</strong>{" A research poster displayed during one or both poster sessions. EBS prints posters for in-person presenters; online presenters share a digital copy. Students stand by their poster and explain their work to visiting judges and attendees (~15 min per judge visit). Students joining online present their poster over video during the same sessions."}</li>
+<li><strong>{"Keynote Speaker:"}</strong>{" A distinguished keynote speaker opens the day by speaking on their research experience, followed by a moderated discussion with symposium participants. The keynote is open to all registered participants and is streamed to online attendees."}</li>
 </ul>
 </div>
 </details>
@@ -274,7 +275,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"What does the online experience include?"}</summary>
 <div id={"i2"}>
-<p>{"Online participants go through the same application and review process, get the same resources and coding lessons, present their poster over video during the live sessions, and receive judging and Q&A. Posters are shared digitally."}</p>
+<p>{"Online participants go through the same application and review process, get the same resources and coding lessons, present their poster over video during the live sessions, and receive judging. Posters are shared digitally."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>

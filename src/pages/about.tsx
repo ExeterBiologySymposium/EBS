@@ -96,7 +96,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"step"}>
 <div className={"step__num"}>{"4"}</div>
 <div className={"step__body"}>
-<p className={"step__title"}>{"Awards & Networking"}</p>
+<p className={"step__title"}>{"Awards"}</p>
 <p>{"The day concludes with an awards ceremony."}</p>
 </div>
 </div>
