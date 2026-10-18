@@ -97,7 +97,7 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .fact-controls .autoplay-control{display:none}
 .hero-squaremark{display:block;width:144px;height:auto;margin:0 0 24px auto;background:transparent;object-fit:contain}
 .hero-registration{display:flex;flex-direction:column;align-items:flex-end;gap:24px;width:220px;max-width:100%;flex-shrink:0}
-.hero-registration .hero-squaremark{width:100%;height:auto;aspect-ratio:1;margin:0}
+.hero-registration .hero-squaremark{width:75%;height:auto;aspect-ratio:1;margin:0}
 .hero-registration>.button{width:100%;min-height:62px}
 @media(max-width:767px){.hero-registration{width:100%;margin-top:22px;gap:20px}.hero-registration>.button{min-height:58px}}
 @media(max-width:767px){.home-hero{min-height:1060px}.hero-facts{top:88px;left:auto;right:var(--gutter);width:210px;padding-top:0}.hero-squaremark{width:104px;margin-bottom:20px}.hero-facts strong{min-height:62px}}
@@ -152,6 +152,6 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .fact-controls{gap:0}.fact-controls button{width:44px;height:44px;padding:0;display:grid;place-items:center}
 .footer-top a{padding:10px 0;margin:0}
 .wordmark,.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}
-@media(max-width:767px){.hero-registration .hero-squaremark{width:80%;align-self:flex-end}}
+@media(max-width:767px){.hero-registration .hero-squaremark{width:75%;align-self:flex-end}}
 /* Keep hero copy legible over the busy group photo. */
 .hero-shade{background:linear-gradient(90deg,#0008 0%,#0004 30%,#0000 52%),linear-gradient(180deg,#0004 0%,#0002 35%,#000a 100%)}
