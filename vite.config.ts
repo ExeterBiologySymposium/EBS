@@ -54,8 +54,9 @@ export default defineConfig({
   build: {
     rolldownOptions: {
       output: {
+        strictExecutionOrder: true,
         chunkFileNames: chunk => chunk.name.startsWith('learning') ? 'protected-assets/[name]-[hash].js' : 'assets/[name]-[hash].js',
-        codeSplitting: { groups: [{ name: 'learning', test: /src[\\/]pages[\\/](resources|datascience|python|rstudio|opensource)\.tsx$/, priority: 20 }] },
+        codeSplitting: { groups: [{ name: 'learning', test: /src[\\/]pages[\\/](resources|datascience|python|rstudio|opensource)\.tsx$/, priority: 20, includeDependenciesRecursively: false }] },
       },
       input: Object.fromEntries(routes.map((route) => [route, resolve(root, route)]))
     },
