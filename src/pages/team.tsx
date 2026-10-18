@@ -1,12 +1,14 @@
 const organizingTeam = [
-  {name:'Adaeze Acholonu',role:'Outreach Associate',year:'2029',initials:'AA'},
+  {name:'Adaeze Acholonu',role:'Outreach and Media Associate',year:'2029',initials:'AA'},
   {name:'Cici Chen',role:'Research Associate',year:'2028',initials:'CC'},
   {name:'Oliver Choi',role:'Research Associate',year:'2029',initials:'OC'},
   {name:'Derek Geng',role:'Outreach Associate',year:'2030',initials:'DG'},
   {name:'Dowan Kim',role:'Research Associate',year:'2029',initials:'DK'},
-  {name:'Esther Kim',role:'Outreach Associate',year:'2029',initials:'EK'},
-  {name:'Margaux Morgan',role:'Outreach Associate',year:'2029',initials:'MM'},
+  {name:'Esther Kim',role:'Outreach and Research Associate',year:'2029',initials:'EK'},
+  {name:'Margaux Morgan',role:'Outreach and Media Associate',year:'2029',initials:'MM'},
   {name:'Avni Murarka',role:'Research Associate',year:'2028',initials:'AM'},
+  {name:'Elaine Fan',role:'Research Associate',year:'2029',initials:'EF'},
+  {name:'Jessica Fan',role:'Research Associate',year:'2029',initials:'JF'},
   {name:'Scarlett Reddy',role:'Research Associate',year:'2029',initials:'SR'},
   {name:'Olivia Wang',role:'Social Media Associate',year:'2029',initials:'OW'}
 ];
