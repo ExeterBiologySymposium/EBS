@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { basename, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { clerkBuildDefines } from './scripts/clerk-config';
+import { clerkBuildDefines } from './scripts/clerk-config.js';
 
 const root = dirname(fileURLToPath(import.meta.url));
 
@@ -37,12 +37,26 @@ function reactShell() {
   };
 }
 
+function verifyLearningSeparation(): Plugin {
+  return { name: 'verify-learning-separation', generateBundle(_options, bundle) {
+    for (const chunk of Object.values(bundle)) {
+      if (chunk.type === 'chunk' && chunk.moduleIds.some(id => /src[\\/]pages[\\/](resources|datascience|python|rstudio|opensource)\.tsx$/.test(id)) && !chunk.fileName.startsWith('protected-assets/')) {
+        throw new Error('Protected learning content escaped its authenticated asset namespace.');
+      }
+    }
+  } };
+}
+
 export default defineConfig({
   appType: 'mpa',
   define: clerkBuildDefines(process.env),
-  plugins: [react(), tailwindcss(), reactShell()],
+  plugins: [react(), tailwindcss(), reactShell(), verifyLearningSeparation()],
   build: {
-    rollupOptions: {
+    rolldownOptions: {
+      output: {
+        chunkFileNames: chunk => chunk.name.startsWith('learning') ? 'protected-assets/[name]-[hash].js' : 'assets/[name]-[hash].js',
+        codeSplitting: { groups: [{ name: 'learning', test: /src[\\/]pages[\\/](resources|datascience|python|rstudio|opensource)\.tsx$/, priority: 20 }] },
+      },
       input: Object.fromEntries(routes.map((route) => [route, resolve(root, route)]))
     },
     outDir: 'dist',

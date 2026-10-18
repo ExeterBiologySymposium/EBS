@@ -1,3 +1,4 @@
+import { LearningLink } from '../auth';
 import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
 
 export default function PageContent() { return <div className="page-layout layout-faq">
@@ -116,7 +117,7 @@ export default function PageContent() { return <div className="page-layout layou
 <summary>{"How do I choose a research topic?"}</summary>
 <div id={"r2"}>
 <p>{"Start with something you're genuinely curious about. Think about biology topics that came up in class, news stories that caught your attention, or questions you've always had. A good EBS research question is: specific (not \"what causes cancer\" but \"what genetic mutations are most common in pediatric glioblastoma\"), answerable with public data, and biological in nature."}</p>
-<p>{"Our resource library and organizing team are available to help you refine your question into something workable. See the "}<a href={"resources.html"}>{"Resources page"}</a>{" for guides on forming research questions and finding datasets."}</p>
+<p>{"Our resource library and organizing team are available to help you refine your question into something workable. See the "}<LearningLink href={"resources.html"}>{"Resources page"}</LearningLink>{" for guides on forming research questions and finding datasets."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>

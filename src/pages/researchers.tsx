@@ -1,3 +1,4 @@
+import { LearningLink } from '../auth';
 import { RegistrationLink } from '../auth';
 import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
 
@@ -157,7 +158,7 @@ export default function PageContent() { return <div className="page-layout layou
 <p>{"Student registration is open now. Fill out the form and we'll be in touch as the research cycle begins."}</p>
 <div className={"actions"}>
 <RegistrationLink className={"button primary"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"}>{"Register Interest"}</RegistrationLink>
-<a className={"button secondary"} href={"resources.html"}>{"Browse Resources"}</a>
+<LearningLink className={"button secondary"} href={"resources.html"}>{"Browse Resources"}</LearningLink>
 </div>
 </div>
 </div>

@@ -148,3 +148,5 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 @media(max-width:360px){.organizing-team-grid{grid-template-columns:1fr}}
 .header-right .button,.button{white-space:normal}
 @media(min-width:768px) and (max-width:900px){.desktop-nav{gap:12px}.site-header{gap:18px}.header-right .button{min-width:112px;padding-inline:12px}}
+
+.member-access{margin-bottom:36px}.member-access h1,.member-access h2{font-size:32px}.member-access p{max-width:760px}

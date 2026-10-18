@@ -10,7 +10,11 @@
     "check": "npm run typecheck",
     "test:auth": "node scripts/check-auth.mjs",
     "test:clerk-config": "node scripts/check-clerk-config.mjs",
-    "seo:update": "node scripts/update-seo.mjs"
+    "seo:update": "node scripts/update-seo.mjs",
+    "test:access": "node scripts/check-access.mjs",
+    "test:member-ui": "node scripts/check-member-ui.mjs",
+    "test:access-build": "node scripts/check-access-build.mjs",
+    "test:vercel-runtime": "node scripts/check-vercel-runtime.mjs"
   },
   "repository": {
     "type": "git",
@@ -24,12 +28,14 @@
   },
   "homepage": "https://github.com/ExeterBiologySymposium/EBS#readme",
   "dependencies": {
+    "@clerk/backend": "^3.25.0",
     "@clerk/react": "^6.17.8",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
-    "@vercel/speed-insights": "^2.0.0",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/functions": "^3.10.1",
+    "@vercel/speed-insights": "^2.0.0",
     "@vitejs/plugin-react": "^6.1.1",
     "lucide-react": "^1.41.0",
     "motion": "^13.2.0",
@@ -41,5 +47,6 @@
   },
   "devDependencies": {
     "@types/node": "^26.4.1"
-  }
+  },
+  "type": "module"
 }

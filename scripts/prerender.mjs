@@ -10,7 +10,7 @@ const routes = ['about.html', 'datascience.html', 'faq.html', 'index.html', 'jud
 const serverOut = resolve(root, '.vite-ssr');
 
 await build({ root, configFile: false, plugins: [react()], build: { ssr: 'src/entry-server.tsx', outDir: serverOut, emptyOutDir: true } });
-const { render } = await import(pathToFileURL(resolve(serverOut, 'entry-server.mjs')).href);
+const { render } = await import(pathToFileURL(resolve(serverOut, 'entry-server.js')).href);
 
 for (const route of routes) {
   const output = resolve(root, 'dist', route);
