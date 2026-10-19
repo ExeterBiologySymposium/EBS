@@ -38,7 +38,7 @@ export default function PageContent() { return <div className="page-layout layou
 </details>
 </div>
 <div className={"person text-block"}>
-<div className={"portrait"}><img alt={"Jaiden Kim"} decoding={"async"} height={"6048"} loading={"lazy"} src={"/images/team/jaiden-kim.jpg"} width={"4032"} /></div>
+<div className={"portrait"}><img alt={"Jaiden Kim"} decoding={"async"} height={"4397"} loading={"lazy"} src={"/images/team/jaiden-kim.jpg"} width={"2931"} /></div>
 <h3>{"Jaiden Kim"}</h3>
 <p className={"role"}>{"Co-Head"}</p>
 <p className={"grade"}>{"Class of 2028"}</p>
