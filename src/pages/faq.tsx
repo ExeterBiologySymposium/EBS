@@ -212,7 +212,7 @@ export default function PageContent() { return <div className="page-layout layou
 <details className={"disclosure"} role={"listitem"}>
 <summary>{"Do in-person presenters need a chaperone?"}</summary>
 <div id={"sy-chaperone"}>
-<p>{"Yes. Every in-person presenter must be accompanied by a chaperone, such as a parent, guardian, or teacher. The detailed chaperone policy is still being finalized. We will share the full requirements with registered participants and update this page as soon as it is set."}</p>
+<p>{"Yes. Every in-person presenter must be accompanied by an adult chaperone. Each visiting school determines whether parents, guardians, or teachers may serve as chaperones for its students, in accordance with its own policies. The visiting school remains responsible for supervising its students and retains liability for any incidents involving its group."}</p>
 </div>
 </details>
 <details className={"disclosure"} role={"listitem"}>

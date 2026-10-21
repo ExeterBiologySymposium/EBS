@@ -1,15 +1,16 @@
 const organizingTeam = [
-  {name:'Adaeze Acholonu',role:'Outreach and Media Associate',year:'2029',initials:'AA'},
+  {name:'Adaeze Acholonu',role:'Outreach and Media Associate',year:'2029',initials:'AA',photo:'/images/team/adaeze-acholonu.jpg'},
   {name:'Cici Chen',role:'Research Associate',year:'2028',initials:'CC',photo:'/images/team/cici-chen.jpg'},
-  {name:'Oliver Choi',role:'Research Associate',year:'2029',initials:'OC'},
-  {name:'Derek Geng',role:'Outreach Associate',year:'2030',initials:'DG',photo:'/images/team/derek-geng.jpg'},
-  {name:'Dowan Kim',role:'Research Associate',year:'2029',initials:'DK'},
-  {name:'Esther Kim',role:'Outreach and Research Associate',year:'2029',initials:'EK',photo:'/images/team/esther-kim.jpg'},
-  {name:'Margaux Morgan',role:'Outreach and Media Associate',year:'2029',initials:'MM'},
-  {name:'Avni Murarka',role:'Research Associate',year:'2028',initials:'AM'},
+  {name:'Oliver Choi',role:'Research Associate',year:'2029',initials:'OC',photo:'/images/team/oliver-choi.jpg'},
+  {name:'Jake Cootey',role:'Research Associate',year:'2029',initials:'JC',photo:'/images/team/jake-cootey.jpg'},
   {name:'Elaine Fan',role:'Research Associate',year:'2029',initials:'EF',photo:'/images/team/elaine-fan.jpg'},
-  {name:'Jessica Fan',role:'Research Associate',year:'2029',initials:'JF'},
-  {name:'Scarlett Reddy',role:'Research Associate',year:'2029',initials:'SR'},
+  {name:'Jessica Fan',role:'Research Associate',year:'2029',initials:'JF',photo:'/images/team/jessica-fan.jpg'},
+  {name:'Derek Geng',role:'Outreach Associate',year:'2030',initials:'DG',photo:'/images/team/derek-geng.jpg'},
+  {name:'Dowan Kim',role:'Research Associate',year:'2029',initials:'DK',photo:'/images/team/dowan-kim.jpg'},
+  {name:'Esther Kim',role:'Outreach and Research Associate',year:'2029',initials:'EK',photo:'/images/team/esther-kim.jpg'},
+  {name:'Margaux Morgan',role:'Outreach and Media Associate',year:'2029',initials:'MM',photo:'/images/team/margaux-morgan.jpg'},
+  {name:'Avni Murarka',role:'Research Associate',year:'2028',initials:'AM',photo:'/images/team/avni-murarka.jpg'},
+  {name:'Scarlett Reddy',role:'Research Associate',year:'2029',initials:'SR',photo:'/images/team/scarlett-reddy.jpg'},
   {name:'Olivia Wang',role:'Social Media Associate',year:'2029',initials:'OW',photo:'/images/team/olivia-wang.jpg'}
 ];
 
@@ -25,7 +26,7 @@ export default function PageContent() { return <div className="page-layout layou
 <h2 className={"team-section-title"}>{"Leadership"}</h2>
 <div className={"grid columns-4"}>
 <div className={"person text-block"}>
-<div className={"portrait"}><img alt={"Adrian Chan working in a laboratory"} decoding={"async"} height={"5120"} loading={"lazy"} src={"images/team/adrian-chan.jpeg"} width={"3840"} /></div>
+<div className={"portrait"}><img alt={"Adrian Chan working in a laboratory"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/team/adrian-chan.jpg"} width={"2688"} /></div>
 <h3>{"Adrian Chan"}</h3>
 <p className={"role"}>{"Co-Head"}</p>
 <p className={"grade"}>{"Class of 2028"}</p>
@@ -50,7 +51,7 @@ export default function PageContent() { return <div className="page-layout layou
 </details>
 </div>
 <div className={"person text-block"}>
-<div className={"portrait"}><img alt={"Reya Satam"} decoding={"async"} height={"1255"} loading={"lazy"} src={"images/team/reya-satam.jpeg"} width={"979"} /></div>
+<div className={"portrait"}><img alt={"Reya Satam"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/team/reya-satam.jpg"} width={"2688"} /></div>
 <h3>{"Reya Satam"}</h3>
 <p className={"role"}>{"Co-Head"}</p>
 <p className={"grade"}>{"Class of 2028"}</p>
@@ -94,7 +95,7 @@ export default function PageContent() { return <div className="page-layout layou
 <p>{"The organizing team supports research curriculum, outreach, logistics, and media."}</p>
 <div className={"grid organizing-team-grid"}>
 {organizingTeam.map(member=><div className="person text-block" key={member.name}>
-<div className={`portrait${member.photo ? '' : ' portrait--initials'}`} aria-hidden={!member.photo}>{member.photo ? <img alt={member.name} decoding="async" height="6048" loading="lazy" src={member.photo} width="4032" /> : <span>{member.initials}</span>}</div>
+<div className={`portrait${member.photo ? '' : ' portrait--initials'}`} aria-hidden={!member.photo}>{member.photo ? <img alt={member.name} decoding="async" height="4032" loading="lazy" src={member.photo} width="2688" /> : <span>{member.initials}</span>}</div>
 <h3>{member.name}</h3>
 <p className="role">{member.role}</p>
 <p className="grade">Class of {member.year}</p>
