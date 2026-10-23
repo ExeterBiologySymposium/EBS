@@ -21,8 +21,45 @@ export function CodeBlock({ text }: { text: string }) {
 
 export function ContactForm({ action, accessKey }: { action: string; accessKey: string }) {
   const [state, setState] = useState<'idle'|'sending'|'sent'|'failed'|'captcha'>('idle');
+  const [captchaError, setCaptchaError] = useState(false);
+  const captcha = useRef<HTMLDivElement>(null);
   const request = useRef<AbortController | null>(null);
   useEffect(() => () => request.current?.abort(), []);
+  useEffect(() => {
+    let disposed = false;
+    const sitekey = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
+    type HCaptcha = { render: (container: HTMLElement, options: { sitekey: string; reCaptchaCompat: false; callback: (token: string) => void; 'expired-callback': () => void; 'error-callback': () => void }) => string };
+    type HCaptchaWindow = Window & { hcaptcha?: HCaptcha };
+    const host = window as HCaptchaWindow;
+
+    function renderCaptcha() {
+      if (disposed || !captcha.current || !host.hcaptcha) return;
+      try {
+        host.hcaptcha.render(captcha.current, {
+          sitekey,
+          reCaptchaCompat: false,
+          callback: () => { setCaptchaError(false); setState(current => current === 'captcha' ? 'idle' : current); },
+          'expired-callback': () => setState(current => current === 'captcha' ? 'idle' : current),
+          'error-callback': () => setCaptchaError(true),
+        });
+      } catch {
+        setCaptchaError(true);
+      }
+    }
+
+    if (host.hcaptcha) {
+      renderCaptcha();
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://js.hcaptcha.com/1/api.js?render=explicit&recaptchacompat=off';
+      script.async = true;
+      script.defer = true;
+      script.onload = renderCaptcha;
+      script.onerror = () => { if (!disposed) setCaptchaError(true); };
+      document.head.appendChild(script);
+    }
+    return () => { disposed = true; };
+  }, []);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -44,9 +81,9 @@ export function ContactForm({ action, accessKey }: { action: string; accessKey: 
     <label htmlFor="c-role">I am a…<select id="c-role" name="role" defaultValue=""><option value="">Select (optional)</option>{['Student','Teacher / Educator','Researcher / Professional','Potential Judge','Parent / Guardian','Other'].map(role=><option key={role}>{role}</option>)}</select></label>
     <label htmlFor="c-subject">Subject<input id="c-subject" name="subject" required /></label>
     <label htmlFor="c-message">Message<textarea id="c-message" name="message" rows={5} required /></label>
-    <div className="h-captcha" data-captcha="true" />
+    <div ref={captcha} className="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" />
     <button className="button" type="submit" disabled={state==='sending'}>{state==='sending'?'Sending…':'Send message'}<ArrowDownRight size={18}/></button>
-  </form><p id="contact-status" role="status">{state==='sent'?'Message sent. Thank you for contacting EBS.':state==='failed'?'We could not send your message. Your text is still here; retry or email us.':state==='captcha'?'Please complete the CAPTCHA before sending your message.':''}</p><div id="form-success-msg" hidden={state!=='sent'} tabIndex={-1}><h3>Message sent</h3><p>Your message has been sent to the EBS organizing team.</p></div><p className="contact-email">Prefer email? <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a></p></>;
+  </form><p id="contact-status" role="status">{captchaError?'The CAPTCHA could not load. Refresh the page or email us instead.':state==='sent'?'Message sent. Thank you for contacting EBS.':state==='failed'?'We could not send your message. Your text is still here; retry or email us.':state==='captcha'?'Please complete the CAPTCHA before sending your message.':''}</p><div id="form-success-msg" hidden={state!=='sent'} tabIndex={-1}><h3>Message sent</h3><p>Your message has been sent to the EBS organizing team.</p></div><p className="contact-email">Prefer email? <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a></p></>;
 }
 
 type RemoteRow = Record<string,string>;
