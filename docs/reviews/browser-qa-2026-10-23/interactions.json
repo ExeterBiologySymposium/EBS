@@ -1,0 +1,61 @@
+[
+  {
+    "name": "desktop search",
+    "result": {
+      "open": true,
+      "links": [
+        "Schedule"
+      ]
+    },
+    "passed": true
+  },
+  {
+    "name": "homepage guidance",
+    "passed": true
+  },
+  {
+    "name": "homepage fact controls",
+    "passed": true
+  },
+  {
+    "name": "mobile menu and search",
+    "passed": true
+  },
+  {
+    "name": "FAQ disclosure",
+    "passed": true
+  },
+  {
+    "name": "contact anchor and validation",
+    "result": {
+      "captchaFrames": 2,
+      "focused": "c-name"
+    },
+    "passed": true
+  },
+  {
+    "name": "resources signed out gate",
+    "result": "Access to EBS resources\n\nSign in or create an account. The EBS team reviews accounts before granting access to resources and coding lessons.\n\nSign in\n",
+    "passed": true
+  },
+  {
+    "name": "datascience signed out gate",
+    "result": "Access to EBS resources\n\nSign in or create an account. The EBS team reviews accounts before granting access to resources and coding lessons.\n\nSign in\n",
+    "passed": true
+  },
+  {
+    "name": "python signed out gate",
+    "result": "Access to EBS resources\n\nSign in or create an account. The EBS team reviews accounts before granting access to resources and coding lessons.\n\nSign in\n",
+    "passed": true
+  },
+  {
+    "name": "rstudio signed out gate",
+    "result": "Access to EBS resources\n\nSign in or create an account. The EBS team reviews accounts before granting access to resources and coding lessons.\n\nSign in\n",
+    "passed": true
+  },
+  {
+    "name": "opensource signed out gate",
+    "result": "Access to EBS resources\n\nSign in or create an account. The EBS team reviews accounts before granting access to resources and coding lessons.\n\nSign in\n",
+    "passed": true
+  }
+]

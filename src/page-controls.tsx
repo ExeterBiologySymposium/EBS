@@ -19,60 +19,94 @@ export function CodeBlock({ text }: { text: string }) {
   return <div className="code-block"><div className="code-toolbar"><span>Code example</span><button type="button" onClick={copy}>{message === 'Copied' ? <Check size={15} /> : <Copy size={15} />}<span aria-live="polite">{message}</span></button></div><pre ref={pre} tabIndex={0}><code>{text}</code></pre></div>;
 }
 
+type HCaptchaApi = {
+  render(container: HTMLElement, options: Record<string, unknown>): string;
+  remove(id: string): void;
+  reset(id: string): void;
+};
+type CaptchaWindow = Window & { hcaptcha?: HCaptchaApi; ebsHCaptchaReady?: () => void };
+let captchaLoad: Promise<HCaptchaApi> | null = null;
+function loadCaptcha(): Promise<HCaptchaApi> {
+  if (captchaLoad) return captchaLoad;
+  const host = window as CaptchaWindow;
+  if (host.hcaptcha) return Promise.resolve(host.hcaptcha);
+  captchaLoad = new Promise<HCaptchaApi>((resolve, reject) => {
+    const script = document.createElement('script');
+    const fail = () => {
+      clearTimeout(timer);
+      script.remove();
+      delete host.ebsHCaptchaReady;
+      captchaLoad = null;
+      reject(new Error('CAPTCHA unavailable'));
+    };
+    const timer = window.setTimeout(fail, 15000);
+    host.ebsHCaptchaReady = () => {
+      if (!host.hcaptcha) { fail(); return; }
+      clearTimeout(timer);
+      delete host.ebsHCaptchaReady;
+      resolve(host.hcaptcha);
+    };
+    script.src = 'https://js.hcaptcha.com/1/api.js?onload=ebsHCaptchaReady&render=explicit&recaptchacompat=off';
+    script.async = true;
+    script.onerror = fail;
+    document.head.appendChild(script);
+  });
+  return captchaLoad;
+}
+
 export function ContactForm({ action, accessKey }: { action: string; accessKey: string }) {
   const [state, setState] = useState<'idle'|'sending'|'sent'|'failed'|'captcha'>('idle');
   const [captchaError, setCaptchaError] = useState(false);
   const captcha = useRef<HTMLDivElement>(null);
+  const captchaToken = useRef('');
+  const widget = useRef<{ api: HCaptchaApi; id: string } | null>(null);
   const request = useRef<AbortController | null>(null);
   useEffect(() => () => request.current?.abort(), []);
   useEffect(() => {
     let disposed = false;
-    const sitekey = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
-    type HCaptcha = { render: (container: HTMLElement, options: { sitekey: string; reCaptchaCompat: false; callback: (token: string) => void; 'expired-callback': () => void; 'error-callback': () => void }) => string };
-    type HCaptchaWindow = Window & { hcaptcha?: HCaptcha };
-    const host = window as HCaptchaWindow;
-
-    function renderCaptcha() {
-      if (disposed || !captcha.current || !host.hcaptcha) return;
-      try {
-        host.hcaptcha.render(captcha.current, {
-          sitekey,
-          reCaptchaCompat: false,
-          callback: () => { setCaptchaError(false); setState(current => current === 'captcha' ? 'idle' : current); },
-          'expired-callback': () => setState(current => current === 'captcha' ? 'idle' : current),
-          'error-callback': () => setCaptchaError(true),
-        });
-      } catch {
-        setCaptchaError(true);
+    loadCaptcha().then(api => {
+      if (disposed || !captcha.current) return;
+      const id = api.render(captcha.current, {
+        // Web3Forms' documented public site key for its free hCaptcha integration.
+        sitekey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2',
+        callback: (token: string) => {
+          if (disposed) return;
+          captchaToken.current = token;
+          setCaptchaError(false);
+          setState(current => current === 'captcha' ? 'idle' : current);
+        },
+        'expired-callback': () => { if (!disposed) captchaToken.current = ''; },
+        'error-callback': () => { if (!disposed) { captchaToken.current = ''; setCaptchaError(true); } },
+      });
+      widget.current = { api, id };
+    }).catch(() => { if (!disposed) setCaptchaError(true); });
+    return () => {
+      disposed = true;
+      captchaToken.current = '';
+      if (widget.current) {
+        widget.current.api.remove(widget.current.id);
+        widget.current = null;
       }
-    }
-
-    if (host.hcaptcha) {
-      renderCaptcha();
-    } else {
-      const script = document.createElement('script');
-      script.src = 'https://js.hcaptcha.com/1/api.js?render=explicit&recaptchacompat=off';
-      script.async = true;
-      script.defer = true;
-      script.onload = renderCaptcha;
-      script.onerror = () => { if (!disposed) setCaptchaError(true); };
-      document.head.appendChild(script);
-    }
-    return () => { disposed = true; };
+    };
   }, []);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     if (request.current || !form.reportValidity()) return;
-    const captchaResponse = form.querySelector<HTMLTextAreaElement>('textarea[name="h-captcha-response"]');
-    if (!captchaResponse?.value.trim()) { setState('captcha'); return; }
+    if (!captchaToken.current.trim()) { setState('captcha'); return; }
     const controller = new AbortController(); request.current = controller; setState('sending');
     const timer = window.setTimeout(() => controller.abort(),15000);
+    const data = new FormData(form);
+    data.set('h-captcha-response', captchaToken.current);
     try {
-      const response = await fetch(action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'},signal:controller.signal});
+      const response = await fetch(action,{method:'POST',body:data,headers:{Accept:'application/json'},signal:controller.signal});
       if (!response.ok || (await response.json()).success !== true) throw new Error('Message rejected');
       setState('sent');
-    } catch { setState('failed'); }
+    } catch {
+      setState('failed');
+      captchaToken.current = '';
+      if (widget.current) widget.current.api.reset(widget.current.id);
+    }
     finally { clearTimeout(timer); request.current = null; }
   }
   return <><form id="contact-form" action={action} method="POST" onSubmit={submit} aria-busy={state==='sending'} hidden={state==='sent'}>

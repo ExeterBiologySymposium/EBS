@@ -1,0 +1,116 @@
+[
+  {
+    "route": "resources",
+    "width": 1280,
+    "errors": [],
+    "h1": "Resources",
+    "text": "Coming soon\n\nResources\n\nResearch guides and tools are coming soon. Check back for updates.\n\nExample posters\n\nPosters from two members of the organizing team, to show what a finished EBS project can look like.\n\nLuke Wang — fungal enzyme inhibitors\nReya Satam — circadian clock genes and traumatic brain injury",
+    "overflow": 0,
+    "links": [],
+    "iframes": []
+  },
+  {
+    "route": "datascience",
+    "width": 1280,
+    "errors": [],
+    "h1": "Coding",
+    "text": "Coming soon\n\nCoding\n\nCoding lessons are coming soon. Check back for updates.",
+    "overflow": 0,
+    "links": [],
+    "iframes": []
+  },
+  {
+    "route": "python",
+    "width": 1280,
+    "errors": [],
+    "h1": "Coding",
+    "text": "Coming soon\n\nCoding\n\nCoding lessons are coming soon. Check back for updates.",
+    "overflow": 0,
+    "links": [],
+    "iframes": []
+  },
+  {
+    "route": "rstudio",
+    "width": 1280,
+    "errors": [],
+    "h1": "Coding",
+    "text": "Coming soon\n\nCoding\n\nCoding lessons are coming soon. Check back for updates.",
+    "overflow": 0,
+    "links": [],
+    "iframes": []
+  },
+  {
+    "route": "opensource",
+    "width": 1280,
+    "errors": [],
+    "h1": "EBS Open Source",
+    "text": "EBS Open Source\n\nOpen datasets, code, and curriculum materials from the Exeter Biology Symposium community.\n\nOpen EBS Open Source in a new tab",
+    "overflow": 0,
+    "links": [
+      "https://ebsopensource.vercel.app"
+    ],
+    "iframes": [
+      {
+        "src": "https://ebsopensource.vercel.app/",
+        "width": 1278
+      }
+    ]
+  },
+  {
+    "route": "resources",
+    "width": 375,
+    "errors": [],
+    "h1": "Resources",
+    "text": "Coming soon\n\nResources\n\nResearch guides and tools are coming soon. Check back for updates.\n\nExample posters\n\nPosters from two members of the organizing team, to show what a finished EBS project can look like.\n\nLuke Wang — fungal enzyme inhibitors\nReya Satam — circadian clock genes and traumatic brain injury",
+    "overflow": 0,
+    "links": [],
+    "iframes": []
+  },
+  {
+    "route": "datascience",
+    "width": 375,
+    "errors": [],
+    "h1": "Coding",
+    "text": "Coming soon\n\nCoding\n\nCoding lessons are coming soon. Check back for updates.",
+    "overflow": 0,
+    "links": [],
+    "iframes": []
+  },
+  {
+    "route": "python",
+    "width": 375,
+    "errors": [],
+    "h1": "Coding",
+    "text": "Coming soon\n\nCoding\n\nCoding lessons are coming soon. Check back for updates.",
+    "overflow": 0,
+    "links": [],
+    "iframes": []
+  },
+  {
+    "route": "rstudio",
+    "width": 375,
+    "errors": [],
+    "h1": "Coding",
+    "text": "Coming soon\n\nCoding\n\nCoding lessons are coming soon. Check back for updates.",
+    "overflow": 0,
+    "links": [],
+    "iframes": []
+  },
+  {
+    "route": "opensource",
+    "width": 375,
+    "errors": [],
+    "h1": "EBS Open Source",
+    "text": "EBS Open Source\n\nOpen datasets, code, and curriculum materials from the Exeter Biology Symposium community.\n\nOpen EBS Open Source in a new tab",
+    "overflow": 0,
+    "links": [
+      "https://ebsopensource.vercel.app"
+    ],
+    "iframes": [
+      {
+        "src": "https://ebsopensource.vercel.app/",
+        "width": 373
+      }
+    ]
+  }
+]
