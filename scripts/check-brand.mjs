@@ -6,6 +6,12 @@ const repo=resolve(import.meta.dirname,'..');
 const css=await readFile(resolve(repo,'src/styles.css'),'utf8');
 const site=await readFile(resolve(repo,'src/site.tsx'),'utf8');
 const controls=await readFile(resolve(repo,'src/page-controls.tsx'),'utf8');
+for(const variant of ['red','white']){
+  assert.ok(site.includes(`/images/brand/ebs-logo-${variant}.png`),`Use the transparent ${variant} EBS logo`);
+  await access(resolve(repo,`public/images/brand/ebs-logo-${variant}.png`));
+}
+assert.doesNotMatch(site,/>EBS<\/a>|className="footer-wordmark" aria-hidden="true">EBS/,'Use the supplied logo instead of typeset initials');
+assert.match(css,/\.site-header\.on-media \.wordmark-white\{display:block\}/,'Use the white logo over the hero');
 for(const color of ['--crimson:#a31f34','--harkness:#6a243b','--muted:#63666a'])assert.ok(css.includes(color),`Missing approved token ${color}`);
 assert.doesNotMatch(css,/font-size:\s*(?:[0-9]|1[0-5])px\b/,'Typography must not reintroduce sub-16px fixed text sizes');
 assert.match(css,/\.fact-controls \.autoplay-control\{display:none\}/,'Hero Play/Pause must be hidden');
@@ -28,6 +34,8 @@ if(process.argv.includes('--built')){
     const html=await readFile(resolve(repo,'dist',route),'utf8');
     assert.equal((html.match(/<h1\b/g)||[]).length,1,`${route}: one h1`);
     assert.match(html,/PEA_ExeterMark_White_Lg\.png/);
+    assert.match(html,/\/images\/brand\/ebs-logo-red\.png/);
+    assert.match(html,/\/images\/brand\/ebs-logo-white\.png/);
     assert.doesNotMatch(html,/Design preview: contact messages are not sent|\/public\/images\//);
     if(route==='index.html')assert.match(html,/PEA_Seal_LtGray_Lg\.png/);
     for(const match of html.matchAll(/(?:src|href)="([^"]+)"/g)){
