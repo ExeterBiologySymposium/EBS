@@ -346,7 +346,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"shell"}>
 <div className={"section-header"}>
 <h2>{"Contact Us"}</h2>
-<p>{"Can't find the answer you're looking for? Send us a message and the EBS organizing team will get back to you."}</p>
+<p>Can't find the answer you're looking for? Send us a message here or visit our <a href="contact.html">Contact page</a>.</p>
 </div>
 <div className={"reading"}>
 <div className={"contact-form-wrap"}>

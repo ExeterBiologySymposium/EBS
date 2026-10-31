@@ -164,3 +164,13 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .hero-facts__location{padding:.08em .24em;border-radius:4px;background:rgba(0,0,0,.48);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-decoration-break:clone;-webkit-box-decoration-break:clone}
 /* Keep hero copy legible over the busy group photo. */
 .hero-shade{background:linear-gradient(90deg,#0008 0%,#0004 30%,#0000 52%),linear-gradient(180deg,#0004 0%,#0002 35%,#000a 100%)}
+
+/* Member Account, Contact, and Events use the existing page shell and controls. */
+.contact-page-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px}.event-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:start}.event-copy h2{margin-top:18px}.event-speaker{color:var(--muted)}.event-details{margin-top:28px}.event-details>div{border-top:1px solid var(--line);padding:16px 0}.event-details dd{margin:8px 0 0}.event-poster img{width:100%;height:auto}.event-poster figcaption{font-size:16px;color:var(--muted);margin-top:12px}.event-followup{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px;padding-top:40px;border-top:1px solid var(--line)}.layout-account .account-destinations{padding-block:36px}.layout-account .page-heading{min-height:0}
+@media(max-width:1279px){.desktop-nav,.header-right{display:none}.site-menu{display:block}}
+@media(max-width:767px){.contact-page-grid,.event-layout,.event-followup{grid-template-columns:minmax(0,1fr);gap:36px}.event-followup{margin-top:36px;padding-top:32px}.event-copy h2{font-size:34px}.layout-account .actions .button{flex:1 1 180px}}
+
+/* Public policy pages reuse the article layout and existing type scale. */
+.layout-legal .article-layout{max-width:1280px}.legal-copy{max-width:800px;min-width:0}.legal-section{padding-top:28px;border-top:1px solid var(--line)}.legal-section+.legal-section{margin-top:42px}.legal-contents{display:block;max-height:calc(100svh - 120px);overflow-y:auto}.legal-contents>p{margin:0 0 12px}.legal-contents a{min-height:44px}.footer-bottom{flex-wrap:wrap}
+@media(max-width:767px){.legal-contents{max-height:none;overflow:visible}.legal-contents .contents-nav{grid-template-columns:1fr}.legal-section+.legal-section{margin-top:34px}}
+@media print{.legal-contents{display:none}}

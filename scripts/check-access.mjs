@@ -16,7 +16,7 @@ try {
     assert.match(denied.headers.get('cache-control'),/no-store/);
     const page=await handlers.protect(new Request('https://www.exeterbiosymposium.page/python.html'));
     assert.equal(page.status,303);
-    assert.match(page.headers.get('location'),/^\/register.html\?/);
+    assert.match(page.headers.get('location'),/^\/account.html\?/);
   }
   const accepted=createAccessHandlers({authenticate:async()=> 'user_a',membership:async()=> 'accepted',enrollPending:async()=>{throw Error('must not enroll accepted');}});
   assert.equal(await accepted.protect(new Request('https://www.exeterbiosymposium.page/resources.html')),null);

@@ -11,6 +11,7 @@ function learningPage(load: () => Promise<{ default: ComponentType }>) {
   });
 }
 const pages = {
+  'events.html': learningPage(() => import('./pages/events')),
   'resources.html': learningPage(() => import('./pages/resources')),
   'datascience.html': learningPage(() => import('./pages/datascience')),
   'python.html': learningPage(() => import('./pages/python')),
@@ -21,5 +22,5 @@ export function ProtectedPage({ page }: { page: string }) {
   const access = useMemberAccess();
   if (access !== 'accepted') return <div className="page-layout shell"><AccessNotice asPage /></div>;
   const Content = pages[page as keyof typeof pages];
-  return <Suspense fallback={<section className="page-heading" role="status">Loading lesson…</section>}><Content /></Suspense>;
+  return <Suspense fallback={<section className="page-heading" role="status">Loading member content…</section>}><Content /></Suspense>;
 }

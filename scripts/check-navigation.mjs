@@ -10,6 +10,12 @@ try {
  const anchor=(href,attrs={})=>({href:new URL(href,base).href,target:'',hasAttribute:name=>name in attrs,...attrs});
  const click={button:0,defaultPrevented:false,metaKey:false,ctrlKey:false,shiftKey:false,altKey:false};
  assert(eligibleLink(click,anchor('/faq.html'),base));
+ for(const route of ['terms.html','privacy.html']) {
+  assert.equal(pageForUrl(new URL('/'+route,base)),route,`${route}: public route`);
+  assert.equal(pageForUrl(new URL('/'+route+'#contact',base)),route,`${route}: section URL`);
+  assert(eligibleLink(click,anchor('/'+route+'#contact'),base),`${route}: enhanced navigation`);
+  assert(!eligibleLink(click,anchor('/'+route+'#contact'),new URL('/'+route,base)),`${route}: native same-page anchor`);
+ }
  for(const [event,link] of [[{...click,ctrlKey:true},anchor('/faq.html')],[click,anchor('/faq.html',{target:'_blank'})],[click,anchor('/faq.html',{download:''})],[click,anchor('https://external.example/faq.html')],[click,anchor('/about.html#main')],[click,anchor('/guides/file.pdf')]])assert(!eligibleLink(event,link,base));
  console.log('PASS: known routes and native behavior for hashes, external/download/new-tab/modified links.');
 } finally {await vite.close()}

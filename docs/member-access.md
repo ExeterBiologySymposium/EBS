@@ -1,6 +1,6 @@
 # Resource and coding access
 
-EBS uses Clerk membership in **Accepted** to authorize Resources, Data Science, Python, R/RStudio, Open Source, their browser lesson bundle, `/enzyme_activity.csv`, and `/guides/**`. Public symposium pages and the signed-in application forms remain available without acceptance.
+EBS uses Clerk membership in **Accepted** to authorize Events (including its poster), Resources, Data Science, Python, R/RStudio, Open Source, their browser lesson bundle, `/enzyme_activity.csv`, and `/guides/**`. Public symposium pages and the signed-in application forms remain available without acceptance.
 
 ## Approve a participant
 
@@ -40,3 +40,13 @@ Protected responses use private/no-store caching. A dedicated `/protected-assets
 ## Verification
 
 Run `npm run build`, `npm run test:auth`, `npm run test:clerk-config`, `npm run test:access`, `npm run test:member-ui`, `npm run test:access-build`, and `npm run test:vercel-runtime`. A live preview must also verify anonymous/Pending denial, Accepted access, direct files, private caching, and revocation before release. Use disposable development identities and delete them after QA.
+
+## Account, Contact, and Events
+
+Signed-in visitors use **Account**, with pending approval and accepted views at the same `/account.html` URL. `/register.html` redirects authenticated visitors to Account; anonymous visitors retain registration. Pending Account views contain approval, profile, and Contact controls without registration links or research-folder/event actions. Accepted Account views include the existing [research-folder integration](participant-folders.md), learning links, and Events.
+
+Contact is a public page reusing the existing CAPTCHA-protected form; the FAQ contact anchor remains available. Events HTML, lazy content, and poster are protected server-side for Accepted members, and event content is excluded from public prerendering and JavaScript. Account/Events are noindex and excluded from the sitemap. Account/Register responses are private/no-store.
+
+Run `npm run test:member-pages` and `npm run test:member-pages-browser` (requires the same optional Puppeteer/Chromium setup as the navigation browser suite). Browser member-state tests use mocked Clerk/Google/CAPTCHA with the real server access policy; production Clerk/middleware verification still requires an authorized live preview.
+
+Research-folder Google operations now use owner-authorized OAuth for the personal EBS My Drive account. Follow the updated [folder setup guide](participant-folders.md); earlier Workspace/service-account instructions are superseded.

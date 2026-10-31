@@ -1,5 +1,6 @@
 import { createClerkClient } from '@clerk/backend';
 import type { AccessDependencies, Membership } from './access.js';
+import { googleRecipient } from './participant-folders.js';
 
 function configuration() {
   const secretKey = process.env.CLERK_SECRET_KEY;
@@ -39,3 +40,8 @@ export const clerkAccess: AccessDependencies = {
     }
   },
 };
+
+export async function participantGoogleEmail(userId: string): Promise<string | null> {
+  const { client } = configuration();
+  return googleRecipient(await client.users.getUser(userId));
+}

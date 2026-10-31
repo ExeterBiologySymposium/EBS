@@ -237,6 +237,33 @@
         "free online biology research opportunities for students",
         "Exeter Biology Symposium online participation"
       ]
+    },
+    "account.html": {
+      "title": "Account | EBS",
+      "description": "Sign in to manage your EBS account and approval status.",
+      "terms": [],
+      "noindex": true
+    },
+    "events.html": {
+      "title": "Events | EBS",
+      "description": "Sign in to access EBS member events.",
+      "terms": [],
+      "noindex": true
+    },
+    "contact.html": {
+      "title": "Contact | EBS",
+      "description": "Contact the Exeter Biology Symposium organizing team about participation, research, account access, and events.",
+      "terms": []
+    },
+    "terms.html": {
+      "title": "Terms of Use | Exeter Biology Symposium",
+      "description": "EBS purpose, participation expectations, research ownership, and terms for using the Exeter Biology Symposium website.",
+      "terms": []
+    },
+    "privacy.html": {
+      "title": "Privacy Notice | Exeter Biology Symposium",
+      "description": "How Exeter Biology Symposium handles account information, applications, messages, research files, and website data.",
+      "terms": []
     }
   },
   "excludedTerms": [

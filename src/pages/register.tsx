@@ -1,7 +1,19 @@
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../auth';
+import { safeReturnTo } from '../access-policy';
+import AccountPage from './account';
 import { AccessNotice } from '../auth';
-import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
 
-export default function PageContent() { return <div className="page-layout layout-register">
+export default function PageContent() {
+  const {status}=useContext(AuthContext);
+  useEffect(()=>{
+    if(status!=='signed-in') return;
+    const returnTo=safeReturnTo(new URLSearchParams(window.location.search).get('returnTo'));
+    window.location.replace('/account.html'+(returnTo?'?'+new URLSearchParams({returnTo}):''));
+  },[status]);
+  if(status==='signed-in') return <AccountPage/>;
+  if(status!=='signed-out') return <div className="page-layout shell"><section className="page-heading"><h1>{status==='loading'?'Checking your account…':'Sign-in unavailable'}</h1><p role="status">{status==='loading'?'Please wait while we check your account.':'Try again later, or contact the EBS team.'}</p><p><a href="contact.html">Contact the EBS team</a></p></section></div>;
+  return <div className="page-layout layout-register">
 <div className={"shell"}>
 <section className={"page-heading"}><h1>{"Register for EBS"}</h1><p className={"lead"}>{"Choose one route. Sign in or create an account to open your application in Google Forms."}</p><p>{"April 25th, 2027. In-person and online participation are planned."}</p></section>
 <AccessNotice/>

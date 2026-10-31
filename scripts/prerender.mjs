@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
-const routes = ['about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html', 'opensource.html', 'python.html', 'register.html', 'researchers.html', 'resources.html', 'rstudio.html', 'schedule.html', 'schools.html', 'student-signup.html', 'team.html'];
+const routes = ['account.html', 'contact.html', 'terms.html', 'privacy.html', 'events.html', 'about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html', 'opensource.html', 'python.html', 'register.html', 'researchers.html', 'resources.html', 'rstudio.html', 'schedule.html', 'schools.html', 'student-signup.html', 'team.html'];
 const serverOut = resolve(root, '.vite-ssr');
 
 await build({ root, configFile: false, plugins: [react()], build: { ssr: 'src/entry-server.tsx', outDir: serverOut, emptyOutDir: true } });
@@ -30,3 +30,8 @@ for (const route of routes) {
 
 await rm(serverOut, { recursive: true, force: true });
 await mkdir(resolve(root, 'dist'), { recursive: true });
+
+// Ship the generated public discovery files alongside the page output.
+for (const file of ['sitemap.xml', 'robots.txt']) {
+  await writeFile(resolve(root, 'dist', file), await readFile(resolve(root, file), 'utf8'));
+}

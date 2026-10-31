@@ -1,4 +1,4 @@
-import { isProtectedPath, normalizedPath } from '../src/access-policy.js';
+import { isProtectedPath, normalizedPath, safeReturnTo } from '../src/access-policy.js';
 
 export type Membership = 'accepted' | 'pending' | 'unassigned';
 export interface AccessDependencies {
@@ -42,14 +42,22 @@ export function createAccessHandlers(dependencies: AccessDependencies) {
     },
     async protect(request: Request): Promise<Response | null> {
       const url = new URL(request.url);
+      const path = normalizedPath(url.pathname);
+      if (/^\/register(?:[/.;]|$)/.test(path)) {
+        try {
+          if (!await dependencies.authenticate(request)) return null;
+          const returnTo = safeReturnTo(url.searchParams.get('returnTo'));
+          return new Response(null, { status: 303, headers: { ...privateHeaders, Location: '/account.html' + (returnTo ? '?' + new URLSearchParams({ returnTo }) : '') } });
+        } catch { return json(503, 'unavailable'); }
+      }
       if (!isProtectedPath(url.pathname)) return null;
       try {
         const value = await state(request);
         if (value.access === 'accepted') return null;
         const path = normalizedPath(url.pathname);
-        if (/^\/(resources|datascience|python|rstudio|opensource)(?:[/.;]|$)/.test(path)) {
+        if (/^\/(resources|datascience|python|rstudio|opensource|events)(?:[/.;]|$)/.test(path)) {
           const returnTo = '/' + path.split('/')[1].replace(/\.html.*$/, '').replace(/;.*$/, '') + '.html';
-          return new Response(null, { status: 303, headers: { ...privateHeaders, Location: '/register.html?' + new URLSearchParams({ access: 'required', returnTo }) } });
+          return new Response(null, { status: 303, headers: { ...privateHeaders, Location: (value.userId ? '/account.html?' : '/register.html?') + new URLSearchParams({ access: 'required', returnTo }) } });
         }
         return json(value.userId ? 403 : 401, value.userId ? 'pending' : 'signed-out');
       } catch { return json(503, 'unavailable'); }

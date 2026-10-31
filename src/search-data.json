@@ -42,7 +42,7 @@
   {
     "title": "Resources",
     "url": "resources.html",
-    "description": "Resources are coming soon. Example posters from the organizing team."
+    "description": "Research resources and example posters from the EBS organizing team."
   },
   {
     "title": "Student Registration",
@@ -73,5 +73,30 @@
     "title": "For Judges",
     "url": "judges.html",
     "description": "Join the judge team at the Exeter Biology Symposium 2027. Evaluate student research posters and presentations."
+  },
+  {
+    "title": "Account",
+    "url": "account.html",
+    "description": "Your EBS approval status, research folder, and member tools."
+  },
+  {
+    "title": "Contact",
+    "url": "contact.html",
+    "description": "Contact the EBS organizing team about accounts, research, participation, and events."
+  },
+  {
+    "title": "Events",
+    "url": "events.html",
+    "description": "Events for accepted EBS members."
+  },
+  {
+    "title": "Terms of Use",
+    "url": "terms.html",
+    "description": "EBS purpose, participation expectations, research ownership, and terms for using the Exeter Biology Symposium website."
+  },
+  {
+    "title": "Privacy Notice",
+    "url": "privacy.html",
+    "description": "How Exeter Biology Symposium handles account information, applications, messages, research files, and website data."
   }
 ]

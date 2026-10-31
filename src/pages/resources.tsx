@@ -1,9 +1,9 @@
 export default function PageContent() { return <div className="page-layout layout-resources">
 <section className={"page-heading"}>
 <div className={"shell"}>
-<p className="eyebrow">Coming soon</p>
+<p className="eyebrow">For EBS participants</p>
 <h1>{"Resources"}</h1>
-<p className={"lead"}>{"Research guides and tools are coming soon. Check back for updates."}</p>
+<p className={"lead"}>{"Explore example posters from the EBS team. Research guides and tools are coming soon."}</p>
 </div>
 </section>
 <section className={"section"}>

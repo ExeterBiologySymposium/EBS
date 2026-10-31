@@ -42,6 +42,7 @@ function ClerkSession({ children }: { children: ReactNode }) {
     status, access, refreshAccess,
     signIn: () => clerk.openSignIn({ forceRedirectUrl: window.location.href, signUpForceRedirectUrl: window.location.href }),
     signUp: () => clerk.openSignUp({ forceRedirectUrl: window.location.href, signInForceRedirectUrl: window.location.href }),
+    manageAccount: () => clerk.openUserProfile(),
     account: status === 'signed-in' ? <UserButton /> : null,
   }}>{children}</AuthContext.Provider>;
 }

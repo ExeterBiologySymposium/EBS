@@ -1,0 +1,16 @@
+{
+  "passed": 11,
+  "checks": [
+    "Pending Account has approval/contact controls, no registration/events links, and no folder API call",
+    "Signed-in Register is redirected to Account",
+    "Pending search excludes Events",
+    "Pending direct/encoded Events and poster are denied by real server access policy",
+    "Accepted Account creates and reopens the personal research folder",
+    "Accepted Events shows the date, virtual format, room, poster, and reading links with persistent navigation",
+    "Accepted desktop navigation fits at 1280px",
+    "375px Events/Contact layouts and mobile navigation work",
+    "Revocation removes the mounted Events body and Account folder actions",
+    "Contact and anonymous registration remain available",
+    "Social links remain in the footer and no uncaught browser errors occur"
+  ]
+}

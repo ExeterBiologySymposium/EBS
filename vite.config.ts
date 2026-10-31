@@ -8,7 +8,7 @@ import { clerkBuildDefines } from './scripts/clerk-config.js';
 const root = dirname(fileURLToPath(import.meta.url));
 
 const routes = [
-  'about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html',
+  'account.html', 'contact.html', 'terms.html', 'privacy.html', 'events.html', 'about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html',
   'opensource.html', 'python.html', 'register.html', 'researchers.html',
   'resources.html', 'rstudio.html', 'schedule.html', 'schools.html',
   'student-signup.html', 'team.html'
@@ -40,7 +40,7 @@ function reactShell() {
 function verifyLearningSeparation(): Plugin {
   return { name: 'verify-learning-separation', generateBundle(_options, bundle) {
     for (const chunk of Object.values(bundle)) {
-      if (chunk.type === 'chunk' && chunk.moduleIds.some(id => /src[\\/]pages[\\/](resources|datascience|python|rstudio|opensource)\.tsx$/.test(id)) && !chunk.fileName.startsWith('protected-assets/')) {
+      if (chunk.type === 'chunk' && chunk.moduleIds.some(id => /src[\\/](?:pages[\\/](resources|datascience|python|rstudio|opensource|events|accepted-account)|research-folder)\.tsx$/.test(id)) && !chunk.fileName.startsWith('protected-assets/')) {
         throw new Error('Protected learning content escaped its authenticated asset namespace.');
       }
     }
@@ -55,8 +55,8 @@ export default defineConfig({
     rolldownOptions: {
       output: {
         strictExecutionOrder: true,
-        chunkFileNames: chunk => chunk.name.startsWith('learning') ? 'protected-assets/[name]-[hash].js' : 'assets/[name]-[hash].js',
-        codeSplitting: { groups: [{ name: 'learning', test: /src[\\/]pages[\\/](resources|datascience|python|rstudio|opensource)\.tsx$/, priority: 20, includeDependenciesRecursively: false }] },
+        chunkFileNames: chunk => chunk.name.startsWith('learning') || ['resources', 'research-folder', 'events', 'accepted-account'].includes(chunk.name) ? 'protected-assets/[name]-[hash].js' : 'assets/[name]-[hash].js',
+        codeSplitting: { groups: [{ name: 'learning', test: /src[\\/]pages[\\/](resources|datascience|python|rstudio|opensource|events|accepted-account)\.tsx$/, priority: 20, includeDependenciesRecursively: false }] },
       },
       input: Object.fromEntries(routes.map((route) => [route, resolve(root, route)]))
     },
