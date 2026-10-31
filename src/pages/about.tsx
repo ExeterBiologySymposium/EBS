@@ -67,8 +67,8 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"section"}>
 <div className={"shell"}>
 <div className={"section-header"}>
-<h2>{"How the Symposium Works"}</h2>
-<p>{"EBS is a one-day event combining research presentations and scientific discussion in a supportive, conference-style setting, held in-person and online."}</p>
+<h2>{"The two parts of EBS"}</h2>
+<p>{"EBS combines a year-long research program for students of all levels with a full day of poster presentations at Exeter and online on April 25, 2027."}</p>
 </div>
 <div className={"grid columns-2"}>
 <div className={"steps"}>
@@ -76,21 +76,21 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"step__num"}>{"1"}</div>
 <div className={"step__body"}>
 <p className={"step__title"}>{"Research & Preparation (Fall 2026 – April 25th, 2027)"}</p>
-<p>{"Students receive resources and structured guidance from the EBS leadership and Organizing Team to develop their research question, conduct their study, and prepare their presentation."}</p>
+<p>{"The research program centers on a document written by experienced high school researchers. Each section includes exercises for different ability levels, guiding students from a research question through a complete dry-lab biology project. The document is shared in a Google folder, where the team regularly checks progress and suggests refinements. Ongoing email support and regular office hours complement the asynchronous work."}</p>
 </div>
 </div>
 <div className={"step"}>
 <div className={"step__num"}>{"2"}</div>
 <div className={"step__body"}>
 <p className={"step__title"}>{"Three Checkpoints (December 2026 – April 2027)"}</p>
-<p>{"Check 1 (December 18, 2026): project idea and research plan. Check 2 (March 12, 2027): abstract and code, with every abstract read in full and every project's code checked for completeness. Check 3 (April 9, 2027): final poster, checked for format, completeness, and numbers matching the abstract and logs. Accepted posters present at the symposium."}</p>
+<p>{"Submit your project idea and plan on December 18, 2026; research abstract and all code or exported workflows on March 12, 2027; and first poster draft on April 9, 2027. At every checkpoint, all four co-heads review submissions and write detailed comments to help students prepare for the next stage."}</p>
 </div>
 </div>
 <div className={"step"}>
 <div className={"step__num"}>{"3"}</div>
 <div className={"step__body"}>
 <p className={"step__title"}>{"Symposium Day (April 25th, 2027)"}</p>
-<p>{"A keynote speaker opens the day. Students present their work through poster presentations, in-person or online. Judges evaluate presentations and provide constructive written feedback."}</p>
+<p>The research program culminates in a poster presented at Exeter or virtually on April 25, 2027. The full-day event includes a keynote presentation and two poster sessions, with judging and feedback. See the <a href="schedule.html">full schedule</a>.</p>
 </div>
 </div>
 <div className={"step"}>
@@ -106,7 +106,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div>
 <div className={"text-block"}>
 <h3>{"\n\n                Poster Presentation\n              "}</h3>
-<p>{"Students display their research on a physical poster and discuss their work with judges, peers, and attendees during dedicated poster sessions. This is the primary format for EBS 2027."}</p>
+<p>{"Students present a physical poster at Exeter or a digital poster online, discussing their findings with judges, peers, and attendees during the poster sessions."}</p>
 </div>
 </div>
 </div>
@@ -129,7 +129,7 @@ export default function PageContent() { return <div className="page-layout layou
 </div>
 <div className={"text-block"}>
 <h3>{"Community"}</h3>
-<p>{"Science thrives through collaboration and discourse. As present at Exeter, EBS fosters a generous, scholarly community where students learn from both our team and their fellow researchers."}</p>
+<p>{"EBS has reached out to middle and high schools across the United States, and individual researchers from more than seven countries have signed up for the research program. Students learn alongside peers and receive support from our experienced student research team."}</p>
 </div>
 </div>
 </div>

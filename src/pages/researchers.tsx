@@ -6,7 +6,7 @@ export default function PageContent() { return <div className="page-layout layou
 <section className={"page-heading"}>
 <div className={"shell"}>
 <h1>{"Student research"}</h1>
-<p className={"lead"}>{"Open to all middle and high school students. Investigate a biological question with public data or published research, then present your work in person or online."}</p>
+<p className={"lead"}>{"EBS has two parts: a year-long dry-lab biology research program for students of all levels, followed by poster presentations at Exeter or online on April 25, 2027."}</p>
 </div>
 </section>
 <section className={"section"}>
@@ -69,34 +69,34 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"timeline__item"}>
 <div className={"timeline__date"}>{"October 2026"}</div>
 <div className={"timeline__title"}>{"Research Kickoff"}</div>
-<p>{"Orientation session covering how EBS works. Narrow your research question using the EBS resource library and organizing team support."}</p>
+<p>{"Start with a 20-minute Zoom orientation arranged by email with an EBS team member. Use the research document and team support to narrow your question."}</p>
 </div>
 <div className={"timeline__item"}>
 <div className={"timeline__date"}>{"October – March"}</div>
 <div className={"timeline__title"}>{"Active Research Period"}</div>
-<p>{"Literature review, data collection or analysis, and iterative development of your project, with support from the resource library and organizing team."}</p>
+<p>{"Work through the research document, literature review, and data analysis at your own pace, with regular progress check-ins, ongoing email support, and office hours."}</p>
 </div>
 <div className={"timeline__item"}>
 <div className={"timeline__date"}>{"Friday, December 18, 2026"}</div>
 <div className={"timeline__title"}>{"Check 1: Idea and Research Plan"}</div>
-<p>{"Submit your project idea and research plan."}</p>
+<p>{"Submit your project idea and research plan. All four EBS co-heads review the submission and provide detailed written feedback for the next stage."}</p>
 </div>
 </div>
 <div className={"timeline"}>
 <div className={"timeline__item"}>
 <div className={"timeline__date"}>{"Friday, March 12, 2027"}</div>
 <div className={"timeline__title"}>{"Check 2: Abstract and Code"}</div>
-<p>{"Submit a 250-word abstract describing your research question, methodology, findings, and conclusions, plus your code or exported workflow. Every abstract is read in full, and every project's code is checked for completeness."}</p>
+<p>{"Submit a 250-word research abstract describing your question, methodology, findings, and conclusions, plus all code or exported workflows. All four co-heads read the abstract, check the code for completeness, and write detailed comments to guide your next steps."}</p>
 </div>
 <div className={"timeline__item"}>
 <div className={"timeline__date"}>{"Friday, April 9, 2027"}</div>
-<div className={"timeline__title"}>{"Check 3: Final Poster"}</div>
-<p>{"Submit your final poster. We check format, completeness, and that the numbers match your abstract and logs. Accepted posters will be allowed to present at the symposia."}</p>
+<div className={"timeline__title"}>{"Check 3: First Poster Draft"}</div>
+<p>{"Submit your first poster draft. All four co-heads provide detailed written comments on format, completeness, and consistency with your abstract and research logs so you can refine it before presentation."}</p>
 </div>
 <div className={"timeline__item"}>
 <div className={"timeline__date"}>{"April 25th, 2027"}</div>
 <div className={"timeline__title"}>{"Symposium Day"}</div>
-<p>{"Present your research in-person at Phillips Exeter Academy or online. Receive judge feedback, attend guest speaker talks, and connect with the broader EBS community."}</p>
+<p>Present your completed poster at Phillips Exeter Academy or virtually. The full-day event includes a keynote presentation and two poster sessions. See the <a href="schedule.html">full schedule</a>.</p>
 </div>
 </div>
 </div>
@@ -127,13 +127,14 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"grid columns-2"}>
 <div>
 <h2>{"Research support"}</h2>
-<p>{"Every registered researcher gets full access to the EBS resource library and organizing team support — no prior research experience needed to get started."}</p>
-<p>{"The organizing team is available throughout the research cycle, whether you're presenting in-person or online, from October through Symposium Day on April 25th."}</p>
-<RegistrationLink className={"button primary"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"}>{"\n            Register Your Interest\n\n"}</RegistrationLink>
+<p>{"The core of the program is a research document written by experienced high school researchers. It guides you through the entire research process, with multiple exercises in each section for different ability levels."}</p>
+<p>{"Your shared Google folder holds the document and your work. The team regularly checks every student’s progress and suggests ways to refine their study. Work asynchronously, stay in touch by email, and use regular office hours to talk through ideas and difficulties."}</p>
+<p>Once your account is Accepted, use <a href="account.html">Account → Create my research folder</a> to set up your folder and document. For research questions or office-hour arrangements, email <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a>.</p>
+<RegistrationLink className={"button primary"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"}>Register your interest</RegistrationLink>
 </div>
 <div>
 <div className={"text-block"}>
-<h3>{"What the Resource Library Covers"}</h3>
+<h3>{"Support throughout your project"}</h3>
 <div className={"checklist"}>
 <div className={"checklist__item"}>
 <span>{"Scoping and refining your research question"}</span>
@@ -145,10 +146,10 @@ export default function PageContent() { return <div className="page-layout layou
 <span>{"Selecting analytical tools and methods appropriate for dry-lab research"}</span>
 </div>
 <div className={"checklist__item"}>
-<span>{"Guidance on your abstract before submission"}</span>
+<span>{"Detailed written feedback from all four co-heads at each checkpoint"}</span>
 </div>
 <div className={"checklist__item"}>
-<span>{"Helping you prepare for judge Q&A"}</span>
+<span>{"Regular office hours and ongoing email communication"}</span>
 </div>
 </div>
 </div>
@@ -160,7 +161,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div className={"shell"}>
 <div className={"next-step"}>
 <h2>{"Register as a student"}</h2>
-<p>{"Student registration is open now. Fill out the form and we'll be in touch as the research cycle begins."}</p>
+<p>{"Join researchers from more than seven countries in the EBS research program. Each student registers individually; the team will follow up by email."}</p>
 <div className={"actions"}>
 <RegistrationLink className={"button primary"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"}>{"Register Interest"}</RegistrationLink>
 <LearningLink className={"button secondary"} href={"resources.html"}>{"Browse Resources"}</LearningLink>

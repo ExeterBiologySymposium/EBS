@@ -7,3 +7,7 @@ dist/
 !.env.example
 .clerk/
 .vercel/
+.neon
+
+.vite-cache/
+.vite-qa/

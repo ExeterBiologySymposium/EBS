@@ -8,7 +8,7 @@ import { clerkBuildDefines } from './scripts/clerk-config.js';
 const root = dirname(fileURLToPath(import.meta.url));
 
 const routes = [
-  'account.html', 'contact.html', 'terms.html', 'privacy.html', 'events.html', 'about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html',
+  'admin.html', 'accept-invitation.html', 'account.html', 'contact.html', 'terms.html', 'privacy.html', 'events.html', 'about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html',
   'opensource.html', 'python.html', 'register.html', 'researchers.html',
   'resources.html', 'rstudio.html', 'schedule.html', 'schools.html',
   'student-signup.html', 'team.html'

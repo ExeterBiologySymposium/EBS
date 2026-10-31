@@ -3,27 +3,15 @@
   "version": "1.0.0",
   "description": "Exeter Biology Symposium website",
   "scripts": {
-    "test:participant-folders": "node scripts/check-participant-folders.mjs && node scripts/check-drive-adapter.mjs && node scripts/check-owner-oauth.mjs && node scripts/check-folder-store.mjs && node scripts/check-folder-ui.mjs",
-    "test:participant-folders-browser": "node scripts/browser-participant-folders.mjs",
     "dev": "vite",
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
     "check": "npm run typecheck",
-    "test:navigation-browser": "node scripts/browser-navigation.mjs",
-    "test:navigation": "node scripts/check-navigation.mjs",
-    "test:contact": "node scripts/check-contact.mjs",
-    "test:auth": "node scripts/check-auth.mjs",
-    "test:clerk-config": "node scripts/check-clerk-config.mjs",
     "seo:update": "node scripts/update-seo.mjs",
-    "test:access": "node scripts/check-access.mjs",
-    "test:member-ui": "node scripts/check-member-ui.mjs",
-    "test:access-build": "node scripts/check-access-build.mjs",
-    "test:vercel-runtime": "node scripts/check-vercel-runtime.mjs",
-    "test:member-pages": "node scripts/check-member-pages.mjs",
-    "test:member-pages-browser": "node scripts/browser-member-pages.mjs",
-    "test:owner-authorization": "node scripts/check-owner-authorization.mjs",
-    "authorize:drive": "node --env-file=.env.google-drive.local scripts/authorize-google-drive.mjs"
+    "authorize:drive": "node --env-file=.env.google-drive.local scripts/authorize-google-drive.mjs",
+    "test:org-admin": "node --test scripts/org-rollover.test.mjs scripts/org-api.test.mjs scripts/org-store.test.mjs && node scripts/org-ui.test.mjs",
+    "orgs:bootstrap": "node scripts/org-bootstrap.mjs"
   },
   "repository": {
     "type": "git",
@@ -57,7 +45,6 @@
     "vite": "^8.2.2"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "^0.5.13",
     "@types/node": "^26.4.1"
   },
   "type": "module"

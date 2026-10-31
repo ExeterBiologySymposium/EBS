@@ -1,4 +1,6 @@
 import account from './pages/account';
+import admin from './pages/admin';
+import acceptInvitation from './pages/accept-invitation';
 import contact from './pages/contact';
 import terms from './pages/terms';
 import privacy from './pages/privacy';
@@ -13,6 +15,8 @@ import studentSignup from './pages/student-signup';
 import team from './pages/team';
 export const pageComponents = {
   'account.html': account,
+  'admin.html': admin,
+  'accept-invitation.html': acceptInvitation,
   'contact.html': contact,
   'terms.html': terms,
   'privacy.html': privacy,

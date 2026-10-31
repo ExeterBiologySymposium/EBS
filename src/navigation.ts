@@ -1,6 +1,6 @@
 import { memberPages } from './access-policy';
 
-const pages = new Set(['account.html', 'contact.html', 'terms.html', 'privacy.html', 'index.html', 'about.html', 'faq.html', 'judges.html', 'register.html', 'researchers.html', 'schedule.html', 'schools.html', 'student-signup.html', 'team.html', ...memberPages]);
+const pages = new Set(['admin.html', 'accept-invitation.html', 'account.html', 'contact.html', 'terms.html', 'privacy.html', 'index.html', 'about.html', 'faq.html', 'judges.html', 'register.html', 'researchers.html', 'schedule.html', 'schools.html', 'student-signup.html', 'team.html', ...memberPages]);
 export function pageForUrl(url: URL): string | null {
   const page = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);
   return pages.has(page) ? page : null;

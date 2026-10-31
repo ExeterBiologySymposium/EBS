@@ -174,3 +174,23 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .layout-legal .article-layout{max-width:1280px}.legal-copy{max-width:800px;min-width:0}.legal-section{padding-top:28px;border-top:1px solid var(--line)}.legal-section+.legal-section{margin-top:42px}.legal-contents{display:block;max-height:calc(100svh - 120px);overflow-y:auto}.legal-contents>p{margin:0 0 12px}.legal-contents a{min-height:44px}.footer-bottom{flex-wrap:wrap}
 @media(max-width:767px){.legal-contents{max-height:none;overflow:visible}.legal-contents .contents-nav{grid-template-columns:1fr}.legal-section+.legal-section{margin-top:34px}}
 @media print{.legal-contents{display:none}}
+
+/* Team administration uses the existing EBS controls and spacing. */
+.admin-members { list-style: none; padding: 0; margin: 1.5rem 0; }
+.admin-members > li { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line, #d8d3ca); }
+.admin-members h3, .admin-members p { margin: .3rem 0; overflow-wrap: anywhere; }
+.admin-members .button { flex-shrink: 0; }
+.admin-pagination { align-items: center; margin: 1.25rem 0; }
+.admin-invite { display: grid; gap: .75rem; max-width: 34rem; }
+.admin-invite input, .admin-invite select { width: 100%; min-width: 0; padding: .8rem; border: 1px solid var(--line, #d8d3ca); border-radius: 4px; font: inherit; background: #fff; color: inherit; }
+.admin-invite .button { justify-self: start; }
+.admin-result:empty { display: none; }
+.admin-result { overflow-wrap: anywhere; }
+.admin-clerk-settings { max-width: 100%; }
+.admin-clerk-settings .cl-rootBox, .admin-clerk-settings .cl-cardBox { width: 100%; max-width: 100%; }
+.admin-staff-invite { margin-bottom: 1.5rem; }
+.admin-refresh { text-decoration: underline; text-underline-offset: .2em; }
+@media (max-width: 600px) { .admin-members > li { align-items: flex-start; flex-direction: column; gap: .75rem; } .admin-pagination { flex-wrap: wrap; } }
+
+.admin-views { margin-bottom: 2rem; }
+.admin-lookup { border-left: 3px solid var(--red, #a31f34); padding-left: 1rem; }

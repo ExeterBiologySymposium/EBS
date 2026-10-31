@@ -2,8 +2,11 @@ import { createContext, useContext, type ReactNode, type AnchorHTMLAttributes } 
 
 export type AuthStatus = 'loading' | 'unavailable' | 'signed-out' | 'signed-in';
 export type MemberAccess = 'checking' | 'pending' | 'accepted' | 'unavailable' | null;
+export type TeamAccess = 'checking' | 'allowed' | 'denied' | 'unavailable' | null;
 export type AuthState = {
   access: MemberAccess;
+  teamAccess: TeamAccess;
+  teamOrganizationId: string | null;
   refreshAccess: () => void;
   status: AuthStatus;
   signIn: () => void;
@@ -14,7 +17,7 @@ export type AuthState = {
 
 // Prerender and the first browser render share a closed gate while Clerk loads.
 export const initialAuth: AuthState = {
-  status: 'loading', access: null, refreshAccess() {}, signIn() {}, signUp() {}, manageAccount() {}, account: null,
+  status: 'loading', access: null, teamAccess: null, teamOrganizationId: null, refreshAccess() {}, signIn() {}, signUp() {}, manageAccount() {}, account: null,
 };
 export const AuthContext = createContext<AuthState>(initialAuth);
 

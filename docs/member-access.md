@@ -2,6 +2,10 @@
 
 EBS uses Clerk membership in **Accepted** to authorize Events (including its poster), Resources, Data Science, Python, R/RStudio, Open Source, their browser lesson bundle, `/enzyme_activity.csv`, and `/guides/**`. Public symposium pages and the signed-in application forms remain available without acceptance.
 
+## Team administration and organization rollover
+
+The production admin feature is documented in [Organization administration](organization-admin.md). After its reviewed bootstrap and enablement, EBS Team members can add/invite into Pending or Accepted; the server allocates open organizations and creates additional 20-seat lists within a conservative 100-total-organization ceiling. Existing seed organizations and their access remain compatible. Registry-based reads recognize every trusted Accepted organization, while the original Accepted ID remains the research-folder namespace anchor. The setup is disabled until the owner supplies the replacement Production Team ID, matching live instance configuration and private schema. The following dashboard procedure remains valid for the original seed organization.
+
 ## Approve a participant
 
 1. In the Clerk Dashboard, select **Exeter Biology Symposium** and the **Production** instance.
@@ -20,7 +24,7 @@ Do not grant ordinary members organization administration permissions. Users can
 | Production | `org_3KqTmgwM6ivIHuoZf6cZp0vDdmM` | `org_3KqTn6S2xdy4l0yLlkKP7TQp1qp` |
 | Development | `org_3KqToDW1JC4iWENRmeEdwESe50Y` | `org_3KqTocshAxpbkh6KPGi0vjMzlSK` |
 
-The existing limit is **five members per organization**. No paid plan upgrade was made. Pending enrollment shows an unavailable/retry message if capacity is reached; contact the EBS administrator to resolve it.
+The seed organizations were originally configured with **five members per organization**; verify their current limits in Clerk. No paid plan upgrade was made. Pending enrollment shows an unavailable/retry message if capacity is reached; contact the EBS administrator to resolve it.
 
 ## Vercel configuration
 
@@ -39,7 +43,7 @@ Protected responses use private/no-store caching. A dedicated `/protected-assets
 
 ## Verification
 
-Run `npm run build`, `npm run test:auth`, `npm run test:clerk-config`, `npm run test:access`, `npm run test:member-ui`, `npm run test:access-build`, and `npm run test:vercel-runtime`. A live preview must also verify anonymous/Pending denial, Accepted access, direct files, private caching, and revocation before release. Use disposable development identities and delete them after QA.
+Run `npm run typecheck` and `npm run build`. The earlier sitewide test suites were removed. Organization administration has focused checks (`npm run test:org-admin`); see [its verification guide](organization-admin.md#verification). A live preview must also verify anonymous/Pending denial, Accepted access, direct files, private caching, and revocation before release. Use disposable development identities and delete them after QA.
 
 ## Account, Contact, and Events
 
@@ -47,6 +51,6 @@ Signed-in visitors use **Account**, with pending approval and accepted views at 
 
 Contact is a public page reusing the existing CAPTCHA-protected form; the FAQ contact anchor remains available. Events HTML, lazy content, and poster are protected server-side for Accepted members, and event content is excluded from public prerendering and JavaScript. Account/Events are noindex and excluded from the sitemap. Account/Register responses are private/no-store.
 
-Run `npm run test:member-pages` and `npm run test:member-pages-browser` (requires the same optional Puppeteer/Chromium setup as the navigation browser suite). Browser member-state tests use mocked Clerk/Google/CAPTCHA with the real server access policy; production Clerk/middleware verification still requires an authorized live preview.
+Verify Account, Contact, and Events behavior in an authorized live preview, including pending and accepted membership states, navigation, and CAPTCHA submission.
 
 Research-folder Google operations now use owner-authorized OAuth for the personal EBS My Drive account. Follow the updated [folder setup guide](participant-folders.md); earlier Workspace/service-account instructions are superseded.

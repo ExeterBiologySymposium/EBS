@@ -74,12 +74,27 @@
     "PEA Genetics and Biotechnology Club",
     "Exeter Genetics and Biotechnology Club",
     "biology research judging opportunities",
-    "student research symposium judge opportunities"
+    "student research symposium judge opportunities",
+    "free dry-lab biology research program for students",
+    "beginner biology research symposium",
+    "Exeter Biology Symposium organizing team",
+    "Exeter Biology Symposium 2027 schedule",
+    "Exeter Biology Symposium school application",
+    "EBS research checkpoints",
+    "Exeter Biology Symposium poster submission deadlines",
+    "Exeter Biology Symposium judge application",
+    "Exeter Biology Symposium student application",
+    "Exeter Biology Symposium applications",
+    "Exeter Biology Symposium adult chaperone requirements",
+    "Exeter Biology Symposium account approval",
+    "Exeter Biology Symposium contact",
+    "EBS research ownership",
+    "Exeter Biology Symposium privacy notice"
   ],
   "pages": {
     "index.html": {
-      "title": "Exeter Biology Symposium | Student Biology Research",
-      "description": "Free student research at Exeter Biology Symposium for middle and high school students. Explore dry-lab projects, present work, and connect with researchers.",
+      "title": "Exeter Biology Symposium 2027 \u2014 Free Student Research",
+      "description": "Free dry-lab biology research for middle and high school students. Present a poster at EBS on April 25, 2027, in Exeter, New Hampshire, or online.",
       "terms": [
         "free biology research opportunities for high school students",
         "free biology research opportunities for middle school students",
@@ -89,12 +104,14 @@
         "biology research opportunities for teens",
         "Exeter Biology Symposium",
         "Exeter Biology Symposium 2027",
-        "Exeter biology symposium for middle and high school students"
-      ]
+        "Exeter biology symposium for middle and high school students",
+        "free dry-lab biology research program for students"
+      ],
+      "lastmod": "2026-10-31"
     },
     "about.html": {
-      "title": "About EBS | Student Biology at Phillips Exeter Academy",
-      "description": "EBS, organized by Phillips Exeter Academy's Genetics and Biotechnology Club, opens free dry-lab biology research to all middle and high school students.",
+      "title": "About EBS \u2014 Beginner Biology Research at Phillips Exeter",
+      "description": "Discover EBS, a free dry-lab biology research program and symposium for beginners, organized by students at Phillips Exeter Academy with faculty guidance.",
       "terms": [
         "student biology symposium at Phillips Exeter Academy",
         "Phillips Exeter Academy biology symposium",
@@ -103,73 +120,83 @@
         "Phillips Exeter Academy student research symposium",
         "PEA student research symposium",
         "student-led biology symposium at Phillips Exeter Academy",
-        "biology research opportunities at Phillips Exeter Academy"
-      ]
-    },
-    "team.html": {
-      "title": "EBS Team | Phillips Exeter Academy Genetics and Biotechnology Club",
-      "description": "Meet the Phillips Exeter Academy (PEA) students in the Genetics and Biotechnology Club who organize EBS, plus faculty advisors supporting first-time researchers.",
-      "terms": [
-        "Phillips Exeter Academy Genetics and Biotechnology Club",
-        "PEA Genetics and Biotechnology Club",
-        "Exeter Genetics and Biotechnology Club"
-      ]
-    },
-    "schedule.html": {
-      "title": "2027 Exeter Biology Symposium Schedule | EBS",
-      "description": "Explore the April 25, 2027 Exeter Biology Symposium schedule: student posters, judging, and scientific discussion at Phillips Exeter Academy or online.",
-      "terms": [
-        "student biology research conference 2027",
-        "New Hampshire student biology research symposium",
-        "New England student biology research symposium",
-        "Exeter NH biology research symposium"
-      ]
-    },
-    "resources.html": {
-      "title": "Biology Research Guides and Tools | EBS",
-      "description": "Use free EBS research guides for dry-lab biology, scientific literature, public databases, bioinformatics, and scientific poster presentation.",
-      "terms": [
+        "biology research opportunities at Phillips Exeter Academy",
         "how to start biology research in high school",
         "how to start biology research in middle school",
         "biology research ideas for beginners",
         "biology research projects without a lab",
         "how to do independent biology research",
         "how to turn a biology interest into a research project",
-        "biology literature review projects for students"
-      ]
+        "biology literature review projects for students",
+        "beginner biology research symposium"
+      ],
+      "lastmod": "2026-10-31"
+    },
+    "team.html": {
+      "title": "EBS Team \u2014 Exeter Genetics and Biotechnology Club",
+      "description": "Meet the student organizers and faculty advisors behind EBS, led by the Genetics and Biotechnology Club at Phillips Exeter Academy in New Hampshire.",
+      "terms": [
+        "Phillips Exeter Academy Genetics and Biotechnology Club",
+        "PEA Genetics and Biotechnology Club",
+        "Exeter Genetics and Biotechnology Club",
+        "Exeter Biology Symposium organizing team"
+      ],
+      "lastmod": "2026-10-31"
+    },
+    "schedule.html": {
+      "title": "EBS 2027 Schedule \u2014 April 25, Exeter and Online",
+      "description": "View the provisional April 25, 2027 EBS schedule in Eastern Time: keynote, poster sessions, judging, and closing ceremony at Phillips Exeter Academy and online.",
+      "terms": [
+        "student biology research conference 2027",
+        "New Hampshire student biology research symposium",
+        "New England student biology research symposium",
+        "Exeter NH biology research symposium",
+        "Exeter Biology Symposium 2027 schedule"
+      ],
+      "lastmod": "2026-10-31"
+    },
+    "resources.html": {
+      "title": "Member Research Resources and Example Posters \u2014 EBS",
+      "description": "Accepted EBS members can view example student biology research posters. Research guides and tools are coming soon; sign in to access the member area.",
+      "terms": [],
+      "lastmod": "2026-10-31",
+      "noindex": true
     },
     "datascience.html": {
-      "title": "RStudio and Python for Biology Research | EBS",
-      "description": "Learn RStudio and Python data analysis for biology research with beginner-friendly EBS lessons, public datasets, plots, and statistical tests.",
-      "terms": [
-        "bioinformatics projects for high school students",
-        "bioinformatics projects for middle school students",
-        "computational biology projects for beginners",
-        "dry-lab biology research for students"
-      ]
+      "title": "Coding Lessons Coming Soon \u2014 EBS",
+      "description": "EBS coding lessons are coming soon. This member area requires an accepted account; check back for updates or contact the team about account access.",
+      "terms": [],
+      "lastmod": "2026-10-31",
+      "noindex": true
     },
     "python.html": {
-      "title": "Python for Biology Data | EBS Track",
-      "description": "Learn pandas, NumPy, and SciPy through a free Python track for biology data analysis and student dry-lab research projects.",
+      "title": "Python Lessons Coming Soon \u2014 EBS",
+      "description": "Python coding lessons for EBS members are coming soon. Sign in with an accepted account and check back for updates from the symposium organizing team.",
       "terms": [
         "Python for biology research beginners"
-      ]
+      ],
+      "lastmod": "2026-10-31",
+      "noindex": true
     },
     "rstudio.html": {
-      "title": "RStudio for Biology Data Analysis | EBS",
-      "description": "Learn RStudio data frames, summaries, plots, and statistical tests through a free biology data analysis track for students.",
+      "title": "RStudio Lessons Coming Soon \u2014 EBS",
+      "description": "RStudio coding lessons for EBS members are coming soon. Sign in with an accepted account and check back for updates from the symposium organizing team.",
       "terms": [
         "RStudio for biology research beginners"
-      ]
+      ],
+      "lastmod": "2026-10-31",
+      "noindex": true
     },
     "opensource.html": {
-      "title": "Open Biology Research Resources | EBS",
-      "description": "Explore open datasets, code, and curriculum materials from the Exeter Biology Symposium community. Start a biology research project with open tools.",
-      "terms": []
+      "title": "Member Open Source Resources \u2014 EBS",
+      "description": "Accepted EBS members can explore community datasets, code, and curriculum materials through EBS Open Source. Sign in to access the linked project tools.",
+      "terms": [],
+      "lastmod": "2026-10-31",
+      "noindex": true
     },
     "schools.html": {
-      "title": "For Schools | Free Student Biology Research | EBS",
-      "description": "Register your school for EBS, a free biology research symposium organized by Phillips Exeter Academy students. All middle and high school students welcome.",
+      "title": "School Registration \u2014 Free Biology Research with EBS",
+      "description": "Sign your school up for EBS, or provide a contact person if EBS has already contacted you. Find guidance on individual student signup and Zoom orientation.",
       "terms": [
         "free biology research opportunities for schools",
         "research opportunities for high school biology clubs",
@@ -179,12 +206,14 @@
         "free biology research resources for teachers",
         "independent biology research projects for schools",
         "biology research programs without lab facilities",
-        "Exeter Biology Symposium school registration"
-      ]
+        "Exeter Biology Symposium school registration",
+        "Exeter Biology Symposium school application"
+      ],
+      "lastmod": "2026-10-31"
     },
     "researchers.html": {
-      "title": "Student Researchers | Exeter Biology Symposium",
-      "description": "Present original dry-lab biological research at Exeter Biology Symposium. No prior research experience required; all middle and high school students welcome.",
+      "title": "Student Research Projects and Deadlines \u2014 EBS 2027",
+      "description": "Explore EBS dry-lab projects and checkpoints: idea and plan, research abstract and all code, then a first poster draft, with feedback from all four co-heads.",
       "terms": [
         "independent biology research for high school students",
         "independent biology research for middle school students",
@@ -202,68 +231,109 @@
         "epidemiology research projects for students",
         "evolutionary biology research projects for students",
         "public health data analysis projects for students",
-        "computational molecular biology projects for beginners"
-      ]
+        "computational molecular biology projects for beginners",
+        "bioinformatics projects for high school students",
+        "bioinformatics projects for middle school students",
+        "computational biology projects for beginners",
+        "dry-lab biology research for students",
+        "EBS research checkpoints",
+        "Exeter Biology Symposium poster submission deadlines"
+      ],
+      "lastmod": "2026-10-31"
     },
     "judges.html": {
-      "title": "Become an EBS Research Judge | EBS",
-      "description": "Judge student biology research posters and presentations at the Exeter Biology Symposium 2027, in person or online. Support first-time student researchers.",
+      "title": "Judge Student Biology Research \u2014 EBS 2027",
+      "description": "Apply to judge student biology research at EBS on April 25, 2027. Review poster presentations and give constructive feedback in person or online.",
       "terms": [
         "biology research judging opportunities",
-        "student research symposium judge opportunities"
-      ]
+        "student research symposium judge opportunities",
+        "Exeter Biology Symposium judge application"
+      ],
+      "lastmod": "2026-10-31"
     },
     "student-signup.html": {
-      "title": "Student Registration | Exeter Biology Symposium",
-      "description": "Register to present original dry-lab biology research at Exeter Biology Symposium 2027. Participation is free for all middle and high school students.",
+      "title": "Student Application \u2014 Exeter Biology Symposium 2027",
+      "description": "Apply individually to present a dry-lab biology poster at EBS 2027, in person or online. Participation is free; sign in, then complete the student Google Form.",
       "terms": [
         "biology research symposium for high school students",
         "biology research symposium for middle school students",
         "online student research symposium",
-        "where to present high school biology research"
-      ]
+        "where to present high school biology research",
+        "Exeter Biology Symposium student application"
+      ],
+      "lastmod": "2026-10-31"
     },
     "register.html": {
-      "title": "Register for Exeter Biology Symposium",
-      "description": "Choose student, school, or judge registration for Exeter Biology Symposium 2027. In-person and online participation planned.",
+      "title": "Apply to Exeter Biology Symposium \u2014 Students, Schools, Judges",
+      "description": "Choose a student, school, or judge application for EBS 2027. Sign in and submit the Google Form; creating an account does not submit an application.",
       "terms": [
-        "Exeter Biology Symposium registration"
-      ]
+        "Exeter Biology Symposium registration",
+        "Exeter Biology Symposium applications"
+      ],
+      "lastmod": "2026-10-31"
     },
     "faq.html": {
-      "title": "FAQ | Exeter Biology Symposium",
-      "description": "Answers about Exeter Biology Symposium 2027: eligibility, dry-lab research, timelines, presentations, registration, and ways to get involved.",
+      "title": "EBS FAQ \u2014 Participation and Getting Started",
+      "description": "Quick answers about EBS eligibility, costs, research, registration, Zoom orientation, and attendance. Find account, school, and judge help in the right place.",
       "terms": [
         "free online biology research opportunities for students",
-        "Exeter Biology Symposium online participation"
-      ]
+        "Exeter Biology Symposium online participation",
+        "Exeter Biology Symposium adult chaperone requirements",
+        "Exeter Biology Symposium account approval"
+      ],
+      "lastmod": "2026-10-31"
     },
     "account.html": {
-      "title": "Account | EBS",
-      "description": "Sign in to manage your EBS account and approval status.",
+      "title": "Your Account and Approval Status \u2014 EBS",
+      "description": "Check your EBS approval status and get application help. Accepted participants can create a research folder and find research, resource, and presentation guidance.",
       "terms": [],
-      "noindex": true
+      "noindex": true,
+      "lastmod": "2026-10-31"
     },
     "events.html": {
-      "title": "Events | EBS",
-      "description": "Sign in to access EBS member events.",
+      "title": "Member Events \u2014 Exeter Biology Symposium",
+      "description": "Sign in with an accepted Exeter Biology Symposium account to access member events. Contact the organizing team if you need help with account access.",
       "terms": [],
-      "noindex": true
+      "noindex": true,
+      "lastmod": "2026-10-31"
     },
     "contact.html": {
-      "title": "Contact | EBS",
-      "description": "Contact the Exeter Biology Symposium organizing team about participation, research, account access, and events.",
-      "terms": []
+      "title": "Contact the Exeter Biology Symposium Team",
+      "description": "Contact the EBS organizing team with questions about participation, student research, applications, account access, or events. Find answers in our FAQ.",
+      "terms": [
+        "Exeter Biology Symposium contact"
+      ],
+      "lastmod": "2026-10-31"
     },
     "terms.html": {
-      "title": "Terms of Use | Exeter Biology Symposium",
-      "description": "EBS purpose, participation expectations, research ownership, and terms for using the Exeter Biology Symposium website.",
-      "terms": []
+      "title": "Terms of Use \u2014 Exeter Biology Symposium",
+      "description": "Read EBS terms on participation, adult supervision, research integrity and ownership, accounts, research folders, and use of symposium resources.",
+      "terms": [
+        "EBS research ownership"
+      ],
+      "lastmod": "2026-10-31"
     },
     "privacy.html": {
-      "title": "Privacy Notice | Exeter Biology Symposium",
-      "description": "How Exeter Biology Symposium handles account information, applications, messages, research files, and website data.",
-      "terms": []
+      "title": "Privacy Notice \u2014 Exeter Biology Symposium",
+      "description": "Learn how EBS handles account and application information, contact messages, research folders, and website data, including hosting and analytics.",
+      "terms": [
+        "Exeter Biology Symposium privacy notice"
+      ],
+      "lastmod": "2026-10-31"
+    },
+    "admin.html": {
+      "title": "EBS administration | EBS",
+      "description": "Sign in with your EBS Team account to manage participants.",
+      "terms": [],
+      "noindex": true,
+      "lastmod": "2026-10-31"
+    },
+    "accept-invitation.html": {
+      "title": "Accept your invitation | EBS",
+      "description": "Sign in to accept your EBS organization invitation.",
+      "terms": [],
+      "noindex": true,
+      "lastmod": "2026-10-31"
     }
   },
   "excludedTerms": [
@@ -273,5 +343,6 @@
     "how to choose a biology research question",
     "how to conduct research using public datasets",
     "public biology datasets for student research"
-  ]
+  ],
+  "googleSiteVerification": "2Z5fl97yNeITcjZHCFydWygaEzeAIWNtDmKmB74A_E0"
 }

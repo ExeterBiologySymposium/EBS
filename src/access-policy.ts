@@ -21,7 +21,7 @@ export function isMemberPage(page: string): boolean {
   return (memberPages as readonly string[]).includes(page);
 }
 export function isAccountPath(path: string): boolean {
-  return /^\/(account|register)(?:[/.;]|$)/.test(normalizedPath(path));
+  return /^\/(account|register|admin|accept-invitation)(?:[/.;]|$)/.test(normalizedPath(path));
 }
 export function safeReturnTo(value: string | null): string | null {
   if (!value || !value.startsWith('/') || value.startsWith('//') || /[\\\r\n]/.test(value)) return null;

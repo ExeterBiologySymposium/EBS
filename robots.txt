@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /protected-assets/
+Disallow: /guides/
+Disallow: /enzyme_activity.csv
 
 Sitemap: https://exeterbiosymposium.vercel.app/sitemap.xml

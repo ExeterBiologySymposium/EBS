@@ -113,9 +113,7 @@ Removing a participant from Clerk Accepted blocks the website feature on subsequ
 
 ## Verification and release
 
-Run `npm run test:participant-folders`, `npm run test:owner-authorization`, `npm run build`, and the member-access checks in [member-access.md](member-access.md), plus `npm run test:navigation` and `npm run test:contact`.
-
-The folder suite exercises authorization, recipient selection, partial failures, concurrency, exact permission bodies, accessible UI states, and the actual migration/SQL using the PGlite PostgreSQL engine. It does not connect to a hosted Neon instance. `scripts/browser-participant-folders.mjs` uses the installed Puppeteer and a Chromium executable (`PUPPETEER_EXECUTABLE_PATH` when needed) for an isolated, mocked browser acceptance test; it cannot create live Google files or grant real access.
+Run `npm run typecheck` and `npm run build`, then follow the preview checks in [member-access.md](member-access.md). The automated folder and browser test suites have been removed.
 
 Before deployment approval, test an authorized preview with disposable Google resources and identities: anonymous/Pending denial, Accepted creation, reload/retry, simultaneous tabs, direct Drive access by the recipient, denial for another participant, staff access, external-domain restrictions, account linking, and a hosted Neon connection. Inspect the actual ACLs on both folder and document. Live Google and hosted database verification remain required before describing this feature as operational.
 
