@@ -15,6 +15,7 @@ export default function AccountPage() {
         {status === 'signed-in' && <>
           {!accepted && <button className="button" type="button" onClick={refreshAccess} disabled={checking}>{checking ? 'Checking approval…' : 'Check approval status'}</button>}
           <button className="button secondary" type="button" onClick={manageAccount}>Account settings</button>
+          {accepted && <a className="button secondary" href="https://discord.gg/Wu9SvxYs4y" target="_blank" rel="noopener noreferrer">Join the EBS Discord</a>}
           {teamAccess === 'allowed' && <a className="button secondary" href="admin.html">Manage participants</a>}
         </>}
         <a className="button secondary" href="contact.html">Contact the EBS team</a>
