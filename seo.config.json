@@ -55,6 +55,9 @@
     "bioinformatics projects for middle school students",
     "computational biology projects for beginners",
     "dry-lab biology research for students",
+    "no-code biology research projects for students",
+    "bioinformatics without coding for students",
+    "six-week biology research projects for students",
     "Python for biology research beginners",
     "RStudio for biology research beginners",
     "student biology research conference 2027",
@@ -240,6 +243,20 @@
         "Exeter Biology Symposium poster submission deadlines"
       ],
       "lastmod": "2026-10-31"
+    },
+    "projects.html": {
+      "title": "No-Code Biology Research Projects for Students \u2014 EBS 2027",
+      "description": "Find a six-week, no-code biology research project. Answer five quick questions to match with a Galaxy, iDEP, or Biblioshiny cohort, then sign up.",
+      "terms": [
+        "no-code biology research projects for students",
+        "bioinformatics without coding for students",
+        "six-week biology research projects for students",
+        "bioinformatics projects for high school students",
+        "genomics projects for beginners",
+        "biology research ideas for beginners",
+        "research opportunities for high school biology clubs"
+      ],
+      "lastmod": "2026-11-10"
     },
     "judges.html": {
       "title": "Judge Student Biology Research \u2014 EBS 2027",
