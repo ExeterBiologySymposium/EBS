@@ -51,6 +51,7 @@ public/
 - **Register**: Registration page
 - **Student-signup**: Student registration form (Google Forms link)
 - **Open source**: Open source policy page
+- **Datasets** (`datasets.html`, Accepted members only): Dataset library with guides to esquisse, Galaxy, iDEP and biblioshiny and a filterable catalog of datasets in 14 research fields. Content lives in `src/learning/datasets/` (never import it from public pages); see `docs/dataset-library.md`
 
 ## Key Features
 

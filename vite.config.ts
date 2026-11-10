@@ -9,7 +9,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 
 const routes = [
   'admin.html', 'accept-invitation.html', 'account.html', 'contact.html', 'terms.html', 'privacy.html', 'events.html', 'about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html',
-  'opensource.html', 'python.html', 'register.html', 'researchers.html',
+  'opensource.html', 'datasets.html', 'python.html', 'register.html', 'researchers.html',
   'resources.html', 'rstudio.html', 'schedule.html', 'schools.html',
   'student-signup.html', 'team.html'
 ];
@@ -40,7 +40,8 @@ function reactShell() {
 function verifyLearningSeparation(): Plugin {
   return { name: 'verify-learning-separation', generateBundle(_options, bundle) {
     for (const chunk of Object.values(bundle)) {
-      if (chunk.type === 'chunk' && chunk.moduleIds.some(id => /src[\\/](?:pages[\\/](resources|datascience|python|rstudio|opensource|events|accepted-account)|research-folder)\.tsx$/.test(id)) && !chunk.fileName.startsWith('protected-assets/')) {
+      // src/learning/ holds member-only content modules (such as the dataset library catalog).
+      if (chunk.type === 'chunk' && chunk.moduleIds.some(id => /src[\\/](?:(?:pages[\\/](resources|datascience|python|rstudio|opensource|datasets|events|accepted-account)|research-folder)\.tsx|learning[\\/].+\.tsx?)$/.test(id)) && !chunk.fileName.startsWith('protected-assets/')) {
         throw new Error('Protected learning content escaped its authenticated asset namespace.');
       }
       // Server modules hold member page content and storage code; they must never reach the browser.
@@ -60,7 +61,11 @@ export default defineConfig({
       output: {
         strictExecutionOrder: true,
         chunkFileNames: chunk => chunk.name.startsWith('learning') || ['resources', 'research-folder', 'events', 'accepted-account'].includes(chunk.name) ? 'protected-assets/[name]-[hash].js' : 'assets/[name]-[hash].js',
-        codeSplitting: { groups: [{ name: 'learning', test: /src[\\/]pages[\\/](resources|datascience|python|rstudio|opensource|events|accepted-account)\.tsx$/, priority: 20, includeDependenciesRecursively: false }] },
+        codeSplitting: { groups: [
+          // The dataset library is large, so it loads only on its own page; the name keeps it in protected-assets/.
+          { name: 'learning-datasets', test: /src[\\/](?:pages[\\/]datasets\.tsx|learning[\\/]datasets[\\/][^\\/]+\.ts)$/, priority: 30, includeDependenciesRecursively: false },
+          { name: 'learning', test: /src[\\/]pages[\\/](resources|datascience|python|rstudio|opensource|events|accepted-account)\.tsx$/, priority: 20, includeDependenciesRecursively: false },
+        ] },
       },
       input: Object.fromEntries(routes.map((route) => [route, resolve(root, route)]))
     },
