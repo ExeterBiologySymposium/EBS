@@ -36,7 +36,7 @@ export default function AccountPage() {
     </div></section>}
     {accepted && <>
       <Suspense fallback={<section className="section"><div className="shell" role="status">Loading your research folder…</div></section>}><AcceptedAccount /></Suspense>
-      <section className="section account-destinations"><div className="shell"><h2>Explore EBS</h2><div className="actions"><a className="button secondary" href="events.html">Events</a><a className="button secondary" href="resources.html">Resources</a><a className="button secondary" href="datascience.html">Coding</a></div></div></section>
+      <section className="section account-destinations"><div className="shell"><h2>Explore EBS</h2><div className="actions"><a className="button secondary" href="events.html">Events</a><a className="button secondary" href="resources.html">Resources</a><a className="button secondary" href="datascience.html">Coding</a><a className="button secondary" href="projects.html">Research projects</a></div></div></section>
     </>}
   </div>;
 }

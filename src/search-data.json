@@ -40,6 +40,11 @@
     "description": "Explore EBS dry-lab projects and checkpoints: idea and plan, research abstract and all code, then a first poster draft, with feedback from all four co-heads."
   },
   {
+    "title": "No-Code Research Projects and Cohorts",
+    "url": "projects.html",
+    "description": "Find a six-week, no-code biology research project. Answer five quick questions to match with a Galaxy, iDEP, or Biblioshiny cohort, then sign up."
+  },
+  {
     "title": "Research Resources",
     "url": "resources.html",
     "description": "Research materials for Accepted EBS members, shared by the organizing team. Sign in with an accepted account to view the latest resources."
