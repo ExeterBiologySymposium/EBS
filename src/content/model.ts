@@ -25,7 +25,7 @@ export function isPageKey(value: unknown): value is PageKey {
 export type MemberDestination = (typeof memberPages)[number];
 export const memberDestinations: Record<MemberDestination, string> = {
   'resources.html': 'Resources', 'datascience.html': 'Coding', 'python.html': 'Python',
-  'rstudio.html': 'R / RStudio', 'opensource.html': 'Open source', 'events.html': 'Events',
+  'rstudio.html': 'R / RStudio', 'opensource.html': 'Open source', 'datasets.html': 'Dataset library', 'events.html': 'Events',
 };
 
 /** Text with optional links: each link turns the first matching phrase in the text into a link. */

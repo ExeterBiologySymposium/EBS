@@ -52,6 +52,7 @@ public/
 - **Student-signup**: Student registration form (Google Forms link)
 - **Open source**: Open source policy page
 - **Projects** (`projects.html`): Public no-code research cohort finder (Galaxy, iDEP, Biblioshiny; six projects). Project data in `src/cohorts/projects.ts`, matching in `src/cohorts/match.ts`, team notes in `docs/research-cohorts.md`
+- **Datasets** (`datasets.html`, Accepted members only): Dataset library with guides to esquisse, Galaxy, iDEP and biblioshiny and a filterable catalog of datasets in 14 research fields. Content lives in `src/learning/datasets/` (never import it from public pages); see `docs/dataset-library.md`
 
 ## Key Features
 

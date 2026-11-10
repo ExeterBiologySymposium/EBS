@@ -17,6 +17,7 @@ const pages = {
   'python.html': learningPage(() => import('./pages/python')),
   'rstudio.html': learningPage(() => import('./pages/rstudio')),
   'opensource.html': learningPage(() => import('./pages/opensource')),
+  'datasets.html': learningPage(() => import('./pages/datasets')),
 };
 export function ProtectedPage({ page }: { page: string }) {
   const access = useMemberAccess();

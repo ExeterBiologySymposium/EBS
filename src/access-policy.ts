@@ -1,4 +1,4 @@
-export const learningPages = ['resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'opensource.html'] as const;
+export const learningPages = ['resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'opensource.html', 'datasets.html'] as const;
 
 export const memberPages = [...learningPages, 'events.html'] as const;
 
@@ -10,7 +10,7 @@ export function normalizedPath(path: string): string {
 }
 export function isProtectedPath(path: string): boolean {
   const value = normalizedPath(path);
-  return /^\/(resources|datascience|python|rstudio|opensource|events)(?:[/.;]|$)/.test(value)
+  return /^\/(resources|datascience|python|rstudio|opensource|datasets|events)(?:[/.;]|$)/.test(value)
     || /^\/(protected-assets|guides)(?:\/|$)/.test(value)
     || /^\/enzyme_activity\.csv(?:[/.;]|$)/.test(value);
 }

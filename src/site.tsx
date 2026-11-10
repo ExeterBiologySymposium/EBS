@@ -8,7 +8,8 @@ import { isMemberPage, isProtectedPath } from './access-policy';
 import { ProtectedPage } from './protected-pages';
 import searchPages from './search-data.json';
 
-const nav = [['About','about.html'],['Team','team.html'],['Schedule','schedule.html'],['Projects','projects.html'],['Resources','resources.html'],['Coding','datascience.html'],['Events','events.html'],['FAQ','faq.html'],['Contact','contact.html']];
+// Projects (projects.html) and Datasets (datasets.html) are hidden from navigation for now; both pages stay live.
+const nav = [['About','about.html'],['Team','team.html'],['Schedule','schedule.html'],['Resources','resources.html'],['Coding','datascience.html'],['Events','events.html'],['FAQ','faq.html'],['Contact','contact.html']];
 const primaryNav = nav;
 const more = [['For schools','schools.html'],['For students','researchers.html'],['For judges','judges.html'],['Register','register.html'],['Student registration','student-signup.html'],['Open source','opensource.html'],['Python','python.html'],['RStudio','rstudio.html']];
 const facts = [['Participation','100% free'],['Who can join','All middle & high school students'],['When','April 25th, 2027'],['Where','Exeter, NH + online']];

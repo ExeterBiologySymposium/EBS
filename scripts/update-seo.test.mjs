@@ -8,7 +8,7 @@ import test from 'node:test';
 const root = resolve(import.meta.dirname, '..');
 const projectConfig = JSON.parse(await readFile(resolve(root, 'seo.config.json'), 'utf8'));
 const token = '2Z5fl97yNeITcjZHCFydWygaEzeAIWNtDmKmB74A_E0';
-const privateRoutes = ['admin.html', 'accept-invitation.html', 'account.html', 'events.html', 'resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'opensource.html'];
+const privateRoutes = ['admin.html', 'accept-invitation.html', 'account.html', 'events.html', 'resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'opensource.html', 'datasets.html'];
 const publicRoutes = ['index.html', 'about.html', 'team.html', 'schedule.html', 'schools.html', 'researchers.html', 'projects.html', 'judges.html', 'student-signup.html', 'register.html', 'faq.html', 'contact.html', 'terms.html', 'privacy.html'];
 
 async function fixture(t, change = () => {}) {

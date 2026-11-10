@@ -5,7 +5,7 @@ export default function AcceptedAccount() { return <>
     <h2 id="participant-help-title">Participant questions</h2>
     <details className="disclosure" id="finding-resources"><summary>Where do I find my research document and support?</summary>
       <p>Your research document is in your shared Google folder above. Written by experienced high school researchers, it guides the research process with exercises for different ability levels. The EBS team checks progress, suggests refinements, and offers ongoing <a href="mailto:exeterbiologysymposium@gmail.com">email support</a> and regular office hours.</p>
-      <p><a href="resources.html">Resources</a> contains the latest research materials. Visit <a href="datascience.html">Coding</a> for coding resources.</p>
+      <p><a href="resources.html">Resources</a> contains the latest research materials. Visit <a href="datascience.html">Coding</a> for coding resources, and the <a href="datasets.html">Dataset library</a> for free datasets and step-by-step tool guides.</p>
     </details>
     <details className="disclosure" id="research-folder"><summary>How do I create and open my research folder?</summary>
       <ol>
@@ -16,7 +16,7 @@ export default function AcceptedAccount() { return <>
       <p>You and the EBS team can access your folder; other participants are not automatically given access. <a href="contact.html">Contact us</a> if the folder is unavailable or your linked Google account changes.</p>
     </details>
     <details className="disclosure" id="research-help"><summary>How do I choose a topic and tools?</summary>
-      <p>Start with a specific biology question you can investigate using public data or published studies. Choose tools that fit the question; coding experience is not required. See <a href="researchers.html">Student research</a> for project examples, or <a href="contact.html">ask the EBS team</a> for help narrowing your idea.</p>
+      <p>Start with a specific biology question you can investigate using public data or published studies. Choose tools that fit the question; coding experience is not required. The <a href="datasets.html">Dataset library</a> pairs datasets in 14 research fields with guides to esquisse, Galaxy, iDEP and biblioshiny. See <a href="researchers.html">Student research</a> for project examples, or <a href="contact.html">ask the EBS team</a> for help narrowing your idea.</p>
     </details>
     <details className="disclosure" id="research-checkpoints"><summary>What do I submit, and when?</summary>
       <p>Check the Student research page for current checkpoint dates and submission requirements. All four EBS co-heads review each checkpoint and provide detailed written comments to help you prepare for the next stage. See <a href="researchers.html">Student research</a> for requirements.</p>

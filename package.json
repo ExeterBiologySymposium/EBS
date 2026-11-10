@@ -13,7 +13,8 @@
     "test:org-admin": "node --test scripts/org-rollover.test.mjs scripts/org-api.test.mjs scripts/org-store.test.mjs && node scripts/org-ui.test.mjs",
     "orgs:bootstrap": "node scripts/org-bootstrap.mjs",
     "test:content": "node --test scripts/content.test.mjs",
-    "test:cohorts": "node --test scripts/cohorts.test.mjs"
+    "test:cohorts": "node --test scripts/cohorts.test.mjs",
+    "test:datasets": "node --test scripts/datasets.test.mjs"
   },
   "repository": {
     "type": "git",

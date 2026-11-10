@@ -55,7 +55,7 @@ export function createAccessHandlers(dependencies: AccessDependencies) {
         const value = await state(request);
         if (value.access === 'accepted') return null;
         const path = normalizedPath(url.pathname);
-        if (/^\/(resources|datascience|python|rstudio|opensource|events)(?:[/.;]|$)/.test(path)) {
+        if (/^\/(resources|datascience|python|rstudio|opensource|datasets|events)(?:[/.;]|$)/.test(path)) {
           const returnTo = '/' + path.split('/')[1].replace(/\.html.*$/, '').replace(/;.*$/, '') + '.html';
           return new Response(null, { status: 303, headers: { ...privateHeaders, Location: (value.userId ? '/account.html?' : '/register.html?') + new URLSearchParams({ access: 'required', returnTo }) } });
         }

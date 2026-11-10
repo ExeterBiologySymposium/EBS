@@ -30,6 +30,11 @@
     "description": "Choose a student, school, or judge application for EBS 2027. Sign in and submit the Google Form; creating an account does not submit an application."
   },
   {
+    "title": "Dataset Library",
+    "url": "datasets.html",
+    "description": "Guides to esquisse, Galaxy, iDEP and biblioshiny, and free datasets for research in 14 fields, from systems biology and microbiome science to bibliometrics and meta-analysis."
+  },
+  {
     "title": "Member Open Source Resources",
     "url": "opensource.html",
     "description": "Accepted EBS members can explore community datasets, code, and curriculum materials through EBS Open Source. Sign in to access the linked project tools."
