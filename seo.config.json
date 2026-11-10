@@ -157,34 +157,34 @@
     },
     "resources.html": {
       "title": "Research resources \u2014 EBS",
-      "description": "Explore research resources for Accepted EBS members. Sign in to view the latest materials and guidance from the organizing team.",
+      "description": "Research materials for Accepted EBS members, shared by the organizing team. Sign in with an accepted account to view the latest resources.",
       "terms": [],
-      "lastmod": "2026-10-31",
+      "lastmod": "2026-11-10",
       "noindex": true
     },
     "datascience.html": {
       "title": "Coding \u2014 EBS",
-      "description": "Explore coding for Accepted EBS members. Sign in to view the latest materials and guidance from the organizing team.",
+      "description": "Coding materials for Accepted EBS members, shared by the organizing team. Sign in with an accepted account to see the latest lessons and updates.",
       "terms": [],
-      "lastmod": "2026-10-31",
+      "lastmod": "2026-11-10",
       "noindex": true
     },
     "python.html": {
       "title": "Python \u2014 EBS",
-      "description": "Explore python for Accepted EBS members. Sign in to view the latest materials and guidance from the organizing team.",
+      "description": "Python materials for Accepted EBS members, shared by the organizing team. Sign in with an accepted account to see the latest lessons and updates.",
       "terms": [
         "Python for biology research beginners"
       ],
-      "lastmod": "2026-10-31",
+      "lastmod": "2026-11-10",
       "noindex": true
     },
     "rstudio.html": {
       "title": "R / RStudio \u2014 EBS",
-      "description": "Explore r / rstudio for Accepted EBS members. Sign in to view the latest materials and guidance from the organizing team.",
+      "description": "R and RStudio materials for Accepted EBS members, shared by the organizing team. Sign in with an accepted account to see the latest lessons and updates.",
       "terms": [
         "RStudio for biology research beginners"
       ],
-      "lastmod": "2026-10-31",
+      "lastmod": "2026-11-10",
       "noindex": true
     },
     "opensource.html": {

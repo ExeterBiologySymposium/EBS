@@ -1,6 +1,6 @@
 # Production participant administration
 
-EBS Team members use **Account → Manage participants** (`/admin.html`). Staff choose Pending or Accepted, look up an exact email, and either add the verified existing account or send an invitation. An Accepted addition grants access immediately; an Accepted invitation grants access after Clerk accepts the invitation. The server selects an organization with room. Staff cannot choose arbitrary organization IDs or participant administrator roles.
+EBS Team members use **Account → Manage participants** (`/admin.html`). The same page also holds **Website content** (`/admin.html?view=content`, see [Website content editor](website-content.md)) and **Team organization settings**. Staff choose Pending or Accepted, look up an exact email, and either add the verified existing account or send an invitation. An Accepted addition grants access immediately; an Accepted invitation grants access after Clerk accepts the invitation. The server selects an organization with room. Staff cannot choose arbitrary organization IDs or participant administrator roles.
 
 Pending, Accepted and Invitations combine registered organizations. Full lists remain viewable. Approval adds Accepted membership before removing Pending; **Accepted — cleanup needed** exposes retryable partial success. Adding an Accepted account to Pending does not downgrade it. Duplicate outstanding invitations are blocked across both destinations.
 
