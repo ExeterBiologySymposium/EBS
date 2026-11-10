@@ -137,34 +137,50 @@ function InvitationList({ revision, onDenied }: { revision: number; onDenied(): 
   </>}<button className="admin-refresh" type="button" onClick={() => setReload(value => value + 1)}>Refresh invitations</button></>;
 }
 
+type Workspace = 'participants' | 'content' | 'settings';
+function currentWorkspace(): Workspace {
+  if (typeof window === 'undefined') return 'participants';
+  if (new URLSearchParams(window.location.search).get('view') === 'content') return 'content';
+  return /^#(?:\/|team-settings)/.test(window.location.hash) ? 'settings' : 'participants';
+}
+
 function AdminWorkspace({ teamOrganizationId }: { teamOrganizationId: string }) {
   const { refreshAccess } = useContext(AuthContext);
   const [revoked, setRevoked] = useState(false);
   const [revision, setRevision] = useState(0);
   const [view, setView] = useState<Destination | 'invitations'>('pending');
-  const [settingsOpen, setSettingsOpen] = useState(() => typeof window !== 'undefined' && /^#(?:\/|team-settings)/.test(window.location.hash));
+  const [, setLocationChange] = useState(0);
   const onDenied = useCallback(() => { setRevoked(true); refreshAccess(); }, [refreshAccess]);
   const onChanged = useCallback(() => setRevision(value => value + 1), []);
-  useEffect(() => { const update = () => setSettingsOpen(/^#(?:\/|team-settings)/.test(window.location.hash)); window.addEventListener('hashchange', update); window.addEventListener('popstate', update); return () => { window.removeEventListener('hashchange', update); window.removeEventListener('popstate', update); }; }, []);
+  // The workspace follows the URL. Site navigation re-renders this component; hash links (including
+  // Clerk's Team settings routes) only fire hashchange. Back/Forward is left to the site navigation,
+  // so the website editor can still ask about unsaved changes before it closes.
+  useEffect(() => { const update = () => setLocationChange(value => value + 1); window.addEventListener('hashchange', update); return () => window.removeEventListener('hashchange', update); }, []);
   if (revoked) return <section className="section"><div className="shell" role="alert"><p>Your team access has changed. Administrative data has been closed.</p><a href="account.html">Return to Account</a></div></section>;
-  const contentOpen = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('view') === 'content';
-  if (contentOpen) return <><div className="shell actions"><a href="admin.html">Back to participants</a></div><Suspense fallback={<p>Loading editor…</p>}><ContentEditor /></Suspense></>;
+  const workspace = currentWorkspace();
   return <>
-    <div className="shell actions admin-tools"><a className="button secondary" href="admin.html?view=content">Edit website content</a><button className="button secondary" type="button" onClick={() => { const open = !settingsOpen; setSettingsOpen(open); history.pushState({ ...history.state }, '', location.pathname + location.search + (open ? '#team-settings' : '')); }}>{settingsOpen ? 'Back to participants' : 'Team organization settings'}</button>{!settingsOpen && <button className="button secondary" type="button" onClick={onChanged}>Refresh lists and capacity</button>}</div>
-    {settingsOpen ? <section className="section"><div className="shell"><Suspense fallback={<p role="status">Loading Team settings…</p>}><TeamSettings teamOrganizationId={teamOrganizationId} /></Suspense></div></section> : <>
-      <AddParticipant revision={revision} onChanged={onChanged} onDenied={onDenied} />
-      <section className="section"><div className="shell">
-        <div className="actions admin-views" aria-label="Participant views">{(['pending', 'accepted', 'invitations'] as const).map(value => <button key={value} type="button" className={`button ${view === value ? '' : 'secondary'}`} aria-pressed={view === value} onClick={() => setView(value)}>{value === 'invitations' ? 'Invitations' : label(value)}</button>)}</div>
-        {view === 'invitations' ? <InvitationList revision={revision} onDenied={onDenied} /> : <ParticipantList key={view} group={view} revision={revision} onChanged={onChanged} onDenied={onDenied} />}
-      </div></section>
-    </>}
+    <nav className="shell admin-sections" aria-label="Administration sections">
+      <a href="admin.html" aria-current={workspace === 'participants' ? 'page' : undefined}>Participants</a>
+      <a href="admin.html?view=content" aria-current={workspace === 'content' ? 'page' : undefined}>Website content</a>
+      <a href="admin.html#team-settings" aria-current={workspace === 'settings' ? 'page' : undefined}>Team organization settings</a>
+    </nav>
+    {workspace === 'content' ? <Suspense fallback={<section className="section"><div className="shell"><p role="status">Loading the website editor…</p></div></section>}><ContentEditor onDenied={onDenied} /></Suspense>
+      : workspace === 'settings' ? <section className="section"><div className="shell"><Suspense fallback={<p role="status">Loading Team settings…</p>}><TeamSettings teamOrganizationId={teamOrganizationId} /></Suspense></div></section>
+      : <>
+        <div className="shell actions admin-tools"><button className="button secondary" type="button" onClick={onChanged}>Refresh lists and capacity</button></div>
+        <AddParticipant revision={revision} onChanged={onChanged} onDenied={onDenied} />
+        <section className="section"><div className="shell">
+          <div className="actions admin-views" aria-label="Participant views">{(['pending', 'accepted', 'invitations'] as const).map(value => <button key={value} type="button" className={`button ${view === value ? '' : 'secondary'}`} aria-pressed={view === value} onClick={() => setView(value)}>{value === 'invitations' ? 'Invitations' : label(value)}</button>)}</div>
+          {view === 'invitations' ? <InvitationList revision={revision} onDenied={onDenied} /> : <ParticipantList key={view} group={view} revision={revision} onChanged={onChanged} onDenied={onDenied} />}
+        </div></section>
+      </>}
   </>;
 }
 
 export default function AdminPage() {
   const { status, teamAccess, teamOrganizationId, signIn, refreshAccess } = useContext(AuthContext);
   const allowed = status === 'signed-in' && teamAccess === 'allowed' && !!teamOrganizationId;
-  return <div className="page-layout layout-admin"><section className="page-heading"><div className="shell"><p className="eyebrow">For the EBS team</p><h1>EBS administration</h1><p className="lead">Add participants, send invitations, and manage access to EBS research tools.</p><a href="account.html">Back to Account</a></div></section>
+  return <div className="page-layout layout-admin"><section className="page-heading"><div className="shell"><p className="eyebrow">For the EBS team</p><h1>EBS administration</h1><p className="lead">Manage participants and invitations, edit website content, and control access to EBS research tools.</p><a href="account.html">Back to Account</a></div></section>
     {allowed ? <AdminWorkspace key={teamOrganizationId} teamOrganizationId={teamOrganizationId} /> : <section className="section"><div className="shell"><p role="status">{status === 'signed-out' ? 'Sign in with your EBS Team account to continue.' : status === 'loading' || teamAccess === 'checking' ? 'Checking team access…' : teamAccess === 'denied' ? 'This page is available to members of EBS Team.' : 'Team access is unavailable. Try again or contact the EBS account owner.'}</p>
       {status === 'signed-out' ? <button className="button" type="button" onClick={signIn}>Sign in</button> : status === 'signed-in' && <button className="button secondary" type="button" onClick={refreshAccess}>Check team access again</button>}
     </div></section>}

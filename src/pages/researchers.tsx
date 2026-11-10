@@ -1,4 +1,5 @@
 import { PublishedPage } from '../content/view';
-import initial from '../content/researchers-default.json';
-import type { ContentNode } from '../content/model';
-export default function PageContent() { return <PublishedPage page="researchers" initial={initial as ContentNode[]} />; }
+import { researchersInitial } from '../content/defaults/researchers';
+
+// Public page: the build-time snapshot is prerendered, then replaced by the latest publication.
+export default function PageContent() { return <PublishedPage page="researchers" initial={researchersInitial} />; }

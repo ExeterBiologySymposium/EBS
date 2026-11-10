@@ -2,6 +2,10 @@
 
 EBS uses Clerk membership in **Accepted** to authorize Events (including its poster), Resources, Data Science, Python, R/RStudio, Open Source, their browser lesson bundle, `/enzyme_activity.csv`, and `/guides/**`. Public symposium pages and the signed-in application forms remain available without acceptance.
 
+## Website content
+
+Student research, Resources, Coding, Python and R/RStudio are edited by the EBS Team through **EBS administration → Website content**; see [Website content editor](website-content.md). Their content loads from `/api/page-content`, which serves Student research publicly and checks Accepted membership server-side for the four member pages. Member page content is never included in public JavaScript or prerendered HTML.
+
 ## Team administration and organization rollover
 
 The production admin feature is documented in [Organization administration](organization-admin.md). After its reviewed bootstrap and enablement, EBS Team members can add/invite into Pending or Accepted; the server allocates open organizations and creates additional 20-seat lists within a conservative 100-total-organization ceiling. Existing seed organizations and their access remain compatible. Registry-based reads recognize every trusted Accepted organization, while the original Accepted ID remains the research-folder namespace anchor. The setup is disabled until the owner supplies the replacement Production Team ID, matching live instance configuration and private schema. The following dashboard procedure remains valid for the original seed organization.

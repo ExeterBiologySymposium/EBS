@@ -1,6 +1,6 @@
 # Website content editor screen
 
-Status: proposed; part of the combined plan awaiting approval. November 10, 2026.
+Status: implemented locally November 10, 2026 (`src/content-editor.tsx`, `src/content/editor-fields.tsx`).
 
 ## Entry and structure
 

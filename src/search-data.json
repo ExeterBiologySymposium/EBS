@@ -1,8 +1,8 @@
 [
   {
-    "title": "Python — Coming Soon",
+    "title": "Python Lessons",
     "url": "python.html",
-    "description": "Python coding lessons for EBS members are coming soon. Sign in with an accepted account and check back for updates from the symposium organizing team."
+    "description": "Python materials for Accepted EBS members, shared by the organizing team. Sign in with an accepted account to see the latest lessons and updates."
   },
   {
     "title": "EBS Organizers and Faculty Advisors",
@@ -40,9 +40,9 @@
     "description": "Explore EBS dry-lab projects and checkpoints: idea and plan, research abstract and all code, then a first poster draft, with feedback from all four co-heads."
   },
   {
-    "title": "Research Resources and Example Posters",
+    "title": "Research Resources",
     "url": "resources.html",
-    "description": "Accepted EBS members can view example student biology research posters. Research guides and tools are coming soon; sign in to access the member area."
+    "description": "Research materials for Accepted EBS members, shared by the organizing team. Sign in with an accepted account to view the latest resources."
   },
   {
     "title": "Student Applications",
@@ -55,9 +55,9 @@
     "description": "Sign your school up for EBS, or provide a contact person if EBS has already contacted you. Find guidance on individual student signup and Zoom orientation."
   },
   {
-    "title": "Coding — Coming Soon",
+    "title": "Coding Lessons",
     "url": "datascience.html",
-    "description": "EBS coding lessons are coming soon. This member area requires an accepted account; check back for updates or contact the team about account access."
+    "description": "Coding materials for Accepted EBS members, shared by the organizing team. Sign in with an accepted account to see the latest lessons and updates."
   },
   {
     "title": "EBS Participation and Signup FAQ",
@@ -65,9 +65,9 @@
     "description": "Find answers about EBS project eligibility, case-by-case wet-lab acceptance, costs, registration, Zoom orientation, and attendance."
   },
   {
-    "title": "RStudio — Coming Soon",
+    "title": "R and RStudio Lessons",
     "url": "rstudio.html",
-    "description": "RStudio coding lessons for EBS members are coming soon. Sign in with an accepted account and check back for updates from the symposium organizing team."
+    "description": "R and RStudio materials for Accepted EBS members, shared by the organizing team. Sign in with an accepted account to see the latest lessons and updates."
   },
   {
     "title": "Judge Applications",

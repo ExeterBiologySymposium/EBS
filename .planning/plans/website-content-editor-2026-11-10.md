@@ -1,6 +1,6 @@
 # Website content editor implementation plan
 
-Status: proposed; waiting for one combined approval of this plan, [specification](../specs/website-content-editor-2026-11-10.md) and [screen design](../design/screens/website-content-editor-2026-11-10.md). November 10, 2026. No implementation or live changes have been made by this task.
+Status: implemented and verified locally on November 10, 2026, together with the [specification](../specs/website-content-editor-2026-11-10.md) and [screen design](../design/screens/website-content-editor-2026-11-10.md). No live migration, configuration, content publication or deployment has been performed.
 
 ## 1. Establish the current baseline
 
@@ -69,3 +69,12 @@ Browser checks: all five page editors; draft save/reopen; draft preview; publica
 Review the scoped diff against each acceptance criterion and fix introduced failures. Report actual evidence and remaining limitations. This is an implementation review by the executing agent; do not claim an independent reviewer unless one was actually requested and used.
 
 Local delivery is the verified code, migration and usage/setup documentation. A live migration, real content publication, live permission test or deployment follows only under explicit release authorization. Successful local verification alone does not mean the feature is available on the deployed website.
+
+## Completed verification
+
+- Content suite (`npm run test:content`): 9 tests, including the PostgreSQL schema test on the optional PGlite runtime (revision races, atomic publication history, append-only versions, constraints, cross-instance isolation, end-to-end API restoration). Without PGlite the SQL test reports an explicit skip.
+- `npm run test:org-admin` (28 tests, no skips with PGlite), `npm run typecheck`, `npm run build` (bundle, separation checks and prerender), 12 SEO tests, `node scripts/update-seo.mjs --check`, `node scripts/check-faq-clarity.mjs` and `git diff --check` pass.
+- The new Student research and Resources readers were rendered server-side and diffed against the original components: identical markup apart from the intended case-by-case wet-lab copy (and one neutral wrapper on Resources).
+- Built output inspected: member page content, drafts and server modules are absent from public JavaScript and prerendered HTML; a build guard now fails if server modules are bundled for the browser (verified by a deliberate violation).
+- Fake-provider browser checks (`node scripts/content-browser-fixture.mjs`): editing all five pages, add/move/remove with focus and Undo, validation summary, linked phrases, image picker, save/preview/publish reflected on a fresh read, history and restoration, two-editor conflict, lost save and publish responses reconciled, unsaved-change prompts (links, page switch, Back), revoked Team access, Team-but-not-Accepted, anonymous visitors, admin workspace Back/Forward, and desktop/mobile layouts.
+- Not verified: live Clerk, the hosted Neon database, Vercel routing and real publication. These need the release steps in `docs/website-content.md`.

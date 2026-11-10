@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'rea
 import { ArrowDownRight, Check, Copy } from 'lucide-react';
 import { ensureKeynote, scheduleLocation, symposiumVenue, type ScheduleRow } from './schedule-details';
 
-export function CodeBlock({ text }: { text: string }) {
+export function CodeBlock({ text, label = 'Code example' }: { text: string; label?: string }) {
   const pre = useRef<HTMLPreElement>(null);
   const [message, setMessage] = useState('Copy code');
   async function copy() {
@@ -16,7 +16,7 @@ export function CodeBlock({ text }: { text: string }) {
       setMessage('Code selected. Press ⌘C or Ctrl+C.');
     }
   }
-  return <div className="code-block"><div className="code-toolbar"><span>Code example</span><button type="button" onClick={copy}>{message === 'Copied' ? <Check size={15} /> : <Copy size={15} />}<span aria-live="polite">{message}</span></button></div><pre ref={pre} tabIndex={0}><code>{text}</code></pre></div>;
+  return <div className="code-block"><div className="code-toolbar"><span>{label}</span><button type="button" onClick={copy}>{message === 'Copied' ? <Check size={15} /> : <Copy size={15} />}<span aria-live="polite">{message}</span></button></div><pre ref={pre} tabIndex={0}><code>{text}</code></pre></div>;
 }
 
 type HCaptchaApi = {

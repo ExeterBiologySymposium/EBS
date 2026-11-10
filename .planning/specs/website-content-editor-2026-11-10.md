@@ -1,6 +1,6 @@
 # Website content editor
 
-Status: proposed; awaiting the combined implementation approval required by the user's Spartan working agreements. Prepared November 10, 2026.
+Status: implementation requested by the user on November 10, 2026 and completed locally; see [Website content editor](../../docs/website-content.md) for usage and setup. Applying the migration, enabling `EBS_CONTENT_ENABLED` and deploying remain separate release steps. Prepared November 10, 2026.
 
 ## Outcome and confirmed scope
 

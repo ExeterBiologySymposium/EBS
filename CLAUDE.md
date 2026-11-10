@@ -106,6 +106,7 @@ public/
 - Page component exported as default
 - Route defined in `page-routes.tsx` (maps page name to component)
 - Search index (`search-data.json`) must be updated when adding/removing pages
+- Student research, Resources, Coding, Python and R/RStudio are edited by the EBS Team in **EBS administration → Website content** (see `docs/website-content.md`). Their pages render typed content (`src/content/model.ts`, `src/content/view.tsx`); built-in initial content lives in `src/content/defaults/researchers.ts` (public) and `server/content/defaults.ts` (member pages, server-only)
 
 ### Performance
 - All images optimized (srcSet, lazy loading where appropriate)

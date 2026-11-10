@@ -1,7 +1,7 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import { basename, resolve, dirname } from 'node:path';
+import { basename, relative, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { clerkBuildDefines } from './scripts/clerk-config.js';
 
@@ -42,6 +42,10 @@ function verifyLearningSeparation(): Plugin {
     for (const chunk of Object.values(bundle)) {
       if (chunk.type === 'chunk' && chunk.moduleIds.some(id => /src[\\/](?:pages[\\/](resources|datascience|python|rstudio|opensource|events|accepted-account)|research-folder)\.tsx$/.test(id)) && !chunk.fileName.startsWith('protected-assets/')) {
         throw new Error('Protected learning content escaped its authenticated asset namespace.');
+      }
+      // Server modules hold member page content and storage code; they must never reach the browser.
+      if (chunk.type === 'chunk' && chunk.moduleIds.some(id => /^(?:server|api)[\\/]/.test(relative(root, id)))) {
+        throw new Error(`Server-only code was bundled into ${chunk.fileName}.`);
       }
     }
   } };
