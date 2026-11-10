@@ -51,6 +51,7 @@ public/
 - **Register**: Registration page
 - **Student-signup**: Student registration form (Google Forms link)
 - **Open source**: Open source policy page
+- **Projects** (`projects.html`): Public no-code research cohort finder (Galaxy, iDEP, Biblioshiny; six projects). Project data in `src/cohorts/projects.ts`, matching in `src/cohorts/match.ts`, team notes in `docs/research-cohorts.md`
 - **Datasets** (`datasets.html`, Accepted members only): Dataset library with guides to esquisse, Galaxy, iDEP and biblioshiny and a filterable catalog of datasets in 14 research fields. Content lives in `src/learning/datasets/` (never import it from public pages); see `docs/dataset-library.md`
 
 ## Key Features
@@ -107,6 +108,7 @@ public/
 - Page component exported as default
 - Route defined in `page-routes.tsx` (maps page name to component)
 - Search index (`search-data.json`) must be updated when adding/removing pages
+- Cohort project text summarizes the private Drive guides; never copy student names or MENTOR notes from them. Run `npm run test:cohorts` after changing `src/cohorts/`
 - Student research, Resources, Coding, Python and R/RStudio are edited by the EBS Team in **EBS administration → Website content** (see `docs/website-content.md`). Their pages render typed content (`src/content/model.ts`, `src/content/view.tsx`); built-in initial content lives in `src/content/defaults/researchers.ts` (public) and `server/content/defaults.ts` (member pages, server-only)
 
 ### Performance

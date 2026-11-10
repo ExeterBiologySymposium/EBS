@@ -4,6 +4,7 @@ import acceptInvitation from './pages/accept-invitation';
 import contact from './pages/contact';
 import terms from './pages/terms';
 import privacy from './pages/privacy';
+import projects from './pages/projects';
 import about from './pages/about';
 import faq from './pages/faq';
 import judges from './pages/judges';
@@ -20,6 +21,7 @@ export const pageComponents = {
   'contact.html': contact,
   'terms.html': terms,
   'privacy.html': privacy,
+  'projects.html': projects,
   'about.html': about,
   'faq.html': faq,
   'judges.html': judges,

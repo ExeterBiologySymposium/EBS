@@ -9,7 +9,7 @@ const root = resolve(import.meta.dirname, '..');
 const projectConfig = JSON.parse(await readFile(resolve(root, 'seo.config.json'), 'utf8'));
 const token = '2Z5fl97yNeITcjZHCFydWygaEzeAIWNtDmKmB74A_E0';
 const privateRoutes = ['admin.html', 'accept-invitation.html', 'account.html', 'events.html', 'resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'opensource.html', 'datasets.html'];
-const publicRoutes = ['index.html', 'about.html', 'team.html', 'schedule.html', 'schools.html', 'researchers.html', 'judges.html', 'student-signup.html', 'register.html', 'faq.html', 'contact.html', 'terms.html', 'privacy.html'];
+const publicRoutes = ['index.html', 'about.html', 'team.html', 'schedule.html', 'schools.html', 'researchers.html', 'projects.html', 'judges.html', 'student-signup.html', 'register.html', 'faq.html', 'contact.html', 'terms.html', 'privacy.html'];
 
 async function fixture(t, change = () => {}) {
   const temporaryRoot = await mkdtemp(resolve(tmpdir(), 'ebs-seo-'));
@@ -35,7 +35,7 @@ function succeeds(result) {
   assert.equal(result.status, 0, result.stderr || result.stdout);
 }
 
-test('project policy indexes only the 13 public pages and uses evergreen member-page descriptions', () => {
+test('project policy indexes only the 14 public pages and uses evergreen member-page descriptions', () => {
   assert.deepEqual(Object.keys(projectConfig.pages).filter(route => !projectConfig.pages[route].noindex).sort(), publicRoutes.toSorted());
   assert.equal(projectConfig.googleSiteVerification, token);
   for (const route of ['datascience.html', 'python.html', 'rstudio.html']) {
@@ -67,7 +67,7 @@ test('sitemap uses configured modification dates and excludes every private page
   const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
   assert.deepEqual(urls.toSorted(), publicRoutes.map(route => `${config.siteUrl}/${route === 'index.html' ? '' : route}`).sort());
   const dates = [...sitemap.matchAll(/<lastmod>(.*?)<\/lastmod>/g)].map(match => match[1]);
-  assert.equal(dates.length, 13);
+  assert.equal(dates.length, publicRoutes.length);
   assert.ok(dates.every(date => date === '2020-02-29'));
 });
 

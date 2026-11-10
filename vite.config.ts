@@ -9,7 +9,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 
 const routes = [
   'admin.html', 'accept-invitation.html', 'account.html', 'contact.html', 'terms.html', 'privacy.html', 'events.html', 'about.html', 'datascience.html', 'faq.html', 'index.html', 'judges.html',
-  'opensource.html', 'datasets.html', 'python.html', 'register.html', 'researchers.html',
+  'opensource.html', 'datasets.html', 'projects.html', 'python.html', 'register.html', 'researchers.html',
   'resources.html', 'rstudio.html', 'schedule.html', 'schools.html',
   'student-signup.html', 'team.html'
 ];
