@@ -35,11 +35,11 @@ function succeeds(result) {
   assert.equal(result.status, 0, result.stderr || result.stdout);
 }
 
-test('project policy indexes only the 13 public pages and describes unfinished lessons honestly', () => {
+test('project policy indexes only the 13 public pages and uses evergreen member-page descriptions', () => {
   assert.deepEqual(Object.keys(projectConfig.pages).filter(route => !projectConfig.pages[route].noindex).sort(), publicRoutes.toSorted());
   assert.equal(projectConfig.googleSiteVerification, token);
   for (const route of ['datascience.html', 'python.html', 'rstudio.html']) {
-    assert.match(projectConfig.pages[route].description, /coming soon/i);
+    assert.match(projectConfig.pages[route].description, /Accepted EBS members/i);
   }
 });
 

@@ -1,0 +1,14 @@
+import { authenticateClerk } from '../server/clerk-config.js';
+import {clerkAccess} from '../server/clerk.js';
+import {organizationRuntime} from '../server/orgs/runtime.js';
+import {createContentHandlers} from '../server/content/handlers.js';
+import {neonContentStore} from '../server/content/store.js';
+import {privateHeaders} from '../server/access.js';
+import {validateContent} from '../src/content/model.js';
+import researchers from '../server/content/researchers.json' with {type:'json'};
+import resources from '../server/content/resources.json' with {type:'json'};
+import datascience from '../server/content/datascience.json' with {type:'json'};
+import python from '../server/content/python.json' with {type:'json'};
+import rstudio from '../server/content/rstudio.json' with {type:'json'};
+const defaults={researchers,resources,datascience,python,rstudio};
+export default {async fetch(request:Request){try{const {service,config}=organizationRuntime();const connection=process.env.EBS_ORG_DATABASE_URL||process.env.EBS_DRIVE_DATABASE_URL;if(!connection)throw Error();return await createContentHandlers({authenticate:authenticateClerk,isTeam:u=>service.isTeam(u),isAccepted:async u=>await clerkAccess.membership(u)==='accepted',store:neonContentStore(connection,config.instanceId),defaults:async p=>validateContent(defaults[p])})(request);}catch{return Response.json({error:'Content setup is unavailable.'},{status:503,headers:privateHeaders});}}};

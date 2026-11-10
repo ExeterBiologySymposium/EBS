@@ -1,0 +1,43 @@
+[
+  {
+    "tag": "section",
+    "props": {
+      "className": "page-heading"
+    },
+    "children": [
+      {
+        "tag": "div",
+        "props": {
+          "className": "shell"
+        },
+        "children": [
+          {
+            "tag": "p",
+            "props": {
+              "className": "eyebrow"
+            },
+            "children": [
+              "Coming soon"
+            ]
+          },
+          {
+            "tag": "h1",
+            "props": {},
+            "children": [
+              "Coding"
+            ]
+          },
+          {
+            "tag": "p",
+            "props": {
+              "className": "lead"
+            },
+            "children": [
+              "Coding lessons are coming soon. Check back for updates."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

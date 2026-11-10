@@ -1,0 +1,944 @@
+[
+  {
+    "tag": "section",
+    "props": {
+      "className": "page-heading"
+    },
+    "children": [
+      {
+        "tag": "div",
+        "props": {
+          "className": "shell"
+        },
+        "children": [
+          {
+            "tag": "h1",
+            "props": {},
+            "children": [
+              "Student research"
+            ]
+          },
+          {
+            "tag": "p",
+            "props": {
+              "className": "lead"
+            },
+            "children": [
+              "EBS has two parts: a year-long dry-lab biology research program for students of all levels, followed by poster presentations at Exeter or online on April 25, 2027."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "section",
+    "props": {
+      "className": "section"
+    },
+    "children": [
+      {
+        "tag": "div",
+        "props": {
+          "className": "shell"
+        },
+        "children": [
+          {
+            "tag": "figure",
+            "props": {
+              "className": "context-media context-media--research"
+            },
+            "children": [
+              {
+                "tag": "img",
+                "props": {
+                  "src": "/images/Studying/Screenshot 2026-09-10 at 6.02.51 PM.png",
+                  "alt": "Student working on research at a laptop",
+                  "loading": "lazy"
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "props": {
+              "className": "grid columns-2"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "props": {},
+                "children": [
+                  {
+                    "tag": "h2",
+                    "props": {},
+                    "children": [
+                      "Dry-Lab Research"
+                    ]
+                  },
+                  {
+                    "tag": "p",
+                    "props": {},
+                    "children": [
+                      "The EBS research program focuses on dry-lab projects that use computational analysis, public datasets, published studies, or statistical modeling. Wet-lab projects will be accepted for presentation on a case-by-case basis."
+                    ]
+                  },
+                  {
+                    "tag": "p",
+                    "props": {},
+                    "children": [
+                      "This makes original research accessible regardless of what lab access your school has. Your project should ask a real biological question and answer it with a method reviewers can follow and verify."
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "callout"
+                    },
+                    "children": [
+                      {
+                        "tag": "p",
+                        "props": {},
+                        "children": [
+                          {
+                            "tag": "strong",
+                            "props": {},
+                            "children": [
+                              "Product design welcome."
+                            ]
+                          },
+                          " Research does not have to be wet-lab or experimental. Computational analysis, literature synthesis, epidemiological modeling, genomic data analysis, and biology-adjacent product design all qualify."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tag": "div",
+                "props": {},
+                "children": [
+                  {
+                    "tag": "h3",
+                    "props": {},
+                    "children": [
+                      "Valid Research Areas"
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "checklist"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "checklist__item"
+                        },
+                        "children": [
+                          {
+                            "tag": "span",
+                            "props": {},
+                            "children": [
+                              "Genetics and genomics"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "checklist__item"
+                        },
+                        "children": [
+                          {
+                            "tag": "span",
+                            "props": {},
+                            "children": [
+                              "Computational biology and bioinformatics"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "checklist__item"
+                        },
+                        "children": [
+                          {
+                            "tag": "span",
+                            "props": {},
+                            "children": [
+                              "Epidemiology and public health"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "checklist__item"
+                        },
+                        "children": [
+                          {
+                            "tag": "span",
+                            "props": {},
+                            "children": [
+                              "Ecology and evolutionary biology"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "checklist__item"
+                        },
+                        "children": [
+                          {
+                            "tag": "span",
+                            "props": {},
+                            "children": [
+                              "Neuroscience and behavioral biology"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "checklist__item"
+                        },
+                        "children": [
+                          {
+                            "tag": "span",
+                            "props": {},
+                            "children": [
+                              "Cell and molecular biology (computational focus)"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "checklist__item"
+                        },
+                        "children": [
+                          {
+                            "tag": "span",
+                            "props": {},
+                            "children": [
+                              "Biology-adjacent product design"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "callout"
+                    },
+                    "children": [
+                      {
+                        "tag": "p",
+                        "props": {},
+                        "children": [
+                          "Not sure if your topic qualifies? ",
+                          {
+                            "tag": "a",
+                            "props": {
+                              "href": "faq.html"
+                            },
+                            "children": [
+                              "Check the FAQ"
+                            ]
+                          },
+                          " or reach out to the organizing team — we'd rather help you scope a project than turn you away."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "section",
+    "props": {
+      "className": "section"
+    },
+    "children": [
+      {
+        "tag": "div",
+        "props": {
+          "className": "shell"
+        },
+        "children": [
+          {
+            "tag": "div",
+            "props": {
+              "className": "section-header"
+            },
+            "children": [
+              {
+                "tag": "h2",
+                "props": {},
+                "children": [
+                  "Timeline"
+                ]
+              },
+              {
+                "tag": "p",
+                "props": {},
+                "children": [
+                  "The research cycle runs from October 2026 through Symposium Day on April 25th, 2027."
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "props": {
+              "className": "grid columns-2"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "props": {
+                  "className": "timeline"
+                },
+                "children": [
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "timeline__item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__date"
+                        },
+                        "children": [
+                          "September 2026"
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__title"
+                        },
+                        "children": [
+                          "Interest Registration"
+                        ]
+                      },
+                      {
+                        "tag": "p",
+                        "props": {},
+                        "children": [
+                          "Submit your interest via the registration form. Share your research area and any initial ideas."
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "timeline__item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__date"
+                        },
+                        "children": [
+                          "October 2026"
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__title"
+                        },
+                        "children": [
+                          "Research Kickoff"
+                        ]
+                      },
+                      {
+                        "tag": "p",
+                        "props": {},
+                        "children": [
+                          "Start with a 20-minute Zoom orientation arranged by email with an EBS team member. Use the research document and team support to narrow your question."
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "timeline__item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__date"
+                        },
+                        "children": [
+                          "October – March"
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__title"
+                        },
+                        "children": [
+                          "Active Research Period"
+                        ]
+                      },
+                      {
+                        "tag": "p",
+                        "props": {},
+                        "children": [
+                          "Work through the research document, literature review, and data analysis at your own pace, with regular progress check-ins, ongoing email support, and office hours."
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "timeline__item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__date"
+                        },
+                        "children": [
+                          "Friday, December 18, 2026"
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__title"
+                        },
+                        "children": [
+                          "Check 1: Idea and Research Plan"
+                        ]
+                      },
+                      {
+                        "tag": "p",
+                        "props": {},
+                        "children": [
+                          "Submit your project idea and research plan. All four EBS co-heads review the submission and provide detailed written feedback for the next stage."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tag": "div",
+                "props": {
+                  "className": "timeline"
+                },
+                "children": [
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "timeline__item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__date"
+                        },
+                        "children": [
+                          "Friday, March 12, 2027"
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__title"
+                        },
+                        "children": [
+                          "Check 2: Abstract and Code"
+                        ]
+                      },
+                      {
+                        "tag": "p",
+                        "props": {},
+                        "children": [
+                          "Submit a 250-word research abstract describing your question, methodology, findings, and conclusions, plus all code or exported workflows. All four co-heads read the abstract, check the code for completeness, and write detailed comments to guide your next steps."
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "timeline__item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__date"
+                        },
+                        "children": [
+                          "Friday, April 9, 2027"
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__title"
+                        },
+                        "children": [
+                          "Check 3: First Poster Draft"
+                        ]
+                      },
+                      {
+                        "tag": "p",
+                        "props": {},
+                        "children": [
+                          "Submit your first poster draft. All four co-heads provide detailed written comments on format, completeness, and consistency with your abstract and research logs so you can refine it before presentation."
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "timeline__item"
+                    },
+                    "children": [
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__date"
+                        },
+                        "children": [
+                          "April 25th, 2027"
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "timeline__title"
+                        },
+                        "children": [
+                          "Symposium Day"
+                        ]
+                      },
+                      {
+                        "tag": "p",
+                        "props": {},
+                        "children": [
+                          "Present your completed poster at Phillips Exeter Academy or virtually. The full-day event includes a keynote presentation and two poster sessions. See the ",
+                          {
+                            "tag": "a",
+                            "props": {
+                              "href": "schedule.html"
+                            },
+                            "children": [
+                              "full schedule"
+                            ]
+                          },
+                          "."
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "section",
+    "props": {
+      "className": "section"
+    },
+    "children": [
+      {
+        "tag": "div",
+        "props": {
+          "className": "shell"
+        },
+        "children": [
+          {
+            "tag": "div",
+            "props": {
+              "className": "section-header"
+            },
+            "children": [
+              {
+                "tag": "h2",
+                "props": {},
+                "children": [
+                  "Presentation Format"
+                ]
+              },
+              {
+                "tag": "p",
+                "props": {},
+                "children": [
+                  "EBS uses a single, consistent format so every participant is judged the same way."
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "div",
+            "props": {
+              "className": "grid columns-2"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "props": {
+                  "className": "text-block"
+                },
+                "children": [
+                  {
+                    "tag": "h3",
+                    "props": {},
+                    "children": [
+                      "Poster Presentation"
+                    ]
+                  },
+                  {
+                    "tag": "p",
+                    "props": {},
+                    "children": [
+                      "Design a research poster and present it to judges and attendees during the poster session. Judges spend approximately 15 minutes per poster. Standard academic poster format — EBS provides a template."
+                    ]
+                  },
+                  {
+                    "tag": "span",
+                    "props": {
+                      "className": "badge badge--primary"
+                    },
+                    "children": [
+                      "In-person"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tag": "div",
+                "props": {
+                  "className": "text-block"
+                },
+                "children": [
+                  {
+                    "tag": "h3",
+                    "props": {},
+                    "children": [
+                      "Poster Presentation, Online"
+                    ]
+                  },
+                  {
+                    "tag": "p",
+                    "props": {},
+                    "children": [
+                      "Same format, presented over video — walk judges and attendees through your poster during the same live sessions as in-person presenters."
+                    ]
+                  },
+                  {
+                    "tag": "span",
+                    "props": {
+                      "className": "badge badge--primary"
+                    },
+                    "children": [
+                      "Online"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "section",
+    "props": {
+      "className": "section"
+    },
+    "children": [
+      {
+        "tag": "div",
+        "props": {
+          "className": "shell"
+        },
+        "children": [
+          {
+            "tag": "div",
+            "props": {
+              "className": "grid columns-2"
+            },
+            "children": [
+              {
+                "tag": "div",
+                "props": {},
+                "children": [
+                  {
+                    "tag": "h2",
+                    "props": {},
+                    "children": [
+                      "Research support"
+                    ]
+                  },
+                  {
+                    "tag": "p",
+                    "props": {},
+                    "children": [
+                      "The core of the program is a research document written by experienced high school researchers. It guides you through the entire research process, with multiple exercises in each section for different ability levels."
+                    ]
+                  },
+                  {
+                    "tag": "p",
+                    "props": {},
+                    "children": [
+                      "Your shared Google folder holds the document and your work. The team regularly checks every student’s progress and suggests ways to refine their study. Work asynchronously, stay in touch by email, and use regular office hours to talk through ideas and difficulties."
+                    ]
+                  },
+                  {
+                    "tag": "p",
+                    "props": {},
+                    "children": [
+                      "Once your account is Accepted, use ",
+                      {
+                        "tag": "a",
+                        "props": {
+                          "href": "account.html"
+                        },
+                        "children": [
+                          "Account → Create my research folder"
+                        ]
+                      },
+                      " to set up your folder and document. For research questions or office-hour arrangements, email ",
+                      {
+                        "tag": "a",
+                        "props": {
+                          "href": "mailto:exeterbiologysymposium@gmail.com"
+                        },
+                        "children": [
+                          "exeterbiologysymposium@gmail.com"
+                        ]
+                      },
+                      "."
+                    ]
+                  },
+                  {
+                    "tag": "RegistrationLink",
+                    "props": {
+                      "className": "button primary",
+                      "href": "https://forms.gle/vgtVrsBm1UbBhwtv9"
+                    },
+                    "children": [
+                      "Register your interest"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tag": "div",
+                "props": {},
+                "children": [
+                  {
+                    "tag": "div",
+                    "props": {
+                      "className": "text-block"
+                    },
+                    "children": [
+                      {
+                        "tag": "h3",
+                        "props": {},
+                        "children": [
+                          "Support throughout your project"
+                        ]
+                      },
+                      {
+                        "tag": "div",
+                        "props": {
+                          "className": "checklist"
+                        },
+                        "children": [
+                          {
+                            "tag": "div",
+                            "props": {
+                              "className": "checklist__item"
+                            },
+                            "children": [
+                              {
+                                "tag": "span",
+                                "props": {},
+                                "children": [
+                                  "Scoping and refining your research question"
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "div",
+                            "props": {
+                              "className": "checklist__item"
+                            },
+                            "children": [
+                              {
+                                "tag": "span",
+                                "props": {},
+                                "children": [
+                                  "Identifying credible sources and datasets"
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "div",
+                            "props": {
+                              "className": "checklist__item"
+                            },
+                            "children": [
+                              {
+                                "tag": "span",
+                                "props": {},
+                                "children": [
+                                  "Selecting analytical tools and methods appropriate for dry-lab research"
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "div",
+                            "props": {
+                              "className": "checklist__item"
+                            },
+                            "children": [
+                              {
+                                "tag": "span",
+                                "props": {},
+                                "children": [
+                                  "Detailed written feedback from all four co-heads at each checkpoint"
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tag": "div",
+                            "props": {
+                              "className": "checklist__item"
+                            },
+                            "children": [
+                              {
+                                "tag": "span",
+                                "props": {},
+                                "children": [
+                                  "Regular office hours and ongoing email communication"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "section",
+    "props": {
+      "className": "section"
+    },
+    "children": [
+      {
+        "tag": "div",
+        "props": {
+          "className": "shell"
+        },
+        "children": [
+          {
+            "tag": "div",
+            "props": {
+              "className": "next-step"
+            },
+            "children": [
+              {
+                "tag": "h2",
+                "props": {},
+                "children": [
+                  "Register as a student"
+                ]
+              },
+              {
+                "tag": "p",
+                "props": {},
+                "children": [
+                  "Join researchers from more than seven countries in the EBS research program. Each student registers individually; the team will follow up by email."
+                ]
+              },
+              {
+                "tag": "div",
+                "props": {
+                  "className": "actions"
+                },
+                "children": [
+                  {
+                    "tag": "RegistrationLink",
+                    "props": {
+                      "className": "button primary",
+                      "href": "https://forms.gle/vgtVrsBm1UbBhwtv9"
+                    },
+                    "children": [
+                      "Register Interest"
+                    ]
+                  },
+                  {
+                    "tag": "LearningLink",
+                    "props": {
+                      "className": "button secondary",
+                      "href": "resources.html"
+                    },
+                    "children": [
+                      "Browse Resources"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

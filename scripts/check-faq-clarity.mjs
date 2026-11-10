@@ -41,7 +41,7 @@ try {
     assert.equal(answers(accepted).length, 7, 'Accepted has seven concise questions');
     assert.match(accepted, /Create my research folder/);
     assert.match(accepted, /Your research folder/);
-    assert.match(accepted, /Coding lessons are coming soon/);
+    assert.match(accepted, /coding resources/);
     assert.doesNotMatch(accepted, /While you wait/);
     for (const [status, access] of [['signed-out', null], ['loading', null], ['signed-in', 'checking'], ['signed-in', 'unavailable'], ['unavailable', null]]) {
       const html = await renderAccount(status, access);

@@ -6,7 +6,7 @@ export default function PageContent() { return <div className="page-layout layou
 <img className="about-exeter-mark" src="/Phillips Exeter Academy-selected-assets/PEA_ExeterMark_Red_Lg.png" alt="Exeter" width={2400} height={779} decoding="async" />
 <p className="eyebrow">About EBS</p>
 <h1>Opening biology research<br/>to its next generation.</h1>
-<p className={"lead"}>{"A free dry-lab biology research program and symposium, organized by students in the Genetics and Biotechnology Club at Phillips Exeter Academy."}</p>
+<p className={"lead"}>{"A free biology symposium and dry-lab research program, organized by students in the Genetics and Biotechnology Club at Phillips Exeter Academy."}</p>
 </div>
 </section>
 <img className="about-cover" src="/images/Genetics Club Photos/EGBC 2.jpg" alt="Students from the Genetics and Biotechnology Club at the Broad Institute" />
@@ -26,7 +26,7 @@ export default function PageContent() { return <div className="page-layout layou
 <div>
 <h2>{"What Is Dry-Lab Research?"}</h2>
 <p>{"Dry-lab research is biology conducted without a physical laboratory — using computers, databases, statistics, and published literature to answer scientific questions. It is rigorous, publishable, and increasingly essential in modern biology."}</p>
-<p>{" EBS is dry-lab only as it removes the primary barrier to entry for most students: access to physical lab equipment. Anyone with a computer and internet connection can begin doing meaningful biological research."}</p>
+<p>{"The EBS research program focuses on dry-lab biology so students can take part with a computer and internet access. Wet-lab projects will be accepted for presentation on a case-by-case basis."}</p>
 <div className={"checklist"}>
 <div className={"checklist__item"}>
 <span><strong>{"Bioinformatics"}</strong>{" — analyzing genomic, proteomic, or evolutionary data"}</span>

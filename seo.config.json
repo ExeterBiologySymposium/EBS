@@ -111,7 +111,7 @@
     },
     "about.html": {
       "title": "About EBS \u2014 Beginner Biology Research at Phillips Exeter",
-      "description": "Discover EBS, a free dry-lab biology research program and symposium for beginners, organized by students at Phillips Exeter Academy with faculty guidance.",
+      "description": "Discover EBS, a free biology symposium and dry-lab research program organized by students at Phillips Exeter Academy with faculty guidance.",
       "terms": [
         "student biology symposium at Phillips Exeter Academy",
         "Phillips Exeter Academy biology symposium",
@@ -156,22 +156,22 @@
       "lastmod": "2026-10-31"
     },
     "resources.html": {
-      "title": "Member Research Resources and Example Posters \u2014 EBS",
-      "description": "Accepted EBS members can view example student biology research posters. Research guides and tools are coming soon; sign in to access the member area.",
+      "title": "Research resources \u2014 EBS",
+      "description": "Explore research resources for Accepted EBS members. Sign in to view the latest materials and guidance from the organizing team.",
       "terms": [],
       "lastmod": "2026-10-31",
       "noindex": true
     },
     "datascience.html": {
-      "title": "Coding Lessons Coming Soon \u2014 EBS",
-      "description": "EBS coding lessons are coming soon. This member area requires an accepted account; check back for updates or contact the team about account access.",
+      "title": "Coding \u2014 EBS",
+      "description": "Explore coding for Accepted EBS members. Sign in to view the latest materials and guidance from the organizing team.",
       "terms": [],
       "lastmod": "2026-10-31",
       "noindex": true
     },
     "python.html": {
-      "title": "Python Lessons Coming Soon \u2014 EBS",
-      "description": "Python coding lessons for EBS members are coming soon. Sign in with an accepted account and check back for updates from the symposium organizing team.",
+      "title": "Python \u2014 EBS",
+      "description": "Explore python for Accepted EBS members. Sign in to view the latest materials and guidance from the organizing team.",
       "terms": [
         "Python for biology research beginners"
       ],
@@ -179,8 +179,8 @@
       "noindex": true
     },
     "rstudio.html": {
-      "title": "RStudio Lessons Coming Soon \u2014 EBS",
-      "description": "RStudio coding lessons for EBS members are coming soon. Sign in with an accepted account and check back for updates from the symposium organizing team.",
+      "title": "R / RStudio \u2014 EBS",
+      "description": "Explore r / rstudio for Accepted EBS members. Sign in to view the latest materials and guidance from the organizing team.",
       "terms": [
         "RStudio for biology research beginners"
       ],
@@ -253,7 +253,7 @@
     },
     "student-signup.html": {
       "title": "Student Application \u2014 Exeter Biology Symposium 2027",
-      "description": "Apply individually to present a dry-lab biology poster at EBS 2027, in person or online. Participation is free; sign in, then complete the student Google Form.",
+      "description": "Apply to present original biology research at EBS 2027, in person or online. Wet-lab projects will be accepted on a case-by-case basis. Participation is free.",
       "terms": [
         "biology research symposium for high school students",
         "biology research symposium for middle school students",
@@ -274,7 +274,7 @@
     },
     "faq.html": {
       "title": "EBS FAQ \u2014 Participation and Getting Started",
-      "description": "Quick answers about EBS eligibility, costs, research, registration, Zoom orientation, and attendance. Find account, school, and judge help in the right place.",
+      "description": "Find answers about EBS project eligibility, case-by-case wet-lab acceptance, costs, registration, Zoom orientation, and attendance.",
       "terms": [
         "free online biology research opportunities for students",
         "Exeter Biology Symposium online participation",

@@ -18,7 +18,7 @@ export default function PageContent() {
 <section className={"page-heading"}><h1>{"Register for EBS"}</h1><p className={"lead"}>{"Choose one route. Sign in or create an account to open your application in Google Forms."}</p><p>{"April 25th, 2027. In-person and online participation are planned."}</p></section>
 <AccessNotice/>
 <div className={"registration-options registration-routes"}>
-<section><p className={"route-kicker"}>{"01"}</p><h2>{"Students"}</h2><p>{"For middle and high school students presenting original dry-lab biological research."}</p><div className={"actions"}><a className={"button"} href={"student-signup.html"}>{"Student registration"}</a></div></section>
+<section><p className={"route-kicker"}>{"01"}</p><h2>{"Students"}</h2><p>{"For middle and high school students presenting original biology research. Wet-lab projects will be accepted for presentation on a case-by-case basis."}</p><div className={"actions"}><a className={"button"} href={"student-signup.html"}>{"Student registration"}</a></div></section>
 <section><p className={"route-kicker"}>{"02"}</p><h2>{"Schools and educators"}</h2><p>{"For educators, counselors, and administrators sharing EBS with students or registering school interest."}</p><div className={"actions"}><a className={"button"} href={"schools.html"}>{"School registration"}</a></div></section>
 <section><p className={"route-kicker"}>{"03"}</p><h2>{"Judges"}</h2><p>{"For researchers and professionals who want to evaluate student posters and presentations."}</p><div className={"actions"}><a className={"button"} href={"judges.html"}>{"Judge recruitment"}</a></div></section>
 </div>

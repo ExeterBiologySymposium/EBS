@@ -26,7 +26,7 @@ export default function PageContent() { return <div className="page-layout layou
           <p id="sy-travel">Participation and in-person poster printing are free. Participants cover travel, lodging, and meals outside the event. EBS does not provide travel funding or housing; online presentation is available if you cannot travel.</p>
         </details>
         <details className="disclosure" id="research"><summary>What research can I present?</summary>
-          <p id="r1"><span id="g2">Original dry-lab biology research uses public data, published studies, or computational methods instead of physical lab experiments.</span> Biology-related product design supported by research also qualifies. Wet-lab experiments are not accepted, and reviewers must be able to verify your methods and evidence. See <a href="researchers.html">project examples</a>.</p>
+          <p id="r1"><span id="g2">Original dry-lab biology research uses public data, published studies, or computational methods instead of physical lab experiments.</span> Biology-related product design supported by research also qualifies. Wet-lab projects will be accepted for presentation on a case-by-case basis. Reviewers must be able to verify your methods and evidence. See <a href="researchers.html">project examples</a>.</p>
         </details>
       </div>
     </section>

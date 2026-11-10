@@ -194,3 +194,5 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 
 .admin-views { margin-bottom: 2rem; }
 .admin-lookup { border-left: 3px solid var(--red, #a31f34); padding-left: 1rem; }
+
+.content-editor{max-width:1000px}.content-editor fieldset{min-width:0;border:1px solid var(--line);padding:16px;margin:16px 0}.content-field{display:grid;gap:8px;margin:16px 0}.content-field textarea,.content-field select,.content-editor select{width:100%;padding:12px;background:var(--bg);border:1px solid var(--line);border-radius:4px}.content-field textarea{min-height:90px;resize:vertical}.content-group{padding:12px;border-left:2px solid var(--line);margin-block:12px}.content-editor button:not(.button){text-decoration:underline;min-height:44px;padding:8px}.content-editor legend{max-width:100%;overflow-wrap:anywhere}

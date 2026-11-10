@@ -5,7 +5,7 @@ const sections: LegalSection[] = [
     id: "about-this-notice",
     title: "About this notice",
     content: <>
-      <p>Exeter Biology Symposium (EBS) is a free, student-run dry-lab biology research program and symposium organized by the Genetics and Biotechnology Club at Phillips Exeter Academy, with faculty guidance. We help middle and high school students learn research skills, develop original projects, and present their work.</p>
+      <p>Exeter Biology Symposium (EBS) is a free, student-run biology symposium and dry-lab research program organized by the Genetics and Biotechnology Club at Phillips Exeter Academy, with faculty guidance. We help middle and high school students learn research skills, develop original projects, and present their work.</p>
       <p>This notice explains how the EBS organizing team collects, uses, and shares personal information in connection with the EBS website, accounts, applications, contact messages, research tools, and related program activities. Personal information means information that identifies you or can reasonably be linked to you.</p>
       <p>Read this notice alongside our <a href="terms.html">Terms of Use</a>. It describes our practices; it does not substitute for any separate consent required for an activity. Phillips Exeter Academy also publishes an <a href="https://exeter.edu/privacy-notice/">Academy Privacy Notice</a>, which addresses the Academy's broader activities. This EBS notice focuses on the symposium and its website.</p>
     </>,

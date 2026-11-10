@@ -14,7 +14,7 @@ const sections: LegalSection[] = [
     id: "our-purpose",
     title: "Our purpose",
     content: <>
-      <p>EBS helps middle and high school students take their first steps in biological research. Through free learning resources, structured guidance, and a supportive symposium, students develop research questions, analyze evidence, and present original dry-lab biological research to peers and judges.</p>
+      <p>EBS helps middle and high school students take their first steps in biological research. Through free learning resources, structured guidance, and a supportive symposium, students develop research questions, analyze evidence, and present original biology research to peers and judges. Wet-lab projects will be accepted for presentation on a case-by-case basis.</p>
       <p>Dry-lab research uses computers, public datasets, statistical methods, computational tools, and published literature rather than physical laboratory experiments. Our aim is to make rigorous research more accessible to students who may not have laboratory access or prior research experience, while encouraging curiosity, academic integrity, and clear scientific communication.</p>
       <p>EBS participation is free. Participants remain responsible for their own equipment, internet access, travel, and other personal expenses unless we expressly state otherwise. Participation does not guarantee a presentation place, award, publication, academic credit, or admission to Phillips Exeter Academy or another institution.</p>
     </>,

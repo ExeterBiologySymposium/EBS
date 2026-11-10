@@ -1,9 +1,2 @@
-export default function PageContent() { return <div className="page-layout layout-python">
-<section className={"page-heading"}>
-<div className={"shell"}>
-<p className="eyebrow">Coming soon</p>
-<h1>{"Coding"}</h1>
-<p className={"lead"}>{"Coding lessons are coming soon. Check back for updates."}</p>
-</div>
-</section>
-</div>; }
+import { PublishedPage } from '../content/view';
+export default function PageContent() { return <PublishedPage page="python" />; }

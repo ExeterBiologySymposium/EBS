@@ -11,7 +11,8 @@
     "seo:update": "node scripts/update-seo.mjs",
     "authorize:drive": "node --env-file=.env.google-drive.local scripts/authorize-google-drive.mjs",
     "test:org-admin": "node --test scripts/org-rollover.test.mjs scripts/org-api.test.mjs scripts/org-store.test.mjs && node scripts/org-ui.test.mjs",
-    "orgs:bootstrap": "node scripts/org-bootstrap.mjs"
+    "orgs:bootstrap": "node scripts/org-bootstrap.mjs",
+    "test:content": "node --test scripts/content.test.mjs"
   },
   "repository": {
     "type": "git",

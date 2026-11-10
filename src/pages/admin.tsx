@@ -3,6 +3,7 @@ import { AuthContext } from '../auth';
 import { adminMessage, adminRequest, lostTeamAccess } from '../admin-api';
 import type { Destination, Page, Result } from '../../server/orgs/types';
 
+const ContentEditor = lazy(() => import('../content-editor'));
 const TeamSettings = lazy(() => import('../team-organization-settings'));
 type Participant = { userId: string; name: string; identifier: string; joinedAt: number; pending: boolean; accepted: boolean };
 type Invitation = { id: string; email: string; destination: Destination; createdAt: number; expiresAt: number };
@@ -146,8 +147,10 @@ function AdminWorkspace({ teamOrganizationId }: { teamOrganizationId: string }) 
   const onChanged = useCallback(() => setRevision(value => value + 1), []);
   useEffect(() => { const update = () => setSettingsOpen(/^#(?:\/|team-settings)/.test(window.location.hash)); window.addEventListener('hashchange', update); window.addEventListener('popstate', update); return () => { window.removeEventListener('hashchange', update); window.removeEventListener('popstate', update); }; }, []);
   if (revoked) return <section className="section"><div className="shell" role="alert"><p>Your team access has changed. Administrative data has been closed.</p><a href="account.html">Return to Account</a></div></section>;
+  const contentOpen = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('view') === 'content';
+  if (contentOpen) return <><div className="shell actions"><a href="admin.html">Back to participants</a></div><Suspense fallback={<p>Loading editor…</p>}><ContentEditor /></Suspense></>;
   return <>
-    <div className="shell actions admin-tools"><button className="button secondary" type="button" onClick={() => { const open = !settingsOpen; setSettingsOpen(open); history.pushState({ ...history.state }, '', location.pathname + location.search + (open ? '#team-settings' : '')); }}>{settingsOpen ? 'Back to participants' : 'Team organization settings'}</button>{!settingsOpen && <button className="button secondary" type="button" onClick={onChanged}>Refresh lists and capacity</button>}</div>
+    <div className="shell actions admin-tools"><a className="button secondary" href="admin.html?view=content">Edit website content</a><button className="button secondary" type="button" onClick={() => { const open = !settingsOpen; setSettingsOpen(open); history.pushState({ ...history.state }, '', location.pathname + location.search + (open ? '#team-settings' : '')); }}>{settingsOpen ? 'Back to participants' : 'Team organization settings'}</button>{!settingsOpen && <button className="button secondary" type="button" onClick={onChanged}>Refresh lists and capacity</button>}</div>
     {settingsOpen ? <section className="section"><div className="shell"><Suspense fallback={<p role="status">Loading Team settings…</p>}><TeamSettings teamOrganizationId={teamOrganizationId} /></Suspense></div></section> : <>
       <AddParticipant revision={revision} onChanged={onChanged} onDenied={onDenied} />
       <section className="section"><div className="shell">

@@ -30,6 +30,7 @@ export function installNavigation(commit: (navigation: Navigation) => void): () 
     });
   };
   async function navigate(target: URL, pop: boolean) {
+    if (pop && !window.dispatchEvent(new Event('ebs:before-pop-navigation', { cancelable: true }))) { history.pushState({ ebsScroll: [scrollX, scrollY] }, '', current); return; }
     const requestRevision = ++revision;
     pending?.abort();
     const controller = new AbortController();
