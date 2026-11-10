@@ -1,6 +1,6 @@
 # Dataset library
 
-The Dataset library (`/datasets.html`, **Datasets** in the menu) helps participants find a free public dataset for their question and analyze it. It has:
+The Dataset library (`/datasets.html`) helps participants find a free public dataset for their question and analyze it. It is hidden from the site navigation for now; members reach it from **Account → Explore EBS**, the participant FAQ, site search or a direct link. To show it in the header again, add `['Datasets','datasets.html']` back to `nav` in `src/site.tsx`. It has:
 
 - **Tool guides** for esquisse, Galaxy, iDEP and biblioshiny: what each tool is for, the data it accepts, step-by-step instructions, tips and official links, plus a “Which tool fits your data?” table.
 - **A filterable catalog** of datasets in 14 research fields. Each entry shows the provider, level, suggested tools, format, access terms, a starter research question, a caution where misuse is likely, and “How to get and use it” steps (some with copyable R or Python code).

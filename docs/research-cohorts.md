@@ -1,6 +1,6 @@
 # Research cohorts and the project finder
 
-`projects.html` (**Projects** in the header) helps students choose one of the six no-code cohort projects and sign up. It is public, so club members do not need an EBS account to use it.
+`projects.html` (hidden from the site navigation for now; add `['Projects','projects.html']` back to `nav` in `src/site.tsx` to show it in the header) helps students choose one of the six no-code cohort projects and sign up. It is public, so club members do not need an EBS account to use it.
 
 | Cohort | Project | Difficulty |
 | --- | --- | --- |
