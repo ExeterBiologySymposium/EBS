@@ -4,6 +4,11 @@
    Reviewed Exeter palette. Helvetica/Arial are fallbacks pending licensed Graphik webfonts. */
 :root{--bg:#fff;--surface:#f4f5f5;--ink:#424242;--muted:#63666a;--crimson:#a31f34;--crimson-dark:#6a243b;--harkness:#6a243b;--line:#d9dddf;--gutter:32px;--font:Helvetica,Arial,sans-serif;color-scheme:light}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:96px}body{margin:0;background:var(--surface);color:var(--ink);font:16px/1.5 var(--font);letter-spacing:-.015em;-webkit-font-smoothing:antialiased}a{color:inherit;text-underline-offset:4px}button,input,textarea,select{font:inherit;color:inherit}button,summary{cursor:pointer}button{border:0;background:none}button:disabled{opacity:.4;cursor:default}img{display:block;max-width:100%;height:auto}h1,h2,h3,h4,p,figure,dl{margin:0}h1,h2,h3,h4{font-weight:500;line-height:1.03;letter-spacing:-.045em}h1{font-size:clamp(46px,6vw,88px)}h2{font-size:clamp(34px,3.5vw,54px)}h3{font-size:clamp(23px,2.2vw,34px)}p{margin-top:18px}p,li,dd{overflow-wrap:break-word}ul,ol{padding-left:24px;margin-block:22px}li+li{margin-top:8px}[hidden]{display:none!important}[id]{scroll-margin-top:96px}:focus-visible{outline:3px solid var(--crimson);outline-offset:4px}main:focus{outline:none}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.skip{position:fixed;top:-80px;left:16px;z-index:150;background:var(--bg);color:var(--ink);padding:12px}.skip:focus{top:12px}.eyebrow{font-size:16px;font-weight:400;letter-spacing:.02em}.button{display:inline-flex;flex-direction:column;align-items:stretch;gap:18px;min-width:210px;min-height:66px;padding:13px 16px 10px;border-radius:4px;background:var(--ink);color:var(--bg);text-decoration:none;font-size:16px;line-height:1.3;transition:background .2s}.button>svg{align-self:flex-end}.button:hover{background:var(--crimson);color:var(--bg)}.button.secondary{background:transparent;border:1px solid var(--line);color:var(--ink)}.media-button{background:#ffffff18;border:1px solid #ffffff22;backdrop-filter:blur(20px);color:#fff}.media-button:hover{background:#9d2235}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}.small,.form-hint,.external-form-note{font-size:16px;color:var(--muted)}
+/* Links in running text must read as links. Tailwind's preflight sets a{text-decoration:inherit}, which removed the
+   browser underline site-wide. :where() keeps these at element specificity, so navigation, buttons and cards that opt out
+   with a class keep their design. */
+:where(p,li,dd,dt,td,th,figcaption,blockquote,label,address,caption) a{text-decoration-line:underline;text-decoration-thickness:1px}
+:where(p,li,dd,dt,td,th,figcaption,blockquote,label,address,caption) a:hover{text-decoration-thickness:2px}
 
 /* Shared reference header: quiet navigation; utilities live outside primary task flow. */
 .site-header{position:fixed;inset:0 0 auto;z-index:90;min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:14px var(--gutter);background:var(--bg);color:var(--ink);transition:background .2s,color .2s}
@@ -322,9 +327,6 @@ html:has(.content-actionbar){scroll-padding-bottom:150px}
 }
 
 /* Research cohorts (projects.html): project finder, sign-up and project catalogue. */
-/* Tailwind's preflight removes link underlines; keep links in this page's prose (and the homepage FAQ answers) identifiable. */
-.layout-projects :is(p,li,dd,td) a,.home-faq-list a{text-decoration:underline;text-decoration-thickness:1px}
-.layout-projects :is(p,li,dd,td) a:hover,.home-faq-list a:hover{color:var(--crimson)}
 .layout-projects .page-heading h1{max-width:900px}
 .layout-projects .page-heading .actions{margin-top:32px}
 .project-facts-row{display:flex;flex-wrap:wrap;gap:8px 0;margin:28px 0 0;padding:0;list-style:none;color:var(--muted)}
