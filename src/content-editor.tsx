@@ -114,6 +114,18 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
     return () => { window.removeEventListener('beforeunload', beforeUnload); document.removeEventListener('click', click, true); window.removeEventListener('ebs:before-pop-navigation', pop); };
   }, [dirty]);
 
+  // Keep keyboard focus from landing underneath the sticky action bar.
+  useEffect(() => {
+    const reveal = (event: FocusEvent) => {
+      const bar = document.querySelector('.content-actionbar');
+      if (!bar || !(event.target instanceof Element) || bar.contains(event.target)) return;
+      const box = event.target.getBoundingClientRect(), covered = bar.getBoundingClientRect();
+      if (box.bottom > covered.top && box.top < covered.bottom) window.scrollBy({ top: box.bottom - covered.top + 24, behavior: 'instant' });
+    };
+    document.addEventListener('focusin', reveal);
+    return () => document.removeEventListener('focusin', reveal);
+  }, []);
+
   useEffect(() => {
     if (mode !== 'history' || !record) return;
     const controller = new AbortController();
