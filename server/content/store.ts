@@ -10,6 +10,8 @@ export type StoredPage = {
   editedBy: string;
   editedByName: string;
   published: unknown | null;
+  /** Format of the publication, which can differ from the draft's after a format change. */
+  publishedSchemaVersion: number | null;
   publishedRevision: number | null;
   publishedAt: string | null;
   publishedBy: string | null;
@@ -27,7 +29,7 @@ export interface ContentStore {
 }
 
 type Query = (text: string, params: unknown[]) => Promise<Record<string, unknown>[]>;
-const columns = 'schema_version, revision, draft, edited_at, edited_by, edited_by_name, published, published_revision, published_at, published_by, published_by_name';
+const columns = 'schema_version, revision, draft, edited_at, edited_by, edited_by_name, published, published_schema_version, published_revision, published_at, published_by, published_by_name';
 const time = (value: unknown) => value instanceof Date ? value.toISOString() : String(value);
 const optional = <T>(value: unknown, map: (value: unknown) => T) => value === null || value === undefined ? null : map(value);
 function page(row: Record<string, unknown> | undefined): StoredPage | null {
@@ -35,7 +37,7 @@ function page(row: Record<string, unknown> | undefined): StoredPage | null {
   return {
     schemaVersion: Number(row.schema_version), revision: Number(row.revision), draft: row.draft,
     editedAt: time(row.edited_at), editedBy: String(row.edited_by), editedByName: String(row.edited_by_name ?? ''),
-    published: row.published ?? null, publishedRevision: optional(row.published_revision, Number),
+    published: row.published ?? null, publishedSchemaVersion: optional(row.published_schema_version, Number), publishedRevision: optional(row.published_revision, Number),
     publishedAt: optional(row.published_at, time), publishedBy: optional(row.published_by, String), publishedByName: optional(row.published_by_name, String),
   };
 }
@@ -68,13 +70,13 @@ export function createContentStore(query: Query, instanceId: string): ContentSto
     async publish(key, expectedRevision, actor) {
       const rows = await query(`WITH updated AS (
           UPDATE ebs_content_pages
-          SET revision = revision + 1, published = draft, published_revision = revision + 1,
+          SET revision = revision + 1, published = draft, published_schema_version = schema_version, published_revision = revision + 1,
             published_at = now(), published_by = $4::text, published_by_name = $5::text
           WHERE instance_id = $1::text AND page_key = $2::text AND revision = $3::integer
           RETURNING instance_id, page_key, ${columns}
         ), recorded AS (
           INSERT INTO ebs_content_versions (instance_id, page_key, revision, schema_version, content, published_at, published_by, published_by_name)
-          SELECT instance_id, page_key, published_revision, schema_version, published, published_at, published_by, published_by_name FROM updated
+          SELECT instance_id, page_key, published_revision, published_schema_version, published, published_at, published_by, published_by_name FROM updated
           RETURNING revision
         )
         SELECT ${columns} FROM updated`,

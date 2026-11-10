@@ -56,7 +56,7 @@ Local implementation does not apply the migration, enable configuration, publish
 ### Enabling
 
 1. Validate on an isolated Neon branch first: run [`scripts/sql/page-content.sql`](../scripts/sql/page-content.sql) there and test with a disposable deployment.
-2. Apply the same script once to the Production database with a private server role, for example in the Neon SQL Editor. It is additive and safe to re-run: it creates only `ebs_content_pages` (current draft and publication per page), `ebs_content_versions` (append-only publication history) and a trigger that blocks changing or deleting versions. It does not touch organization or research-folder tables. (Tables named `ebs_page_content`/`ebs_page_publications` from an earlier unreleased draft of this feature are unused.)
+2. Apply the same script once to the Production database with a private server role, for example in the Neon SQL Editor. It is additive and safe to re-run: it creates only `ebs_content_pages` (current draft and publication per page), `ebs_content_versions` (append-only publication history) and triggers that block changing, deleting or truncating versions. It does not touch organization or research-folder tables. (Tables named `ebs_page_content`/`ebs_page_publications` from an earlier unreleased draft of this feature are unused.)
 3. In Vercel Production, set the server-only variable `EBS_CONTENT_ENABLED=true` and redeploy.
 4. Verify on the live site: anonymous visitors can read Student research; Resources/Coding/Python/R redirect anonymous and Pending visitors; a Team member can save, preview and publish a harmless change (and restore the previous version afterwards); a non-Team account gets "does not have access" from the editor.
 
@@ -75,6 +75,7 @@ No seeding is needed. Until a page is first published, readers receive its built
 - Every editor request authenticates the Clerk session and freshly checks EBS Team membership server-side; member-page reads check Accepted membership; Student research reads are public. Page, audience and instance come from server configuration, never from the request.
 - Mutations require a same-origin `Origin`, `application/json`, a bounded body (about 200 KB per page) and an exact field set. Content is validated against fixed page schemas: unknown fields or section types are rejected, text is length-limited and rendered as text, links must be site paths, `https://` or `mailto:`, and images must be site paths or `https://`. Scripts, HTML, `javascript:` and `data:` links are rejected.
 - All responses are private and `no-store`. Member page defaults live in `server/content/defaults.ts` and never enter public JavaScript or prerendered HTML.
+- The history triggers stop the website and ordinary SQL from rewriting publications, but a database owner can still disable triggers. Where your Neon setup allows it, run the website with a role limited to `SELECT, INSERT, UPDATE` on `ebs_content_pages` and `SELECT, INSERT` on `ebs_content_versions`, and keep owner credentials out of Vercel.
 
 ### API
 

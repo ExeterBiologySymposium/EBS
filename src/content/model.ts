@@ -134,17 +134,20 @@ export function urlProblem(value: string, purpose: UrlPurpose): string | null {
   let url: URL;
   try { url = new URL(value); } catch { return urlGuidance(purpose); }
   if (url.username || url.password) return 'Links cannot include a username or password.';
-  if (url.protocol === 'https:') return /\s/.test(value) ? 'Remove spaces from the link.' : url.hostname ? null : urlGuidance(purpose);
+  if (url.protocol === 'https:') return !/^https:\/\//i.test(value) ? 'Start full links with https://.' : /\s/.test(value) ? 'Remove spaces from the link.' : url.hostname ? null : urlGuidance(purpose);
   if (url.protocol === 'mailto:' && purpose === 'link') return /^mailto:[^\s@?#/]+@[^\s@?#/]+\.[^\s@?#/]+(?:\?\S*)?$/i.test(value) ? null : 'Enter a complete email link, such as mailto:name@example.com.';
   if (url.protocol === 'http:') return 'Use a secure link that starts with https://.';
   return urlGuidance(purpose);
 }
-/** Friendly completion for common shorthand; never changes a link's scheme. */
+// Endings that are web addresses rather than file names (.py, .sh, .md, .zip and .png are both).
+const webEndings = new Set(['com', 'org', 'net', 'edu', 'gov', 'io', 'co', 'us', 'uk', 'ca']);
+/** Friendly completion for common shorthand; never changes a link's scheme or guesses at file names. */
 export function suggestUrl(value: string, purpose: UrlPurpose): string {
   const link = value.trim();
   if (purpose === 'link' && /^[^\s@/:]+@[^\s@/:]+\.[^\s@/:]+$/.test(link)) return 'mailto:' + link;
   if (purpose === 'image' && /^images\//i.test(link)) return '/' + link;
-  if (!/\.html?(?:[?#]|$)/i.test(link) && /^(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,}(?:[/?#]\S*)?$/i.test(link)) return 'https://' + link;
+  const address = /^(?:[a-z0-9-]+\.)+([a-z]{2,})(?:[/?#]\S*)?$/i.exec(link);
+  if (address && (/^www\./i.test(link) || webEndings.has(address[1].toLowerCase()))) return 'https://' + link;
   return link;
 }
 export function isExternalUrl(value: string) { return /^https:\/\//i.test(value); }
@@ -161,10 +164,12 @@ type Check<T> = (value: unknown, path: string, context: Context) => T;
 const join = (path: string, key: string | number) => path ? `${path}.${key}` : String(key);
 const plain = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value) && Object.getPrototypeOf(value) === Object.prototype;
 
+const loneSurrogate = /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/;
 function text(rule: { max: number; multiline?: boolean; required?: string }): Check<string> {
   return (value, path, context) => {
     if (typeof value !== 'string') { context.issues.push({ path, message: FORMAT }); return ''; }
-    if (rule.multiline ? /[\u0000-\u0008\u000b-\u001f\u007f]/.test(value) : /[\u0000-\u001f\u007f]/.test(value)) context.issues.push({ path, message: rule.multiline ? 'Remove unsupported control characters.' : 'Keep this on a single line.' });
+    if (loneSurrogate.test(value)) context.issues.push({ path, message: 'This contains a character that cannot be saved. Retype the text and try again.' });
+    else if (rule.multiline ? /[\u0000-\u0008\u000b-\u001f\u007f]/.test(value) : /[\u0000-\u001f\u007f]/.test(value)) context.issues.push({ path, message: rule.multiline ? 'Remove unsupported control characters.' : 'Keep this on a single line.' });
     else if (value.length > rule.max) context.issues.push({ path, message: `Shorten this to ${rule.max.toLocaleString('en-US')} characters or fewer.` });
     else if (rule.required && !value.trim()) context.issues.push({ path, message: rule.required });
     return value;
@@ -268,7 +273,8 @@ const heading = line();
 const intro = paragraph();
 const sectionChecks: { [K in SectionType]: Check<Extract<LessonSection, { type: K }>> } = {
   text: shape<TextSection>({ type: literal('text'), heading, body: rich(), highlight: flag }, (value, path, context) => {
-    if (!value.heading.trim() && !value.body.text.trim()) context.issues.push({ path: join(path, 'body.text'), message: 'Add a heading or some text, or remove this section.' });
+    // A malformed body is already reported; only check emptiness for well-formed text.
+    if (typeof value.body?.text === 'string' && !value.heading.trim() && !value.body.text.trim()) context.issues.push({ path: join(path, 'body.text'), message: 'Add a heading or some text, or remove this section.' });
   }),
   list: shape<ListSection>({ type: literal('list'), heading, intro, numbered: flag, items: list(paragraph('Enter text for this item or remove it.'), 100, 'items', { count: 1, message: 'Add at least one item, or remove this section.' }) }),
   links: shape<LinksSection>({ type: literal('links'), heading, intro, links: list(shape<LessonLink>({ label: line('Enter the link text readers will see.'), url: link('link'), description: paragraph() }), 60, 'links', { count: 1, message: 'Add at least one link, or remove this section.' }) }),

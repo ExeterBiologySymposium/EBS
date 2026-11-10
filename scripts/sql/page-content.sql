@@ -14,14 +14,16 @@ CREATE TABLE IF NOT EXISTS ebs_content_pages (
   edited_by text NOT NULL,
   edited_by_name text NOT NULL DEFAULT '',
   published jsonb CHECK (jsonb_typeof(published) = 'object'),
+  published_schema_version integer CHECK (published_schema_version > 0),
   published_revision integer,
   published_at timestamptz,
   published_by text,
   published_by_name text,
   PRIMARY KEY (instance_id, page_key),
   CONSTRAINT ebs_content_pages_publication CHECK (
-    (published IS NULL AND published_revision IS NULL AND published_at IS NULL AND published_by IS NULL)
-    OR (published IS NOT NULL AND published_revision BETWEEN 1 AND revision AND published_at IS NOT NULL AND published_by IS NOT NULL)
+    (published IS NULL AND published_schema_version IS NULL AND published_revision IS NULL AND published_at IS NULL AND published_by IS NULL)
+    OR (published IS NOT NULL AND published_schema_version IS NOT NULL AND published_revision BETWEEN 1 AND revision
+      AND published_at IS NOT NULL AND published_by IS NOT NULL)
   )
 );
 
@@ -47,5 +49,8 @@ $$;
 CREATE OR REPLACE TRIGGER ebs_content_versions_append_only
   BEFORE UPDATE OR DELETE ON ebs_content_versions
   FOR EACH ROW EXECUTE FUNCTION ebs_content_versions_append_only();
+CREATE OR REPLACE TRIGGER ebs_content_versions_no_truncate
+  BEFORE TRUNCATE ON ebs_content_versions
+  FOR EACH STATEMENT EXECUTE FUNCTION ebs_content_versions_append_only();
 
 REVOKE ALL ON ebs_content_pages, ebs_content_versions FROM PUBLIC;

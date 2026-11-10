@@ -71,6 +71,8 @@ test('validation names the field for unsafe links, missing text and malformed co
   assert.deepEqual(issuesFor('python', lesson(Array.from({ length: 81 }, () => text('x')))), ['sections']);
   assert.deepEqual(issuesFor('python', lesson(Array.from({ length: 12 }, () => ({ type: 'code', heading: '', intro: '', language: '', code: 'x'.repeat(19000) })))), ['']);
   assert.deepEqual(issuesFor('python', lesson('not a list')), ['sections']);
+  assert.deepEqual(issuesFor('python', lesson([{ type: 'text', heading: '', body: { text: 'x' }, highlight: false }])), ['sections.0.body'], 'a malformed section is a field problem, not a crash');
+  assert.deepEqual(issuesFor('python', lesson([], { title: 'Python\ud800' })), ['title'], 'lone surrogates cannot be stored as PostgreSQL JSON');
   for (const [url, purpose] of [['http://example.com', 'link'], ['//example.com', 'link'], ['/guides/../admin.html', 'link'], ['/guides/%2E%2E/x', 'link'], ['https://user:pass@example.com', 'link'], ['mailto:nobody', 'link'], ['data:text/html,x', 'link'], ['vbscript:x', 'link'], ['/x\\y', 'link'], ['faq.html', 'image'], ['/images/a.png', 'form'], [' https://example.com', 'link'], ['', 'image']]) {
     assert.ok(model.urlProblem(url, purpose), `${purpose} ${url}`);
   }
@@ -81,6 +83,10 @@ test('validation names the field for unsafe links, missing text and malformed co
   assert.equal(model.suggestUrl('www.ncbi.nlm.nih.gov/gene', 'link'), 'https://www.ncbi.nlm.nih.gov/gene');
   assert.equal(model.suggestUrl('faq.html', 'link'), 'faq.html');
   assert.equal(model.suggestUrl('http://example.com', 'link'), 'http://example.com');
+  assert.equal(model.suggestUrl('colab.research.google.com', 'link'), 'https://colab.research.google.com');
+  for (const file of ['hello.py', 'setup.sh', 'README.md', 'slides.zip', 'demo.mov']) assert.equal(model.suggestUrl(file, 'link'), file, 'file names never become web addresses');
+  assert.equal(model.suggestUrl('poster.png', 'image'), 'poster.png');
+  for (const url of ['https:evil.example', 'https:/evil.example']) assert.ok(model.urlProblem(url, 'link'), url);
 });
 
 test('readers render editor text, code and links as inert text with safe link attributes', () => {
@@ -120,14 +126,14 @@ function memoryStore() {
     async saveDraft(page, expected, content, actor) {
       const row = rows.get(page);
       if ((row?.revision ?? 0) !== expected) return null;
-      const next = { published: null, publishedRevision: null, publishedAt: null, publishedBy: null, publishedByName: null, ...row, schemaVersion: 1, revision: expected + 1, draft: structuredClone(content), editedAt: new Date().toISOString(), editedBy: actor.id, editedByName: actor.name };
+      const next = { published: null, publishedSchemaVersion: null, publishedRevision: null, publishedAt: null, publishedBy: null, publishedByName: null, ...row, schemaVersion: 1, revision: expected + 1, draft: structuredClone(content), editedAt: new Date().toISOString(), editedBy: actor.id, editedByName: actor.name };
       rows.set(page, next); return next;
     },
     async publish(page, expected, actor) {
       const row = rows.get(page);
       if (!row || row.revision !== expected) return null;
       const publishedAt = new Date().toISOString();
-      const next = { ...row, revision: expected + 1, published: structuredClone(row.draft), publishedRevision: expected + 1, publishedAt, publishedBy: actor.id, publishedByName: actor.name };
+      const next = { ...row, revision: expected + 1, published: structuredClone(row.draft), publishedSchemaVersion: row.schemaVersion, publishedRevision: expected + 1, publishedAt, publishedBy: actor.id, publishedByName: actor.name };
       rows.set(page, next);
       history.push({ page, revision: expected + 1, schemaVersion: 1, publishedAt, publishedBy: actor.id, publishedByName: actor.name, content: structuredClone(row.draft) });
       return next;
@@ -136,16 +142,16 @@ function memoryStore() {
     async version(page, revision) { return history.find(entry => entry.page === page && entry.revision === revision) ?? null; },
   };
 }
-function api({ actor = null, enabled = true, store = memoryStore(), team = ['user_team'], accepted = ['user_accepted'] } = {}) {
+function api({ actor = null, enabled = true, store = memoryStore(), team = ['user_team'], accepted = ['user_accepted'], initial = page => initialContent[page], name = user => user === 'user_team' ? 'Ada Team' : '' } = {}) {
   const calls = { authenticate: 0, store: 0 };
   const handler = createContentHandlers({
     enabled,
     authenticate: async () => { calls.authenticate++; return actor; },
     isTeam: async user => team.includes(user),
     isAccepted: async user => accepted.includes(user),
-    editorName: async user => user === 'user_team' ? 'Ada Team' : '',
+    editorName: async user => name(user),
     store: () => { calls.store++; if (store instanceof Error) throw store; return store; },
-    initial: page => initialContent[page],
+    initial,
   });
   return { handler, calls, store };
 }
@@ -162,7 +168,7 @@ test('Student research is public, member pages require Accepted, and editing req
   const draft = structuredClone(initialContent.researchers); draft.title = 'Unpublished draft title';
   for (const actor of [null, 'user_pending', 'user_accepted', 'user_team']) {
     const { handler, calls, store } = api({ actor });
-    store.rows.set('researchers', { schemaVersion: 1, revision: 1, draft, editedAt: '2026-11-10T00:00:00.000Z', editedBy: 'user_team', editedByName: '', published: null, publishedRevision: null, publishedAt: null, publishedBy: null, publishedByName: null });
+    store.rows.set('researchers', { schemaVersion: 1, revision: 1, draft, editedAt: '2026-11-10T00:00:00.000Z', editedBy: 'user_team', editedByName: '', published: null, publishedSchemaVersion: null, publishedRevision: null, publishedAt: null, publishedBy: null, publishedByName: null });
     const publicRead = await call(handler, get(pages.public));
     assert.equal(publicRead.status, 200);
     assert.deepEqual(Object.keys(publicRead.body), ['content']);
@@ -205,7 +211,10 @@ test('requests are validated before any content is read or written', async () =>
     [post(pages.public, 'save', '{not json'), 400],
     [post(pages.public, 'save', JSON.stringify({ revision: 0, content: { ...content, notes: 'x'.repeat(300000) } })), 413],
   ];
+  cases.push([post(pages.public, 'restore', { 'revision,version': 2 }), 400]);
   for (const [request, status] of cases) assert.equal((await call(handler, request)).status, status, `${request.method} ${request.url}`);
+  const named = api({ actor: 'user_team', name: () => 'Ada\u0000 Team\ud800' });
+  assert.equal((await call(named.handler, post(pages.public, 'save', { revision: 0, content }))).body.editedBy, 'Ada Team\ufffd');
   const invalid = await call(handler, post(pages.public, 'save', { revision: 0, content: { ...content, title: '' } }));
   assert.equal(invalid.status, 400);
   assert.deepEqual(invalid.body.issues, [{ path: 'title', message: 'Enter a page title.' }]);
@@ -233,11 +242,20 @@ test('storage failures are explicit and never fall back to initial or draft cont
     assert.equal(result.body.content, undefined);
   }
   const corrupt = memoryStore();
-  corrupt.rows.set('researchers', { schemaVersion: 1, revision: 2, draft: initialContent.researchers, published: { title: '<script>' }, publishedRevision: 2, publishedAt: 'x', publishedBy: 'user_team', publishedByName: '' });
+  corrupt.rows.set('researchers', { schemaVersion: 1, revision: 2, draft: initialContent.researchers, published: { title: '<script>' }, publishedSchemaVersion: 1, publishedRevision: 2, publishedAt: 'x', publishedBy: 'user_team', publishedByName: '' });
   assert.equal((await call(api({ store: corrupt }).handler, get(pages.public))).status, 503);
   const future = memoryStore();
-  future.rows.set('researchers', { schemaVersion: 2, revision: 2, draft: initialContent.researchers, published: initialContent.researchers, publishedRevision: 2, publishedAt: 'x', publishedBy: 'user_team', publishedByName: '' });
+  future.rows.set('researchers', { schemaVersion: 2, revision: 2, draft: initialContent.researchers, published: initialContent.researchers, publishedSchemaVersion: 2, publishedRevision: 2, publishedAt: 'x', publishedBy: 'user_team', publishedByName: '' });
   assert.equal((await call(api({ store: future }).handler, get(pages.public))).status, 503);
+  // A draft in a newer format does not take the published page down with it.
+  const newerDraft = memoryStore();
+  newerDraft.rows.set('researchers', { schemaVersion: 2, revision: 3, draft: { future: true }, published: initialContent.researchers, publishedSchemaVersion: 1, publishedRevision: 2, publishedAt: 'x', publishedBy: 'user_team', publishedByName: '' });
+  assert.equal((await call(api({ store: newerDraft }).handler, get(pages.public))).status, 200);
+  assert.equal((await call(api({ actor: 'user_team', store: newerDraft }).handler, get(pages.public, 'edit'))).status, 503);
+  // Broken built-in content fails closed as unavailable, without describing the problem to readers.
+  const broken = await call(api({ initial: () => ({ broken: true }) }).handler, get(pages.public));
+  assert.equal(broken.status, 503);
+  assert.equal(broken.body.issues, undefined);
 });
 
 test('drafts, publication, conflicts and restoration follow revisions', async () => {
@@ -316,6 +334,8 @@ test('PostgreSQL schema keeps revisions atomic, versions append-only and instanc
     assert.equal(await other.version('researchers', 3), null);
     await assert.rejects(() => database.query("UPDATE ebs_content_versions SET content = '{}'::jsonb"), /cannot be changed/);
     await assert.rejects(() => database.query('DELETE FROM ebs_content_versions'), /cannot be changed/);
+    await assert.rejects(() => database.query('TRUNCATE ebs_content_versions'), /cannot be changed/);
+    assert.equal((await store.read('researchers')).publishedSchemaVersion, 1);
     await assert.rejects(() => database.query('DELETE FROM ebs_content_pages'), /foreign key/);
     await assert.rejects(() => database.query("INSERT INTO ebs_content_pages (instance_id, page_key, schema_version, revision, draft, edited_by) VALUES ('ins_one', 'admin', 1, 1, '{}', 'x')"), /check constraint/);
     await assert.rejects(() => database.query("INSERT INTO ebs_content_pages (instance_id, page_key, schema_version, revision, draft, edited_by) VALUES ('other', 'python', 1, 1, '{}', 'x')"), /check constraint/);

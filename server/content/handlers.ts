@@ -67,21 +67,33 @@ async function readJson(request: Request): Promise<Record<string, unknown>> {
 
 export function createContentHandlers(deps: ContentDependencies) {
   const initial = new Map<PageKey, PageContent>();
-  // A broken built-in default is a deployment bug; fail closed rather than render it.
+  // A broken built-in default is a deployment bug: fail closed as unavailable rather than render it.
   const initialFor = (page: PageKey) => {
-    if (!initial.has(page)) initial.set(page, validatePageContent(page, deps.initial(page)));
+    if (!initial.has(page)) {
+      try { initial.set(page, validatePageContent(page, deps.initial(page))); } catch { throw problem('unavailable', 503); }
+    }
     return initial.get(page)!;
   };
-  const stored = (page: PageKey, value: unknown, schemaVersion: number) => {
+  const stored = (page: PageKey, value: unknown, schemaVersion: number | null) => {
     if (schemaVersion !== CONTENT_SCHEMA_VERSION) throw problem('unavailable', 503);
     try { return validatePageContent(page, value); } catch { throw problem('unavailable', 503); }
   };
+  // A publication never changes once made, so its validated form is reused while it stays live.
+  const live = new Map<PageKey, { revision: number; content: PageContent }>();
+  function published(page: PageKey, row: StoredPage): PageContent {
+    if (!row.published || row.publishedRevision === null) return initialFor(page);
+    const cached = live.get(page);
+    if (cached?.revision === row.publishedRevision) return cached.content;
+    const content = stored(page, row.published, row.publishedSchemaVersion);
+    live.set(page, { revision: row.publishedRevision, content });
+    return content;
+  }
   function editView(page: PageKey, row: StoredPage | null) {
     return {
       page,
       revision: row?.revision ?? 0,
       draft: row ? stored(page, row.draft, row.schemaVersion) : initialFor(page),
-      live: row?.published ? stored(page, row.published, row.schemaVersion) : initialFor(page),
+      live: row ? published(page, row) : initialFor(page),
       liveSource: row?.published ? 'published' : 'initial',
       editedAt: row?.editedAt ?? null,
       editedBy: row ? row.editedByName || 'An EBS Team member' : null,
@@ -91,7 +103,9 @@ export function createContentHandlers(deps: ContentDependencies) {
     };
   }
   async function actor(id: string): Promise<Actor> {
-    try { return { id, name: (await deps.editorName(id)).slice(0, 200) }; } catch { return { id, name: '' }; }
+    // Profile names come from Clerk; keep only text PostgreSQL can store.
+    const clean = (name: string) => name.slice(0, 200).replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g, '\uFFFD').replace(/[\u0000-\u001f\u007f]/g, '').trim();
+    try { return { id, name: clean(await deps.editorName(id)) }; } catch { return { id, name: '' }; }
   }
 
   async function handle(request: Request): Promise<Response> {
@@ -121,7 +135,7 @@ export function createContentHandlers(deps: ContentDependencies) {
       // Readers only ever receive published (or initial) content, never drafts.
       if (!deps.enabled) return respond(200, { content: initialFor(page) });
       const row = await deps.store().read(page);
-      return respond(200, { content: row?.published ? stored(page, row.published, row.schemaVersion) : initialFor(page) });
+      return respond(200, { content: row ? published(page, row) : initialFor(page) });
     }
     if (!deps.enabled) throw problem('not-configured', 503);
     const store = deps.store();
@@ -140,7 +154,8 @@ export function createContentHandlers(deps: ContentDependencies) {
     }
 
     const body = await readJson(request);
-    if (Object.keys(body).sort().join(',') !== writeActions[action as WriteAction]) throw problem('invalid-request', 400);
+    const fields = writeActions[action as WriteAction].split(','), keys = Object.keys(body).sort();
+    if (keys.length !== fields.length || keys.some((key, index) => key !== fields[index])) throw problem('invalid-request', 400);
     const expected = body.revision;
     if (!revisionValue(expected, action === 'save' ? 0 : 1)) throw problem('invalid-request', 400);
     const conflict = async () => problem('conflict', 409, { revision: (await store.read(page))?.revision ?? 0 });
@@ -154,7 +169,7 @@ export function createContentHandlers(deps: ContentDependencies) {
       const current = await store.read(page);
       if (!current || current.revision !== expected) throw await conflict();
       const draft = stored(page, current.draft, current.schemaVersion);
-      if (sameContent(draft, current.published ? stored(page, current.published, current.schemaVersion) : initialFor(page))) throw problem('no-changes', 409);
+      if (sameContent(draft, published(page, current))) throw problem('no-changes', 409);
       const row = await store.publish(page, expected, await actor(userId!));
       if (!row) throw await conflict();
       return respond(200, editView(page, row));
