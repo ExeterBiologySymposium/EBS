@@ -206,7 +206,7 @@
     },
     "schools.html": {
       "title": "School Registration \u2014 Free Biology Research with EBS",
-      "description": "Sign your school up for EBS, or provide a contact person if EBS has already contacted you. Find guidance on individual student signup and Zoom orientation.",
+      "description": "Sign your school up for EBS, or provide a contact person if EBS has already contacted you. Find guidance on individual student signup.",
       "terms": [
         "free biology research opportunities for schools",
         "research opportunities for high school biology clubs",
@@ -219,7 +219,7 @@
         "Exeter Biology Symposium school registration",
         "Exeter Biology Symposium school application"
       ],
-      "lastmod": "2026-10-31"
+      "lastmod": "2026-11-14"
     },
     "researchers.html": {
       "title": "Student Research Projects and Deadlines \u2014 EBS 2027",
@@ -249,7 +249,7 @@
         "EBS research checkpoints",
         "Exeter Biology Symposium poster submission deadlines"
       ],
-      "lastmod": "2026-10-31"
+      "lastmod": "2026-11-14"
     },
     "projects.html": {
       "title": "No-Code Biology Research Projects for Students \u2014 EBS 2027",
@@ -298,14 +298,14 @@
     },
     "faq.html": {
       "title": "EBS FAQ \u2014 Participation and Getting Started",
-      "description": "Find answers about EBS project eligibility, case-by-case wet-lab acceptance, costs, registration, Zoom orientation, and attendance.",
+      "description": "Find answers about EBS project eligibility, case-by-case wet-lab acceptance, costs, registration, and attendance.",
       "terms": [
         "free online biology research opportunities for students",
         "Exeter Biology Symposium online participation",
         "Exeter Biology Symposium adult chaperone requirements",
         "Exeter Biology Symposium account approval"
       ],
-      "lastmod": "2026-10-31"
+      "lastmod": "2026-11-14"
     },
     "account.html": {
       "title": "Your Account and Approval Status \u2014 EBS",

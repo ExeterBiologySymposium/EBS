@@ -1,6 +1,7 @@
 # FAQ clarity and placement
 
 Status: approved by the user in chat on 2026-10-31; implemented and verified locally.
+Superseded in part on 2026-11-14: the orientation call was removed from the FAQ, Schools and Student research (see [student registration automation](student-registration-automation.md)). Do not restore it.
 Date: 2026-10-31
 
 ## Outcome
