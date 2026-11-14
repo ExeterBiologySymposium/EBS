@@ -7,6 +7,8 @@ const messages: Record<string, string> = {
   'lookup-changed': 'The account changed or already exists. Look up the email again before continuing.',
   'ambiguous-account': 'More than one verified account matches this email. Ask the account owner to review it.',
   'not-pending': 'This account is no longer in Pending. Refresh the list.',
+  'not-accepted': 'This account is no longer in Accepted. Refresh the list.',
+  'invalid-folder-link': 'Enter a valid HTTP or HTTPS URL without a username or password.',
   'invalid-request': 'Check the information entered and try again.',
 };
 export class AdminRequestError extends Error {

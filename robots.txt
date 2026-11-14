@@ -5,4 +5,4 @@ Disallow: /protected-assets/
 Disallow: /guides/
 Disallow: /enzyme_activity.csv
 
-Sitemap: https://exeterbiosymposium.vercel.app/sitemap.xml
+Sitemap: https://www.exeterbiosymposium.page/sitemap.xml

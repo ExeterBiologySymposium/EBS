@@ -11,6 +11,46 @@ const token = '2Z5fl97yNeITcjZHCFydWygaEzeAIWNtDmKmB74A_E0';
 const privateRoutes = ['admin.html', 'accept-invitation.html', 'account.html', 'events.html', 'resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'opensource.html', 'datasets.html'];
 const publicRoutes = ['index.html', 'about.html', 'team.html', 'schedule.html', 'schools.html', 'researchers.html', 'projects.html', 'judges.html', 'student-signup.html', 'register.html', 'faq.html', 'contact.html', 'terms.html', 'privacy.html'];
 
+test('production discovery files and page metadata agree on the public domain', async () => {
+  const origin = 'https://www.exeterbiosymposium.page';
+  const read = file => readFile(resolve(root, file), 'utf8');
+  assert.equal(projectConfig.siteUrl, origin);
+  assert.match(await read('robots.txt'), /^Sitemap: https:\/\/www\.exeterbiosymposium\.page\/sitemap\.xml$/m);
+
+  const sitemap = await read('sitemap.xml');
+  const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
+  const canonicalUrl = route => new URL(route === 'index.html' ? '/' : route, origin).href;
+  assert.deepEqual(urls.toSorted(), publicRoutes.map(canonicalUrl).sort());
+  for (const route of Object.keys(projectConfig.pages)) {
+    const html = await read(route);
+    const url = canonicalUrl(route);
+    assert.ok(html.includes(`<link rel="canonical" href="${url}">`), route);
+    assert.ok(html.includes(`<meta property="og:url" content="${url}">`), route);
+    const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    assert.equal(schema.url, url, route);
+  }
+});
+
+test('Vercel permanently redirects the alternate hosts and retired paths', async () => {
+  const { redirects } = JSON.parse(await readFile(resolve(root, 'vercel.json'), 'utf8'));
+  const hostRedirect = redirects.find(rule => rule.source === '/:path*');
+  const host = new RegExp(`^(?:${hostRedirect.has.find(condition => condition.type === 'host').value})$`);
+  for (const alias of ['exeterbiosymposium.page', 'exeterbiosymposium.vercel.app']) {
+    assert.match(alias, host);
+  }
+  for (const untouched of ['www.exeterbiosymposium.page', 'clerk.exeterbiosymposium.page', 'ebs-preview.vercel.app']) {
+    assert.doesNotMatch(untouched, host);
+  }
+  assert.equal(hostRedirect.destination, 'https://www.exeterbiosymposium.page/:path*');
+  assert.equal(hostRedirect.permanent, true);
+
+  for (const [source, destination] of [['/index.html', '/'], ['/volunteer-signup.html', '/judges.html']]) {
+    const rule = redirects.find(rule => rule.source === source);
+    assert.equal(rule.destination, destination, source);
+    assert.equal(rule.permanent, true, source);
+  }
+});
+
 async function fixture(t, change = () => {}) {
   const temporaryRoot = await mkdtemp(resolve(tmpdir(), 'ebs-seo-'));
   t.after(() => rm(temporaryRoot, { recursive: true, force: true }));

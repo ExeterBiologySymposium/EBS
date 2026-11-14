@@ -1,6 +1,7 @@
 import { privateHeaders } from '../access.js';
 import { OrganizationProblem, type Destination } from './types.js';
 import type { OrganizationService } from './service.js';
+import { validFolderLink } from '../../src/folder-link.js';
 
 export function adminResponse(status: number, value: object) {
   return Response.json(value, { status, headers: { ...privateHeaders, 'X-Content-Type-Options': 'nosniff', ...(status === 202 || status === 429 ? { 'Retry-After': '5' } : {}) } });
@@ -28,7 +29,15 @@ const emailValue = (email: unknown): email is string => typeof email === 'string
 const userValue = (id: unknown): id is string => typeof id === 'string' && /^user_[a-zA-Z0-9]{1,128}$/.test(id);
 const destinationValue = (value: unknown): value is Destination => value === 'pending' || value === 'accepted';
 
-export function createAdminHandlers({ authenticate, service, teamId }: { authenticate(request: Request): Promise<string | null>; service: OrganizationService; teamId: string }) {
+export function createAdminHandlers({ authenticate, service, teamId, folderLinks }: {
+  authenticate(request: Request): Promise<string | null>;
+  service: OrganizationService;
+  teamId: string;
+  folderLinks: { get(userId: string): Promise<string | null>; set(userId: string, folderUrl: string | null): Promise<void> };
+}) {
+  async function requireAccepted(userId: string) {
+    if (await service.membership(userId) !== 'accepted') throw new OrganizationProblem('not-accepted', 409);
+  }
   return { async fetch(request: Request): Promise<Response> {
     if (!['GET', 'POST'].includes(request.method)) return adminResponse(405, { state: 'method-not-allowed' });
     if (request.method === 'POST') {
@@ -41,6 +50,12 @@ export function createAdminHandlers({ authenticate, service, teamId }: { authent
       if (!await service.isTeam(actor)) return adminResponse(403, { state: 'forbidden' });
       if (request.method === 'GET') {
         const query = new URL(request.url).searchParams;
+        if (query.get('action') === 'folder-link') {
+          const userId = query.get('userId');
+          if ([...query.keys()].sort().join(',') !== 'action,userId' || !userValue(userId)) throw new OrganizationProblem('invalid-request', 400);
+          await requireAccepted(userId);
+          return adminResponse(200, { folderUrl: await folderLinks.get(userId) });
+        }
         if ([...query.keys()].some(key => !['action', 'group', 'cursor'].includes(key))) throw new OrganizationProblem('invalid-request', 400);
         switch (query.get('action')) {
           case 'status': return adminResponse(200, { state: 'allowed', teamOrganizationId: teamId });
@@ -54,6 +69,13 @@ export function createAdminHandlers({ authenticate, service, teamId }: { authent
         throw new OrganizationProblem('invalid-request', 400);
       }
       const body = await readBody(request);
+      if (body.action === 'folder-link' && exact(body, 'action,folderUrl,userId') && userValue(body.userId)) {
+        const folderUrl = validFolderLink(body.folderUrl);
+        if (body.folderUrl !== null && !folderUrl) throw new OrganizationProblem('invalid-folder-link', 400);
+        await requireAccepted(body.userId);
+        await folderLinks.set(body.userId, folderUrl);
+        return adminResponse(200, { folderUrl });
+      }
       if (body.action === 'lookup' && exact(body, 'action,email') && emailValue(body.email)) return adminResponse(200, await service.lookup(body.email.trim()));
       if (body.action === 'invite' && exact(body, 'action,destination,email') && emailValue(body.email) && destinationValue(body.destination)) return adminResponse(200, await service.invite(body.email.trim(), body.destination, actor));
       if (body.action === 'add' && exact(body, 'action,destination,email,userId') && userValue(body.userId) && emailValue(body.email) && destinationValue(body.destination)) return adminResponse(200, await service.add(body.userId, body.email.trim(), body.destination, actor));

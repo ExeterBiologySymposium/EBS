@@ -22,6 +22,13 @@ try {
   assert(render(allowed, 'admin.html').includes('Look up account'));
   assert(render(allowed, 'admin.html').includes('Destination'));
   assert(render(allowed, 'admin.html').includes('value="pending" selected'));
+  const { ResearchFolderView, folderResponse } = await vite.ssrLoadModule('/src/research-folder.tsx');
+  const custom = { state: 'custom', folderUrl: 'https://files.example.test/shared' };
+  assert.deepEqual(folderResponse(custom), custom);
+  assert.deepEqual(folderResponse({ ...custom, folderUrl: 'javascript:alert(1)' }), { state: 'unavailable' });
+  const folder = renderToString(h(ResearchFolderView, { value: custom, busy: false, onAction() {}, onAccount() {} }));
+  assert.match(folder, /href="https:\/\/files\.example\.test\/shared"[^>]*>Open my folder/);
+  assert.doesNotMatch(folder, /Open research document|Create my research folder|Link Google account/);
   assert(render({ status: 'signed-out' }, 'admin.html').includes('Sign in'));
   assert(render({ status: 'loading' }, 'accept-invitation.html').includes('Accept your EBS invitation'));
   const { pageForUrl } = await vite.ssrLoadModule('/src/navigation.ts');

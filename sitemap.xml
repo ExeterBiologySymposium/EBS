@@ -1,59 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/</loc>
+    <loc>https://www.exeterbiosymposium.page/</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/about.html</loc>
+    <loc>https://www.exeterbiosymposium.page/about.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/team.html</loc>
+    <loc>https://www.exeterbiosymposium.page/team.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/schedule.html</loc>
+    <loc>https://www.exeterbiosymposium.page/schedule.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/schools.html</loc>
+    <loc>https://www.exeterbiosymposium.page/schools.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/researchers.html</loc>
+    <loc>https://www.exeterbiosymposium.page/researchers.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
+<<<<<<< Updated upstream
     <loc>https://exeterbiosymposium.vercel.app/projects.html</loc>
     <lastmod>2026-11-10</lastmod>
   </url>
   <url>
     <loc>https://exeterbiosymposium.vercel.app/judges.html</loc>
+=======
+    <loc>https://www.exeterbiosymposium.page/judges.html</loc>
+>>>>>>> Stashed changes
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/student-signup.html</loc>
+    <loc>https://www.exeterbiosymposium.page/student-signup.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/register.html</loc>
+    <loc>https://www.exeterbiosymposium.page/register.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/faq.html</loc>
+    <loc>https://www.exeterbiosymposium.page/faq.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/contact.html</loc>
+    <loc>https://www.exeterbiosymposium.page/contact.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/terms.html</loc>
+    <loc>https://www.exeterbiosymposium.page/terms.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
   <url>
-    <loc>https://exeterbiosymposium.vercel.app/privacy.html</loc>
+    <loc>https://www.exeterbiosymposium.page/privacy.html</loc>
     <lastmod>2026-10-31</lastmod>
   </url>
 </urlset>

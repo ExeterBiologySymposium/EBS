@@ -2,6 +2,8 @@
 
 Accepted participants use **Account → Create my research folder** to create one personal folder and a copy of the research document template. The personal EBS Google account owns these resources in My Drive. Staff inherit access from the parent folder; the app adds only the participant's specific Google email to their child folder. It never shares the parent with participants or enables public links, and it does not send invitation emails.
 
+EBS Team members can assign a different folder in **Admin → Accepted → Research folder link** on the participant’s row. Paste an HTTP or HTTPS URL, save it, and grant the participant access on the linked service. **Account → Open my folder** uses this link without Google setup. To return to the generated folder and starter document, save the field empty. Custom links are stored in private Clerk user metadata and work independently of the Drive configuration.
+
 ## Current status
 
 The local implementation now uses owner-authorized OAuth instead of a service account. No live owner consent, Google file/permission changes, hosted Neon setup, or deployment was performed during implementation. Live setup and verification are still required. Neon records/schema and the Account UI are retained.
@@ -119,4 +121,4 @@ Before deployment approval, test an authorized preview with disposable Google re
 
 ## API
 
-`GET /api/participant-folder` reads the signed-in participant's saved state. `POST` creates or resumes it and requires an exact same-origin Origin header. Both independently verify current Accepted membership and resolve the Google identity server-side. Request bodies cannot select a user, email, template, or destination. All responses are private/no-store; errors do not return upstream diagnostics or credentials.
+`GET /api/participant-folder` reads the signed-in participant's saved state. `POST` returns their assigned link or creates or resumes a generated folder and requires an exact same-origin Origin header. Both independently verify current Accepted membership and use the session user ID. For generated folders, both resolve the Google identity server-side. All responses are private/no-store and errors contain a generic state.

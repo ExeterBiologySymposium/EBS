@@ -4,13 +4,15 @@ import { fixture } from './org-fixture.mjs';
 
 // Explicit localhost-only QA process. This uses fake users and cannot send email.
 const root = resolve(import.meta.dirname, '..');
-let fix, handlers, cleanupFails = false, ceiling = false;
+let fix, handlers, participantFolder, cleanupFails = false, ceiling = false, folderSaveFails = false;
+const links = new Map();
 const vite = await createServer({ root, configLoader: 'runner', cacheDir: resolve(root, '.vite-qa'), optimizeDeps: { include: ['react','react-dom/client','react/jsx-runtime','motion/react','lucide-react','@vercel/analytics/react'] }, resolve: { dedupe: ['react','react-dom'], alias: { '@clerk/react': resolve(root, 'scripts/org-clerk-fixture.tsx') } }, server: { host: '127.0.0.1', port: 4180, strictPort: true, hmr: false, ws: false }, plugins: [{ name: 'org-qa-only', configureServer(server) {
   server.middlewares.use(async (request, response, next) => {
     if (request.url.startsWith('/__org-qa')) {
       let source = ''; for await (const chunk of request) source += chunk;
       const value = source ? JSON.parse(source) : {};
       if ('cleanupFails' in value) cleanupFails = value.cleanupFails;
+      if ('folderSaveFails' in value) folderSaveFails = value.folderSaveFails;
       if ('revoke' in value) fix.organizations.get('org_team').members = [];
       if ('ceiling' in value) {
         ceiling = value.ceiling;
@@ -26,9 +28,10 @@ const vite = await createServer({ root, configLoader: 'runner', cacheDir: resolv
       }
       response.setHeader('Content-Type', 'application/json'); return response.end(JSON.stringify({ cleanupFails, ceiling, organizations: fix.organizations.size }));
     }
-    if (request.url.startsWith('/api/team-admin')) {
+    if (request.url.startsWith('/api/team-admin') || request.url.startsWith('/api/participant-folder')) {
       let body = ''; for await (const chunk of request) body += chunk;
-      const result = await handlers.fetch(new Request('http://127.0.0.1:4180' + request.url, { method: request.method, headers: request.headers, ...(body ? { body } : {}) }));
+      const handler = request.url.startsWith('/api/team-admin') ? handlers : participantFolder;
+      const result = await handler.fetch(new Request('http://127.0.0.1:4180' + request.url, { method: request.method, headers: request.headers, ...(body ? { body } : {}) }));
       response.statusCode = result.status; result.headers.forEach((value, key) => response.setHeader(key, value)); return response.end(await result.text());
     }
     if (['/admin.html', '/account.html', '/accept-invitation.html'].includes(request.url.split(/[?#]/)[0])) {
@@ -41,6 +44,7 @@ const vite = await createServer({ root, configLoader: 'runner', cacheDir: resolv
 } }] });
 const { createOrganizationService } = await vite.ssrLoadModule('/server/orgs/service.ts');
 const { createAdminHandlers } = await vite.ssrLoadModule('/server/orgs/handlers.ts');
+const { createFolderHandlers } = await vite.ssrLoadModule('/server/participant-folders.ts');
 fix = fixture(createOrganizationService);
 const records = Array.from({ length: 26 }, (_, i) => ({ userId: 'user_student' + i, name: 'Student ' + i, identifier: `student${i}@example.test`, joinedAt: Date.UTC(2026, 9, 20) - i * 1000 }));
 for (const record of records) fix.users.set(record.userId, { id: record.userId, name: record.name, verifiedEmails: [record.identifier] });
@@ -49,6 +53,22 @@ fix.organizations.set('org_pending2', { id: 'org_pending2', name: 'EBS Pending 0
 fix.pools.push({ kind: 'pending', ordinal: 2, operationId: 'seed-second', organizationId: 'org_pending2', state: 'ready' });
 const remove = fix.gateway.removeMember;
 fix.gateway.removeMember = async (...args) => { if (cleanupFails) throw Error('fake cleanup failure'); return remove(...args); };
-handlers = createAdminHandlers({ authenticate: async () => 'user_staff', service: fix.service, teamId: 'org_team' });
+await fix.service.add('user_student', 'student@example.test', 'accepted', 'user_staff');
+handlers = createAdminHandlers({
+  authenticate: async () => 'user_staff', service: fix.service, teamId: 'org_team',
+  folderLinks: {
+    get: async userId => links.get(userId) ?? null,
+    set: async (userId, url) => {
+      if (folderSaveFails) throw Error('fake folder save failure');
+      if (url === null) links.delete(userId);
+      else links.set(userId, url);
+    },
+  },
+});
+participantFolder = createFolderHandlers({
+  authenticate: async () => 'user_student', membership: fix.service.membership,
+  participant: async userId => ({ customUrl: links.get(userId) ?? null, googleEmail: 'student@example.test' }),
+  googleFolder: () => ({ store: { get: async () => ({ email: 'student@example.test', folderId: 'fixture-folder', documentId: 'fixture-document', ready: true }) }, drive: {} }),
+});
 await vite.listen();
 console.log('Fake-provider admin fixture: http://127.0.0.1:4180/admin.html');

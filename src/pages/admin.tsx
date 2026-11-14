@@ -1,6 +1,7 @@
-import { lazy, Suspense, useCallback, useContext, useEffect, useRef, useState, type FormEvent } from 'react';
+import { lazy, Suspense, useCallback, useContext, useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { AuthContext } from '../auth';
 import { adminMessage, adminRequest, lostTeamAccess } from '../admin-api';
+import { folderLinkMaxLength, validFolderLink } from '../folder-link';
 import type { Destination, Page, Result } from '../../server/orgs/types';
 
 const ContentEditor = lazy(() => import('../content-editor'));
@@ -84,6 +85,72 @@ function AddParticipant({ revision, onChanged, onDenied }: { revision: number; o
   </div></section>;
 }
 
+function FolderLinkForm({ userId, onDenied }: { userId: string; onDenied(): void }) {
+  const fieldId = useId();
+  const [url, setUrl] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState('');
+  const [retry, setRetry] = useState(0);
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState('');
+  const mounted = useMounted();
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoadError('');
+    adminRequest<{ folderUrl: string | null }>(`action=folder-link&userId=${encodeURIComponent(userId)}`, { signal: controller.signal })
+      .then(value => { if (!controller.signal.aborted) setUrl(value.folderUrl ?? ''); })
+      .catch(error => {
+        if (controller.signal.aborted) return;
+        if (lostTeamAccess(error)) onDenied();
+        else setLoadError(adminMessage(error));
+      });
+    return () => controller.abort();
+  }, [userId, retry, onDenied]);
+
+  async function save(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (saving || url === null) return;
+    const folderUrl = validFolderLink(url);
+    if (url.trim() && !folderUrl) {
+      setMessage('Enter a valid HTTP or HTTPS URL without a username or password.');
+      return;
+    }
+    setSaving(true);
+    setMessage('');
+    try {
+      const value = await adminRequest<{ folderUrl: string | null }>('', { body: { action: 'folder-link', userId, folderUrl } });
+      if (!mounted.current) return;
+      setUrl(value.folderUrl ?? '');
+      setMessage(value.folderUrl ? 'Folder link saved.' : 'Custom link cleared. Account will use the Google Drive setup.');
+    } catch (error) {
+      if (!mounted.current) return;
+      if (lostTeamAccess(error)) onDenied();
+      else setMessage(adminMessage(error));
+    } finally {
+      if (mounted.current) setSaving(false);
+    }
+  }
+
+  if (loadError) return <><p role="alert">{loadError}</p><button className="admin-refresh" type="button" onClick={() => setRetry(value => value + 1)}>Retry loading the link</button></>;
+  if (url === null) return <p role="status">Loading folder link…</p>;
+  return <form className="admin-invite admin-folder-form" onSubmit={save}>
+    <label htmlFor={fieldId}>Custom URL</label>
+    <input id={fieldId} type="url" value={url} onChange={event => { setUrl(event.target.value); setMessage(''); }}
+      readOnly={saving} maxLength={folderLinkMaxLength} autoComplete="off" aria-describedby={`${fieldId}-hint`} />
+    <p id={`${fieldId}-hint`} className="form-hint">Grant the participant access on the linked service. Leave this field blank and save to use the Google Drive setup.</p>
+    <button className="button secondary" type="submit" disabled={saving}>{saving ? 'Saving…' : 'Save folder link'}</button>
+    <p className="admin-folder-status" role="status">{message}</p>
+  </form>;
+}
+
+function ParticipantFolderLink({ member, onDenied }: { member: Participant; onDenied(): void }) {
+  const [opened, setOpened] = useState(false);
+  return <details className="admin-folder-link" onToggle={event => { if (event.currentTarget.open) setOpened(true); }}>
+    <summary>Research folder link<span className="sr-only"> for {member.identifier}</span></summary>
+    {opened && <FolderLinkForm userId={member.userId} onDenied={onDenied} />}
+  </details>;
+}
+
 function ParticipantList({ group, revision, onChanged, onDenied }: { group: Destination; revision: number; onChanged(): void; onDenied(): void }) {
   const [cursor, setCursor] = useState<string | null>(null);
   const [page, setPage] = useState<Page<Participant> | null>(null);
@@ -113,7 +180,9 @@ function ParticipantList({ group, revision, onChanged, onDenied }: { group: Dest
     <p ref={announcement} className="admin-result" role="status" aria-live="polite" tabIndex={-1}>{message}</p>
     {error ? <div role="alert"><p>{error}</p><button className="button secondary" type="button" onClick={() => setReload(value => value + 1)}>Retry participant list</button></div> : !page ? <p role="status">Loading participants…</p> : <>
       {page.data.length ? <ul className="admin-members" aria-label={`${group} participants`}>{page.data.map(member => <li key={member.userId}>
-        <div><h3>{member.name || member.identifier}</h3>{member.name && <p>{member.identifier}</p>}<p className="small">Joined {date(member.joinedAt)} · {member.accepted ? member.pending ? 'Accepted — cleanup needed' : 'Accepted' : 'Pending review'}</p></div>
+        <div className="admin-member-info"><h3>{member.name || member.identifier}</h3>{member.name && <p>{member.identifier}</p>}<p className="small">Joined {date(member.joinedAt)} · {member.accepted ? member.pending ? 'Accepted — cleanup needed' : 'Accepted' : 'Pending review'}</p>
+          {group === 'accepted' && <ParticipantFolderLink member={member} onDenied={onDenied} />}
+        </div>
         {member.pending && <button className="button secondary" type="button" disabled={!!busy} aria-label={`${member.accepted ? 'Retry cleanup for' : 'Accept participant'} ${member.identifier}`} onClick={() => void accept(member)}>{busy === member.userId ? 'Saving…' : member.accepted ? 'Retry cleanup' : 'Accept participant'}</button>}
       </li>)}</ul> : <p>No {group} participants.</p>}
       <Pagination page={page} busy={!!busy} onChange={setCursor} />

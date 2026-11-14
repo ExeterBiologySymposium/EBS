@@ -185,6 +185,12 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .admin-members > li { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line, #d8d3ca); }
 .admin-members h3, .admin-members p { margin: .3rem 0; overflow-wrap: anywhere; }
 .admin-members .button { flex-shrink: 0; }
+.admin-member-info { min-width: 0; }
+.admin-folder-link { margin-top: .5rem; }
+.admin-members .admin-folder-link > summary { min-height: 44px; }
+.admin-folder-form { margin: .75rem 0; }
+.admin-folder-form .admin-folder-status:empty { margin: 0; }
+.admin-folder-form input { background: var(--surface); }
 .admin-pagination { align-items: center; margin: 1.25rem 0; }
 .admin-invite { display: grid; gap: .75rem; max-width: 34rem; }
 .admin-invite input, .admin-invite select { width: 100%; min-width: 0; padding: .8rem; border: 1px solid var(--line, #d8d3ca); border-radius: 4px; font: inherit; background: #fff; color: inherit; }

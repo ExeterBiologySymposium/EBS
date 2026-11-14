@@ -27,7 +27,7 @@ export interface ParticipantDrive {
   shareFolder(folderId: string, email: string): Promise<void>;
 }
 export type FolderResult = {
-  state: 'empty' | 'processing' | 'ready' | 'needs-review' | 'identity-changed' | 'link-google' | 'unavailable' | 'signed-out' | 'forbidden';
+  state: 'empty' | 'processing' | 'ready' | 'custom' | 'needs-review' | 'identity-changed' | 'link-google' | 'unavailable' | 'signed-out' | 'forbidden';
   folderUrl?: string;
   documentUrl?: string;
 };
@@ -82,9 +82,8 @@ export async function provisionFolder(userId: string, email: string, store: Fold
   }
 }
 export function createFolderHandlers(dependencies: Pick<AccessDependencies, 'authenticate' | 'membership'> & {
-  recipient(userId: string): Promise<string | null>;
-  store: FolderStore;
-  drive: ParticipantDrive;
+  participant(userId: string): Promise<{ customUrl: string | null; googleEmail: string | null }>;
+  googleFolder(): { store: FolderStore; drive: ParticipantDrive };
 }) {
   return { async fetch(request: Request): Promise<Response> {
     const respond = (status: number, value: FolderResult) => Response.json(value, { status, headers: privateHeaders });
@@ -94,11 +93,13 @@ export function createFolderHandlers(dependencies: Pick<AccessDependencies, 'aut
       const userId = await dependencies.authenticate(request);
       if (!userId) return respond(401, { state: 'signed-out' });
       if (await dependencies.membership(userId) !== 'accepted') return respond(403, { state: 'forbidden' });
-      const email = await dependencies.recipient(userId);
+      const { customUrl, googleEmail: email } = await dependencies.participant(userId);
+      if (customUrl) return respond(200, { state: 'custom', folderUrl: customUrl });
+      const { store, drive } = dependencies.googleFolder();
       if (!email) return respond(409, { state: 'link-google' });
       const value = request.method === 'GET'
-        ? result(await dependencies.store.get(userId), email)
-        : await provisionFolder(userId, email, dependencies.store, dependencies.drive);
+        ? result(await store.get(userId), email)
+        : await provisionFolder(userId, email, store, drive);
       return respond(value.state === 'processing' ? 202 : value.state === 'needs-review' || value.state === 'identity-changed' ? 409 : 200, value);
     } catch {
       // Upstream errors can contain tokens, SQL, email addresses, or private file IDs.

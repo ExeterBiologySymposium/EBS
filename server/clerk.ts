@@ -2,6 +2,7 @@ import { authenticateClerk, clerkConfiguration } from './clerk-config.js';
 import { organizationRuntime } from './orgs/runtime.js';
 import type { AccessDependencies, Membership } from './access.js';
 import { googleRecipient } from './participant-folders.js';
+import { validFolderLink } from '../src/folder-link.js';
 
 async function membership(userId: string): Promise<Membership> {
   if (process.env.EBS_ORG_POOLS_ENABLED === 'true') return organizationRuntime().service.membership(userId);
@@ -29,7 +30,25 @@ export const clerkAccess: AccessDependencies = {
   },
 };
 
-export async function participantGoogleEmail(userId: string): Promise<string | null> {
+const folderLinkKey = 'ebsResearchFolderUrl';
+
+async function folderUser(userId: string) {
   const { client } = clerkConfiguration();
-  return googleRecipient(await client.users.getUser(userId));
+  return client.users.getUser(userId);
+}
+
+export const participantFolderLinks = {
+  async get(userId: string) {
+    return validFolderLink((await folderUser(userId)).privateMetadata?.[folderLinkKey]);
+  },
+  async set(userId: string, folderUrl: string | null) {
+    const { client } = clerkConfiguration();
+    await client.users.updateUserMetadata(userId, { privateMetadata: { [folderLinkKey]: folderUrl } });
+  },
+};
+
+export async function participantFolderSettings(userId: string) {
+  const user = await folderUser(userId);
+  const customUrl = validFolderLink(user.privateMetadata?.[folderLinkKey]);
+  return { customUrl, googleEmail: customUrl ? null : googleRecipient(user) };
 }
