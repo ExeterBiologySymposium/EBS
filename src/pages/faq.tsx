@@ -60,7 +60,7 @@ export default function PageContent() { return <div className="page-layout layou
           <p>The EBS team reviews your application and emails you if approved. Check your status on your <a href="account.html">Account page</a>. Accepted accounts can create a research folder and access Events and available member resources; account help explains the next steps.</p>
         </details>
         <details className="disclosure" id="orientation-meetings"><summary>What is the orientation meeting?</summary>
-          <p>A 20-minute Zoom introduction to EBS, getting started with research, and where to find support. You can ask questions, too. An EBS team member arranges the meeting by email; <a href="mailto:exeterbiologysymposium@gmail.com">email EBS</a> to coordinate.</p>
+          <p>A 20-minute Zoom introduction to EBS, getting started with research, and where to find support. You can ask questions, too. An EBS team member arranges the meeting by email; <a href="mailto:exeterbiosymposium@gmail.com">email EBS</a> to coordinate.</p>
         </details>
       </div>
     </section>

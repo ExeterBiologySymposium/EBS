@@ -39,7 +39,7 @@ Until a guide has a link, its card says *"Your cohort lead shares the full click
 
 ## Sign-up
 
-While `cohortSignup.formUrl` is empty, **Email my sign-up** opens an email to `exeterbiologysymposium@gmail.com` with the student's choices filled in, and **Copy my choices** copies the same text. To collect sign-ups in a Google Form instead:
+While `cohortSignup.formUrl` is empty, **Email my sign-up** opens an email to `exeterbiosymposium@gmail.com` with the student's choices filled in, and **Copy my choices** copies the same text. To collect sign-ups in a Google Form instead:
 
 1. Create the form with questions for name, first choice, second choice, computer, and solo or partner.
 2. Paste the form's full `https://docs.google.com/forms/d/e/…/viewform` link into `cohortSignup.formUrl`. Short `forms.gle` links work, but cannot be pre-filled.

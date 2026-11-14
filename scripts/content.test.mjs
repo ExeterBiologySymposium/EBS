@@ -33,7 +33,7 @@ test('initial content validates and preserves the latest copy, layout and access
   assert.equal(research.registrationUrl, 'https://forms.gle/vgtVrsBm1UbBhwtv9');
   const signedOut = render(h(view.PublishedPage, { page: 'researchers', initial: research }));
   assert.equal(signedOut.match(/<h1>/g).length, 1);
-  for (const link of ['href="faq.html"', 'href="schedule.html"', 'href="account.html"', 'href="mailto:exeterbiologysymposium@gmail.com"', 'href="/register.html"']) assert.ok(signedOut.includes(link), link);
+  for (const link of ['href="faq.html"', 'href="schedule.html"', 'href="account.html"', 'href="mailto:exeterbiosymposium@gmail.com"', 'href="/register.html"']) assert.ok(signedOut.includes(link), link);
   assert.ok(signedOut.includes('>Sign in to continue: Register your interest</button>'));
   assert.equal(signedOut.match(/class="timeline__item"/g).length, 7);
   const accepted = render(h(view.PublishedPage, { page: 'researchers', initial: research }), { status: 'signed-in', access: 'accepted' });
@@ -76,7 +76,7 @@ test('validation names the field for unsafe links, missing text and malformed co
   for (const [url, purpose] of [['http://example.com', 'link'], ['//example.com', 'link'], ['/guides/../admin.html', 'link'], ['/guides/%2E%2E/x', 'link'], ['https://user:pass@example.com', 'link'], ['mailto:nobody', 'link'], ['data:text/html,x', 'link'], ['vbscript:x', 'link'], ['/x\\y', 'link'], ['faq.html', 'image'], ['/images/a.png', 'form'], [' https://example.com', 'link'], ['', 'image']]) {
     assert.ok(model.urlProblem(url, purpose), `${purpose} ${url}`);
   }
-  for (const [url, purpose] of [['faq.html#research', 'link'], ['#top', 'link'], ['/images/Poster/Luke Poster.jpeg', 'image'], ['/images/Studying/Screenshot 2026-09-10 at 6.02.51 PM.png', 'image'], ['mailto:exeterbiologysymposium@gmail.com', 'link'], ['https://forms.gle/vgtVrsBm1UbBhwtv9', 'form']]) {
+  for (const [url, purpose] of [['faq.html#research', 'link'], ['#top', 'link'], ['/images/Poster/Luke Poster.jpeg', 'image'], ['/images/Studying/Screenshot 2026-09-10 at 6.02.51 PM.png', 'image'], ['mailto:exeterbiosymposium@gmail.com', 'link'], ['https://forms.gle/vgtVrsBm1UbBhwtv9', 'form']]) {
     assert.equal(model.urlProblem(url, purpose), null, `${purpose} ${url}`);
   }
   assert.equal(model.suggestUrl('team@example.org', 'link'), 'mailto:team@example.org');

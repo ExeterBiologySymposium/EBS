@@ -266,7 +266,7 @@ export default function DatasetLibraryPage() {
       <p>Not sure which dataset fits your question, or found one you think belongs here? Email the EBS team or bring it to office hours. We would rather help you scope a project than see you stuck.</p>
       <div className="actions">
         <a className="button" href="contact.html"><span>Contact the EBS team</span><ArrowDownRight size={18} aria-hidden="true" /></a>
-        <a className="button secondary" href="mailto:exeterbiologysymposium@gmail.com?subject=Dataset%20library%20suggestion"><span>Suggest a dataset</span><ArrowDownRight size={18} aria-hidden="true" /></a>
+        <a className="button secondary" href="mailto:exeterbiosymposium@gmail.com?subject=Dataset%20library%20suggestion"><span>Suggest a dataset</span><ArrowDownRight size={18} aria-hidden="true" /></a>
       </div>
     </div></div></section>
   </div>;

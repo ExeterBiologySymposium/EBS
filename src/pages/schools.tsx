@@ -38,7 +38,7 @@ export default function PageContent() { return <div className="page-layout layou
 <section className="school-questions reading" id="school-questions" aria-labelledby="school-questions-title">
 <h2 id="school-questions-title">Questions from schools</h2>
 <details className="disclosure" id="s-faq-registration"><summary>Does our school need to fill out the school form?</summary>
-<p>Use the form if your school would like to sign up. If EBS has already contacted your school, skip it and email a contact person's name and email to <a href="mailto:exeterbiologysymposium@gmail.com">EBS</a>. Every student researcher must still <a href="student-signup.html">register individually</a>.</p>
+<p>Use the form if your school would like to sign up. If EBS has already contacted your school, skip it and email a contact person's name and email to <a href="mailto:exeterbiosymposium@gmail.com">EBS</a>. Every student researcher must still <a href="student-signup.html">register individually</a>.</p>
 </details>
 <details className="disclosure" id="s-faq-2"><summary>What does our school contact person need to do?</summary>
 <p>Share EBS information with interested students and coordinate communication with the organizing team. A faculty advisor or another school representative can be the contact. Students do not need a teacher research supervisor; EBS provides research support.</p>
@@ -47,10 +47,10 @@ export default function PageContent() { return <div className="page-layout layou
 <p>Most spend 1–2 hours per week, at their own pace. They can work individually or in teams of up to three, with each member applying separately.</p>
 </details>
 <details className="disclosure" id="s-faq-orientation"><summary>How do we arrange orientation?</summary>
-<p>An EBS team member arranges a 20-minute Zoom meeting by email to introduce the program and answer questions. Your school contact person can <a href="mailto:exeterbiologysymposium@gmail.com">email EBS</a> to coordinate.</p>
+<p>An EBS team member arranges a 20-minute Zoom meeting by email to introduce the program and answer questions. Your school contact person can <a href="mailto:exeterbiosymposium@gmail.com">email EBS</a> to coordinate.</p>
 </details>
 <details className="disclosure" id="s-faq-advisor"><summary>How do we contact the EBS faculty advisor?</summary>
-<p>Email <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a> and say your message is for the faculty advisor. The EBS team coordinates advisor contact through this address.</p>
+<p>Email <a href="mailto:exeterbiosymposium@gmail.com">exeterbiosymposium@gmail.com</a> and say your message is for the faculty advisor. The EBS team coordinates advisor contact through this address.</p>
 </details>
 <p>For <a id="s-faq-3" href="faq.html#g5">costs</a>, <a id="s-faq-4" href="faq.html#s4">teams</a>, <a id="s-faq-5" href="faq.html#s5">submitting elsewhere</a>, and attendance requirements, see the <a href="faq.html">main FAQ</a>.</p>
 </section>

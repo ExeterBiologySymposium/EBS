@@ -157,7 +157,7 @@ const sections: LegalSection[] = [
     id: "contact",
     title: "Contact",
     content: <>
-      <p>For questions, corrections, or privacy requests, contact the Exeter Biology Symposium organizing team at <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a> with “Privacy request” in the subject line, or visit our <a href="contact.html">Contact page</a>.</p>
+      <p>For questions, corrections, or privacy requests, contact the Exeter Biology Symposium organizing team at <a href="mailto:exeterbiosymposium@gmail.com">exeterbiosymposium@gmail.com</a> with “Privacy request” in the subject line, or visit our <a href="contact.html">Contact page</a>.</p>
       <p>For questions about the Academy's wider practices, consult the contact details in <a href="https://exeter.edu/privacy-notice/">Phillips Exeter Academy's Privacy Notice</a>.</p>
     </>,
   }
