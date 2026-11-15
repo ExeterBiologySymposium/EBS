@@ -23,7 +23,7 @@ const EMAIL = {
   greeting: 'Dear [Name],',
   paragraphs: [
     'We are pleased to inform you that you have successfully passed the first round of the EBS application — Congratulations! We have chosen you because of your passion and willingness to dedicate time and effort to our Symposium.',
-    'The next step, if you have not already done so, is to fill out a researcher information form via this [link]. You will be receiving an invitation to a Google Drive folder that will be where you can store all your research as well as your research mentor assignment after filling out this form.',
+    'You will be receiving an invitation to a Google Drive folder where you can store all your research, as well as your research mentor assignment.',
     'The EBS team is beyond excited to have you start your research journey.',
   ],
   closing: 'Best regards,',
@@ -85,7 +85,6 @@ const PROBLEM = {
   LAYOUT: 'Tracker layout changed — owner runs setup()',
   CYCLE: 'REGISTRATION_CYCLE changed — owner runs enableSending()',
   SCOPES: 'permissions are missing — owner runs setup() and grants every permission',
-  FORM_URL: 'RESEARCHER_FORM_URL is not a Google Form link',
   TEST_ONLY: 'TEST_ONLY_RECIPIENT must be exeterbiosymposium@gmail.com or a +tag of it',
   RECORDS: 'send records could not be saved; sending stopped for this check',
   RESEARCHER: 'Researcher tracker unavailable — welcomes wait and list updates retry',
@@ -161,7 +160,6 @@ function enableSending() {
     const pass = run_({ mode: 'enable', started: started });
     if (!pass.ok) throw new Error('Sending stays off: ' + pass.problem + '.');
     const config = readConfig_(props);
-    if (!validResearcherFormUrl_(config.researcherFormUrl)) throw new Error('Sending stays off: ' + PROBLEM.FORM_URL + '.');
     if (!config.testOnlyValid) throw new Error('Sending stays off: ' + PROBLEM.TEST_ONLY + '.');
     if (ScriptApp.getAuthorizationInfo(ScriptApp.AuthMode.FULL, SENDING_SCOPES).getAuthorizationStatus() !== ScriptApp.AuthorizationStatus.NOT_REQUIRED) {
       throw new Error('Sending stays off: ' + PROBLEM.SCOPES + '.');
@@ -199,9 +197,7 @@ function pauseSending() {
 /** Owner: sends the welcome email with a [Test] subject to the EBS inbox only. Writes no records. */
 function sendTestEmail() {
   if (String(Session.getEffectiveUser().getEmail() || '').toLowerCase() !== SENDER_EMAIL) throw new Error('Run sendTestEmail() as ' + SENDER_EMAIL + '.');
-  const url = validResearcherFormUrl_(PropertiesService.getScriptProperties().getProperty('RESEARCHER_FORM_URL'));
-  if (!url) throw new Error('Set RESEARCHER_FORM_URL to the researcher information form link first.');
-  const message = buildEmail_('Test Researcher', url);
+  const message = buildEmail_('Test Researcher');
   MailApp.sendEmail({ to: TEST_RECIPIENT, replyTo: SENDER_EMAIL, name: EMAIL.senderName, subject: '[Test] ' + EMAIL.subject, body: message.text, htmlBody: message.html });
   console.log('Test email sent to the EBS inbox.');
 }
@@ -428,7 +424,6 @@ function readConfig_(props) {
     token: get('EBS_STATUS_TOKEN'),
     formId: get('FORM_ID'),
     trackerId: get('TRACKER_SPREADSHEET_ID'),
-    researcherFormUrl: get('RESEARCHER_FORM_URL'),
     researcherTrackerId: get('RESEARCHER_TRACKER_ID'),
     researcherSheet: get('RESEARCHER_TRACKER_SHEET') || 'Sheet1',
     sheetName: get('TRACKER_SHEET_NAME') || 'Registration tracker',
@@ -474,7 +469,6 @@ function sendingProblem_(ctx) {
   const config = ctx.config;
   if (config.sendingCycle !== config.cycle) return PROBLEM.CYCLE;
   if (ScriptApp.getAuthorizationInfo(ScriptApp.AuthMode.FULL, SENDING_SCOPES).getAuthorizationStatus() !== ScriptApp.AuthorizationStatus.NOT_REQUIRED) return PROBLEM.SCOPES;
-  if (!validResearcherFormUrl_(config.researcherFormUrl)) return PROBLEM.FORM_URL;
   if (!config.testOnlyValid) return PROBLEM.TEST_ONLY;
   return null;
 }
@@ -1048,7 +1042,7 @@ function send_(ctx, row, decision) {
   if (timeLeft_(ctx) < SEND_RESERVE_MS) return { clear: false, status: STATUS.QUEUED };
   const base = { submissionId: row.submissionId, recipientSubmissionId: decision.recipientSubmissionId, userId: decision.userId, emailHashes: decision.emailHashes, at: Date.now(), appended: false };
   saveRecord_(ctx, keys, Object.assign({ state: 'attempting' }, base));
-  const message = buildEmail_(decision.name, ctx.config.researcherFormUrl);
+  const message = buildEmail_(decision.name);
   try {
     MailApp.sendEmail({ to: decision.recipient, bcc: SENDER_EMAIL, replyTo: SENDER_EMAIL, name: EMAIL.senderName, subject: EMAIL.subject, body: message.text, htmlBody: message.html });
   } catch (error) {
@@ -1268,15 +1262,13 @@ function problem_(ctx, text) {
 
 // ---------------------------------------------------------------- email
 
-function buildEmail_(name, url) {
+function buildEmail_(name) {
   const greeting = EMAIL.greeting.split('[Name]').join(name);
-  const parts = EMAIL.paragraphs[1].split('[link]');
-  const text = [greeting, '', EMAIL.paragraphs[0], '', parts[0] + 'link (' + url + ')' + parts[1], '', EMAIL.paragraphs[2], '', EMAIL.closing].concat(EMAIL.signature).join('\n');
-  const html = '<p>' + html_(greeting) + '</p>'
-    + '<p>' + html_(EMAIL.paragraphs[0]) + '</p>'
-    + '<p>' + html_(parts[0]) + '<a href="' + html_(url) + '">link</a>' + html_(parts[1]) + '</p>'
-    + '<p>' + html_(EMAIL.paragraphs[2]) + '</p>'
-    + '<p>' + [EMAIL.closing].concat(EMAIL.signature).map(html_).join('<br>') + '</p>';
+  const text = [greeting].concat(EMAIL.paragraphs).join('\n\n') + '\n\n' + [EMAIL.closing].concat(EMAIL.signature).join('\n');
+  const html = ['<p>' + html_(greeting) + '</p>']
+    .concat(EMAIL.paragraphs.map(function (paragraph) { return '<p>' + html_(paragraph) + '</p>'; }))
+    .concat(['<p>' + [EMAIL.closing].concat(EMAIL.signature).map(html_).join('<br>') + '</p>'])
+    .join('');
   return { text: text, html: html };
 }
 
@@ -1319,12 +1311,6 @@ function unsafeName_(name) { return /[@<>]|:\/\/|www\.|[a-z0-9-]\.[a-z]{2,}(?:[\
 function hashEmail_(email) {
   return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, email, Utilities.Charset.UTF_8)
     .map(function (byte) { return ('0' + (byte & 255).toString(16)).slice(-2); }).join('');
-}
-
-function validResearcherFormUrl_(value) {
-  const text = String(value == null ? '' : value).trim();
-  if (!text || text.length > 2048) return null;
-  return /^https:\/\/(?:docs\.google\.com\/forms\/(?:u\/\d+\/)?d\/(?:e\/)?[A-Za-z0-9_-]{10,}(?:\/[A-Za-z0-9_-]+)*\/?|forms\.gle\/[A-Za-z0-9]{5,})(?:\?[A-Za-z0-9_.~=&%-]*)?$/.test(text) ? text : null;
 }
 
 function validTestRecipient_(email) { return email === SENDER_EMAIL || /^exeterbiosymposium\+[a-z0-9._-]+@gmail\.com$/.test(email); }

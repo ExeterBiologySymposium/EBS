@@ -16,7 +16,6 @@ const factory = new Function(...SERVICES, ...NODE_ONLY, '"use strict";\n' + sour
 
 const SENDER = 'exeterbiosymposium@gmail.com';
 const TOKEN = 'test-token-' + 'k'.repeat(40);
-const FORM_URL = 'https://docs.google.com/forms/d/e/TESTFORMIDENTIFIER0123456789/viewform?usp=header';
 const STATUS_URL = 'https://www.exeterbiosymposium.page/api/registration-status';
 const SUBJECT = '[Action Required] EBS Registration Update';
 const T0 = Date.parse('2026-11-16T15:00:00Z');
@@ -288,7 +287,7 @@ function accept(w, email) { const entry = w.accounts.get(email); entry.status = 
 
 function baseWorld({ responses = true } = {}) {
   const w = makeWorld();
-  for (const [key, value] of Object.entries({ EBS_STATUS_TOKEN: TOKEN, FORM_ID: 'form_main', TRACKER_SPREADSHEET_ID: 'ss_tracker', RESEARCHER_FORM_URL: FORM_URL, RESEARCHER_TRACKER_ID: 'ss_researchers' })) w.props.set(key, value);
+  for (const [key, value] of Object.entries({ EBS_STATUS_TOKEN: TOKEN, FORM_ID: 'form_main', TRACKER_SPREADSHEET_ID: 'ss_tracker', RESEARCHER_TRACKER_ID: 'ss_researchers' })) w.props.set(key, value);
   const tracker = new FakeSpreadsheet(w, 'ss_tracker');
   tracker.addSheetDirect('Researcher Signup');
   w.spreadsheets.set('ss_tracker', tracker);
@@ -447,10 +446,11 @@ test('a tick on an Accepted row sends one welcome from the Form data, records it
   assert.equal(message.name, 'Exeter Biology Symposium');
   assert.equal(message.subject, SUBJECT);
   assert.match(message.body, /^Dear Avery Stone,\n\nWe are pleased to inform you that you have successfully passed the first round of the EBS application — Congratulations!/);
-  assert.ok(message.body.includes(`fill out a researcher information form via this link (${FORM_URL}). You will be receiving an invitation`));
+  assert.ok(message.body.includes('Symposium.\n\nYou will be receiving an invitation to a Google Drive folder where you can store all your research, as well as your research mentor assignment.\n\nThe EBS team is beyond excited to have you start your research journey.\n\nBest regards,'));
   assert.ok(message.body.endsWith('Best regards,\nAdrian Chan\nFounder, Exeter Biology Symposium\nP H I L L I P S   E X E T E R   A C A D E M Y\n20 Main Street | Exeter, NH 03833\nexeterbiosymposium@gmail.com'));
   assert.ok(message.htmlBody.includes('<p>Dear Avery Stone,</p>'));
-  assert.ok(message.htmlBody.includes(`via this <a href="${FORM_URL}">link</a>. You will`));
+  assert.ok(message.htmlBody.includes('<p>You will be receiving an invitation to a Google Drive folder where you can store all your research, as well as your research mentor assignment.</p>'));
+  assert.doesNotMatch(message.body + message.htmlBody, /researcher information form|<a |https?:\/\//, 'students already filled out the researcher form; the email has no link');
   assert.ok(message.htmlBody.includes('P H I L L I P S &nbsp;&nbsp;E X E T E R &nbsp;&nbsp;A C A D E M Y'));
   assert.doesNotMatch(message.body + message.htmlBody, /Mallory|attacker/);
   assert.equal(cell(w, row, COL.SEND), false);
@@ -772,7 +772,6 @@ test('every guard failure stops the run before any student data is written, and 
     ['permission missing', w => { w.missingScopes = true; }],
     ['header changed', w => { trackerSheet(w).cell(2, COL.WELCOME).value = 'Status'; }],
     ['protection removed', w => { trackerSheet(w).protections = []; }],
-    ['form link invalid', w => { w.props.set('RESEARCHER_FORM_URL', 'https://example.test/form'); }],
   ];
   for (const [label, breakIt] of guards) {
     const w = readyWorld();

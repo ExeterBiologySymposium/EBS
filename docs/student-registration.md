@@ -7,7 +7,7 @@ A Google Apps Script owned by `exeterbiosymposium@gmail.com` keeps that tab curr
 - Code: [`apps-script/student-registration/`](../apps-script/student-registration/) (`Code.gs` and `appsscript.json`), copied by hand into a standalone Apps Script project. The website build does not deploy it.
 - Endpoint: [`server/registration-status.ts`](../server/registration-status.ts). Configuration: [organization administration](organization-admin.md#required-server-configuration).
 - Tests: `npm run test:registration`.
-- The repository is public. Sheet and Form IDs, the researcher form link, the token and student data live only in Script Properties and Vercel environment variables. Never commit them.
+- The repository is public. Sheet and Form IDs, the token and student data live only in Script Properties and Vercel environment variables. Never commit them.
 
 ## For the EBS Team
 
@@ -133,7 +133,6 @@ Do these once, in order, signed in as `exeterbiosymposium@gmail.com`. Steps 5 an
 | `FORM_ID` | Yes | The student application Form's ID: the part between `/forms/d/` and `/edit` in its **edit** link. Not the public `/forms/d/e/…` or `forms.gle` link, which use a different ID |
 | `TRACKER_SPREADSHEET_ID` | Yes | The ID of the Form's linked response spreadsheet. The script checks that the Form really is linked to it |
 | `RESEARCHER_TRACKER_ID` | Yes | The Researcher tracker spreadsheet ID. It needs exactly one **Researcher** (or **Reseacher**) header and one **Email** header in row 1 |
-| `RESEARCHER_FORM_URL` | To send | The researcher information form link used in the email (`https://docs.google.com/forms/…` or `https://forms.gle/…`) |
 | `TRACKER_SHEET_NAME` | No | Tab name. Default `Registration tracker` |
 | `ACCOUNT_EMAIL_QUESTION` | No | Default `Researcher Email` |
 | `FALLBACK_EMAIL_QUESTION` | No | Default `Adult Contact Person Email` |
@@ -155,7 +154,7 @@ On every run the script refuses to write student data or send unless all of thes
 - it runs as `exeterbiosymposium@gmail.com`, and this project holds the tracker's claim;
 - `FORM_ID` and `TRACKER_SPREADSHEET_ID` are the ones `setup()` used, and the tracker's headers and protection are intact.
 
-While sending is on, it also requires the same `REGISTRATION_CYCLE` that `enableSending()` recorded, every granted permission and a valid `RESEARCHER_FORM_URL`.
+While sending is on, it also requires the same `REGISTRATION_CYCLE` that `enableSending()` recorded, and every granted permission.
 
 A failed check writes only a "Paused — …" line in row 1. A definite failure also turns sending off. The tracker never shows exception text, and logs contain only row numbers and counts.
 

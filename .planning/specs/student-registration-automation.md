@@ -26,12 +26,12 @@ These replace the matching parts of the text above. The approved implementation 
 
 ### Email
 - The script reads "Researcher Email" from the Form response; if it is blank, it uses "Adult Contact Person Email". Recipient and name always come from the Form response and the EBS lookup, never from tracker cells.
-- Subject: `[Action Required] EBS Registration Update`. Body, used verbatim with `[Name]` replaced by the applicant's Full Name and `[link]` by the researcher information form link stored only in the script's `RESEARCHER_FORM_URL` property:
+- Subject: `[Action Required] EBS Registration Update`. Body, used verbatim with `[Name]` replaced by the applicant's Full Name. On 2026-11-15 the second paragraph changed: students now complete the researcher information form before they are approved, so the email no longer links to it and keeps only the Drive folder sentence.
 
   ```text
   Dear [Name],
   We are pleased to inform you that you have successfully passed the first round of the EBS application — Congratulations! We have chosen you because of your passion and willingness to dedicate time and effort to our Symposium.
-  The next step, if you have not already done so, is to fill out a researcher information form via this [link]. You will be receiving an invitation to a Google Drive folder that will be where you can store all your research as well as your research mentor assignment after filling out this form.
+  You will be receiving an invitation to a Google Drive folder where you can store all your research, as well as your research mentor assignment.
   The EBS team is beyond excited to have you start your research journey.
   Best regards,
   Adrian Chan
@@ -47,7 +47,7 @@ These replace the matching parts of the text above. The approved implementation 
 ### Privacy and control
 - The script refuses to run unless the response spreadsheet is Restricted, editors cannot reshare it, Form response editing and summary publishing are off, and the configured questions still match. The same sharing checks apply before it reads or writes the Researcher tracker.
 - Sending starts off and is enabled by the owner (`enableSending()`); `pauseSending()` stops it at once. A test mode limits sending to the EBS inbox.
-- The repository is public. Sheet and Form IDs, the researcher form link and the token live only in Vercel environment variables and Apps Script properties.
+- The repository is public. Sheet and Form IDs and the token live only in Vercel environment variables and Apps Script properties.
 
 ### Website
 - The signup page and FAQ tell students to enter their EBS sign-in email in the Researcher Email field, then explain review, Account access and the welcome email from `exeterbiosymposium@gmail.com`.
