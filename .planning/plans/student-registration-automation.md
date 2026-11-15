@@ -29,3 +29,36 @@ The user approved a revised plan in chat. It keeps the six steps above with thes
 - **Website:** the contact address becomes `exeterbiosymposium@gmail.com`, and the orientation call is removed from the FAQ, Schools and Student research (separate commits before the feature).
 - **Test email:** always `exeterbiosymposium@gmail.com`. The end-to-end release test uses a staff-controlled `+tag` address and `TEST_ONLY_RECIPIENT`.
 - During implementation no real email is sent and the live Sheets, Form and Clerk accounts are not changed.
+
+## Verification
+
+Run locally on 2026-11-15. This session's network policy blocked the npm registry, so dependencies could not be installed.
+
+**Ran and passed**
+- `node --test scripts/registration-apps-script.test.mjs`: 38 tests (plain Node, using fakes of the Apps Script services).
+- Server suites through a scratch loader that transpiles TypeScript with a global TypeScript install and stubs `vite` and the uninstalled packages (repository tests unchanged):
+  - `scripts/registration-status.test.mjs`: 9 tests.
+  - `scripts/org-api.test.mjs`, `org-rollover.test.mjs`, `org-store.test.mjs`: 30 pass, 1 skipped (needs PostgreSQL).
+- `node --test scripts/update-seo.test.mjs` (14 tests) and `node scripts/update-seo.mjs --check`.
+- TypeScript syntax checks of every changed `.ts`/`.tsx` file. A scratch TypeScript 6 check of `server/` and `api/` shows only errors caused by the missing Clerk types.
+- Text checks:
+  - no orientation-call phrases in `src/`, the page heads or `seo.config.json`; "orientation" remains only in the judges' briefing and the event-day schedule;
+  - no `exeterbiologysymposium` outside historical `.planning` files;
+  - no Sheet or Form IDs, tokens or personal addresses in the added lines;
+  - `git diff --check`.
+- Mutation checks:
+  - Removing any single safeguard in the endpoint fails its tests.
+  - In `Code.gs`, every safeguard except two is pinned by a test. The two survivors are deliberate duplicates: the account-record and time-budget checks are repeated right before the send.
+
+**Not run here** (they need the npm registry):
+- `npm run typecheck` and `npm run build`;
+- the React-based checks: `scripts/org-ui.test.mjs`, `scripts/content.test.mjs`, `scripts/cohorts.test.mjs`, `scripts/datasets.test.mjs`, `scripts/check-faq-clarity.mjs`;
+- browser QA with `scripts/org-browser-fixture.mjs`.
+
+Their new assertions were checked by reading the code. Run them once the registry is reachable.
+
+**Differences from the approved plan**
+- `scripts/cohorts.test.mjs:150` was left unchanged: it passes at HEAD, because the search dialog lists Projects among its default results.
+- Every copy of a duplicated Submission ID waits for owner review, instead of the first copy being used, so a re-paired row can never send.
+- `setup()` repairs missing checkboxes and protection but refuses to overwrite changed headers, because rewriting headers over shifted columns would misalign the data.
+- No real email was sent, and the live Sheets, Form and Clerk accounts were not changed.
