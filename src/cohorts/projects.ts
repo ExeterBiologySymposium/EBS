@@ -264,7 +264,7 @@ export const cohortSignup = {
   formUrl: '',
   /** Optional Google Forms pre-fill entry IDs (such as "entry.1234567") from "Get pre-filled link". */
   prefill: { firstChoice: '', secondChoice: '', computer: '', partner: '' },
-  email: 'exeterbiologysymposium@gmail.com',
+  email: 'exeterbiosymposium@gmail.com',
 };
 
 export const cohortFacts = {

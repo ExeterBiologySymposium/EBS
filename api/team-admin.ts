@@ -8,7 +8,7 @@ export default {
   async fetch(request: Request): Promise<Response> {
     try {
       const { service, config } = organizationRuntime();
-      return await createAdminHandlers({ authenticate: authenticateClerk, service, teamId: config.teamId, folderLinks: participantFolderLinks }).fetch(request);
+      return await createAdminHandlers({ authenticate: authenticateClerk, service, teamId: config.teamId, folderLinks: participantFolderLinks, trackerUrl: process.env.EBS_REGISTRATION_TRACKER_URL ?? null }).fetch(request);
     } catch { return adminResponse(503, { state: 'configuration' }); }
   },
 };

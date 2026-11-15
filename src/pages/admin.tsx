@@ -2,6 +2,7 @@ import { lazy, Suspense, useCallback, useContext, useEffect, useId, useRef, useS
 import { AuthContext } from '../auth';
 import { adminMessage, adminRequest, lostTeamAccess } from '../admin-api';
 import { folderLinkMaxLength, validFolderLink } from '../folder-link';
+import { validRegistrationTrackerUrl } from '../registration-tracker';
 import type { Destination, Page, Result } from '../../server/orgs/types';
 
 const ContentEditor = lazy(() => import('../content-editor'));
@@ -206,6 +207,28 @@ function InvitationList({ revision, onDenied }: { revision: number; onDenied(): 
   </>}<button className="admin-refresh" type="button" onClick={() => setReload(value => value + 1)}>Refresh invitations</button></>;
 }
 
+// The private Google Sheet where staff request welcome emails (docs/student-registration.md).
+// Rendered only for a valid editable Sheets URL; Google sharing controls who can open it.
+export function RegistrationTrackerLink({ url }: { url: string | null }) {
+  const href = validRegistrationTrackerUrl(url);
+  if (!href) return null;
+  return <>
+    <a className="button secondary" href={href} target="_blank" rel="noopener noreferrer" aria-describedby="registration-tracker-hint">Open registration tracker<span className="sr-only"> (opens in a new tab)</span></a>
+    <p className="form-hint admin-tracker-hint" id="registration-tracker-hint">After accepting a participant, tick Send welcome email for them in the tracker.</p>
+  </>;
+}
+function RegistrationTracker({ onDenied }: { onDenied(): void }) {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    const controller = new AbortController();
+    adminRequest<{ trackerUrl: string | null }>('action=registration-tracker', { signal: controller.signal })
+      .then(value => { if (!controller.signal.aborted) setUrl(value.trackerUrl ?? null); })
+      .catch(error => { if (!controller.signal.aborted && lostTeamAccess(error)) onDenied(); });
+    return () => controller.abort();
+  }, [onDenied]);
+  return <RegistrationTrackerLink url={url} />;
+}
+
 type Workspace = 'participants' | 'content' | 'settings';
 function currentWorkspace(): Workspace {
   if (typeof window === 'undefined') return 'participants';
@@ -236,7 +259,7 @@ function AdminWorkspace({ teamOrganizationId }: { teamOrganizationId: string }) 
     {workspace === 'content' ? <Suspense fallback={<section className="section"><div className="shell"><p role="status">Loading the website editor…</p></div></section>}><ContentEditor onDenied={onDenied} /></Suspense>
       : workspace === 'settings' ? <section className="section"><div className="shell"><Suspense fallback={<p role="status">Loading Team settings…</p>}><TeamSettings teamOrganizationId={teamOrganizationId} /></Suspense></div></section>
       : <>
-        <div className="shell actions admin-tools"><button className="button secondary" type="button" onClick={onChanged}>Refresh lists and capacity</button></div>
+        <div className="shell actions admin-tools"><button className="button secondary" type="button" onClick={onChanged}>Refresh lists and capacity</button><RegistrationTracker onDenied={onDenied} /></div>
         <AddParticipant revision={revision} onChanged={onChanged} onDenied={onDenied} />
         <section className="section"><div className="shell">
           <div className="actions admin-views" aria-label="Participant views">{(['pending', 'accepted', 'invitations'] as const).map(value => <button key={value} type="button" className={`button ${view === value ? '' : 'secondary'}`} aria-pressed={view === value} onClick={() => setView(value)}>{value === 'invitations' ? 'Invitations' : label(value)}</button>)}</div>

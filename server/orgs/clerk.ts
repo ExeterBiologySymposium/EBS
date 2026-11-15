@@ -45,6 +45,7 @@ export function createClerkOrganizationGateway(client: Client, redirectUrl: stri
       return matches[0] || null;
     },
     async userMemberships(id) { return (await pages(offset => client.users.getOrganizationMembershipList({ userId: id, limit: 100, offset }))).map(member => member.organization.id); },
+    async userMembershipTimes(id) { return (await pages(offset => client.users.getOrganizationMembershipList({ userId: id, limit: 100, offset }))).map(member => ({ organizationId: member.organization.id, createdAt: member.createdAt })); },
     async createOrganization(kind, ordinal, privateMetadata) {
       return (await client.organizations.createOrganization({ name: `EBS ${kind === 'pending' ? 'Pending' : 'Accepted'} ${String(ordinal).padStart(3, '0')}`, maxAllowedMemberships: 20, privateMetadata })).id;
     },

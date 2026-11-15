@@ -4,13 +4,8 @@ export default function AcceptedAccount() { return <>
   <section className="section" aria-labelledby="participant-help-title"><div className="shell reading">
     <h2 id="participant-help-title">Participant questions</h2>
     <details className="disclosure" id="finding-resources"><summary>Where do I find my research document and support?</summary>
-<<<<<<< Updated upstream
-      <p>Your research document is in your shared Google folder above. Written by experienced high school researchers, it guides the research process with exercises for different ability levels. The EBS team checks progress, suggests refinements, and offers ongoing <a href="mailto:exeterbiologysymposium@gmail.com">email support</a> and regular office hours.</p>
+      <p>Open your folder above for the materials shared with you. The starter research document in an EBS-generated Google folder guides the research process with exercises for different ability levels. The EBS team checks progress, suggests refinements, and offers ongoing <a href="mailto:exeterbiosymposium@gmail.com">email support</a> and regular office hours.</p>
       <p><a href="resources.html">Resources</a> contains the latest research materials. Visit <a href="datascience.html">Coding</a> for coding resources, and the <a href="datasets.html">Dataset library</a> for free datasets and step-by-step tool guides.</p>
-=======
-      <p>Open your folder above for the materials shared with you. The starter research document in an EBS-generated Google folder guides the research process with exercises for different ability levels. The EBS team checks progress, suggests refinements, and offers ongoing <a href="mailto:exeterbiologysymposium@gmail.com">email support</a> and regular office hours.</p>
-      <p><a href="resources.html">Resources</a> contains the latest research materials. Visit <a href="datascience.html">Coding</a> for coding resources.</p>
->>>>>>> Stashed changes
     </details>
     <details className="disclosure" id="research-folder"><summary>How do I create and open my research folder?</summary>
       <p>If the EBS team shared a folder with you, select <strong>Open my folder</strong> above. To create an EBS Google Drive folder when one hasn’t been assigned, follow these steps.</p>

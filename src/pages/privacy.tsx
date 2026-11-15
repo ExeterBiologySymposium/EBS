@@ -17,7 +17,7 @@ const sections: LegalSection[] = [
       <p>Depending on how you participate, information may include:</p>
       <ul>
         <li><strong>Account information:</strong> your name, email address, account identifier, linked sign-in profile, and membership or approval status. Authentication is handled through Clerk.</li>
-        <li><strong>Applications and participation:</strong> the information requested in the student, school, or judge application you choose to complete, such as contact details, school affiliation, participation role, research interests, and attendance preferences. The form shows the fields requested before you submit it.</li>
+        <li><strong>Applications and participation:</strong> the information requested in the student, school, or judge application you choose to complete, such as contact details, school affiliation, participation role, research interests, and attendance preferences. The form shows the fields requested before you submit it. If you apply as a student, we compare the email address in your application (or, if that field is blank, the adult contact email) with EBS accounts to confirm the account and its approval status, and the EBS team may then send a welcome email from exeterbiosymposium@gmail.com.</li>
         <li><strong>Messages:</strong> your name, email, optional role, subject, message, and information you include in correspondence with the team.</li>
         <li><strong>Research:</strong> project titles, abstracts, posters, code, research documents, progress information, feedback, and other materials you submit or place in an EBS research folder.</li>
         <li><strong>Program arrangements:</strong> information you or an authorized adult provides to coordinate participation, supervision, or a requested accommodation. Contact us before sending sensitive details so we can discuss what is necessary and an appropriate way to provide them.</li>
@@ -67,7 +67,7 @@ const sections: LegalSection[] = [
       <p>The website's integrations include:</p>
       <ul>
         <li><strong>Clerk:</strong> sign-in, account management, and membership information. See <a href="https://clerk.com/legal/privacy">Clerk's privacy information</a>.</li>
-        <li><strong>Google:</strong> application forms, email communications, linked Google sign-in, and Drive/Docs research files where used. See <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>.</li>
+        <li><strong>Google:</strong> application forms, registration tracking, email communications, linked Google sign-in, and Drive/Docs research files where used. See <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>.</li>
         <li><strong>Web3Forms and hCaptcha:</strong> delivery of contact-form messages and protection against automated submissions. See <a href="https://web3forms.com/privacy">Web3Forms' Privacy Policy</a> and <a href="https://www.hcaptcha.com/privacy">hCaptcha's privacy information</a>.</li>
         <li><strong>Vercel:</strong> website hosting, request handling, analytics, and performance measurement. See <a href="https://vercel.com/legal/privacy-policy">Vercel's Privacy Notice</a>.</li>
         <li><strong>Neon:</strong> storage of the records connecting an accepted participant's account to their research folder, when the folder feature is enabled. See <a href="https://neon.com/privacy-policy">Neon's Privacy Policy</a>.</li>
@@ -157,7 +157,7 @@ const sections: LegalSection[] = [
     id: "contact",
     title: "Contact",
     content: <>
-      <p>For questions, corrections, or privacy requests, contact the Exeter Biology Symposium organizing team at <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a> with “Privacy request” in the subject line, or visit our <a href="contact.html">Contact page</a>.</p>
+      <p>For questions, corrections, or privacy requests, contact the Exeter Biology Symposium organizing team at <a href="mailto:exeterbiosymposium@gmail.com">exeterbiosymposium@gmail.com</a> with “Privacy request” in the subject line, or visit our <a href="contact.html">Contact page</a>.</p>
       <p>For questions about the Academy's wider practices, consult the contact details in <a href="https://exeter.edu/privacy-notice/">Phillips Exeter Academy's Privacy Notice</a>.</p>
     </>,
   }

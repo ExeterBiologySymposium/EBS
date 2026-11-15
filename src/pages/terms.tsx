@@ -152,7 +152,7 @@ const sections: LegalSection[] = [
     id: "contact",
     title: "Contact",
     content: <>
-      <p>For questions about these Terms, research permissions, or participation, contact the Exeter Biology Symposium organizing team at <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a> or use the <a href="contact.html">Contact page</a>.</p>
+      <p>For questions about these Terms, research permissions, or participation, contact the Exeter Biology Symposium organizing team at <a href="mailto:exeterbiosymposium@gmail.com">exeterbiosymposium@gmail.com</a> or use the <a href="contact.html">Contact page</a>.</p>
     </>,
   }
 ];

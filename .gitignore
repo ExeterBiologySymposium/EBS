@@ -11,3 +11,6 @@ dist/
 
 .vite-cache/
 .vite-qa/
+# clasp project bindings for the copy-ready Apps Script; they hold private script IDs.
+apps-script/**/.clasp.json
+apps-script/**/.clasprc.json
