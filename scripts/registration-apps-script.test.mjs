@@ -32,7 +32,7 @@ const notSent = (reason, action = '') => `Not sent (Nov 16): ${reason}.${action 
 const review = reason => `Needs owner review: ${reason}`;
 
 // ---------------------------------------------------------------- fakes
-class Cell { constructor() { this.value = ''; this.formula = ''; this.validation = null; this.note = ''; } }
+class Cell { constructor() { this.value = ''; this.formula = ''; this.validation = null; this.note = ''; this.quoted = false; } }
 
 class FakeRange {
   constructor(sheet, row, column, numRows, numColumns) { Object.assign(this, { sheet, row, column, numRows, numColumns }); }
@@ -58,7 +58,13 @@ class FakeRange {
     }
     for (const line of values) for (const value of line) checkValue(value);
     this.sheet.w.noteWrite({ kind: 'values', sheet: this.sheet, range: this });
-    values.forEach((line, r) => line.forEach((value, c) => { const cell = this.sheet.cell(this.row + r, this.column + c); cell.value = value == null ? '' : copy(value); cell.formula = ''; }));
+    values.forEach((line, r) => line.forEach((value, c) => {
+      const cell = this.sheet.cell(this.row + r, this.column + c);
+      // Like Sheets, a leading apostrophe becomes a quote prefix and is not part of the value.
+      cell.quoted = typeof value === 'string' && value.startsWith("'");
+      cell.value = value == null ? '' : cell.quoted ? value.slice(1) : copy(value);
+      cell.formula = '';
+    }));
     return this;
   }
   setValue(value) { return this.setValues(Array.from({ length: this.numRows }, () => Array(this.numColumns).fill(value))); }
@@ -73,7 +79,7 @@ function checkValue(value) {
 }
 
 class FakeProtection {
-  constructor(sheet) { this.sheet = sheet; this.editors = [SENDER, 'staff.one@example.test']; this.unprotected = []; this.warningOnly = false; this.domainEdit = true; this.description = ''; }
+  constructor(sheet) { this.sheet = sheet; this.editors = [SENDER, 'staff.one@example.test']; this.unprotected = []; this.warningOnly = false; this.description = ''; }
   setDescription(text) { this.description = text; return this; }
   getEditors() { return this.editors.map(email => ({ getEmail: () => email })); }
   addEditor(user) { const email = typeof user === 'string' ? user : user.getEmail(); if (!this.editors.includes(email)) this.editors.push(email); return this; }
@@ -82,8 +88,9 @@ class FakeProtection {
   getUnprotectedRanges() { return this.unprotected.map(([row, column, numRows, numColumns]) => this.sheet.getRange(row, column, numRows, numColumns)); }
   setWarningOnly(value) { this.warningOnly = value; return this; }
   isWarningOnly() { return this.warningOnly; }
-  canDomainEdit() { return this.domainEdit; }
-  setDomainEdit(value) { this.domainEdit = value; return this; }
+  // A gmail.com-owned spreadsheet has no domain: canDomainEdit() is false and setDomainEdit() throws.
+  canDomainEdit() { return false; }
+  setDomainEdit() { throw new Error('Domain editing is only available for Google Workspace files.'); }
 }
 
 class FakeSheet {
@@ -363,7 +370,7 @@ test('setup builds a protected tracker, pins the configuration, installs three t
   assert.equal(w.triggers.find(t => t.handler === 'onTrackerEdit').source, 'ss_tracker');
   assert.equal(w.triggers.find(t => t.handler === 'onApplicationSubmit').source, 'form_main');
   assert.deepEqual(w.spreadsheets.get('ss_tracker').metadata.map(m => [m.value, m.visibility]), [['script_main', 'DOCUMENT']]);
-  assert.equal(w.props.get('AUTOMATION_START'), String(T0));
+  assert.equal(w.props.has('AUTOMATION_START'), false, 'the cut-over is go-live, not setup');
   assert.equal(w.props.get('SENDING_ENABLED'), 'false');
   // Rows come from the Form responses: names, application emails (with the adult-contact fallback) and lookups.
   const avery = rowOf(w, w.ids.avery), casey = rowOf(w, w.ids.casey), drew = rowOf(w, w.ids.drew), blake = rowOf(w, w.ids.blake);
@@ -385,8 +392,11 @@ test('re-running setup keeps ticks and the cut-over time, and leaves exactly thr
   const start = w.props.get('AUTOMATION_START');
   w.clock += 3_600_000;
   w.api.setup();
+  w.api.enableSending();
+  staffSet(w, row, COL.SEND, true);
+  w.api.setup();
   assert.equal(cell(w, row, COL.SEND), true);
-  assert.equal(w.props.get('AUTOMATION_START'), start);
+  assert.equal(w.props.get('AUTOMATION_START'), start, 'neither setup nor a later go-live moves the cut-over');
   assert.equal(w.triggers.length, 3);
   assert.equal(w.mail.length, 0);
 });
@@ -405,8 +415,10 @@ test('setup refuses a tracker claimed by another project unless the owner hands 
   w.api.setup();
   assert.equal(w.spreadsheets.get('ss_tracker').metadata[0].value, 'script_main');
   assert.equal(w.props.get('SENDING_ENABLED'), 'false');
-  assert.equal(w.props.get('AUTOMATION_START'), String(T0));
+  assert.equal(w.props.has('AUTOMATION_START'), false, 'a takeover starts a new cut-over at its go-live');
   assert.equal(w.props.has('TAKEOVER_FROM_SCRIPT_ID'), false);
+  w.api.enableSending();
+  assert.equal(w.props.get('AUTOMATION_START'), String(T0));
 });
 
 test('setup and sendTestEmail refuse to run as anyone but the EBS account', () => {
@@ -516,7 +528,7 @@ test('each not-sent reason clears the box with the next step and sends nothing',
   add('no status', 'Nia None', 'nia@example.test', () => account(w, 'nia@example.test', 'user_nia', 'none'), notSent('account has no EBS status yet', 'Ask the student to sign in and open their Account page, approve them in Participants, then tick again.'));
   add('no account', 'Ned Nobody', 'ned@example.test', () => {}, notSent('no EBS account uses this email', 'Ask the student to add and verify it in their EBS account, or email them by hand and tick Welcomed by hand.'));
   add('invalid email', 'Ivy Invalid', 'not-an-email', () => {}, notSent('no valid email in the application', 'Email the student by hand and tick Welcomed by hand.'));
-  add('approved before the tracker', 'Olive Older', 'olive@example.test', () => w.accounts.set('olive@example.test', { userId: 'user_olive', status: 'accepted', acceptedAt: T0 - 1 }), notSent('approved before the tracker started', 'If not yet welcomed, email them by hand and tick Welcomed by hand.'));
+  add('approved before go-live', 'Olive Older', 'olive@example.test', () => w.accounts.set('olive@example.test', { userId: 'user_olive', status: 'accepted', acceptedAt: T0 - 1 }), notSent('approved before sending started', 'If not yet welcomed, email them by hand and tick Welcomed by hand.'));
   add('already in the Researcher tracker', 'Existing Person', 'existing@example.test', () => account(w, 'existing@example.test', 'user_existing', 'accepted'), notSent('already in the Researcher tracker'));
   for (const entry of cases) entry.setup();
   w.api.syncRegistrations();
@@ -759,7 +771,6 @@ test('every guard failure stops the run before any student data is written, and 
     ['cycle changed', w => { w.props.set('REGISTRATION_CYCLE', '2028'); }],
     ['permission missing', w => { w.missingScopes = true; }],
     ['header changed', w => { trackerSheet(w).cell(2, COL.WELCOME).value = 'Status'; }],
-    ['checkbox removed', w => { trackerSheet(w).cell(4, COL.SEND).validation = null; }],
     ['protection removed', w => { trackerSheet(w).protections = []; }],
     ['form link invalid', w => { w.props.set('RESEARCHER_FORM_URL', 'https://example.test/form'); }],
   ];
@@ -1008,8 +1019,12 @@ test('formula-like application values are written as text', () => {
   const w = baseWorld({ responses: false });
   const id = addResponse(w, { name: '=HYPERLINK("https://example.test")', email: '+1@example.test' });
   w.api.setup();
-  assert.equal(cell(w, rowOf(w, id), COL.NAME), '\'=HYPERLINK("https://example.test")');
-  assert.equal(cell(w, rowOf(w, id), COL.EMAIL), "'+1@example.test");
+  const row = rowOf(w, id), sheet = trackerSheet(w);
+  assert.deepEqual([sheet.peek(row, COL.NAME).value, sheet.peek(row, COL.NAME).quoted], ['=HYPERLINK("https://example.test")', true]);
+  assert.deepEqual([sheet.peek(row, COL.EMAIL).value, sheet.peek(row, COL.EMAIL).quoted], ['+1@example.test', true]);
+  const start = w.writes.length;
+  w.api.syncRegistrations();
+  assert.equal(writesSince(w, start).filter(e => e.kind === 'values' && e.row !== 1).length, 0, 'unchanged rows are not rewritten');
 });
 
 test('a record written by another process after the decision still stops the send', () => {
@@ -1041,4 +1056,156 @@ test('an address that MailApp would read as several recipients is never sent', (
   tick(w, id);
   assert.equal(w.mail.length, 0);
   assert.equal(status(w, id), notSent('no valid email in the application', 'Email the student by hand and tick Welcomed by hand.'));
+});
+
+// ---------------------------------------------------------------- review regressions
+test('the cut-over is go-live: students accepted between setup and going live are never sent by the script', () => {
+  const w = baseWorld();
+  w.api.setup();
+  w.clock += 2 * 86_400_000;
+  accept(w, 'avery@example.test'); // Accepted and welcomed by hand the old way, without a tick.
+  w.clock += 7 * 86_400_000;
+  w.props.set('TEST_ONLY_RECIPIENT', 'exeterbiosymposium+ebstest@gmail.com');
+  w.api.enableSending();
+  assert.equal(w.props.has('AUTOMATION_START'), false, 'test mode does not set the cut-over');
+  const testId = addResponse(w, { name: 'EBS Test', email: 'exeterbiosymposium+ebstest@gmail.com' });
+  account(w, 'exeterbiosymposium+ebstest@gmail.com', 'user_test', 'accepted');
+  w.api.syncRegistrations();
+  tick(w, testId);
+  assert.equal(w.mail.length, 1, 'test mode can send to the EBS inbox before go-live');
+  w.props.delete('TEST_ONLY_RECIPIENT');
+  w.api.enableSending();
+  assert.equal(w.props.get('AUTOMATION_START'), String(w.clock));
+  tick(w, w.ids.avery);
+  assert.equal(w.mail.length, 1);
+  assert.equal(status(w, w.ids.avery), notSent('approved before sending started', 'If not yet welcomed, email them by hand and tick Welcomed by hand.').replace('Nov 16', 'Nov 25'));
+});
+
+test('a hand welcome to an address without an account blocks a later application under the same name', () => {
+  const w = readyWorld({ responses: false });
+  const school = addResponse(w, { name: 'Riley Chen', email: 'riley.chen@school.example.test' });
+  w.api.syncRegistrations();
+  tick(w, school);
+  assert.match(status(w, school), /no EBS account uses this email/);
+  tick(w, school, COL.HAND);
+  const again = addResponse(w, { name: 'Riley  Chen', email: 'riley@example.test' });
+  account(w, 'riley@example.test', 'user_riley', 'accepted');
+  w.api.syncRegistrations();
+  tick(w, again);
+  assert.equal(w.mail.length, 0);
+  assert.equal(status(w, again), `${review('same name as a welcomed student')} (row ${rowOf(w, school)})`);
+});
+
+test('the 5-tick limit also applies to edits replayed after a busy run and to new ticks found by the hourly check', () => {
+  const w = readyWorld({ responses: false });
+  const ids = Array.from({ length: 7 }, (_, i) => addResponse(w, { name: `Student ${i}`, email: `student${i}@example.test` }));
+  ids.forEach((id, i) => account(w, `student${i}@example.test`, `user_s${i}`, 'accepted'));
+  w.api.syncRegistrations();
+  staffSet(w, rowOf(w, ids[0]), COL.SEND, true);
+  const pasted = ids.slice(1);
+  w.onFetch = () => {
+    pasted.forEach(id => staffSet(w, rowOf(w, id), COL.SEND, true));
+    w.api.onTrackerEdit(editEvent(w, rowOf(w, pasted[0]), 1, pasted.length, 1));
+  };
+  w.api.syncRegistrations();
+  assert.deepEqual(w.mail.map(m => m.to), ['student0@example.test']);
+  for (const id of pasted) assert.equal(status(w, id), notSent('too many boxes ticked at once', 'Tick 5 or fewer.'));
+  assert.equal([...w.props.keys()].some(key => key.startsWith('PENDING_EDIT')), false);
+  // Six ticks that no edit run saw (for example a multi-selection) are cleared by the hourly check.
+  pasted.forEach(id => staffSet(w, rowOf(w, id), COL.SEND, true));
+  w.api.syncRegistrations();
+  assert.equal(w.mail.length, 1);
+  for (const id of pasted) assert.equal(cell(w, rowOf(w, id), COL.SEND), false);
+});
+
+test('a new Form submission run never sends, even with ticks waiting', () => {
+  const w = readyWorld();
+  accept(w, 'avery@example.test');
+  staffSet(w, rowOf(w, w.ids.avery), COL.SEND, true);
+  w.props.set('PENDING_EDIT:1:test', JSON.stringify({ first: rowOf(w, w.ids.avery), last: rowOf(w, w.ids.avery), send: true, hand: false }));
+  w.api.onApplicationSubmit({});
+  assert.equal(w.mail.length, 0);
+  assert.equal(cell(w, rowOf(w, w.ids.avery), COL.SEND), true);
+  w.api.syncRegistrations();
+  assert.equal(w.mail.length, 1);
+});
+
+test('an account with two verified emails is always welcomed at its Researcher Email address', () => {
+  const w = readyWorld({ responses: false });
+  const researcher = addResponse(w, { name: 'Sam Lee', email: 'sam@example.test' });
+  const guardian = addResponse(w, { name: 'Sam Lee', email: '', adult: 'guardian.lee@example.test' });
+  w.accounts.set('sam@example.test', { userId: 'user_sam', status: 'pending', acceptedAt: null });
+  w.accounts.set('guardian.lee@example.test', { userId: 'user_sam', status: 'pending', acceptedAt: null });
+  w.api.syncRegistrations();
+  accept(w, 'sam@example.test');
+  accept(w, 'guardian.lee@example.test');
+  tick(w, guardian);
+  assert.deepEqual(w.mail.map(m => m.to), ['sam@example.test']);
+  assert.equal(status(w, researcher), `Already welcomed (row ${rowOf(w, guardian)})`);
+});
+
+test('a removed checkbox is restored without pausing sending', () => {
+  const w = readyWorld();
+  accept(w, 'avery@example.test');
+  trackerSheet(w).cell(rowOf(w, w.ids.blake), COL.SEND).validation = null;
+  tick(w, w.ids.avery);
+  assert.equal(w.mail.length, 1);
+  assert.equal(w.props.get('SENDING_ENABLED'), 'true');
+  assert.equal(trackerSheet(w).peek(rowOf(w, w.ids.blake), COL.SEND).validation.getCriteriaType(), 'CHECKBOX');
+  assert.match(String(cell(w, 1, 1)), /checkboxes were restored/);
+});
+
+test('a new Form needs its own spreadsheet: a changed FORM_ID pauses the tracker until setup runs on a new spreadsheet', () => {
+  const w = readyWorld();
+  w.form.id = 'form_next';
+  w.props.set('FORM_ID', 'form_next');
+  const start = w.writes.length;
+  w.api.syncRegistrations();
+  onlyRowOneWrites(w, start);
+  assert.match(String(cell(w, 1, 1)), /FORM_ID or TRACKER_SPREADSHEET_ID changed/);
+  assert.throws(() => w.api.setup(), /needs its own response spreadsheet/);
+  const next = new FakeSpreadsheet(w, 'ss_next');
+  next.addSheetDirect('Form Responses 1');
+  w.spreadsheets.set('ss_next', next);
+  w.files.set('ss_next', { access: 'PRIVATE', shareable: false });
+  w.form.destination = 'ss_next';
+  w.props.set('TRACKER_SPREADSHEET_ID', 'ss_next');
+  w.api.setup();
+  const sheet = next.getSheetByName('Registration tracker');
+  assert.ok(sheet);
+  assert.deepEqual(next.metadata.map(m => m.value), ['script_main']);
+  assert.equal(sheet.getLastRow(), 6);
+  assert.equal(JSON.parse(w.props.get('PINNED')).trackerId, 'ss_next');
+});
+
+test('names are inserted literally, and stored send errors never keep an address', () => {
+  const w = readyWorld({ responses: false });
+  const id = addResponse(w, { name: 'Jo$&n Smith', email: 'jon@example.test' });
+  account(w, 'jon@example.test', 'user_jon');
+  w.api.syncRegistrations();
+  accept(w, 'jon@example.test');
+  w.mailError = new Error('Invalid email: jon@example.test');
+  tick(w, id);
+  const rec = records(w)[`ebs:sub:form_main:${id}`];
+  assert.equal(rec.state, 'review');
+  assert.doesNotMatch(rec.error, /jon@/);
+  assert.match(rec.error, /\[address\]/);
+  w.mailError = null;
+  w.props.set('RESOLVE_SUBMISSION_ID', id);
+  w.props.set('RESOLVE_OUTCOME', 'retry');
+  w.api.resolveSend();
+  tick(w, id);
+  assert.ok(w.mail[0].body.startsWith('Dear Jo$&n Smith,'));
+});
+
+test('rows already welcomed by hand are not looked up again at every hourly check', () => {
+  const w = readyWorld();
+  account(w, 'drew@example.test', 'user_drew', 'accepted');
+  tick(w, w.ids.drew, COL.HAND);
+  w.api.syncRegistrations();
+  assert.equal(records(w)['ebs:acct:2027:user_drew'].state, 'hand');
+  const before = w.fetches.length;
+  w.api.syncRegistrations();
+  w.api.syncRegistrations();
+  assert.equal(w.fetches.slice(before).some(f => JSON.parse(f.params.payload).emails.includes('drew@example.test')), false);
 });

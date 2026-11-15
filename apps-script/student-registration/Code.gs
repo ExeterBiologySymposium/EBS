@@ -62,13 +62,14 @@ const REVIEW = {
   RECORD_MISSING: 'send record missing',
   NAME: 'name needs checking',
   DUPLICATE: 'duplicate row',
+  SAME_NAME: 'same name as a welcomed student',
 };
 const NOT_SENT = {
   PENDING: ['account is Pending', 'Approve in Participants, then tick again.'],
   NO_STATUS: ['account has no EBS status yet', 'Ask the student to sign in and open their Account page, approve them in Participants, then tick again.'],
   NO_ACCOUNT: ['no EBS account uses this email', 'Ask the student to add and verify it in their EBS account, or email them by hand and tick Welcomed by hand.'],
   NO_EMAIL: ['no valid email in the application', 'Email the student by hand and tick Welcomed by hand.'],
-  BEFORE_START: ['approved before the tracker started', 'If not yet welcomed, email them by hand and tick Welcomed by hand.'],
+  BEFORE_START: ['approved before sending started', 'If not yet welcomed, email them by hand and tick Welcomed by hand.'],
   IN_TRACKER: ['already in the Researcher tracker', ''],
   OFF: ['sending is off', 'Ask the owner to turn sending on, then tick again.'],
   TEST_MODE: ['test mode', ''],
@@ -89,6 +90,8 @@ const PROBLEM = {
   RECORDS: 'send records could not be saved; sending stopped for this check',
   RESEARCHER: 'Researcher tracker unavailable — welcomes wait and list updates retry',
   QUOTA: 'the mail quota could not be read',
+  FORM_CHANGED: 'FORM_ID or TRACKER_SPREADSHEET_ID changed — owner runs setup()',
+  CHECKBOXES: 'checkboxes were restored — untick by clicking; never press Delete or paste in the checkbox columns',
 };
 // Statuses recomputed from records on every run; the other "Needs owner review" and "Not sent"
 // statuses describe the last tick and stay until the row is ticked again.
@@ -133,10 +136,10 @@ function onTrackerEdit(e) {
     send: range.getColumn() <= COL.SEND,
     hand: range.getLastColumn() >= COL.HAND,
   };
-  withLock_('edit', function () { run_({ mode: 'edit', started: started, edit: edit }); });
+  withLock_('edit', function () { run_({ mode: 'edit', started: started, edit: edit }); }, edit);
 }
 
-/** Installable form-submit trigger: adds the new application to the tracker. Never sends. */
+/** Installable form-submit trigger: adds the new application to the tracker. Never sends or clears a tick. */
 function onApplicationSubmit(e) {
   const started = Date.now();
   withLock_('trigger', function () { run_({ mode: 'submit', started: started }); });
@@ -163,7 +166,10 @@ function enableSending() {
     if (ScriptApp.getAuthorizationInfo(ScriptApp.AuthMode.FULL, SENDING_SCOPES).getAuthorizationStatus() !== ScriptApp.AuthorizationStatus.NOT_REQUIRED) {
       throw new Error('Sending stays off: ' + PROBLEM.SCOPES + '.');
     }
-    props.setProperties({ SENDING_CYCLE: config.cycle, SENDING_ENABLED: 'true' });
+    const updates = { SENDING_CYCLE: config.cycle, SENDING_ENABLED: 'true' };
+    // The cut-over is go-live: students approved before it may have been welcomed by hand.
+    if (!config.testOnly && !config.automationStart) updates.AUTOMATION_START = String(Date.now());
+    props.setProperties(updates);
     refreshStatusLine_(props, pass.ctx.sheet);
     console.log('Sending is on' + (config.testOnly ? ' in test mode' : '') + '. ' + pass.ctx.counts.rows + ' rows in the tracker.');
   });
@@ -236,13 +242,15 @@ function requireAllScopes_() {
   if (typeof ScriptApp.requireAllScopes === 'function') ScriptApp.requireAllScopes(ScriptApp.AuthMode.FULL);
 }
 
-function withLock_(kind, action) {
+function withLock_(kind, action, edit) {
   const lock = LockService.getScriptLock();
   if (kind === 'owner') {
     lock.waitLock(30000);
   } else if (!lock.tryLock(kind === 'edit' ? 25000 : 10000)) {
-    // Another run holds the lock; it re-scans the checkboxes before it finishes.
-    if (kind === 'edit') PropertiesService.getScriptProperties().setProperty('PENDING_EDIT', String(Date.now()));
+    // Another run holds the lock. It replays this edit, with the same 5-tick limit, before it finishes.
+    if (kind === 'edit' && edit) {
+      PropertiesService.getScriptProperties().setProperty('PENDING_EDIT:' + Date.now() + ':' + Math.random().toString(36).slice(2, 10), JSON.stringify(edit));
+    }
     return null;
   }
   try {
@@ -269,7 +277,11 @@ function setup_(started) {
   const problem = sharingProblem_(config.trackerId) || formProblem_(form, config.trackerId);
   if (problem) throw new Error('Setup stopped: ' + problem + '.');
   const items = pinItems_(form, config);
-  let sheet = config.pinned ? findSheet_(ss, config.pinned.sheetId) : null;
+  const samePlace = !!config.pinned && (!config.pinned.trackerId || config.pinned.trackerId === config.trackerId);
+  if (samePlace && config.pinned.formId && config.pinned.formId !== config.formId) {
+    throw new Error('A new Form needs its own response spreadsheet: link the new Form to a new spreadsheet, set TRACKER_SPREADSHEET_ID to it, then run setup() again.');
+  }
+  let sheet = samePlace ? findSheet_(ss, config.pinned.sheetId) : null;
   if (!sheet) sheet = ss.getSheetByName(config.sheetName);
   if (sheet) {
     const header = sheet.getRange(2, 1, 1, Math.min(WIDTH, sheet.getMaxColumns())).getValues()[0];
@@ -282,14 +294,14 @@ function setup_(started) {
   if (takeover) {
     claim.setValue(scriptId);
     props.deleteProperty('TAKEOVER_FROM_SCRIPT_ID');
-    props.setProperties({ SENDING_ENABLED: 'false', AUTOMATION_START: String(Date.now()) });
+    props.deleteProperty('AUTOMATION_START'); // The next go-live in this project sets a new cut-over.
+    props.setProperty('SENDING_ENABLED', 'false');
   } else if (!claim) {
     ss.addDeveloperMetadata(CLAIM_KEY, scriptId, SpreadsheetApp.DeveloperMetadataVisibility.DOCUMENT);
   }
-  if (!props.getProperty('AUTOMATION_START')) props.setProperty('AUTOMATION_START', String(Date.now()));
   if (!props.getProperty('SENDING_ENABLED')) props.setProperty('SENDING_ENABLED', 'false');
   if (!sheet) sheet = ss.insertSheet(config.sheetName);
-  props.setProperty('PINNED', JSON.stringify({ sheetId: sheet.getSheetId(), items: items }));
+  props.setProperty('PINNED', JSON.stringify({ sheetId: sheet.getSheetId(), formId: config.formId, trackerId: config.trackerId, items: items }));
   formatSheet_(sheet);
   installTriggers_(config);
   const result = run_({ mode: 'setup', started: started });
@@ -373,13 +385,15 @@ function run_(options) {
 
   ctx.records = readRecords_(props);
   convertStaleAttempts_(ctx);
+  repairCheckboxes_(ctx);
   ctx.table = readTable_(ctx);
   const added = appendMissingRows_(ctx);
   if (added.length) ctx.table = readTable_(ctx);
   lookup_(ctx, emailsToRefresh_(ctx, added));
   completeHandRecords_(ctx);
   if (options.mode === 'edit') processTicks_(ctx, ticksInEdit_(ctx, options.edit), options.edit);
-  else if (options.mode === 'sync' || options.mode === 'enable') processTicks_(ctx, ctx.table.rows, null);
+  else if (options.mode === 'sync') processTicks_(ctx, ctx.table.rows, null, true);
+  else if (options.mode === 'enable') processTicks_(ctx, ctx.table.rows, null, false);
   if (options.resolve) resolve_(ctx, options.resolve);
   handlePendingEdits_(ctx);
   retryAppends_(ctx);
@@ -446,6 +460,7 @@ function guardProblem_(ctx) {
   if (sharing) return sharing;
   const form = formProblem_(ctx.form, config.trackerId);
   if (form) return form;
+  if ((config.pinned.formId && config.pinned.formId !== config.formId) || (config.pinned.trackerId && config.pinned.trackerId !== config.trackerId)) return PROBLEM.FORM_CHANGED;
   const items = config.pinned.items || {};
   const keys = ['account', 'fallback', 'name'];
   for (let i = 0; i < keys.length; i++) {
@@ -481,16 +496,21 @@ function layoutProblem_(sheet) {
   for (let i = 0; i < WIDTH; i++) if (String(header[i]).trim() !== HEADERS[i]) return PROBLEM.LAYOUT;
   const protections = sheet.getProtections(SpreadsheetApp.ProtectionType.SHEET);
   if (protections.length !== 1 || protections[0].isWarningOnly()) return PROBLEM.LAYOUT;
-  const last = lastIdRow_(sheet);
-  if (last >= FIRST_ROW) {
-    const rules = sheet.getRange(FIRST_ROW, COL.SEND, last - FIRST_ROW + 1, 2).getDataValidations();
-    for (let r = 0; r < rules.length; r++) {
-      for (let c = 0; c < 2; c++) {
-        if (!rules[r][c] || rules[r][c].getCriteriaType() !== SpreadsheetApp.DataValidationCriteria.CHECKBOX) return PROBLEM.LAYOUT;
-      }
-    }
-  }
   return null;
+}
+
+// Pressing Delete or pasting in the checkbox columns removes a checkbox. Restore them instead of
+// pausing everyone; a tick still counts only as a real checkbox value without a formula.
+function repairCheckboxes_(ctx) {
+  const sheet = ctx.sheet, last = lastIdRow_(sheet);
+  if (last < FIRST_ROW) return;
+  const range = sheet.getRange(FIRST_ROW, COL.SEND, last - FIRST_ROW + 1, 2);
+  const missing = range.getDataValidations().some(function (line) {
+    return line.some(function (rule) { return !rule || rule.getCriteriaType() !== SpreadsheetApp.DataValidationCriteria.CHECKBOX; });
+  });
+  if (!missing) return;
+  range.setDataValidation(checkboxRule_());
+  problem_(ctx, PROBLEM.CHECKBOXES);
 }
 
 // ---------------------------------------------------------------- Form responses and tracker rows
@@ -721,7 +741,7 @@ function emailsToRefresh_(ctx, added) {
     const handWithoutAccount = !!sub && sub.state === 'hand' && !sub.userId;
     const finished = !!sub && (sub.state === 'sent' || (sub.state === 'hand' && !!sub.userId));
     if (added.indexOf(row.submissionId) >= 0
-      || (mode === 'sync' && (row.send || row.hand || row.account === '' || row.account === 'Unavailable' || handWithoutAccount))
+      || (mode === 'sync' && (row.send || (row.hand && !finished) || row.account === '' || row.account === 'Unavailable' || handWithoutAccount))
       || (full && !finished)) emails.push(response.email);
   });
   return emails;
@@ -807,31 +827,43 @@ function ticksInEdit_(ctx, edit) {
   });
 }
 
-function processTicks_(ctx, rows, edit) {
-  let ticked = rows.filter(function (row) { return row.send || row.hand; });
+function processTicks_(ctx, rows, edit, bulkCheck) {
+  // A ticked "Welcomed by hand" box stays ticked; once recorded it needs nothing unless Send is also ticked.
+  let ticked = rows.filter(function (row) { return row.send || (row.hand && !ctx.records[subKey_(ctx, row.submissionId)]); });
   if (!ticked.length) return;
-  if (edit && edit.send) {
-    // A paste or fill that ticks many rows at once is cleared without sending.
-    const sends = ticked.filter(function (row) { return row.send && !row.hand; });
+  if ((edit && edit.send) || bulkCheck) {
+    // A paste or fill that ticks many rows at once is cleared without sending. Without an edit
+    // (the hourly check), boxes already waiting as Queued or Check unavailable do not count.
+    const sends = ticked.filter(function (row) {
+      return row.send && !row.hand && (edit || (row.status !== STATUS.QUEUED && row.status !== STATUS.UNAVAILABLE));
+    });
     if (sends.length > BULK_TICK_LIMIT) {
       sends.forEach(function (row) { clearTick_(ctx, row); ctx.outcomes[row.submissionId] = notSent_(NOT_SENT.BULK); });
-      ticked = ticked.filter(function (row) { return row.hand; });
+      ticked = ticked.filter(function (row) { return row.send ? row.hand || sends.indexOf(row) < 0 : row.hand; });
     }
   }
-  lookup_(ctx, ticked.map(function (row) { const response = ctx.responses[row.submissionId]; return response ? response.email : ''; }));
+  lookup_(ctx, ticked.filter(function (row) { return !row.hand || !ctx.records[subKey_(ctx, row.submissionId)]; })
+    .map(function (row) { const response = ctx.responses[row.submissionId]; return response ? response.email : ''; }));
   ticked.forEach(function (row) {
     if (row.hand) handleHand_(ctx, row);
     else if (row.send) act_(ctx, row);
   });
 }
 
+// Replays edits that arrived while this run held the lock, each with its own 5-tick limit.
 function handlePendingEdits_(ctx) {
-  if (ctx.mode === 'setup' || ctx.mode === 'enable' || ctx.mode === 'resolve') return;
-  for (let round = 0; round < 3 && ctx.props.getProperty('PENDING_EDIT'); round++) {
-    if (timeLeft_(ctx) < SEND_RESERVE_MS) return;
-    ctx.props.deleteProperty('PENDING_EDIT');
-    ctx.table = readTable_(ctx);
-    processTicks_(ctx, ctx.table.rows, null);
+  if (ctx.mode !== 'edit' && ctx.mode !== 'sync') return;
+  for (let round = 0; round < 3; round++) {
+    const keys = ctx.props.getKeys().filter(function (key) { return key.indexOf('PENDING_EDIT:') === 0; }).sort();
+    if (!keys.length) return;
+    for (let i = 0; i < keys.length; i++) {
+      if (timeLeft_(ctx) < SEND_RESERVE_MS) return;
+      const edit = readJson_(ctx.props.getProperty(keys[i]));
+      ctx.props.deleteProperty(keys[i]);
+      if (!edit || typeof edit.first !== 'number' || typeof edit.last !== 'number') continue;
+      ctx.table = readTable_(ctx);
+      processTicks_(ctx, ticksInEdit_(ctx, edit), edit);
+    }
   }
 }
 
@@ -882,9 +914,14 @@ function decide_(ctx, row) {
   if (evidence_(ctx).some(function (item) { return (item.userId && item.userId === userId) || (item.emailHash && item.emailHash === response.emailHash); })) {
     return clear_(review_(REVIEW.RECORD_MISSING));
   }
-  if (!config.automationStart || !(result.acceptedAt >= config.automationStart)) return clear_(notSent_(NOT_SENT.BEFORE_START));
+  // Test mode can reach only the EBS inbox, so the go-live cut-over applies outside test mode.
+  if (!config.testOnly && (!config.automationStart || !(result.acceptedAt >= config.automationStart))) return clear_(notSent_(NOT_SENT.BEFORE_START));
   const nameIssue = nameProblem_(ctx, response, userId);
   if (nameIssue) return clear_(review_(nameIssue));
+  const twin = welcomedTwin_(ctx, row, response, userId);
+  if (twin) return clear_(twin.sameAccount ? 'Already welcomed (row ' + twin.row + ')' : review_(REVIEW.SAME_NAME) + ' (row ' + twin.row + ')');
+  lookup_(ctx, ctx.table.rows.filter(function (other) { return !other.duplicate && userIdFor_(ctx, other) === userId; })
+    .map(function (other) { const data = ctx.responses[other.submissionId]; return data ? data.email : ''; }));
   const recipientRow = preferredRow_(ctx, row, userId);
   const recipientResponse = ctx.responses[recipientRow.submissionId];
   const recipient = recipientResponse.email;
@@ -916,6 +953,24 @@ function nameProblem_(ctx, response, userId) {
   });
   if (Object.keys(names).length > 1) return REVIEW.SHARED_EMAIL;
   if (response.name && unsafeName_(response.name)) return REVIEW.NAME;
+  return null;
+}
+
+// Another row with the same name already welcomed under an unknown or different account, for
+// example a hand welcome to an address that had no EBS account, is likely the same student.
+function welcomedTwin_(ctx, row, response, userId) {
+  if (!response.nameKey) return null;
+  for (let i = 0; i < ctx.table.rows.length; i++) {
+    const other = ctx.table.rows[i];
+    if (other.submissionId === row.submissionId) continue;
+    const data = ctx.responses[other.submissionId];
+    if (!data || data.nameKey !== response.nameKey) continue;
+    const record = ctx.records[subKey_(ctx, other.submissionId)];
+    const welcomed = record ? record.state === 'sent' || record.state === 'hand' : hasEvidence_(other);
+    if (!welcomed) continue;
+    const account = (record && record.userId) || userIdFor_(ctx, other);
+    return { row: other.row, sameAccount: !!account && account === userId };
+  }
   return null;
 }
 
@@ -1214,7 +1269,7 @@ function problem_(ctx, text) {
 // ---------------------------------------------------------------- email
 
 function buildEmail_(name, url) {
-  const greeting = EMAIL.greeting.replace('[Name]', name);
+  const greeting = EMAIL.greeting.split('[Name]').join(name);
   const parts = EMAIL.paragraphs[1].split('[link]');
   const text = [greeting, '', EMAIL.paragraphs[0], '', parts[0] + 'link (' + url + ')' + parts[1], '', EMAIL.paragraphs[2], '', EMAIL.closing].concat(EMAIL.signature).join('\n');
   const html = '<p>' + html_(greeting) + '</p>'
@@ -1253,7 +1308,7 @@ function strictAddress_(email) { return plausibleEmail_(email) && !/[\s,;"()<>\[
 
 function normalizeName_(value) {
   const text = String(value == null ? '' : value).normalize('NFC').replace(/\s+/g, ' ')
-    .replace(/[\u0000-\u001f\u007f-\u009f­؜ᅟᅠ឴឵᠋-᠏​-‏‪-‮⁠-⁯ㅤ︀-️﻿ﾠ￰-￻]/g, '')
+    .replace(/[\u0000-\u001f\u007f-\u009f\u00ad\u061c\u115f\u1160\u17b4\u17b5\u180b-\u180f\u200b-\u200f\u202a-\u202e\u2060-\u206f\u3164\ufe00-\ufe0f\ufeff\uffa0\ufff0-\ufffb]/g, '')
     .replace(/ {2,}/g, ' ').trim();
   return text.length > 80 ? text.slice(0, 80).trim() : text;
 }
@@ -1284,7 +1339,7 @@ function readJson_(text) {
   try { const value = JSON.parse(text); return value && typeof value === 'object' ? value : null; } catch (error) { return null; }
 }
 
-function errorText_(error) { return String((error && error.message) || error || 'unknown error').slice(0, 200); }
+function errorText_(error) { return String((error && error.message) || error || 'unknown error').replace(/[^\s@<>"',;:]+@[^\s@<>"',;:]+/g, '[address]').slice(0, 200); }
 
 function formatTime_(value) {
   const time = Number(value);
@@ -1298,11 +1353,16 @@ function utf8Length_(text) { return encodeURIComponent(text).replace(/%[0-9A-F]{
 function sameCells_(left, right) {
   if (left.length !== right.length) return false;
   for (let i = 0; i < left.length; i++) {
-    const a = left[i] instanceof Date ? left[i].getTime() : left[i];
-    const b = right[i] instanceof Date ? right[i].getTime() : right[i];
+    const a = comparable_(left[i]), b = comparable_(right[i]);
     if (a !== b) return false;
   }
   return true;
+}
+
+// Sheets keeps the leading apostrophe of escaped text as a quote prefix, not as part of the value.
+function comparable_(value) {
+  if (value && typeof value === 'object' && typeof value.getTime === 'function') return value.getTime();
+  return typeof value === 'string' && value.charAt(0) === "'" ? value.slice(1) : value;
 }
 
 function findSheet_(ss, sheetId) {
