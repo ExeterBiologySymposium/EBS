@@ -87,7 +87,7 @@ Do these once, in order, signed in as `exeterbiosymposium@gmail.com`. Steps 5 an
    ```
 5. **Vercel (Production).**
    - Set `EBS_REGISTRATION_STATUS_TOKEN` to the token, marked **Sensitive**.
-   - Set `EBS_REGISTRATION_TRACKER_URL` to the editable link of the Registration tracker tab (`https://docs.google.com/spreadsheets/d/…/edit#gid=…`).
+   - Set `EBS_REGISTRATION_TRACKER_URL` to the response spreadsheet's editable link (`https://docs.google.com/spreadsheets/d/…/edit`). The Registration tracker tab only exists after `setup()` (step 7). Afterwards you can switch this to the tab's own link (ending in `#gid=…`) and redeploy, so the button opens the tab directly.
    - The endpoint needs `EBS_ORG_POOLS_ENABLED=true`. Redeploy; this also publishes the updated website copy.
 6. **Check the endpoint.** Read the token without echoing it, and test only with a reserved address:
    ```bash
@@ -130,7 +130,7 @@ Do these once, in order, signed in as `exeterbiosymposium@gmail.com`. Steps 5 an
 | Property | Required | Purpose |
 | --- | --- | --- |
 | `EBS_STATUS_TOKEN` | Yes | The same value as `EBS_REGISTRATION_STATUS_TOKEN` in Vercel (at least 32 characters) |
-| `FORM_ID` | Yes | The student application Form's ID: the part after `/forms/d/` in its edit link |
+| `FORM_ID` | Yes | The student application Form's ID: the part between `/forms/d/` and `/edit` in its **edit** link. Not the public `/forms/d/e/…` or `forms.gle` link, which use a different ID |
 | `TRACKER_SPREADSHEET_ID` | Yes | The ID of the Form's linked response spreadsheet. The script checks that the Form really is linked to it |
 | `RESEARCHER_TRACKER_ID` | Yes | The Researcher tracker spreadsheet ID. It needs exactly one **Researcher** (or **Reseacher**) header and one **Email** header in row 1 |
 | `RESEARCHER_FORM_URL` | To send | The researcher information form link used in the email (`https://docs.google.com/forms/…` or `https://forms.gle/…`) |
