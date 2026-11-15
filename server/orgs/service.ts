@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { OrganizationProblem, type Destination, type OrganizationGateway, type OrganizationStore, type Pool, type PoolConfiguration, type Operation, type Result, type Page } from './types.js';
+import { OrganizationProblem, type Destination, type OrganizationGateway, type OrganizationStore, type Pool, type PoolConfiguration, type Operation, type Result, type Page, type RegistrationStatus } from './types.js';
 
 const normalize = (email: string) => email.trim().toLowerCase();
 const errorStatus = (error: unknown) => Number((error as { status?: number })?.status || 0);
@@ -179,6 +179,32 @@ export function createOrganizationService({ store, gateway, config }: { store: O
     isTeam,
     async membership(userId: string) { const rows = await memberships(userId); return rows.some(row => row.kind === 'accepted') ? 'accepted' as const : rows.length ? 'pending' as const : 'unassigned' as const; },
     async lookup(email: string) { const user = await gateway.findUser(normalize(email)); return user ? { mode: 'add' as const, userId: user.id, name: user.name, email: normalize(email) } : { mode: 'invite' as const, email: normalize(email) }; },
+    // Read-only status for the registration tracker: the verified account behind each address and
+    // which registered EBS pools hold it. Never returns names and never changes memberships.
+    async registrationStatus(emails: string[]): Promise<RegistrationStatus[]> {
+      try {
+        await production();
+        const kinds = new Map((await pools()).filter(row => row.state === 'ready' && row.organizationId).map(row => [row.organizationId!, row.kind]));
+        return await parallel(emails.map(normalize), async (email): Promise<RegistrationStatus> => {
+          let user;
+          try { user = await gateway.findUser(email); }
+          catch (error) {
+            if (error instanceof OrganizationProblem && error.state === 'ambiguous-account') return { email, account: 'ambiguous' };
+            throw error;
+          }
+          if (!user) return { email, account: 'none' };
+          const times = await gateway.userMembershipTimes(user.id);
+          const accepted = times.filter(row => kinds.get(row.organizationId) === 'accepted');
+          if (accepted.length) {
+            const stamps = accepted.map(row => row.createdAt).filter(Number.isFinite);
+            return { email, account: 'verified', userId: user.id, status: 'accepted', acceptedAt: stamps.length ? Math.min(...stamps) : null };
+          }
+          return { email, account: 'verified', userId: user.id, status: times.some(row => kinds.get(row.organizationId) === 'pending') ? 'pending' : 'none', acceptedAt: null };
+        });
+      } catch (error) {
+        throw error instanceof OrganizationProblem ? error : providerProblem(error);
+      }
+    },
     add: (userId: string, email: string, group: Destination, actor: string) => add(userId, email, group, actor),
     accept: (userId: string, actor: string) => add(userId, null, 'accepted', actor, true),
     enroll: (userId: string) => add(userId, null, 'pending', null),

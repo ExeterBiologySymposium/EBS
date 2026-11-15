@@ -16,6 +16,22 @@ try {
 const get = query => new Request('https://ebs.test/api/team-admin?' + query);
 const post = body => new Request('https://ebs.test/api/team-admin', { method: 'POST', headers: { Origin: 'https://ebs.test', 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
 const noFolderLinks = { get: assert.fail, set: assert.fail };
+const trackerSheet = 'https://docs.google.com/spreadsheets/d/' + 'T'.repeat(44) + '/edit#gid=123';
+
+test('Team receives only a valid editable Google Sheets tracker link; everything else reads as not configured', async () => {
+  const read = async (trackerUrl, query = 'action=registration-tracker') => {
+    const handler = createAdminHandlers({ authenticate: async () => 'user_staff', service: fixture(createOrganizationService).service, teamId: 'org_team', folderLinks: noFolderLinks, trackerUrl });
+    const response = await handler.fetch(get(query));
+    return { status: response.status, body: await response.json(), cache: response.headers.get('cache-control') };
+  };
+  const configured = await read(' ' + trackerSheet + ' ');
+  assert.deepEqual(configured.body, { trackerUrl: trackerSheet });
+  assert.match(configured.cache, /no-store/);
+  for (const trackerUrl of [undefined, null, '', 'not a url', 'http://docs.google.com/spreadsheets/d/' + 'T'.repeat(44), 'https://docs.google.com/spreadsheets/d/e/2PACX-' + 'T'.repeat(40) + '/pubhtml', 'https://docs.google.com/document/d/' + 'T'.repeat(44) + '/edit', 'https://docs.google.com.evil.example/spreadsheets/d/' + 'T'.repeat(44), 'https://user:pass@docs.google.com/spreadsheets/d/' + 'T'.repeat(44), 'https://docs.google.com:8443/spreadsheets/d/' + 'T'.repeat(44), 'https://docs.google.com/spreadsheets/d/short']) {
+    assert.deepEqual((await read(trackerUrl)).body, { trackerUrl: null }, String(trackerUrl));
+  }
+  assert.equal((await read(trackerSheet, 'action=registration-tracker&group=pending')).status, 400);
+});
 
 test('Team can set, replace and clear a custom link for an Accepted participant', async () => {
   const fix = fixture(createOrganizationService);
@@ -90,12 +106,14 @@ test('all administration endpoints freshly authorize Team and return private san
   for (const userId of [null, 'user_student', 'user_staff']) {
     const fix = fixture(createOrganizationService);
     if (userId === 'user_staff') fix.organizations.get('org_team').members = [];
-    const handler = createAdminHandlers({ authenticate: async () => userId, service: fix.service, teamId: 'org_team', folderLinks: noFolderLinks });
-    for (const request of [get('action=status'), get('action=members&group=pending'), get('action=invitations'), get('action=availability'), post({ action: 'lookup', email: 'student@example.test' }), post({ action: 'accept', userId: 'user_student' })]) {
+    const handler = createAdminHandlers({ authenticate: async () => userId, service: fix.service, teamId: 'org_team', folderLinks: noFolderLinks, trackerUrl: trackerSheet });
+    for (const request of [get('action=status'), get('action=members&group=pending'), get('action=invitations'), get('action=availability'), get('action=registration-tracker'), post({ action: 'lookup', email: 'student@example.test' }), post({ action: 'accept', userId: 'user_student' })]) {
       const response = await handler.fetch(request);
       assert.equal(response.status, userId ? 403 : 401);
       assert.match(response.headers.get('cache-control'), /no-store/);
-      assert(!JSON.stringify(await response.json()).includes('student@example.test'));
+      const text = JSON.stringify(await response.json());
+      assert(!text.includes('student@example.test'));
+      assert(!text.includes('docs.google.com'));
     }
     assert.equal(fix.calls.length, 0);
   }

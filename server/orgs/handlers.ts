@@ -2,11 +2,12 @@ import { privateHeaders } from '../access.js';
 import { OrganizationProblem, type Destination } from './types.js';
 import type { OrganizationService } from './service.js';
 import { validFolderLink } from '../../src/folder-link.js';
+import { validRegistrationTrackerUrl } from '../../src/registration-tracker.js';
 
 export function adminResponse(status: number, value: object) {
   return Response.json(value, { status, headers: { ...privateHeaders, 'X-Content-Type-Options': 'nosniff', ...(status === 202 || status === 429 ? { 'Retry-After': '5' } : {}) } });
 }
-async function readBody(request: Request): Promise<Record<string, unknown>> {
+export async function readBody(request: Request): Promise<Record<string, unknown>> {
   if (Number(request.headers.get('content-length')) > 4096) throw new OrganizationProblem('invalid-request', 413);
   const reader = request.body?.getReader(); if (!reader) throw new OrganizationProblem('invalid-request', 400);
   const decoder = new TextDecoder(); let text = '', size = 0;
@@ -24,16 +25,18 @@ async function readBody(request: Request): Promise<Record<string, unknown>> {
   if (!body || typeof body !== 'object' || Array.isArray(body)) throw new OrganizationProblem('invalid-request', 400);
   return body as Record<string, unknown>;
 }
-const exact = (body: object, fields: string) => Object.keys(body).sort().join(',') === fields;
-const emailValue = (email: unknown): email is string => typeof email === 'string' && email.trim().length <= 254 && /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email.trim());
+export const exact = (body: object, fields: string) => Object.keys(body).sort().join(',') === fields;
+export const emailValue = (email: unknown): email is string => typeof email === 'string' && email.trim().length <= 254 && /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email.trim());
 const userValue = (id: unknown): id is string => typeof id === 'string' && /^user_[a-zA-Z0-9]{1,128}$/.test(id);
 const destinationValue = (value: unknown): value is Destination => value === 'pending' || value === 'accepted';
 
-export function createAdminHandlers({ authenticate, service, teamId, folderLinks }: {
+export function createAdminHandlers({ authenticate, service, teamId, folderLinks, trackerUrl = null }: {
   authenticate(request: Request): Promise<string | null>;
   service: OrganizationService;
   teamId: string;
   folderLinks: { get(userId: string): Promise<string | null>; set(userId: string, folderUrl: string | null): Promise<void> };
+  // Private registration tracker Sheet (EBS_REGISTRATION_TRACKER_URL); shown to the Team only.
+  trackerUrl?: string | null;
 }) {
   async function requireAccepted(userId: string) {
     if (await service.membership(userId) !== 'accepted') throw new OrganizationProblem('not-accepted', 409);
@@ -55,6 +58,10 @@ export function createAdminHandlers({ authenticate, service, teamId, folderLinks
           if ([...query.keys()].sort().join(',') !== 'action,userId' || !userValue(userId)) throw new OrganizationProblem('invalid-request', 400);
           await requireAccepted(userId);
           return adminResponse(200, { folderUrl: await folderLinks.get(userId) });
+        }
+        if (query.get('action') === 'registration-tracker') {
+          if ([...query.keys()].join(',') !== 'action') throw new OrganizationProblem('invalid-request', 400);
+          return adminResponse(200, { trackerUrl: validRegistrationTrackerUrl(trackerUrl) });
         }
         if ([...query.keys()].some(key => !['action', 'group', 'cursor'].includes(key))) throw new OrganizationProblem('invalid-request', 400);
         switch (query.get('action')) {
