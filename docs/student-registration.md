@@ -19,7 +19,8 @@ A Google Apps Script owned by `exeterbiosymposium@gmail.com` keeps that tab curr
 
 A tick is a one-time request. If the student cannot be welcomed yet, the box clears and the row says why and what to do. Tick again once it is fixed. Approval alone never sends anything.
 
-- Tick 5 or fewer boxes at a time, one by one or as one block. More than 5 at once are cleared without sending. Ctrl/Cmd multi-selections are seen only at the hourly check.
+- Tick 5 or fewer boxes at a time, one by one or as one block. More than 5 at once are cleared without sending. Ctrl/Cmd multi-selections are handled at the hourly check, which also clears more than 5 new ticks.
+- Untick by clicking the box. Never press Delete, paste or change data validation in the two checkbox columns. If a checkbox disappears, the script puts it back and row 1 says so.
 - Edit only the two checkbox columns; the rest of the tab is protected. To filter or sort, use **Data → Filter views** so your view does not change anyone else's.
 - Keep notes in the response tab, not in the tracker.
 - If you welcome a student yourself, send it from `exeterbiosymposium@gmail.com`, then tick **Welcomed by hand** on their row. The script will never send that student a welcome.
@@ -55,15 +56,15 @@ A tick is a one-time request. If the student cannot be welcomed yet, the box cle
 | Not sent (date): account has no EBS status yet. … | The account has never opened its Account page | Ask the student to sign in and open Account, approve them, then tick again |
 | Not sent (date): no EBS account uses this email. … | No verified EBS account has the application email | Ask the student to add and verify that email in their EBS account, or email them by hand and tick Welcomed by hand |
 | Not sent (date): no valid email in the application. … | The application has no usable email | Email the student by hand and tick Welcomed by hand |
-| Not sent (date): approved before the tracker started. … | Approved before the tracker went live, so it may have been welcomed by hand | If not yet welcomed, email them by hand and tick Welcomed by hand |
+| Not sent (date): approved before sending started. … | Approved before welcome emails from the tracker went live, so they may have been welcomed by hand | If not yet welcomed, email them by hand and tick Welcomed by hand |
 | Not sent (date): already in the Researcher tracker. | The email is already on the Researcher tracker list | Nothing |
 | Not sent (date): sending is off. … | The owner has paused sending | Ask the owner, then tick again |
 | Not sent (date): test mode. | Only the test address can receive email right now | Ask the owner |
-| Not sent (date): too many boxes ticked at once. Tick 5 or fewer. | More than 5 boxes were ticked in one edit | Tick them again, 5 or fewer at a time |
+| Not sent (date): too many boxes ticked at once. Tick 5 or fewer. | More than 5 boxes were ticked in one edit, or more than 5 new ticks waited for the hourly check | Tick them again, 5 or fewer at a time |
 | Needs owner review: … | The script will not send until the owner checks (reasons below) | Tell the account owner |
 | Response deleted | The Form response was deleted | Nothing |
 
-Owner-review reasons: **delivery unknown** (a send may or may not have gone out), **several applicants share this email**, **more than one EBS account**, **email welcomed under another account**, **account already welcomed for another applicant**, **send record missing**, **name needs checking** (the name looks like a link or address), **duplicate row** (a Submission ID appears on more than one row; every copy waits).
+Owner-review reasons: **delivery unknown** (a send may or may not have gone out), **same name as a welcomed student (row N)** (row N was welcomed under another or unknown account, for example by hand to an address without an EBS account; if they are different people, email this student by hand and tick Welcomed by hand), **several applicants share this email**, **more than one EBS account**, **email welcomed under another account**, **account already welcomed for another applicant**, **send record missing**, **name needs checking** (the name looks like a link or address), **duplicate row** (a Submission ID appears on more than one row; every copy waits).
 
 ## Owner setup
 
@@ -119,8 +120,11 @@ Do these once, in order, signed in as `exeterbiosymposium@gmail.com`. Steps 5 an
     5. From a non-owner staff account, tick **Send welcome email** on the test row. Expect "Not sent (date): account is Pending…", and **Executions** should show `onTrackerEdit`.
     6. Accept the test participant in Participants, then tick again. Expect **Sent** within seconds: exactly one email plus the bcc copy, and one new Researcher tracker row.
     7. Untick and tick again: nothing more is sent.
-    8. Clean up: delete the test user in the Clerk Dashboard, the Researcher tracker row and the test Form response. The tracker row then shows **Response deleted**.
-11. **Go live** only with the project lead's go-ahead: delete `TEST_ONLY_RECIPIENT` and run `enableSending()`. Row 1 shows **Sending: On**.
+    8. Clean up: delete the test user in the Clerk Dashboard, the Researcher tracker row and the test Form response. The tracker row then shows **Response deleted**. To repeat the test in the same cycle, use a new `+tag` address; the old one stays recorded as welcomed.
+11. **Go live** only with the project lead's go-ahead.
+    1. First, tick **Welcomed by hand** on the row of every student already welcomed by hand, including students with an outstanding Accepted invitation (Participants → Invitations).
+    2. Delete `TEST_ONLY_RECIPIENT` and run `enableSending()`. Row 1 shows **Sending: On**.
+    3. This first go-live records the cut-over time. Students approved before it are never welcomed by the script; their rows say "approved before sending started". Test mode does not set the cut-over, and later pauses and restarts keep it.
 
 ### Script Properties
 | Property | Required | Purpose |
@@ -141,7 +145,7 @@ Do these once, in order, signed in as `exeterbiosymposium@gmail.com`. Steps 5 an
 | `TAKEOVER_FROM_SCRIPT_ID` | Rarely | Only when moving the tracker to a new project (below) |
 | `RESOLVE_SUBMISSION_ID`, `RESOLVE_OUTCOME` | Rarely | Inputs for `resolveSend()`. They are deleted when it runs |
 
-The sender address, the test recipient and the endpoint address are fixed in the code; properties with those names are ignored. The script writes `SENDING_ENABLED`, `SENDING_CYCLE`, `AUTOMATION_START` (set by the first `setup()`), `PINNED`, `PENDING_EDIT`, `LAST_SUCCESS`, `LAST_STATUS`, `LAST_FULL_REFRESH` and records whose names start with `ebs:`. Never edit those by hand; the records are what prevent duplicate welcomes.
+The sender address, the test recipient and the endpoint address are fixed in the code; properties with those names are ignored. The script writes `SENDING_ENABLED`, `SENDING_CYCLE`, `AUTOMATION_START` (the cut-over, set by the first `enableSending()` outside test mode), `PINNED`, `PENDING_EDIT`, `LAST_SUCCESS`, `LAST_STATUS`, `LAST_FULL_REFRESH` and records whose names start with `ebs:`. Never edit those by hand; the records are what prevent duplicate welcomes.
 
 ### What the script checks
 On every run the script refuses to write student data or send unless all of these hold:
@@ -149,7 +153,7 @@ On every run the script refuses to write student data or send unless all of thes
 - the Form is linked to `TRACKER_SPREADSHEET_ID`, with response editing and summary publishing off;
 - the three configured questions still exist with the same titles;
 - it runs as `exeterbiosymposium@gmail.com`, and this project holds the tracker's claim;
-- the tracker's headers, checkboxes and protection are intact.
+- `FORM_ID` and `TRACKER_SPREADSHEET_ID` are the ones `setup()` used, and the tracker's headers and protection are intact.
 
 While sending is on, it also requires the same `REGISTRATION_CYCLE` that `enableSending()` recorded, every granted permission and a valid `RESEARCHER_FORM_URL`.
 
@@ -166,18 +170,22 @@ A failed check writes only a "Paused — …" line in row 1. A definite failure 
 - **"A welcome with no record"** (in row 1, or "send record missing" on a row): a row shows Sent or Welcomed by hand, but the records are gone, for example after the project was re-created. That row blocks every welcome for the same student. Check the inbox, then record it with `RESOLVE_OUTCOME=sent`.
 - **"Tracker layout changed — owner runs setup()":**
   - Undo the change first (**File → Version history**), for example a moved or inserted column, or edited headers. Then run `setup()`.
-  - `setup()` repairs missing checkboxes and protection, but refuses to overwrite changed headers.
-- **Moving to a new project:** in the new project, set `TAKEOVER_FROM_SCRIPT_ID` to the old project's script ID (**Project Settings → IDs**), run `setup()`, then `enableSending()`. Sending starts off with a new cut-over time. Remove the old project's triggers or delete it.
+  - `setup()` repairs a missing protection, but refuses to overwrite changed headers. Missing checkboxes are restored automatically at every run.
+- **Moving to a new project:** in the new project, set `TAKEOVER_FROM_SCRIPT_ID` to the old project's script ID (**Project Settings → IDs**), run `setup()`, then `enableSending()`. Sending starts off, and the next go-live records a new cut-over time. Remove the old project's triggers or delete it.
 - **When someone with access leaves:**
   - Remove their Drive and Form access.
-  - Rotate the token in both Vercel and Script Properties (setting both together pauses lookups only briefly).
+  - Rotate the token: set the new value in Vercel and in Script Properties, then redeploy Production (the old token keeps working until the redeploy; lookups fail between the two changes).
   - Change the `exeterbiosymposium@gmail.com` password if they knew it.
 - **Quotas** (consumer Google account):
   - 100 email recipients a day. Each welcome uses 2 because of the bcc, so about 50 welcomes a day.
   - 90 minutes of trigger runtime a day, and 6 minutes per run.
   - The script queues sends rather than exceeding a limit.
-- **New registration cycle:** create or link the new Form, update `FORM_ID`, `TRACKER_SPREADSHEET_ID` (if the spreadsheet changes) and `REGISTRATION_CYCLE`, run `setup()`, then `enableSending()`. Records for earlier applications stay and keep blocking duplicates.
-- **Deleting a student's data:** delete the Form response (the tracker blanks the row), the Researcher tracker row and the inbox copy. Records hold IDs, hashed emails and timestamps, plus the error text of a failed send.
+- **New registration cycle:**
+  1. Link the new Form to a **new** response spreadsheet. The script refuses a new Form on the old spreadsheet, so the old tracker keeps its history.
+  2. Restrict and audit the new spreadsheet as in steps 1–2.
+  3. Update `FORM_ID`, `TRACKER_SPREADSHEET_ID` and `REGISTRATION_CYCLE`, run `setup()`, then `enableSending()`.
+  4. Records are kept per cycle (accounts and emails) and per Form (applications), so returning students can be welcomed once in the new cycle.
+- **Deleting a student's data:** delete the Form response (the tracker blanks the row), the Researcher tracker row and the inbox copy. Records hold IDs, hashed emails and timestamps, plus the error text of a failed send with addresses removed.
 - **Website text:**
   - Published Website content may still mention the old orientation call or the old contact address; check it in **EBS administration → Website content**.
   - The live site keeps old page text until the next deploy.

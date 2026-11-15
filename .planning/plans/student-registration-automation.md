@@ -23,7 +23,7 @@ Status: approved by the user in chat on 2026-11-14 with the amendments below; im
 The user approved a revised plan in chat. It keeps the six steps above with these changes:
 
 - **Trigger:** staff tick **Send welcome email** (column A) in the Registration tracker. The hourly trigger only refreshes statuses, processes boxes that are still ticked and retries Researcher tracker appends; it never starts a send on its own. *Superseded:* time-driven polling as the send trigger, dry runs and catch-up sending.
-- **Duplicate protection:** a cut-over time (`AUTOMATION_START`, set by the first `setup()`), a staff **Welcomed by hand** box, the Researcher tracker email list, permanent per-application records, and records keyed by Clerk account and hashed email. Attempts are recorded before `MailApp.sendEmail`; a send that may have happened becomes **Needs owner review** and is never retried automatically.
+- **Duplicate protection:** a cut-over time (`AUTOMATION_START`, set at go-live by the first `enableSending()` outside test mode), a staff **Welcomed by hand** box, the Researcher tracker email list, permanent per-application records, and records keyed by Clerk account and hashed email. Attempts are recorded before `MailApp.sendEmail`; a send that may have happened becomes **Needs owner review** and is never retried automatically.
 - **Tracker integrity:** the tab is protected so staff edit only the two checkbox columns; rows are keyed by Submission ID and the script re-reads it before every write; staff use filter views instead of a shared filter.
 - **Guards:** restricted sharing, no resharing by editors, response editing and summary publishing off, pinned question items, the confirmed sender, a document-level claim by the script, granted scopes and mail quota. A definite guard failure turns sending off.
 - **Website:** the contact address becomes `exeterbiosymposium@gmail.com`, and the orientation call is removed from the FAQ, Schools and Student research (separate commits before the feature).
@@ -35,7 +35,7 @@ The user approved a revised plan in chat. It keeps the six steps above with thes
 Run locally on 2026-11-15. This session's network policy blocked the npm registry, so dependencies could not be installed.
 
 **Ran and passed**
-- `node --test scripts/registration-apps-script.test.mjs`: 38 tests (plain Node, using fakes of the Apps Script services).
+- `node --test scripts/registration-apps-script.test.mjs`: 47 tests (plain Node, using fakes of the Apps Script services).
 - Server suites through a scratch loader that transpiles TypeScript with a global TypeScript install and stubs `vite` and the uninstalled packages (repository tests unchanged):
   - `scripts/registration-status.test.mjs`: 9 tests.
   - `scripts/org-api.test.mjs`, `org-rollover.test.mjs`, `org-store.test.mjs`: 30 pass, 1 skipped (needs PostgreSQL).
@@ -48,7 +48,7 @@ Run locally on 2026-11-15. This session's network policy blocked the npm registr
   - `git diff --check`.
 - Mutation checks:
   - Removing any single safeguard in the endpoint fails its tests.
-  - In `Code.gs`, every safeguard except two is pinned by a test. The two survivors are deliberate duplicates: the account-record and time-budget checks are repeated right before the send.
+  - In `Code.gs`, 46 single-safeguard mutations were run. Every one fails a test except where a second, deliberate check backs it up: the account-record and time-budget checks are repeated right before the send, and two filters both skip recorded hand rows (removing both fails a test).
 
 **Not run here** (they need the npm registry):
 - `npm run typecheck` and `npm run build`;
@@ -60,5 +60,15 @@ Their new assertions were checked by reading the code. Run them once the registr
 **Differences from the approved plan**
 - `scripts/cohorts.test.mjs:150` was left unchanged: it passes at HEAD, because the search dialog lists Projects among its default results.
 - Every copy of a duplicated Submission ID waits for owner review, instead of the first copy being used, so a re-paired row can never send.
-- `setup()` repairs missing checkboxes and protection but refuses to overwrite changed headers, because rewriting headers over shifted columns would misalign the data.
+- `setup()` repairs a missing protection but refuses to overwrite changed headers, because rewriting headers over shifted columns would misalign the data. Missing checkboxes are restored at every run instead of pausing sending.
+- An independent review found two possible duplicate welcomes. Both are fixed and tested:
+  - the cut-over is go-live, not setup;
+  - a tick waits for owner review when another row with the same name was already welcomed under an unknown or different account.
+- The same review led to these changes:
+  - the 5-tick limit also covers replayed edits and new ticks found by the hourly check;
+  - the Researcher Email address is chosen from all of an account's rows;
+  - a new Form needs its own spreadsheet;
+  - names are inserted literally;
+  - stored errors drop addresses;
+  - recorded hand rows are not looked up again.
 - No real email was sent, and the live Sheets, Form and Clerk accounts were not changed.
