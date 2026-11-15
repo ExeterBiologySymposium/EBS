@@ -57,7 +57,7 @@ export default function PageContent() { return <div className="page-layout layou
           <p>Sign in or create an account, then open <a href="student-signup.html">Student registration</a> and submit the Google Form using your account email. Every researcher applies individually. Creating an account or opening the form does not submit your application.</p>
         </details>
         <details className="disclosure" id="application-process"><summary>What happens after I apply?</summary>
-          <p>The EBS team reviews your application and emails you if approved. Check your status on your <a href="account.html">Account page</a>. Accepted accounts can create a research folder and access Events and available member resources; account help explains the next steps.</p>
+          <p>The EBS team reviews your application. When you're approved, your <a href="account.html">Account page</a> shows your access, and the team sends you a welcome email from exeterbiosymposium@gmail.com (check your spam folder if you don't see it). Accepted accounts can create a research folder and access Events and available member resources; account help explains the next steps.</p>
         </details>
       </div>
     </section>
