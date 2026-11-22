@@ -3,6 +3,7 @@ import { EditorialPageCopy } from './content/page-copy';
 import { editorialPages, type EditorialPage } from './content/pages';
 import { definition } from './content/copy/index';
 import { useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useReducedMotion } from 'motion/react';
 import { ArrowDownRight, Search, X } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
 import { pageComponents } from './page-routes';
@@ -18,15 +19,30 @@ function ArrowLink({href,children,className='',current=false}:{href?:string;chil
   if(href && isProtectedPath(href)&&access!=='accepted'){href=status==='signed-in'?'account.html':'register.html';children=status==='signed-in'?'Account':'Request resource access';}
   return <a className={`button ${className}`} href={href} aria-current={current?'page':undefined}><span>{children}</span><ArrowDownRight size={18} aria-hidden="true"/></a>;
 }
+const homeNavOrder = ['about.html', 'team.html', 'schedule.html', 'resources.html', 'datascience.html', 'events.html', 'faq.html', 'contact.html'];
+
 function Header({page}:{page:string}) {
   const {access,status}=useContext(AuthContext);
   const signedIn=status==='signed-in';
   const groups=siteNavigation(access,signedIn);
+  const isHome=page==='index.html';
+  const homeLinks=groups.flatMap(group=>group.links).map(link=>link.href==='about.html'?{...link,label:'About'}:link);
+  const homePrimary=homeNavOrder.flatMap(href=>homeLinks.filter(link=>link.href===href));
+  const homeMore=homeLinks.filter(link=>!homeNavOrder.includes(link.href));
   const header=useRef<HTMLElement>(null);
   const search=useRef<HTMLDialogElement>(null);
   const searchInput=useRef<HTMLInputElement>(null);
   const searchTrigger=useRef<HTMLElement>(null);
   const [query,setQuery]=useState('');
+  const [scrolled,setScrolled]=useState(false);
+
+  useEffect(()=>{
+    if (!isHome) return;
+    const update=()=>setScrolled(window.scrollY>40);
+    update();
+    window.addEventListener('scroll',update,{passive:true});
+    return()=>window.removeEventListener('scroll',update);
+  },[isHome]);
 
   useEffect(()=>{
     if (header.current) for (const disclosure of header.current.querySelectorAll('details')) disclosure.open=false;
@@ -56,15 +72,16 @@ function Header({page}:{page:string}) {
   const terms=query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   const results=searchPages.filter(({url})=>(access==='accepted'||!isProtectedPath(url))&&(!signedIn||!['register.html','student-signup.html'].includes(url))&&(signedIn||url!=='account.html')).map(({title,url,description})=>({title,url,score:terms.reduce((sum,term)=>sum+(title.toLowerCase()===term?12:title.toLowerCase().includes(term)?7:(url+' '+description).toLowerCase().includes(term)?3:0),0)})).filter(row=>!terms.length||row.score>0).sort((a,b)=>b.score-a.score||a.title.localeCompare(b.title)).slice(0,8);
   return <>
-    <header ref={header} className="site-header site-header--grouped" onKeyDown={event=>{
+    <header ref={header} className={`site-header site-header--grouped${isHome ? ' site-header--home' : ''}${isHome && !scrolled ? ' on-media' : ''}`} onKeyDown={event=>{
       if (event.key!=='Escape') return;
       const open=header.current?.querySelector<HTMLDetailsElement>('details[open]');
       if (open) { event.preventDefault(); open.open=false; open.querySelector('summary')?.focus(); }
     }}>
       <a className="skip" href="#main">Skip to content</a>
-      <a className="wordmark" href="/" aria-label="Exeter Biology Symposium home"><img src="/images/brand/ebs-logo-red.png" alt="" width={1536} height={1024}/></a>
+      <a className="wordmark" href="/" aria-label="Exeter Biology Symposium home"><img className="wordmark-red" src="/images/brand/ebs-logo-red.png" alt="" width={1536} height={1024}/>
+        {isHome&&<img className="wordmark-white" src="/images/brand/ebs-logo-white.png" alt="" width={1536} height={1024}/>}</a>
       <nav className="desktop-nav" aria-label="Main navigation">
-        {groups.map(group=>group.label==='Schedule' ? <div key={group.label}>{links(group)}</div> :
+        {isHome?links({label:'Main navigation',links:homePrimary}):groups.map(group=>group.label==='Schedule' ? <div key={group.label}>{links(group)}</div> :
           <details className="header-disclosure" name="ebs-main-navigation" key={group.label}>
             <summary className={group.links.some(link=>link.href===page)?'has-current-page':undefined}>{group.label}</summary>
             <div className="header-disclosure-links">{links(group)}</div>
@@ -86,7 +103,7 @@ function Header({page}:{page:string}) {
             <button type="button" aria-haspopup="dialog" onClick={event=>openSearch(event.currentTarget)}>Search EBS <Search size={17}/></button>
           </div>
           <nav aria-label="Main navigation">
-            {groups.map(group=><div key={group.label}>{group.label!=='Schedule'&&<p>{group.label}</p>}{links(group)}</div>)}
+            {isHome?links({label:'Main navigation',links:[...homePrimary,...homeMore]}):groups.map(group=><div key={group.label}>{group.label!=='Schedule'&&<p>{group.label}</p>}{links(group)}</div>)}
           </nav>
           <div className="menu-account"><AccountControls/></div>
         </div>
@@ -111,24 +128,47 @@ function Hero(){
   const {hero}=usePageCopy('index',definition);
   const {status}=useContext(AuthContext);
   const heroImage=hero.srcEbsStudentsVisitingBroadInstitute;
-  return <section className="home-hero home-hero--intro">
-    <div className="hero-copy">
-      <h1>{hero.title}</h1>
-      <p className="hero-intro">{hero.biologyResearch} {hero.ledByStudents} {hero.openEveryone}</p>
-      <p>{hero.entry100FreeAllMiddleHighSchool} {hero.learnInvestigatePresentPersonOrOnline}</p>
-      <dl className="hero-fact-list">{hero.facts.map(({label,value},index)=><div key={index}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-      <div className="actions">
-        <ArrowLink href={safeCopyUrl(hero.hrefRegisterAsStudent)} className="primary">{hero.registerAsStudent}</ArrowLink>
-        <a className="button secondary" href="schedule.html">View schedule</a>
+  const facts=hero.facts;
+  const [selection,setSelection]=useState(0);
+  const [paused,setPaused]=useState(false);
+  const reducedMotion=useReducedMotion();
+  const active=facts.length?selection%facts.length:0;
+  const fact=facts[active];
+
+  useEffect(()=>{
+    if (paused || reducedMotion || facts.length<2) return;
+    const timer=window.setInterval(()=>setSelection(value=>(value+1)%facts.length),8000);
+    return()=>window.clearInterval(timer);
+  },[paused,reducedMotion,facts.length]);
+
+  return <section className="home-hero">
+    <picture className="hero-picture">
+      <img className="hero-image" src={safeCopyUrl(heroImage,'image')} srcSet={heroImage===definition.fields.hero.fields.srcEbsStudentsVisitingBroadInstitute.initial ? "/images/team/ebs-team-broad-institute-480.jpg 480w, /images/team/ebs-team-broad-institute-960.jpg 960w, /images/team/ebs-team-broad-institute-1440.jpg 1440w, /images/team/ebs-team-broad-institute-1920.jpg 1920w" : undefined} sizes="100vw" alt={hero.altEbsStudentsVisitingBroadInstitute} fetchPriority="high"/>
+    </picture>
+    <div className="hero-shade" aria-hidden="true"/>
+    {fact&&<div className="hero-facts" onMouseEnter={()=>setPaused(true)} onFocusCapture={()=>setPaused(true)}>
+      <span>{fact.label}</span>
+      <strong><span className={fact.label==='Where'?'hero-facts__location':undefined}>{fact.value}</span></strong>
+      {facts.length>1&&<div className="fact-controls">
+        {facts.map(({label},index)=><button type="button" key={index} aria-label={`Show ${label}`} aria-pressed={index===active} onClick={()=>{setSelection(index);setPaused(true);}}><span/></button>)}
+        {!reducedMotion&&<button className="autoplay-control" type="button" onClick={()=>setPaused(value=>!value)}>{paused?'Play':'Pause'}</button>}
+      </div>}
+    </div>}
+    <div className="hero-bottom">
+      <div className="hero-copy">
+        <h1>{hero.title}</h1>
+        <p className="hero-intro">{hero.biologyResearch}<br/>{hero.ledByStudents}<br/>{hero.openEveryone}</p>
+        <p>{hero.entry100FreeAllMiddleHighSchool}<br/>{hero.learnInvestigatePresentPersonOrOnline}</p>
+        <a className="school-link" href={status==='signed-in'?'account.html':safeCopyUrl(hero.schoolPage)}>{status==='signed-in'?'Your account ↗':hero.schoolLink}</a>
       </div>
-      {status!=='signed-in'&&<a className="school-link" href={safeCopyUrl(hero.schoolPage)}>{hero.schoolLink}</a>}
-    </div>
-    <div className="hero-photo">
-      <picture><img src={safeCopyUrl(heroImage,'image')} srcSet={heroImage===definition.fields.hero.fields.srcEbsStudentsVisitingBroadInstitute.initial ? "/images/team/ebs-team-broad-institute-480.jpg 480w, /images/team/ebs-team-broad-institute-960.jpg 960w, /images/team/ebs-team-broad-institute-1440.jpg 1440w, /images/team/ebs-team-broad-institute-1920.jpg 1920w" : undefined} sizes="(min-width: 1001px) 50vw, 100vw" alt={hero.altEbsStudentsVisitingBroadInstitute} fetchPriority="high"/></picture>
-      <img className="hero-photo-mark" src={safeCopyUrl(hero.srcPhillipsExeterAcademy,'image')} alt={hero.altPhillipsExeterAcademy} width={361} height={361}/>
+      <div className="hero-registration">
+        <img className="hero-squaremark" src={safeCopyUrl(hero.srcPhillipsExeterAcademy,'image')} alt={hero.altPhillipsExeterAcademy} width={361} height={361}/>
+        <ArrowLink href={safeCopyUrl(hero.hrefRegisterAsStudent)} className="media-button">{hero.registerAsStudent}</ArrowLink>
+      </div>
     </div>
   </section>;
 }
+
 function Guidance(){
   const {researchGuidance}=usePageCopy('index',definition);
   return <section className="home-guidance">
