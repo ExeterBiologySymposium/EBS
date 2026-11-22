@@ -96,13 +96,6 @@ export const definition = group("schools", {
     howMuchTimeDoStudentsNeed: copy("Question · How much time do students need?", "How much time do students need?"),
     mostSpend12HoursPer: copy("Text · Most spend 1–2 hours per week, at their own pace. They can work…", "Most spend 1–2 hours per week, at their own pace. They can work individually or in teams of up to three, with each member applying separately."),
   }),
-  howDoWeArrangeOrientation: group("How do we arrange orientation?", {
-    howDoWeArrangeOrientation: copy("Question · How do we arrange orientation?", "How do we arrange orientation?"),
-    anEbsTeamMemberArranges20: copy("Text · An EBS team member arranges a 20-minute Zoom meeting by email to…", "An EBS team member arranges a 20-minute Zoom meeting by email to introduce the program and answer questions. Your school contact person can"),
-    hrefEmailEbs: url("Link destination · email EBS", "mailto:exeterbiosymposium@gmail.com", "link"),
-    emailEbs: copy("Link text · email EBS", "email EBS"),
-    coordinate: copy("Text · An EBS team member arranges a 20-minute Zoom meeting by email to…", "to coordinate."),
-  }),
   howDoWeContactEbsFaculty: group("How do we contact the EBS faculty advisor?", {
     howDoWeContactEbsFaculty: copy("Question · How do we contact the EBS faculty advisor?", "How do we contact the EBS faculty advisor?"),
     email: copy("Text · Email exeterbiosymposium@gmail.com and say your message is for…", "Email"),

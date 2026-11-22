@@ -37,6 +37,7 @@ test('initial content validates and preserves the latest copy, layout and access
   for (const link of ['href="faq.html"', 'href="schedule.html"', 'href="account.html"', 'href="mailto:exeterbiosymposium@gmail.com"', 'href="/register.html"']) assert.ok(signedOut.includes(link), link);
   assert.ok(signedOut.includes('>Sign in to continue: Register your interest</button>'));
   assert.equal(signedOut.match(/class="timeline__item"/g).length, 7);
+  assert.doesNotMatch(signedOut, /Zoom|orientation/i, 'Student research no longer describes an orientation call');
   const accepted = render(h(view.PublishedPage, { page: 'researchers', initial: research }), { status: 'signed-in', access: 'accepted' });
   assert.ok(accepted.includes('href="https://forms.gle/vgtVrsBm1UbBhwtv9" target="_blank" rel="noopener noreferrer"'));
   assert.ok(accepted.includes('<a class="button secondary" href="resources.html">Browse Resources</a>'));

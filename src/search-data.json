@@ -62,7 +62,7 @@
   {
     "title": "School Registration",
     "url": "schools.html",
-    "description": "Sign your school up for EBS, or provide a contact person if EBS has already contacted you. Find guidance on individual student signup and Zoom orientation."
+    "description": "Sign your school up for EBS, or provide a contact person if EBS has already contacted you. Find guidance on individual student signup."
   },
   {
     "title": "Coding Lessons",
@@ -72,7 +72,7 @@
   {
     "title": "EBS Participation and Signup FAQ",
     "url": "faq.html",
-    "description": "Find answers about EBS project eligibility, case-by-case wet-lab acceptance, costs, registration, Zoom orientation, and attendance."
+    "description": "Find answers about EBS project eligibility, case-by-case wet-lab acceptance, costs, registration, and attendance."
   },
   {
     "title": "R and RStudio Lessons",

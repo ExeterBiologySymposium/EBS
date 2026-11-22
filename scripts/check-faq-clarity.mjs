@@ -48,14 +48,18 @@ try {
       assert.doesNotMatch(html, /While you wait|Participant questions/, `${status}/${access} must not show membership-specific guidance`);
     }
     const baseline = JSON.parse(await readFile(baselinePath, 'utf8'));
-    assert.equal(answers(faq).length, 12);
+    assert.equal(answers(faq).length, 11);
+    assert.doesNotMatch(faq, /orientation|Zoom/i, 'The FAQ no longer describes an orientation call');
     const answerWords = words(answers(faq).join(' '));
     assert.ok(answerWords <= baseline.answerWords / 2, `${answerWords} answer words must be at most half the original ${baseline.answerWords}`);
-    for (const [page, expected] of [['schools', 5], ['judges', 3]]) {
+    for (const [page, expected] of [['schools', 4], ['judges', 3]]) {
       const { default: Page } = await server.ssrLoadModule(`/src/pages/${page}.tsx`);
-      assert.equal(answers(renderToStaticMarkup(createElement(Page))).length, expected, `${page} question count`);
+      const markup = renderToStaticMarkup(createElement(Page));
+      assert.equal(answers(markup).length, expected, `${page} question count`);
+      // Judges keep their pre-event briefing; only the student and school orientation call was removed.
+      if (page === 'schools') assert.doesNotMatch(markup, /orientation|Zoom/i, 'Schools no longer describes an orientation call');
     }
-    console.log(`Passed account-state checks and FAQ structure: ${baseline.questions} → 12 questions; ${baseline.answerWords} → ${answerWords} answer words (${Math.round(100 * (1 - answerWords / baseline.answerWords))}% shorter). Schools: 5; Judges: 3.`);
+    console.log(`Passed account-state checks and FAQ structure: ${baseline.questions} → 11 questions; ${baseline.answerWords} → ${answerWords} answer words (${Math.round(100 * (1 - answerWords / baseline.answerWords))}% shorter). Schools: 4; Judges: 3.`);
   }
 } finally {
   await server.close();

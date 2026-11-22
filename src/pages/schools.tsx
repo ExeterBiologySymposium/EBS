@@ -49,9 +49,6 @@ export default function PageContent() {
 <details className="disclosure" id="s-faq-1"><summary>{editorial.howMuchTimeDoStudentsNeed.howMuchTimeDoStudentsNeed}</summary>
 <p>{editorial.howMuchTimeDoStudentsNeed.mostSpend12HoursPer}</p>
 </details>
-<details className="disclosure" id="s-faq-orientation"><summary>{editorial.howDoWeArrangeOrientation.howDoWeArrangeOrientation}</summary>
-<p>{editorial.howDoWeArrangeOrientation.anEbsTeamMemberArranges20 + " "}<a href={safeCopyUrl(editorial.howDoWeArrangeOrientation.hrefEmailEbs)}>{editorial.howDoWeArrangeOrientation.emailEbs}</a>{" " + editorial.howDoWeArrangeOrientation.coordinate}</p>
-</details>
 <details className="disclosure" id="s-faq-advisor"><summary>{editorial.howDoWeContactEbsFaculty.howDoWeContactEbsFaculty}</summary>
 <p>{editorial.howDoWeContactEbsFaculty.email + " "}<a href={safeCopyUrl(editorial.howDoWeContactEbsFaculty.hrefExeterbiosymposiumGmailCom)}>{editorial.howDoWeContactEbsFaculty.exeterbiosymposiumGmailCom}</a>{" " + editorial.howDoWeContactEbsFaculty.sayMessageFacultyAdvisorEbsTeam}</p>
 </details>

@@ -12,7 +12,7 @@ export function LegalPage({ title, lead, sections }: {
       <p className="eyebrow">Exeter Biology Symposium</p>
       <h1>{title}</h1>
       <p className="lead">{lead}</p>
-      <p className="small">Last updated: <time dateTime="2026-10-31">October 31, 2026</time></p>
+      <p className="small">Last updated: <time dateTime="2026-11-14">November 14, 2026</time></p>
     </div></section>
     <div className="shell article-layout">
       <nav className="contents legal-contents" aria-label={`${title} contents`}>

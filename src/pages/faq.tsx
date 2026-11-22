@@ -62,9 +62,6 @@ export default function PageContent() {
         <details className="disclosure" id="application-process"><summary>{editorial.whatHappensAfterIApply.whatHappensAfterIApply}</summary>
           <p>{editorial.whatHappensAfterIApply.ebsTeamReviewsApplicationEmailsIf + " "}<a href={safeCopyUrl(editorial.whatHappensAfterIApply.hrefAccountPage)}>{editorial.whatHappensAfterIApply.accountPage}</a>{editorial.whatHappensAfterIApply.acceptedAccountsCanCreateResearchFolder}</p>
         </details>
-        <details className="disclosure" id="orientation-meetings"><summary>{editorial.whatOrientationMeeting.whatOrientationMeeting}</summary>
-          <p>{editorial.whatOrientationMeeting.entry20MinuteZoomIntroductionEbsGetting + " "}<a href={safeCopyUrl(editorial.whatOrientationMeeting.hrefEmailEbs)}>{editorial.whatOrientationMeeting.emailEbs}</a>{" " + editorial.whatOrientationMeeting.coordinate}</p>
-        </details>
       </div>
     </section>
     <div className="reading">

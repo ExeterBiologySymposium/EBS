@@ -39,7 +39,12 @@ function SubmissionCheck({ userId }: { userId: string }) {
   </div>;
 }
 
-export function ApplicationProgress({ children, account = false }: { children: ReactNode; account?: boolean }) {
+export function ApplicationProgress({ children, account = false, submissionNote, approvalNote }: {
+  children: ReactNode;
+  account?: boolean;
+  submissionNote?: string;
+  approvalNote?: string;
+}) {
   const { status, access, userId, signIn, signUp } = useContext(AuthContext);
   const preview = usePageCopyState()?.preview;
   const signedIn = status === 'signed-in';
@@ -57,13 +62,14 @@ export function ApplicationProgress({ children, account = false }: { children: R
         {status === 'unavailable' && <p role="status">Sign-in is unavailable. Reload the page or <a href="contact.html">contact the EBS team</a>.</p>}
       </li>
       <li><strong>Submit the Google Form</strong>
-        <p>Use the same email address as your EBS account. Google Forms opens in a new tab.</p>
+        <p>{submissionNote ?? 'Use the same email address as your EBS account. Google Forms opens in a new tab.'}</p>
         {signedIn && children}
         {signedIn && !accepted && userId && !preview && <SubmissionCheck key={userId} userId={userId} />}
         {signedIn && !accepted && preview && <p className="small">I submitted my form · Self-reported</p>}
       </li>
       <li><strong>Check EBS approval</strong>
         {accepted ? <p>Accepted</p> : <p>{account ? 'Use Check approval status above after the EBS team reviews your application.' : <>After the EBS team reviews your application, check your approval status in <a href="account.html">Account</a>.</>}</p>}
+        {approvalNote && <p>{approvalNote}</p>}
       </li>
     </ol>
   </section>;

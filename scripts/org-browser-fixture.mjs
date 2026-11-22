@@ -64,6 +64,8 @@ handlers = createAdminHandlers({
       else links.set(userId, url);
     },
   },
+  // Fake Sheet ID for browser QA of the Team-only tracker link.
+  trackerUrl: 'https://docs.google.com/spreadsheets/d/' + 'X'.repeat(44) + '/edit',
 });
 participantFolder = createFolderHandlers({
   authenticate: async () => 'user_student', membership: fix.service.membership,

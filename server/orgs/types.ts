@@ -25,6 +25,8 @@ export interface OrganizationGateway {
   user(id: string): Promise<User>;
   findUser(email: string): Promise<User | null>;
   userMemberships(id: string): Promise<string[]>;
+  /** Each membership's organization and creation time (ms), used to report when an account was accepted. */
+  userMembershipTimes(id: string): Promise<{ organizationId: string; createdAt: number }[]>;
   createOrganization(kind: Destination, ordinal: number, metadata: Record<string, unknown>): Promise<string>;
   addMember(organizationId: string, userId: string): Promise<void>;
   removeMember(organizationId: string, userId: string): Promise<void>;
@@ -35,5 +37,8 @@ export type PoolConfiguration = { instanceId: string; teamId: string; pendingId:
 export class OrganizationProblem extends Error {
   constructor(public readonly state: string, public readonly status = 503) { super(state); }
 }
+export type RegistrationStatus =
+  | { email: string; account: 'invalid' | 'none' | 'ambiguous' }
+  | { email: string; account: 'verified'; userId: string; status: 'accepted' | 'pending' | 'none'; acceptedAt: number | null };
 export type Result = { state: 'added' | 'invited' | 'already-member' | 'already-accepted' | 'already-invited' | 'cleanup-needed'; destination: Destination };
 export type Page<T> = { data: T[]; totalCount: number; offset: number; nextCursor: string | null; previousCursor: string | null };

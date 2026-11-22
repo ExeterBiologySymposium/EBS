@@ -92,17 +92,10 @@ export const definition = group("faq", {
   }),
   whatHappensAfterIApply: group("What happens after I apply?", {
     whatHappensAfterIApply: copy("Question · What happens after I apply?", "What happens after I apply?"),
-    ebsTeamReviewsApplicationEmailsIf: copy("Text · The EBS team reviews your application and emails you if…", "The EBS team reviews your application and emails you if approved. Check your status on your"),
+    ebsTeamReviewsApplicationEmailsIf: copy("Text before the Account page link", "The EBS team reviews your application. When you're approved, your"),
     hrefAccountPage: url("Link destination · Account page", "account.html", "link"),
     accountPage: copy("Link text · Account page", "Account page"),
-    acceptedAccountsCanCreateResearchFolder: copy("Text · The EBS team reviews your application and emails you if…", ". Accepted accounts can create a research folder and access Events and available member resources; account help explains the next steps."),
-  }),
-  whatOrientationMeeting: group("What is the orientation meeting?", {
-    whatOrientationMeeting: copy("Question · What is the orientation meeting?", "What is the orientation meeting?"),
-    entry20MinuteZoomIntroductionEbsGetting: copy("Text · A 20-minute Zoom introduction to EBS, getting started with…", "A 20-minute Zoom introduction to EBS, getting started with research, and where to find support. You can ask questions, too. An EBS team member arranges the meeting by email;"),
-    hrefEmailEbs: url("Link destination · email EBS", "mailto:exeterbiosymposium@gmail.com", "link"),
-    emailEbs: copy("Link text · email EBS", "email EBS"),
-    coordinate: copy("Text · A 20-minute Zoom introduction to EBS, getting started with…", "to coordinate."),
+    acceptedAccountsCanCreateResearchFolder: copy("Text after the Account page link", " shows your access, and the team sends you a welcome email from exeterbiosymposium@gmail.com (check your spam folder if you don't see it). Accepted accounts can create a research folder and access Events and available member resources; account help explains the next steps.", {"multiline":true}),
   }),
   stillHaveQuestion: group("Still have a question?", {
     stillHaveQuestion: copy("Heading · Still have a question?", "Still have a question?"),

@@ -197,6 +197,7 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .admin-invite .button { justify-self: start; }
 .admin-result:empty { display: none; }
 .admin-result { overflow-wrap: anywhere; }
+.admin-tools .admin-tracker-hint { flex-basis: 100%; margin: 0; }
 .admin-clerk-settings { max-width: 100%; }
 .admin-clerk-settings .cl-rootBox, .admin-clerk-settings .cl-cardBox { width: 100%; max-width: 100%; }
 .admin-staff-invite { margin-bottom: 1.5rem; }

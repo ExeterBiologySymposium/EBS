@@ -30,7 +30,7 @@ export const researchersInitial: ResearchContent = {
     intro: "The research cycle runs from October 2026 through Symposium Day on April 25th, 2027.",
     entries: [
       { date: "September 2026", title: "Interest Registration", description: { text: "Submit your interest via the registration form. Share your research area and any initial ideas.", links: [] } },
-      { date: "October 2026", title: "Research Kickoff", description: { text: "Start with a 20-minute Zoom orientation arranged by email with an EBS team member. Use the research document and team support to narrow your question.", links: [] } },
+      { date: "October 2026", title: "Research Kickoff", description: { text: "Use the research document and team support to narrow your question.", links: [] } },
       { date: "October – March", title: "Active Research Period", description: { text: "Work through the research document, literature review, and data analysis at your own pace, with regular progress check-ins, ongoing email support, and office hours.", links: [] } },
       { date: "Friday, December 18, 2026", title: "Check 1: Idea and Research Plan", description: { text: "Submit your project idea and research plan. All four EBS co-heads review the submission and provide detailed written feedback for the next stage.", links: [] } },
       { date: "Friday, March 12, 2027", title: "Check 2: Abstract and Code", description: { text: "Submit a 250-word research abstract describing your question, methodology, findings, and conclusions, plus all code or exported workflows. All four co-heads read the abstract, check the code for completeness, and write detailed comments to guide your next steps.", links: [] } },

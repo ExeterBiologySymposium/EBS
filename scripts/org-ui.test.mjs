@@ -38,9 +38,30 @@ try {
     assert(source.includes('noindex,nofollow'));
     assert(!(await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8')).includes('/' + route));
   }
+  // Team-only registration tracker link: a valid editable Sheets URL only, opened safely in a new tab.
+  const { RegistrationTrackerLink } = await vite.ssrLoadModule('/src/pages/admin.tsx');
+  const tracker = url => renderToString(h(RegistrationTrackerLink, { url })).replaceAll('<!-- -->', '');
+  const sheet = 'https://docs.google.com/spreadsheets/d/' + 'T'.repeat(44) + '/edit#gid=7';
+  const trackerLink = tracker(sheet);
+  assert(trackerLink.includes(`<a class="button secondary" href="${sheet}" target="_blank" rel="noopener noreferrer" aria-describedby="registration-tracker-hint">Open registration tracker<span class="sr-only"> (opens in a new tab)</span></a>`));
+  assert(trackerLink.includes('After accepting a participant, tick Send welcome email for them in the tracker.'));
+  for (const url of [null, '', 'javascript:alert(1)', 'http://docs.google.com/spreadsheets/d/' + 'T'.repeat(44), 'https://docs.google.com/spreadsheets/d/e/2PACX-' + 'T'.repeat(40) + '/pubhtml', 'https://docs.google.com.evil.example/spreadsheets/d/' + 'T'.repeat(44), 'https://user:pass@docs.google.com/spreadsheets/d/' + 'T'.repeat(44)]) assert.equal(tracker(url), '', String(url));
+  // The link loads only after a fresh Team check in the browser, so no server-rendered state includes it.
+  for (const state of [allowed, { status: 'signed-out' }, { status: 'signed-in', access: 'accepted', teamAccess: 'denied' }]) assert(!render(state, 'admin.html').includes('Open registration tracker'));
+  // Student copy: use the EBS account email, then review, Account access and the welcome email.
+  const signup = render({ status: 'signed-out' }, 'student-signup.html');
+  assert(signup.includes('In the Researcher Email field, enter the email you use to sign in to EBS.'));
+  assert(signup.includes('the team sends you a welcome email from exeterbiosymposium@gmail.com with next steps.'));
+  assert(!signup.includes('Open student application'));
+  const signedInSignup = render({ status: 'signed-in', access: 'pending' }, 'student-signup.html');
+  assert(signedInSignup.includes('Open student application'));
+  const faqPage = render({ status: 'signed-out' }, 'faq.html');
+  assert(faqPage.includes('id="application-process"'));
+  assert(faqPage.includes('the team sends you a welcome email from exeterbiosymposium@gmail.com'));
+  assert(!/orientation|Zoom/i.test(faqPage.replace(/<dialog[\s\S]*?<\/dialog>/, '')));
   const { isAccountPath } = await vite.ssrLoadModule('/src/access-policy.ts');
   assert(isAccountPath('/admin.html'));
   assert(isAccountPath('/%61dmin.html'));
   assert(isAccountPath('/accept-invitation.html'));
-  console.log('PASS: Team-only Account entry, denied/loading admin views, invitation landing route, navigation and private/noindex route policy.');
+  console.log('PASS: Team-only Account entry, denied/loading admin views, registration tracker link, student registration copy, invitation landing route, navigation and private/noindex route policy.');
 } finally { await vite.close(); }
