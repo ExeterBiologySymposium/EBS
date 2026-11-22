@@ -64,7 +64,7 @@ function ClerkSession({ children }: { children: ReactNode }) {
   const access: MemberAccess = status !== 'signed-in' ? null : member.userId === user?.id ? member.access : 'checking';
   const teamAccess: TeamAccess = status !== 'signed-in' ? null : team.userId === user?.id ? team.access : 'checking';
   return <AuthContext.Provider value={{
-    status, access, teamAccess, teamOrganizationId: teamAccess === 'allowed' ? team.organizationId : null, refreshAccess,
+    status, access, teamAccess, userId: status === 'signed-in' ? user?.id : undefined, teamOrganizationId: teamAccess === 'allowed' ? team.organizationId : null, refreshAccess,
     signIn: () => clerk.openSignIn({ forceRedirectUrl: window.location.href, signUpForceRedirectUrl: window.location.href }),
     signUp: () => clerk.openSignUp({ forceRedirectUrl: window.location.href, signInForceRedirectUrl: window.location.href }),
     manageAccount: () => clerk.openUserProfile(),

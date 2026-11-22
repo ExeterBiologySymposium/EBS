@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
 import { ContentRequestError, contentRequest } from './content/api';
-import { EditorContext, ErrorSummary, LessonForm, ResearchForm, setIn, type EditorState, type Path } from './content/editor-fields';
-import { contentIssues, contentPages, isPageKey, pageKeys, sameContent, validatePageContent, type ContentIssue, type PageContent, type PageKey } from './content/model';
+import type { Field } from './content/fields';
+import { contentPageGroups, type EditorialPage } from './content/pages';
+import { EditorialPreviewView } from './content/editorial-preview';
+import { EditorContext, EditorialForm, ErrorSummary, LessonForm, ResearchForm, setIn, type EditorState, type Path } from './content/editor-fields';
+import { contentIssues, contentPages, isPageKey, sameContent, validatePageContent, type ContentIssue, type PageContent, type PageKey } from './content/model';
 import { PageView } from './content/view';
 
 type EditRecord = {
-  page: PageKey; revision: number; draft: PageContent; live: PageContent; liveSource: 'initial' | 'published';
+  page: PageKey; definition?: Field; initialSource?: 'current-schedule' | 'built-in-schedule'; revision: number; draft: PageContent; live: PageContent; liveSource: 'initial' | 'published';
   editedAt: string | null; editedBy: string | null; publishedRevision: number | null; publishedAt: string | null; publishedBy: string | null;
 };
 type VersionSummary = { revision: number; publishedAt: string; publishedBy: string };
@@ -18,7 +21,7 @@ type Notice =
 const when = (iso: string | null) => iso ? new Date(iso).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'America/New_York' }) + ' ET' : '';
 const verbs: Record<WriteAction, string> = { save: 'save', publish: 'publication', restore: 'restoration' };
 function checked(page: PageKey, value: EditRecord): EditRecord {
-  return { ...value, draft: validatePageContent(page, value.draft), live: validatePageContent(page, value.live) };
+  return { ...value, draft: validatePageContent(page, value.draft, value.definition), live: validatePageContent(page, value.live, value.definition) };
 }
 function useMounted() {
   const mounted = useRef(true);
@@ -28,6 +31,7 @@ function useMounted() {
 
 function Preview({ page, content, label }: { page: PageKey; content: PageContent; label: string }) {
   // Links are inert here so a click cannot leave the editor.
+  if (contentPages[page].template === 'fields') return <EditorialPreviewView page={page as EditorialPage} content={content} label={label} />;
   const stop = (event: ReactMouseEvent) => { if (event.target instanceof Element && event.target.closest('a')) event.preventDefault(); };
   return <div className="content-preview-frame">
     <p className="content-preview-banner">{label}</p>
@@ -37,10 +41,10 @@ function Preview({ page, content, label }: { page: PageKey; content: PageContent
 }
 
 export default function ContentEditor({ onDenied }: { onDenied(): void }) {
-  const [page, setPage] = useState<PageKey>(() => {
-    const requested = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('page');
-    return isPageKey(requested) ? requested : 'researchers';
-  });
+  const locationPage = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('page');
+  const selected = isPageKey(locationPage) ? locationPage : 'researchers';
+  const [page, setPage] = useState<PageKey>(selected);
+  useEffect(() => setPage(selected), [selected]);
   const [record, setRecord] = useState<EditRecord | null>(null);
   const [draft, setDraft] = useState<PageContent | null>(null);
   const [loadError, setLoadError] = useState('');
@@ -56,6 +60,7 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
   const [versions, setVersions] = useState<VersionSummary[] | null>(null);
   const [versionsError, setVersionsError] = useState('');
   const [versionsReload, setVersionsReload] = useState(0);
+  const previewRequest = useRef<AbortController | null>(null);
   const [versionPreview, setVersionPreview] = useState<(VersionSummary & { content: PageContent }) | 'loading' | null>(null);
   const busyRef = useRef(false);
   const draftRef = useRef(draft);
@@ -68,7 +73,7 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
 
   const dirty = !!record && !!draft && !sameContent(draft, record.draft);
   const unpublished = !!record && !sameContent(record.draft, record.live);
-  const localIssues = useMemo(() => draft ? contentIssues(page, draft) : [], [page, draft]);
+  const localIssues = useMemo(() => draft ? contentIssues(page, draft, record?.definition) : [], [page, draft, record?.definition]);
   const issues = localIssues.length ? localIssues : serverIssues;
   const issueMap = useMemo(() => {
     const map = new Map<string, string>();
@@ -83,6 +88,7 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
   }, [onDenied]);
   useEffect(() => {
     const controller = new AbortController();
+    previewRequest.current?.abort();
     setRecord(null); setDraft(null); setLoadError(''); setNotice(null); setUndo(null); setShowAll(false); setServerIssues([]); setVersions(null); setVersionPreview(null);
     contentRequest<EditRecord>({ page, action: 'edit' }, { signal: controller.signal })
       .then(value => { const loaded = checked(page, value); setRecord(loaded); setDraft(loaded.draft); })
@@ -91,7 +97,7 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
         if (error instanceof ContentRequestError && error.detail.state === 'not-configured') setSetupMessage(error.message);
         else setLoadError(error instanceof ContentRequestError ? error.message : 'This page could not be opened for editing.');
       });
-    return () => controller.abort();
+    return () => { controller.abort(); previewRequest.current?.abort(); };
   }, [page, reload, denied]);
 
   // Protect unsaved edits from reloads, the site's in-page navigation and Back/Forward.
@@ -178,7 +184,7 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
   function save(revision?: number) {
     const current = recordRef.current, sent = draftRef.current;
     if (!current || !sent) return;
-    const problems = contentIssues(page, sent);
+    const problems = contentIssues(page, sent, current.definition);
     if (problems.length) {
       setShowAll(true); setNotice(null);
       requestAnimationFrame(() => requestAnimationFrame(() => summaryRef.current?.focus()));
@@ -229,7 +235,7 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
       try {
         const server = await latest();
         const target = pending.action === 'restore' && pending.version
-          ? validatePageContent(page, (await contentRequest<{ content: unknown }>({ page, action: 'version', version: String(pending.version) })).content)
+          ? validatePageContent(page, (await contentRequest<{ content: unknown }>({ page, action: 'version', version: String(pending.version) })).content, recordRef.current?.definition)
           : pending.sent;
         if (!mounted.current) return;
         if (pending.action === 'publish') {
@@ -269,13 +275,18 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
   function choosePage(next: PageKey) {
     if (next === page) return;
     if (dirty && !window.confirm(`You have unsaved changes to ${info.label}. Discard them and open ${contentPages[next].label}?`)) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set('page', next);
+    window.history.replaceState(window.history.state, '', url);
     setMode('edit'); setPage(next);
   }
   function previewVersion(version: VersionSummary) {
+    previewRequest.current?.abort();
+    const controller = previewRequest.current = new AbortController();
     setVersionPreview('loading');
-    contentRequest<{ content: unknown }>({ page, action: 'version', version: String(version.revision) })
-      .then(value => { if (mounted.current) setVersionPreview({ ...version, content: validatePageContent(page, value.content) }); })
-      .catch(error => { if (mounted.current && !denied(error)) { setVersionPreview(null); setVersionsError(error instanceof ContentRequestError ? error.message : 'That version could not be previewed.'); } });
+    contentRequest<{ content: unknown }>({ page, action: 'version', version: String(version.revision) }, { signal: controller.signal })
+      .then(value => { if (!controller.signal.aborted && mounted.current) setVersionPreview({ ...version, content: validatePageContent(page, value.content, recordRef.current?.definition) }); })
+      .catch(error => { if (!controller.signal.aborted && mounted.current && !denied(error)) { setVersionPreview(null); setVersionsError(error instanceof ContentRequestError ? error.message : 'That version could not be previewed.'); } });
   }
 
   if (setupMessage) return <section className="section content-editor"><div className="shell content-workspace">
@@ -288,15 +299,19 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
   return <section className="section content-editor" aria-labelledby="content-editor-title"><div className="shell content-workspace">
     <div className="content-head">
       <h2 id="content-editor-title">Website content</h2>
-      <p className="content-intro">Edit Student research, Resources and the Coding pages without changing code. Drafts stay private to the EBS Team until you publish them.</p>
+      <p className="content-intro">Choose a page to edit. Drafts stay private to the EBS Team until you publish them.</p>
       <div className="content-field content-picker">
         <label htmlFor="content-page-select">Page</label>
         <select id="content-page-select" value={page} disabled={!!busy} onChange={event => choosePage(event.target.value as PageKey)}>
-          {pageKeys.map(key => <option key={key} value={key}>{contentPages[key].label}</option>)}
+          {Object.entries(contentPageGroups).map(([group, keys]) => <optgroup key={group} label={group}>{keys.map(key => <option key={key} value={key}>{contentPages[key].label}</option>)}</optgroup>)}
         </select>
       </div>
-      <p className="content-meta"><strong>Audience:</strong> {info.audience === 'public' ? 'Public — anyone can view this page.' : 'Accepted members — only approved participants can view this page.'}{' '}
+      <p className="content-meta"><strong>Audience:</strong> {{ public: 'Public — anyone can view this page.', accepted: 'Accepted members — only approved participants can view this page.',
+          team: 'EBS Team — administration is restricted to the team.', account: 'Account — guidance depends on sign-in and approval status.' }[info.audience]}{' '}
         <a href={info.route} target="_blank" rel="noopener noreferrer">View the live page<span className="sr-only"> (opens in a new tab)</span></a></p>
+      {record?.initialSource && <p className="content-meta">{record.initialSource === 'current-schedule'
+        ? 'The editor loaded the current schedule and session information.'
+        : 'The current schedule feed could not be loaded. The editor shows the built-in schedule.'}</p>}
       {record && <p className="content-meta">
         {record.liveSource === 'published' ? `Live version published ${when(record.publishedAt)} by ${record.publishedBy}.` : 'Readers currently see the original site content; this page has not been published from the editor yet.'}
         {record.revision > 0 && ` Draft last saved ${when(record.editedAt)} by ${record.editedBy}.`}
@@ -327,7 +342,7 @@ export default function ContentEditor({ onDenied }: { onDenied(): void }) {
 
       {mode === 'edit' && <div id="content-form" className="content-form" tabIndex={-1}>
         {showAll && issues.length > 0 && <ErrorSummary ref={summaryRef} template={info.template} issues={issues} />}
-        <EditorContext.Provider value={editor}>{info.template === 'research' ? <ResearchForm /> : <LessonForm />}</EditorContext.Provider>
+        <EditorContext.Provider value={editor}>{info.template === 'research' ? <ResearchForm /> : info.template === 'lesson' ? <LessonForm /> : record.definition && <EditorialForm key={page} definition={record.definition} />}</EditorContext.Provider>
       </div>}
       {mode === 'preview' && <Preview page={page} content={draft} label={dirty ? 'Draft preview — includes unsaved changes, not published' : 'Draft preview — not published'} />}
       {mode === 'history' && <div className="content-history-panel">

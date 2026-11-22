@@ -1,26 +1,25 @@
 # Website content editor
 
-EBS Team members can update five pages through the website, without repository access, a build or a deployment:
+EBS Team members can use **EBS administration → Website content** to edit and publish content on all 24 pages. Publishing an edit updates the page without a repository change or a new deployment.
 
-| Page | Route | Who can read it |
-| --- | --- | --- |
-| Student research | `/researchers.html` | Everyone (public) |
-| Resources | `/resources.html` | Accepted members |
-| Coding | `/datascience.html` | Accepted members |
-| Python | `/python.html` | Accepted members |
-| R / RStudio | `/rstudio.html` | Accepted members |
-
-Other pages, navigation labels, search descriptions and research Google Docs are not edited here.
+| Section | Pages |
+| --- | --- |
+| Symposium | Home, About, Team, Schedule, FAQ, Contact |
+| Participation | Register, Student registration, Schools, Judges, Student research, Research projects |
+| Member resources | Events, Resources, Coding, Python, R / RStudio, Open Source, Dataset library |
+| Account and policies | Account, Accept invitation, EBS administration, Terms, Privacy |
 
 ## For the EBS Team
 
 ### Opening the editor
 
-Use **Account → Edit website content**, **EBS administration → Website content** (`/admin.html?view=content`), or **Edit this page** at the top of any of the five pages. Editing requires membership in the EBS Team organization, the same access as participant administration. You do not need to be Accepted to edit or preview; reading the member pages themselves still requires Accepted.
+Use **Account → Edit website content**, **EBS administration → Website content** (`/admin.html?view=content`), or **Edit this page** on a page while signed in to the EBS Team. Editing requires membership in the EBS Team organization, the same access as participant administration. You do not need to be Accepted to edit or preview; Accepted membership is required to open the published member pages directly.
 
 ### Editing
 
-Choose a page from **Page**. Fields are grouped by the visible parts of the page and use the page's existing layout, so you only supply words, links and images.
+Choose a page from **Page**. The editor groups fields by section. On Dataset library, search for a dataset by name and select it to edit its description, steps, code example or source links. On Schedule, edit rows and sessions. The first Schedule draft starts from the current feed when it is available. Check the source message before publishing. After you publish, the website uses the published rows and sessions.
+
+Account has separate fields for visitors, Pending participants, Accepted participants and the EBS Team. Choose a reader state in Preview to see the corresponding guidance. Forms, access decisions, participant operations and student records continue to use their existing integrations. Site navigation, the footer and search metadata are managed in the repository.
 
 - **Required** fields are marked. If something needs fixing, **Save draft** lists each problem; select one to jump to the field.
 - **Repeated entries** (timeline entries, research areas, formats, sections, links, images) have **Up**, **Down** and **Remove** buttons. A removal can be reversed with **Undo** in the bar at the bottom until you make another change.
@@ -32,7 +31,7 @@ Choose a page from **Page**. Fields are grouped by the visible parts of the page
 ### Saving, previewing and publishing
 
 1. **Save draft** stores your changes privately. Readers keep seeing the live version.
-2. **Preview draft** shows the page exactly as readers will see it, labelled as unpublished. Links are disabled in previews.
+2. **Preview draft** shows the page exactly as readers will see it, labelled as unpublished. Links and submissions are disabled in previews.
 3. **Publish** makes the saved draft live. Readers see it the next time they open the page (an open tab updates when it regains focus). No deployment is needed. Publish is available only when the draft is saved and differs from the live page.
 4. **Published versions** lists every publication with its time and publisher. **Preview** shows an older version; **Restore to draft** copies it into your draft. Restoring never publishes by itself: review it, then select **Publish**. Restoring the version marked **Live now** is a quick way to discard a saved draft.
 
@@ -56,25 +55,25 @@ Local implementation does not apply the migration, enable configuration, publish
 ### Enabling
 
 1. Validate on an isolated Neon branch first: run [`scripts/sql/page-content.sql`](../scripts/sql/page-content.sql) there and test with a disposable deployment.
-2. Apply the same script once to the Production database with a private server role, for example in the Neon SQL Editor. It is additive and safe to re-run: it creates only `ebs_content_pages` (current draft and publication per page), `ebs_content_versions` (append-only publication history) and triggers that block changing, deleting or truncating versions. It does not touch organization or research-folder tables. (Tables named `ebs_page_content`/`ebs_page_publications` from an earlier unreleased draft of this feature are unused.)
+2. Apply the same script to the Production database before deploying the expanded editor. On an existing installation it replaces the page-key constraint in a transaction and preserves current content and history. Run it with a private server role, for example in the Neon SQL Editor. The script can be re-run. On a fresh installation it creates `ebs_content_pages` (current draft and publication per page), `ebs_content_versions` (append-only publication history) and triggers that block changing, deleting or truncating versions. It does not touch organization or research-folder tables. (Tables named `ebs_page_content`/`ebs_page_publications` from an earlier unreleased draft of this feature are unused.)
 3. In Vercel Production, set the server-only variable `EBS_CONTENT_ENABLED=true` and redeploy.
-4. Verify on the live site: anonymous visitors can read Student research; Resources/Coding/Python/R redirect anonymous and Pending visitors; a Team member can save, preview and publish a harmless change (and restore the previous version afterwards); a non-Team account gets "does not have access" from the editor.
+4. Verify on the live site: confirm that the selector lists all 24 pages, public pages load anonymously, the seven member pages require Accepted and administration requires Team. Verify that a non-Team account receives an access error from the editor. Test publication and restoration on the isolated deployment.
 
 No seeding is needed. Until a page is first published, readers receive its built-in content, and the editor starts from that content.
 
 ### Behaviour and failure handling
 
 - **Disabled or not yet set up** (`EBS_CONTENT_ENABLED` not `true`): readers receive the built-in content and the editor explains that setup is incomplete. Turning the flag off later hides published changes (they remain stored) and shows the built-in content again.
-- **Database or configuration errors** are reported, never treated as an empty database. Student research keeps its built-in snapshot with a "could not be loaded" notice and Try again; member pages show the notice without content. Drafts are never shown to readers.
+- **Database or configuration errors** are reported, never treated as an empty database. Readers see a retry notice when a publication cannot be loaded. Built-in reader copy remains available according to the page's normal access rules. Drafts are never shown to readers.
 - **Concurrency.** Every write names the revision it was based on and is checked atomically in SQL; a stale write is refused with a conflict. A publication and its history record are written in one statement.
-- **Search engines and no-JavaScript visitors** see the build-time Student research snapshot in `src/content/defaults/researchers.ts`; published changes replace it once the page's JavaScript loads. After significant publications, copy the published text into that file in a normal code change so the snapshot and the page metadata stay current. Member pages are noindex and never prerendered with content.
+- **Search engines and visitors without JavaScript** receive the public build-time snapshot. The browser loads current publications after hydration. Update the relevant defaults in the repository and rebuild when the static snapshot needs to reflect a major change. Member pages are noindex and prerender without member content.
 - **Removing content.** Versions cannot be edited or deleted. To take something down, publish a corrected version.
 
 ### Security model
 
-- Every editor request authenticates the Clerk session and freshly checks EBS Team membership server-side; member-page reads check Accepted membership; Student research reads are public. Page, audience and instance come from server configuration, never from the request.
+- Every editor request authenticates the Clerk session and freshly checks EBS Team membership server-side; member-page reads check Accepted membership. Administrative copy requires Team. Account reads return only the fields appropriate to the current reader. Page, audience and instance come from server configuration, never from the request.
 - Mutations require a same-origin `Origin`, `application/json`, a bounded body (about 200 KB per page) and an exact field set. Content is validated against fixed page schemas: unknown fields or section types are rejected, text is length-limited and rendered as text, links must be site paths, `https://` or `mailto:`, and images must be site paths or `https://`. Scripts, HTML, `javascript:` and `data:` links are rejected.
-- All responses are private and `no-store`. Member page defaults live in `server/content/defaults.ts` and never enter public JavaScript or prerendered HTML.
+- All responses are private and `no-store`. Member defaults are available on the server and in gated member bundles.
 - The history triggers stop the website and ordinary SQL from rewriting publications, but a database owner can still disable triggers. Where your Neon setup allows it, run the website with a role limited to `SELECT, INSERT, UPDATE` on `ebs_content_pages` and `SELECT, INSERT` on `ebs_content_versions`, and keep owner credentials out of Vercel.
 
 ### API
@@ -83,7 +82,7 @@ No seeding is needed. Until a page is first published, readers receive its built
 
 | Method | Action | Access | Result |
 | --- | --- | --- | --- |
-| GET | `read` (default) | Public for `researchers`; Accepted otherwise | Published (or built-in) content only |
+| GET | `read` (default) | Page audience, with state-specific Account output | Published (or built-in) content only |
 | GET | `edit` | Team | Draft, live content, revision and edit/publish metadata |
 | GET | `history` | Team | Up to 50 publications, newest first |
 | GET | `version&version=N` | Team | One publication's content |

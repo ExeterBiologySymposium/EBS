@@ -1,5 +1,5 @@
 import { createServer } from 'vite';
-import { readFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 // Explicit localhost-only QA process for the website content editor. It uses fake identities and an
@@ -10,7 +10,7 @@ try { ({ PGlite } = await import('@electric-sql/pglite')); }
 catch { console.error('This fixture needs a local PostgreSQL runtime: npm install --no-save @electric-sql/pglite'); process.exit(1); }
 
 const qa = { actor: 'user_team', team: true, accepted: true, failNextWrite: false };
-const pages = ['admin.html', 'account.html', 'researchers.html', 'resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'faq.html', 'schedule.html'];
+const pages = (await readdir(root)).filter(file => file.endsWith('.html'));
 let handler, store, initialContent;
 const vite = await createServer({
   root, configLoader: 'runner', cacheDir: resolve(root, '.vite-qa'),
@@ -47,7 +47,7 @@ const vite = await createServer({
         result.headers.forEach((value, key) => response.setHeader(key, value));
         return response.end(await result.text());
       }
-      const page = path === '/' ? 'researchers.html' : path.slice(1);
+      const page = path === '/' ? 'index.html' : path.slice(1);
       if (pages.includes(page)) {
         const html = await server.transformIndexHtml('/content-qa.html', `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EBS content QA</title></head><body data-react-page="${page}"><div id="root"></div><script type="module" src="/scripts/content-browser-entry.tsx"></script></body></html>`);
         response.setHeader('Content-Type', 'text/html');

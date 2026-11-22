@@ -1,124 +1,111 @@
-const organizingTeam = [
-  {name:'Adaeze Acholonu',role:'Outreach and Media Associate',year:'2029',initials:'AA',photo:'/images/team/adaeze-acholonu.jpg'},
-  {name:'Cici Chen',role:'Research Associate',year:'2028',initials:'CC',photo:'/images/team/cici-chen.jpg'},
-  {name:'Oliver Choi',role:'Research Associate',year:'2029',initials:'OC',photo:'/images/team/oliver-choi.jpg'},
-  {name:'Jake Cootey',role:'Research Associate',year:'2029',initials:'JC',photo:'/images/team/jake-cootey.jpg'},
-  {name:'Elaine Fan',role:'Research Associate',year:'2029',initials:'EF',photo:'/images/team/elaine-fan.jpg'},
-  {name:'Jessica Fan',role:'Research Associate',year:'2029',initials:'JF',photo:'/images/team/jessica-fan.jpg'},
-  {name:'Derek Geng',role:'Outreach Associate',year:'2030',initials:'DG',photo:'/images/team/derek-geng.jpg'},
-  {name:'Dowan Kim',role:'Research Associate',year:'2029',initials:'DK',photo:'/images/team/dowan-kim.jpg'},
-  {name:'Esther Kim',role:'Outreach and Research Associate',year:'2029',initials:'EK',photo:'/images/team/esther-kim.jpg'},
-  {name:'Margaux Morgan',role:'Outreach and Media Associate',year:'2029',initials:'MM',photo:'/images/team/margaux-morgan.jpg'},
-  {name:'Avni Murarka',role:'Research Associate',year:'2028',initials:'AM',photo:'/images/team/avni-murarka.jpg'},
-  {name:'Scarlett Reddy',role:'Research Associate',year:'2029',initials:'SR',photo:'/images/team/scarlett-reddy.jpg'},
-  {name:'Olivia Wang',role:'Social Media Associate',year:'2029',initials:'OW',photo:'/images/team/olivia-wang.jpg'}
-];
-
-export default function PageContent() { return <div className="page-layout layout-team">
+import { usePageCopy, safeCopyUrl } from '../content/page-copy';
+import { definition } from '../content/copy/team';
+export default function PageContent() {
+  const editorial = usePageCopy('team', definition); return <div className="page-layout layout-team">
 <section className={"page-heading"}>
 <div className={"shell"}>
-<h1>{"Our team"}</h1>
-<p className={"lead"}>{"EBS is built and run entirely by students in the Genetics and Biotechnology Club at Phillips Exeter Academy (PEA). We are grateful for the support of our faculty advisors and the broader Exeter community."}</p>
+<h1>{editorial.pageHeading.title}</h1>
+<p className={"lead"}>{editorial.pageHeading.ebsBuiltRunEntirelyByStudents}</p>
 </div>
 </section>
 <section className={"section"}>
 <div className={"shell"}>
-<h2 className={"team-section-title"}>{"Leadership"}</h2>
+<h2 className={"team-section-title"}>{editorial.leadership.leadership}</h2>
 <div className={"grid columns-4"}>
 <div className={"person text-block"}>
-<div className={"portrait"}><img alt={"Adrian Chan working in a laboratory"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/team/adrian-chan.jpg"} width={"2688"} /></div>
-<h3>{"Adrian Chan"}</h3>
-<p className={"role"}>{"Co-Head"}</p>
-<p className={"grade"}>{"Class of 2028"}</p>
+<div className={"portrait"}><img alt={editorial.leadership.altAdrianChanWorkingLaboratory} decoding={"async"} height={"4032"} loading={"lazy"} src={safeCopyUrl(editorial.leadership.srcAdrianChanWorkingLaboratory, "image")} width={"2688"} /></div>
+<h3>{editorial.leadership.adrianChan}</h3>
+<p className={"role"}>{editorial.leadership.coHead}</p>
+<p className={"grade"}>{editorial.leadership.class2028}</p>
 <details className={"team-card__details"}>
-<summary>{"View profile"}</summary>
+<summary>{editorial.viewProfile.viewProfile}</summary>
 <ul className={"team-card__profile"}>
-<li><strong>{"Medical & Scientific Intern, Hong Kong Genome Institute"}</strong><br />{"Contributed to whole-genome sequencing workflows with HKGI and Hong Kong Children’s Hospital, plus genomic literacy and policy work."}</li>
-<li><strong>{"SSTP 2026 Research Intern, University of Iowa Department of Pathology — Yang Lab"}</strong><br />{"Analyzed SETDB1 using ORIEN and TCGA datasets; assessed dFF-ChIP and total RNA-sequencing results; developed a CRISPR/Cas9-degron system in UCEC cell lines."}</li>
+<li><strong>{editorial.viewProfile.medicalScientificInternHongKongGenome}</strong><br />{editorial.viewProfile.contributedWholeGenomeSequencingWorkflowsWith}</li>
+<li><strong>{editorial.viewProfile.sstp2026ResearchInternUniversityIowa}</strong><br />{editorial.viewProfile.analyzedSetdb1UsingOrienTcgaDatasets}</li>
 </ul>
 </details>
 </div>
 <div className={"person text-block"}>
-<div className={"portrait"}><img alt={"Jaiden Kim"} decoding={"async"} height={"4397"} loading={"lazy"} src={"/images/team/jaiden-kim.jpg"} width={"2931"} /></div>
-<h3>{"Jaiden Kim"}</h3>
-<p className={"role"}>{"Co-Head"}</p>
-<p className={"grade"}>{"Class of 2028"}</p>
+<div className={"portrait"}><img alt={editorial.leadership.altJaidenKim} decoding={"async"} height={"4397"} loading={"lazy"} src={safeCopyUrl(editorial.leadership.srcJaidenKim, "image")} width={"2931"} /></div>
+<h3>{editorial.leadership.jaidenKim}</h3>
+<p className={"role"}>{editorial.leadership.coHead2}</p>
+<p className={"grade"}>{editorial.leadership.class20282}</p>
 <details className={"team-card__details"}>
-<summary>{"View profile"}</summary>
+<summary>{editorial.viewProfile.viewProfile2}</summary>
 <ul className={"team-card__profile"}>
-<li><strong>{"Summer 2026 Research Intern, Rice University Department of Biosciences"}</strong><br /><em>{"Elucidating Serotonin-Independent Pathways Underlying Sertraline-Mediated Lipid Loss and Protestasis"}</em></li>
+<li><strong>{editorial.viewProfile.summer2026ResearchInternRiceUniversity}</strong><br /><em>{editorial.viewProfile.elucidatingSerotoninIndependentPathwaysUnderlyingSertraline}</em></li>
 </ul>
 </details>
 </div>
 <div className={"person text-block"}>
-<div className={"portrait"}><img alt={"Reya Satam"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/team/reya-satam.jpg"} width={"2688"} /></div>
-<h3>{"Reya Satam"}</h3>
-<p className={"role"}>{"Co-Head"}</p>
-<p className={"grade"}>{"Class of 2028"}</p>
+<div className={"portrait"}><img alt={editorial.leadership.altReyaSatam} decoding={"async"} height={"4032"} loading={"lazy"} src={safeCopyUrl(editorial.leadership.srcReyaSatam, "image")} width={"2688"} /></div>
+<h3>{editorial.leadership.reyaSatam}</h3>
+<p className={"role"}>{editorial.leadership.coHead3}</p>
+<p className={"grade"}>{editorial.leadership.class20283}</p>
 <details className={"team-card__details"}>
-<summary>{"View profile"}</summary>
+<summary>{editorial.viewProfile.viewProfile3}</summary>
 <ul className={"team-card__profile"}>
-<li><strong>{"Presenter, Max Planck Florida Institute for Neuroscience Sunposium"}</strong><br />{"Presented research on genetic architecture of multiple sclerosis."}</li>
-<li><strong>{"Research Intern, UMass Chan Medical School"}</strong><br />{"Investigates how localized traumatic brain injury changes circadian rhythms in "}<em>{"Drosophila"}</em>{"."}</li>
-<li><strong>{"Neurogenetics researcher"}</strong><br />{"Completed a meta-analysis on genetic regulatory architecture of multiple sclerosis with University of Notre Dame faculty."}</li>
+<li><strong>{editorial.viewProfile.presenterMaxPlanckFloridaInstituteNeuroscience}</strong><br />{editorial.viewProfile.presentedResearchGeneticArchitectureMultipleSclerosis}</li>
+<li><strong>{editorial.viewProfile.researchInternUmassChanMedicalSchool}</strong><br />{editorial.viewProfile.investigatesHowLocalizedTraumaticBrainInjury + " "}<em>{editorial.viewProfile.drosophila}</em>{"."}</li>
+<li><strong>{editorial.viewProfile.neurogeneticsResearcher}</strong><br />{editorial.viewProfile.completedMetaAnalysisGeneticRegulatoryArchitecture}</li>
 </ul>
 </details>
 </div>
 <div className={"person text-block"}>
-<div aria-label={"Photo of Luke Wang"} className={"portrait"} role={"img"}><img alt={"Luke Wang"} decoding={"async"} height={"4014"} loading={"lazy"} src={"images/team/luke-wang.jpg"} width={"4804"} /></div>
-<h3>{"Luke Wang"}</h3>
-<p className={"role"}>{"Co-Head"}</p>
-<p className={"grade"}>{"Class of 2027"}</p>
+<div aria-label={"Photo of Luke Wang"} className={"portrait"} role={"img"}><img alt={editorial.leadership.altLukeWang} decoding={"async"} height={"4014"} loading={"lazy"} src={safeCopyUrl(editorial.leadership.srcLukeWang, "image")} width={"4804"} /></div>
+<h3>{editorial.leadership.lukeWang}</h3>
+<p className={"role"}>{editorial.leadership.coHead4}</p>
+<p className={"grade"}>{editorial.leadership.class2027}</p>
 <details className={"team-card__details"}>
-<summary>{"View profile"}</summary>
+<summary>{editorial.viewProfile.viewProfile4}</summary>
 <ul className={"team-card__profile"}>
-<li><strong>{"SSP Biochemistry, 2026 — Research Project"}</strong><br /><em>{"Characterization of Setosphaeria turcica Cdc14 Phosphatase Activity and Development of Potential Inhibitors for Northern Corn Leaf Blight"}</em></li>
+<li><strong>{editorial.viewProfile.sspBiochemistry2026ResearchProject}</strong><br /><em>{editorial.viewProfile.characterizationSetosphaeriaTurcicaCdc14PhosphataseActivity}</em></li>
 </ul>
 </details>
 </div>
 </div>
-<h2 className={"team-section-title"}>{"Faculty Advisors"}</h2>
-<p>{"EBS is supported by dedicated faculty at Phillips Exeter Academy who believe in student-led scientific inquiry and provide guidance, oversight, and institutional support."}</p>
+<h2 className={"team-section-title"}>{editorial.leadership.facultyAdvisors}</h2>
+<p>{editorial.leadership.ebsSupportedByDedicatedFacultyAt}</p>
 <div className={"grid columns-2"}>
 <div className={"faculty faculty--morrill text-block"}>
-<div className={"portrait"}><img alt={"Dr. Summer Morrill teaching biology students"} decoding={"async"} height={"683"} loading={"lazy"} src={"images/team/Dr. Morrill.jpg"} width={"1024"} /></div>
+<div className={"portrait"}><img alt={editorial.leadership.altDrSummerMorrillTeachingBiology} decoding={"async"} height={"683"} loading={"lazy"} src={safeCopyUrl(editorial.leadership.srcDrSummerMorrillTeachingBiology, "image")} width={"1024"} /></div>
 <div>
-<h3>{"Dr. Summer Morrill"}</h3>
-<p className={"role"}>{"Biology Instructor"}</p>
-<p className={"faculty-card__dept"}>{"Alfred H. Hayes ’25 and Jean M. Hayes Teaching Chair in Science"}</p>
-<p className={"faculty-card__dept"}>{"MIT Ph.D. Biology ’20"}</p>
-<p className={"faculty-card__dept"}>{"Phillips Exeter Academy"}</p>
+<h3>{editorial.leadership.drSummerMorrill}</h3>
+<p className={"role"}>{editorial.leadership.biologyInstructor}</p>
+<p className={"faculty-card__dept"}>{editorial.leadership.alfredHHayes25JeanM}</p>
+<p className={"faculty-card__dept"}>{editorial.leadership.mitPhDBiology20}</p>
+<p className={"faculty-card__dept"}>{editorial.leadership.phillipsExeterAcademy}</p>
 </div>
 </div>
 </div>
-<h2 className={"team-section-title"}>{"Organizing Team"}</h2>
-<p>{"The organizing team supports research curriculum, outreach, logistics, and media."}</p>
+<h2 className={"team-section-title"}>{editorial.leadership.organizingTeam}</h2>
+<p>{editorial.leadership.organizingTeamSupportsResearchCurriculumOutreach}</p>
 <div className={"grid organizing-team-grid"}>
-{organizingTeam.map(member=><div className="person text-block" key={member.name}>
-<div className={`portrait${member.photo ? '' : ' portrait--initials'}`} aria-hidden={!member.photo}>{member.photo ? <img alt={member.name} decoding="async" height="4032" loading="lazy" src={member.photo} width="2688" /> : <span>{member.initials}</span>}</div>
+{editorial.organizingTeamMembers.map(member=><div className="person text-block" key={member.name}>
+<div className={`portrait${member.photo ? '' : ' portrait--initials'}`} aria-hidden={!member.photo}>{member.photo ? <img alt={member.name} decoding="async" height="4032" loading="lazy" src={safeCopyUrl(member.photo, "image")} width="2688" /> : <span>{member.initials}</span>}</div>
 <h3>{member.name}</h3>
 <p className="role">{member.role}</p>
-<p className="grade">Class of {member.year}</p>
+<p className="grade">{editorial.leadership.class + " "}{member.year}</p>
 </div>)}
 </div>
 <figure className={"group-photo"}>
-<img alt={"EGBC club members visiting Broad Institute"} decoding={"async"} height={"2752"} loading={"lazy"} src={"/images/team/ebs-team-broad-institute.jpg"} width={"4128"} />
-<figcaption>{"EGBC club members at Broad Institute."}</figcaption>
+<img alt={editorial.leadership.altEgbcClubMembersVisitingBroad} decoding={"async"} height={"2752"} loading={"lazy"} src={safeCopyUrl(editorial.leadership.srcEgbcClubMembersVisitingBroad, "image")} width={"4128"} />
+<figcaption>{editorial.leadership.egbcClubMembersAtBroadInstitute}</figcaption>
 </figure>
 <figure className={"group-photo"}>
-<img alt={"EGBC students at the Koch Institute during the 2026 Cambridge Science Festival"} decoding={"async"} height={"4032"} loading={"lazy"} src={"/images/Genetics Club Photos/EGBC 4.jpg"} width={"6048"} />
-<figcaption>{"EGBC students at the Koch Institute for Integrative Cancer Research during the 2026 Cambridge Science Festival."}</figcaption>
+<img alt={editorial.leadership.altEgbcStudentsAtKochInstitute} decoding={"async"} height={"4032"} loading={"lazy"} src={safeCopyUrl(editorial.leadership.srcEgbcStudentsAtKochInstitute, "image")} width={"6048"} />
+<figcaption>{editorial.leadership.egbcStudentsAtKochInstituteIntegrative}</figcaption>
 </figure>
 </div>
 </section>
 <section className={"section"}>
 <div className={"shell"}>
 <div className={"next-step"}>
-<h2>{"The Genetics and Biotechnology Club"}</h2>
-<p>{"Have a question or want to connect with the team? We'd love to hear from you."}</p>
+<h2>{editorial.geneticsBiotechnologyClub.geneticsBiotechnologyClub}</h2>
+<p>{editorial.geneticsBiotechnologyClub.haveQuestionOrWantConnectWith}</p>
 <div className={"actions"}>
-<a className={"button primary"} href={"faq.html#contact"}>{"Contact the Team"}</a>
-<a className={"button secondary"} href={"about.html"}>{"Our Mission"}</a>
+<a className={"button primary"} href={safeCopyUrl(editorial.geneticsBiotechnologyClub.hrefContactTeam)}>{editorial.geneticsBiotechnologyClub.contactTeam}</a>
+<a className={"button secondary"} href={safeCopyUrl(editorial.geneticsBiotechnologyClub.hrefOurMission)}>{editorial.geneticsBiotechnologyClub.ourMission}</a>
 </div>
 </div>
 </div>

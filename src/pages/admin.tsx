@@ -1,3 +1,5 @@
+import { usePageCopy, usePageCopyState } from '../content/page-copy';
+import { definition } from '../content/copy/admin';
 import { lazy, Suspense, useCallback, useContext, useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { AuthContext } from '../auth';
 import { adminMessage, adminRequest, lostTeamAccess } from '../admin-api';
@@ -33,6 +35,8 @@ function useMounted() {
 }
 
 function AddParticipant({ revision, onChanged, onDenied }: { revision: number; onChanged(): void; onDenied(): void }) {
+  const editorial = usePageCopy('admin', definition);
+
   const [email, setEmail] = useState('');
   const [destination, setDestination] = useState<Destination>('pending');
   const [lookup, setLookup] = useState<Lookup | null>(null);
@@ -70,14 +74,14 @@ function AddParticipant({ revision, onChanged, onDenied }: { revision: number; o
     finally { busyRef.current = false; if (mounted.current) setBusy(null); }
   }
   return <section className="section admin-add"><div className="shell">
-    <h2>Add or invite participant</h2><p>Choose Pending for review or Accepted to grant resource access.</p>
+    <h2>{editorial.addOrInvite.addOrInviteParticipant}</h2><p>{editorial.addOrInvite.choosePendingReviewOrAcceptedGrant}</p>
     <form className="admin-invite" onSubmit={submit}>
-      <label htmlFor="participant-email">Participant email</label>
+      <label htmlFor="participant-email">{editorial.addOrInvite.participantEmail}</label>
       <input id="participant-email" type="email" required maxLength={254} value={email} onChange={event => { setEmail(event.target.value); setLookup(null); setMessage(''); }} disabled={!!busy} autoComplete="email" />
-      <label htmlFor="participant-destination">Destination</label>
-      <select id="participant-destination" value={destination} disabled={!!busy} onChange={event => setDestination(event.target.value as Destination)}><option value="pending">Pending</option><option value="accepted">Accepted</option></select>
+      <label htmlFor="participant-destination">{editorial.addOrInvite.destination}</label>
+      <select id="participant-destination" value={destination} disabled={!!busy} onChange={event => setDestination(event.target.value as Destination)}><option value="pending">{editorial.addOrInvite.pending}</option><option value="accepted">{editorial.addOrInvite.accepted}</option></select>
       <p id="destination-capacity" role="status">{capacity === 'space-available' ? 'Space available' : capacity === 'will-create' ? 'A new list will be created' : capacity === 'capacity-reached' ? 'Capacity reached' : capacity === 'needs-review' ? 'Allocation needs owner review' : capacityError || 'Checking capacity…'}</p>
-      {capacityError && <button className="button secondary" type="button" onClick={onChanged}>Retry capacity check</button>}
+      {capacityError && <button className="button secondary" type="button" onClick={onChanged}>{editorial.addOrInvite.retryCapacityCheck}</button>}
       {lookup && <div className="admin-lookup" role="status"><p>{lookup.mode === 'add' ? `Existing verified account: ${lookup.name ? lookup.name + ' · ' : ''}${lookup.email}` : `Send an email invitation to ${lookup.email}.`}</p><p>{lookup.mode === 'add' ? destination === 'accepted' ? 'Adding this account to Accepted grants access immediately.' : 'This account will enter Pending for review. Already Accepted accounts keep their access.' : `They will join ${label(destination)} when they accept the invitation${destination === 'accepted' ? ', granting access to EBS resources.' : ' and wait for review.'}`}</p></div>}
       <button className="button" type="submit" disabled={!!busy || !!lookup && !open} aria-describedby="destination-capacity">{busy === 'lookup' ? 'Looking up account…' : busy === 'save' ? 'Saving…' : !lookup ? 'Look up account' : lookup.mode === 'add' ? `Add to ${label(destination)}` : `Send ${label(destination)} invitation`}</button>
     </form>
@@ -214,6 +218,8 @@ function currentWorkspace(): Workspace {
 }
 
 function AdminWorkspace({ teamOrganizationId }: { teamOrganizationId: string }) {
+  const editorial = usePageCopy('admin', definition);
+
   const { refreshAccess } = useContext(AuthContext);
   const [revoked, setRevoked] = useState(false);
   const [revision, setRevision] = useState(0);
@@ -225,18 +231,18 @@ function AdminWorkspace({ teamOrganizationId }: { teamOrganizationId: string }) 
   // Clerk's Team settings routes) only fire hashchange. Back/Forward is left to the site navigation,
   // so the website editor can still ask about unsaved changes before it closes.
   useEffect(() => { const update = () => setLocationChange(value => value + 1); window.addEventListener('hashchange', update); return () => window.removeEventListener('hashchange', update); }, []);
-  if (revoked) return <section className="section"><div className="shell" role="alert"><p>Your team access has changed. Administrative data has been closed.</p><a href="account.html">Return to Account</a></div></section>;
+  if (revoked) return <section className="section"><div className="shell" role="alert"><p>{editorial.workspace.teamAccessHasChangedAdministrativeData}</p><a href="account.html">{editorial.workspace.returnAccount}</a></div></section>;
   const workspace = currentWorkspace();
   return <>
     <nav className="shell admin-sections" aria-label="Administration sections">
-      <a href="admin.html" aria-current={workspace === 'participants' ? 'page' : undefined}>Participants</a>
-      <a href="admin.html?view=content" aria-current={workspace === 'content' ? 'page' : undefined}>Website content</a>
-      <a href="admin.html#team-settings" aria-current={workspace === 'settings' ? 'page' : undefined}>Team organization settings</a>
+      <a href="admin.html" aria-current={workspace === 'participants' ? 'page' : undefined}>{editorial.workspace.participants}</a>
+      <a href="admin.html?view=content" aria-current={workspace === 'content' ? 'page' : undefined}>{editorial.workspace.websiteContent}</a>
+      <a href="admin.html#team-settings" aria-current={workspace === 'settings' ? 'page' : undefined}>{editorial.workspace.teamOrganizationSettings}</a>
     </nav>
     {workspace === 'content' ? <Suspense fallback={<section className="section"><div className="shell"><p role="status">Loading the website editor…</p></div></section>}><ContentEditor onDenied={onDenied} /></Suspense>
       : workspace === 'settings' ? <section className="section"><div className="shell"><Suspense fallback={<p role="status">Loading Team settings…</p>}><TeamSettings teamOrganizationId={teamOrganizationId} /></Suspense></div></section>
       : <>
-        <div className="shell actions admin-tools"><button className="button secondary" type="button" onClick={onChanged}>Refresh lists and capacity</button></div>
+        <div className="shell actions admin-tools"><button className="button secondary" type="button" onClick={onChanged}>{editorial.workspace.refreshListsCapacity}</button></div>
         <AddParticipant revision={revision} onChanged={onChanged} onDenied={onDenied} />
         <section className="section"><div className="shell">
           <div className="actions admin-views" aria-label="Participant views">{(['pending', 'accepted', 'invitations'] as const).map(value => <button key={value} type="button" className={`button ${view === value ? '' : 'secondary'}`} aria-pressed={view === value} onClick={() => setView(value)}>{value === 'invitations' ? 'Invitations' : label(value)}</button>)}</div>
@@ -247,11 +253,21 @@ function AdminWorkspace({ teamOrganizationId }: { teamOrganizationId: string }) 
 }
 
 export default function AdminPage() {
+  const editorial = usePageCopy('admin', definition);
+
+  const preview = usePageCopyState();
   const { status, teamAccess, teamOrganizationId, signIn, refreshAccess } = useContext(AuthContext);
   const allowed = status === 'signed-in' && teamAccess === 'allowed' && !!teamOrganizationId;
-  return <div className="page-layout layout-admin"><section className="page-heading"><div className="shell"><p className="eyebrow">For the EBS team</p><h1>EBS administration</h1><p className="lead">Manage participants and invitations, edit website content, and control access to EBS research tools.</p><a href="account.html">Back to Account</a></div></section>
-    {allowed ? <AdminWorkspace key={teamOrganizationId} teamOrganizationId={teamOrganizationId} /> : <section className="section"><div className="shell"><p role="status">{status === 'signed-out' ? 'Sign in with your EBS Team account to continue.' : status === 'loading' || teamAccess === 'checking' ? 'Checking team access…' : teamAccess === 'denied' ? 'This page is available to members of EBS Team.' : 'Team access is unavailable. Try again or contact the EBS account owner.'}</p>
-      {status === 'signed-out' ? <button className="button" type="button" onClick={signIn}>Sign in</button> : status === 'signed-in' && <button className="button secondary" type="button" onClick={refreshAccess}>Check team access again</button>}
+  return <div className="page-layout layout-admin"><section className="page-heading"><div className="shell"><p className="eyebrow">{editorial.pageHeading.ebsTeam}</p><h1>{editorial.pageHeading.title}</h1><p className="lead">{editorial.pageHeading.manageParticipantsInvitationsEditWebsiteContent}</p><a href="account.html">{editorial.pageHeading.backAccount}</a></div></section>
+    {preview?.preview ? <><nav className="shell admin-sections" aria-label="Administration sections">
+      <span>{editorial.workspace.participants}</span><span>{editorial.workspace.websiteContent}</span><span>{editorial.workspace.teamOrganizationSettings}</span>
+    </nav><section className="section"><div className="shell">
+      {preview.workspace === 'participants' ? <><h2>{editorial.addOrInvite.addOrInviteParticipant}</h2>
+        <p>{editorial.addOrInvite.choosePendingReviewOrAcceptedGrant}</p>
+        <label>{editorial.addOrInvite.participantEmail} <input disabled /></label></>
+        : <h2>{preview.workspace === 'settings' ? editorial.workspace.teamOrganizationSettings : editorial.workspace.websiteContent}</h2>}
+    </div></section></> : allowed ? <AdminWorkspace key={teamOrganizationId} teamOrganizationId={teamOrganizationId} /> : <section className="section"><div className="shell"><p role="status">{status === 'signed-out' ? 'Sign in with your EBS Team account to continue.' : status === 'loading' || teamAccess === 'checking' ? 'Checking team access…' : teamAccess === 'denied' ? 'This page is available to members of EBS Team.' : 'Team access is unavailable. Try again or contact the EBS account owner.'}</p>
+      {status === 'signed-out' ? <button className="button" type="button" onClick={signIn}>{editorial.page.sign}</button> : status === 'signed-in' && <button className="button secondary" type="button" onClick={refreshAccess}>{editorial.page.checkTeamAccessAgain}</button>}
     </div></section>}
   </div>;
 }

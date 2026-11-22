@@ -5,6 +5,7 @@ export type MemberAccess = 'checking' | 'pending' | 'accepted' | 'unavailable' |
 export type TeamAccess = 'checking' | 'allowed' | 'denied' | 'unavailable' | null;
 export type AuthState = {
   access: MemberAccess;
+  userId?: string;
   teamAccess: TeamAccess;
   teamOrganizationId: string | null;
   refreshAccess: () => void;
@@ -32,9 +33,10 @@ export function AccountControls() {
 }
 
 export function RegistrationLink({ href, children, className = 'button' }: {
-  href: string; children: ReactNode; className?: string;
+  href?: string; children: ReactNode; className?: string;
 }) {
   const { status, signIn } = useContext(AuthContext);
+  if (!href) return <button className={className} type="button" disabled>{children}</button>;
   if (status === 'signed-in') return <a className={className} href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
   return <button type="button" className={className} onClick={signIn} disabled={status !== 'signed-out'}>
     {status === 'loading' ? 'Loading sign-in…' : status === 'unavailable' ? 'Sign-in unavailable — try again later' : <>Sign in to continue: {children}</>}

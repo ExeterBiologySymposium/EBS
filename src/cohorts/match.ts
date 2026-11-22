@@ -74,10 +74,13 @@ export function hasInterests(answers: Answers): boolean {
   return answers.hooks.length > 0 || answers.fields.length > 0 || (answers.data !== null && answers.data !== 'any') || answers.challenge !== null;
 }
 
-export function rankProjects(answers: Answers): Ranked[] {
-  const chosen = researchFields.filter(field => answers.fields.includes(field.key));
-  return projects.map((project, order) => {
-    const platform = platformOf(project);
+export type FinderCatalog = { projects: typeof projects; platforms: typeof platforms; researchFields: typeof researchFields };
+export const defaultCatalog: FinderCatalog = { projects, platforms, researchFields };
+
+export function rankProjects(answers: Answers, catalog = defaultCatalog): Ranked[] {
+  const chosen = catalog.researchFields.filter(field => answers.fields.includes(field.key));
+  return catalog.projects.map((project, order) => {
+    const platform = platformOf(project, catalog.platforms);
     const reasons: string[] = [];
     let score = 0;
     if (answers.hooks.includes(project.key)) {
@@ -129,8 +132,8 @@ export type Recommendation = {
   ruledOut: Ranked[];
   notes: string[];
 };
-export function recommend(answers: Answers): Recommendation {
-  const ranked = rankProjects(answers);
+export function recommend(answers: Answers, catalog = defaultCatalog): Recommendation {
+  const ranked = rankProjects(answers, catalog);
   if (!hasAnswers(answers)) return { ranked, first: null, second: null, ruledOut: [], notes: [] };
   const open = ranked.filter(entry => entry.blocked === null);
   const [first = null, second = null] = open;
@@ -153,10 +156,10 @@ export function recommend(answers: Answers): Recommendation {
 
 export type SignupChoices = { first: ProjectKey | null; second: ProjectKey | null; computer: Computer | null; partner: Partner | null };
 
-export function projectLabel(key: ProjectKey | null): string {
+export function projectLabel(key: ProjectKey | null, catalog = defaultCatalog): string {
   if (!key) return 'Not chosen yet';
-  const project = projectByKey(key);
-  return `${project.name} (${platformOf(project).name})`;
+  const project = projectByKey(key, catalog.projects);
+  return `${project.name} (${platformOf(project, catalog.platforms).name})`;
 }
 function computerLabel(computer: Computer | null) {
   return computerOptions.find(option => option.key === computer)?.short ?? 'Not chosen yet';
@@ -166,31 +169,31 @@ function partnerLabel(partner: Partner | null) {
 }
 
 /** The plain-text summary a student sends, matching the questions on the cohort form. */
-export function signupSummary(choices: SignupChoices): string {
+export function signupSummary(choices: SignupChoices, catalog = defaultCatalog): string {
   return [
     'EBS research cohort sign-up',
     'Name: ',
-    `First choice: ${projectLabel(choices.first)}`,
-    `Second choice: ${projectLabel(choices.second)}`,
+    `First choice: ${projectLabel(choices.first, catalog)}`,
+    `Second choice: ${projectLabel(choices.second, catalog)}`,
     `Computer: ${computerLabel(choices.computer)}`,
     `Working: ${partnerLabel(choices.partner)}`,
     ...(choices.partner === 'partner' ? ['Partner’s name, if you have one: '] : []),
   ].join('\n');
 }
 
-export function signupMailto(choices: SignupChoices): string {
-  const subject = `Research cohort sign-up${choices.first ? `: ${projectByKey(choices.first).name}` : ''}`;
-  return `mailto:${cohortSignup.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(signupSummary(choices) + '\n')}`;
+export function signupMailto(choices: SignupChoices, catalog = defaultCatalog): string {
+  const subject = `Research cohort sign-up${choices.first ? `: ${projectByKey(choices.first, catalog.projects).name}` : ''}`;
+  return `mailto:${cohortSignup.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(signupSummary(choices, catalog) + '\n')}`;
 }
 
 /** The sign-up form link, pre-filled when entry IDs are configured; null while there is no form. */
-export function signupFormLink(choices: SignupChoices, config: typeof cohortSignup = cohortSignup): string | null {
+export function signupFormLink(choices: SignupChoices, config: typeof cohortSignup = cohortSignup, catalog = defaultCatalog): string | null {
   let url: URL;
   try { url = new URL(config.formUrl); } catch { return null; }
   if (url.protocol !== 'https:') return null;
   const values: [string, string][] = [
-    [config.prefill.firstChoice, choices.first ? projectLabel(choices.first) : ''],
-    [config.prefill.secondChoice, choices.second ? projectLabel(choices.second) : ''],
+    [config.prefill.firstChoice, choices.first ? projectLabel(choices.first, catalog) : ''],
+    [config.prefill.secondChoice, choices.second ? projectLabel(choices.second, catalog) : ''],
     [config.prefill.computer, choices.computer ? computerLabel(choices.computer) : ''],
     [config.prefill.partner, choices.partner ? partnerLabel(choices.partner) : ''],
   ];

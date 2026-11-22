@@ -1,4 +1,6 @@
 import { lazy, Suspense, useEffect, type ComponentType } from 'react';
+import { EditorialPageCopy } from './content/page-copy';
+import { editorialPages, type EditorialPage } from './content/pages';
 import { AccessNotice, useMemberAccess } from './auth';
 function learningPage(load: () => Promise<{ default: ComponentType }>) {
   return lazy(async () => {
@@ -23,5 +25,7 @@ export function ProtectedPage({ page }: { page: string }) {
   const access = useMemberAccess();
   if (access !== 'accepted') return <div className="page-layout shell"><AccessNotice asPage /></div>;
   const Content = pages[page as keyof typeof pages];
-  return <Suspense fallback={<section className="page-heading" role="status">Loading member content…</section>}><Content /></Suspense>;
+  const key = page.replace(/\.html$/, '') as EditorialPage;
+  const body = <><nav className="shell member-page-nav" aria-label="Member portal"><a href="account.html">← Account</a></nav><Suspense fallback={<section className="page-heading" role="status">Loading member content…</section>}><Content /></Suspense></>;
+  return Object.hasOwn(editorialPages, key) ? <EditorialPageCopy page={key}>{body}</EditorialPageCopy> : body;
 }

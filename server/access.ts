@@ -1,9 +1,10 @@
-import { isProtectedPath, normalizedPath, safeReturnTo } from '../src/access-policy.js';
+import { eventPosterPath, isProtectedPath, normalizedPath, safeReturnTo } from '../src/access-policy.js';
 
 export type Membership = 'accepted' | 'pending' | 'unassigned';
 export interface AccessDependencies {
   authenticate(request: Request): Promise<string | null>;
   membership(userId: string): Promise<Membership>;
+  isTeam?(userId: string): Promise<boolean>;
   enrollPending(userId: string): Promise<void>;
 }
 export const privateHeaders = {
@@ -54,6 +55,9 @@ export function createAccessHandlers(dependencies: AccessDependencies) {
       try {
         const value = await state(request);
         if (value.access === 'accepted') return null;
+        // Team-only previews can display the existing poster even when the editor is not Accepted.
+        if (value.userId && url.pathname === eventPosterPath && url.searchParams.get('preview') === '1' &&
+            await dependencies.isTeam?.(value.userId)) return null;
         const path = normalizedPath(url.pathname);
         if (/^\/(resources|datascience|python|rstudio|opensource|datasets|events)(?:[/.;]|$)/.test(path)) {
           const returnTo = '/' + path.split('/')[1].replace(/\.html.*$/, '').replace(/;.*$/, '') + '.html';

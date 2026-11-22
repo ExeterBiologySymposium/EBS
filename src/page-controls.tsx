@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { usePageCopyState } from './content/page-copy';
 import { ArrowDownRight, Check, Copy } from 'lucide-react';
-import { ensureKeynote, scheduleLocation, symposiumVenue, type ScheduleRow } from './schedule-details';
 
 export function CodeBlock({ text, label = 'Code example' }: { text: string; label?: string }) {
   const pre = useRef<HTMLPreElement>(null);
@@ -54,7 +54,11 @@ function loadCaptcha(): Promise<HCaptchaApi> {
   return captchaLoad;
 }
 
-export function ContactForm({ action, accessKey }: { action: string; accessKey: string }) {
+export function ContactForm(props: { action: string; accessKey: string }) {
+  const preview = usePageCopyState()?.preview;
+  return preview ? <button className="button" type="button" disabled>Send message</button> : <LiveContactForm {...props} />;
+}
+function LiveContactForm({ action, accessKey }: { action: string; accessKey: string }) {
   const [state, setState] = useState<'idle'|'sending'|'sent'|'failed'|'captcha'>('idle');
   const [captchaError, setCaptchaError] = useState(false);
   const captcha = useRef<HTMLDivElement>(null);
@@ -117,36 +121,5 @@ export function ContactForm({ action, accessKey }: { action: string; accessKey: 
     <label htmlFor="c-message">Message<textarea id="c-message" name="message" rows={5} required /></label>
     <div ref={captcha} className="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" />
     <button className="button" type="submit" disabled={state==='sending'}>{state==='sending'?'Sending…':'Send message'}<ArrowDownRight size={18}/></button>
-  </form><p id="contact-status" role="status">{captchaError?'The CAPTCHA could not load. Refresh the page or email us instead.':state==='sent'?'Message sent. Thank you for contacting EBS.':state==='failed'?'We could not send your message. Your text is still here; retry or email us.':state==='captcha'?'Please complete the CAPTCHA before sending your message.':''}</p><div id="form-success-msg" hidden={state!=='sent'} tabIndex={-1}><h3>Message sent</h3><p>Your message has been sent to the EBS organizing team.</p></div><p className="contact-email">Prefer email? <a href="mailto:exeterbiologysymposium@gmail.com">exeterbiologysymposium@gmail.com</a></p></>;
-}
-
-type RemoteRow = Record<string,string>;
-function useCollection(name: 'schedule_items'|'session_info') {
-  const [rows,setRows] = useState<RemoteRow[]|null>(null);
-  useEffect(()=>{
-    const controller = new AbortController();
-    const fields = name === 'schedule_items' ? ['time','event','location'] : ['title','description'];
-    const query = new URLSearchParams();
-    query.append('queries[]',JSON.stringify({method:'orderAsc',attribute:'order',values:[]}));
-    query.append('queries[]',JSON.stringify({method:'limit',values:[100]}));
-    const timer = window.setTimeout(()=>controller.abort(),15000);
-    fetch(`https://nyc.cloud.appwrite.io/v1/databases/ebs/collections/${name}/documents?${query}`,{headers:{'X-Appwrite-Project':'6a4ae6460030ea485984'},signal:controller.signal})
-      .then(async response=>{ if(!response.ok) throw new Error('Unavailable'); return response.json(); })
-      .then(data=>{
-        if(!Array.isArray(data.documents)||!data.documents.length||data.documents.length>100||data.total!==data.documents.length||!data.documents.every((row:RemoteRow)=>row&&fields.every(field=>typeof row[field]==='string'&&row[field].trim()))) return;
-        const valid = name==='session_info' ? data.documents.filter((row:RemoteRow)=>row.title.trim().toLowerCase()!=='date') : data.documents;
-        if(valid.length&&!controller.signal.aborted) setRows(valid);
-      }).catch(()=>{ /* Keep complete, static fallback on service failure. */ }).finally(()=>clearTimeout(timer));
-    return ()=>{ controller.abort();clearTimeout(timer); };
-  },[name]);
-  return rows;
-}
-export function RemoteSchedule({children}:{children:ReactNode}) {
-  const rows=useCollection('schedule_items');
-  const scheduleRows = rows ? ensureKeynote(rows as ScheduleRow[]) : null;
-  return scheduleRows ? <tbody id="schedule-body">{scheduleRows.map((row,i)=><tr key={i}><td>{row.time}</td><td>{row.event}</td><td>{scheduleLocation(row.location)}</td></tr>)}</tbody> : children;
-}
-export function RemoteSessions({children}:{children:ReactNode}) {
-  const rows=useCollection('session_info');
-  return rows ? <div id="session-info-grid" className="session-grid">{rows.map((row,i)=><section key={i}><h3>{row.title}</h3><p>{row.title.trim().toLowerCase()==='venue'?symposiumVenue:row.description}</p></section>)}</div> : children;
+  </form><p id="contact-status" role="status">{captchaError?'The CAPTCHA could not load. Refresh the page or email us instead.':state==='sent'?'Message sent. Thank you for contacting EBS.':state==='failed'?'We could not send your message. Your text is still here; retry or email us.':state==='captcha'?'Please complete the CAPTCHA before sending your message.':''}</p><div id="form-success-msg" hidden={state!=='sent'} tabIndex={-1}><h3>Message sent</h3><p>Your message has been sent to the EBS organizing team.</p></div><p className="contact-email">Prefer email? <a href="mailto:exeterbiosymposium@gmail.com">exeterbiosymposium@gmail.com</a></p></>;
 }

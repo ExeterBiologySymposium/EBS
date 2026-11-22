@@ -1,7 +1,9 @@
 import { authenticateClerk } from '../clerk-config.js';
 import { clerkAccess } from '../clerk.js';
 import { organizationRuntime } from '../orgs/runtime.js';
-import { initialContent } from './defaults.js';
+import { fetchScheduleFeed } from '../../src/schedule-feed.js';
+import { validatePageContent } from '../../src/content/model.js';
+import { editorialDefinitions, initialContent } from './defaults.js';
 import { ContentProblem, type ContentDependencies } from './handlers.js';
 import { neonContentStore } from './store.js';
 
@@ -9,6 +11,7 @@ import { neonContentStore } from './store.js';
 // organization runtime, so editing is unavailable wherever participant administration is.
 export function contentRuntime(env: Record<string, string | undefined> = process.env): ContentDependencies {
   let organizations: ReturnType<typeof organizationRuntime> | undefined;
+  let schedule: { expires: number; data: Promise<{ content: unknown; source: 'current-schedule' | 'built-in-schedule' }> } | undefined;
   const team = () => organizations ??= organizationRuntime();
   return {
     enabled: env.EBS_CONTENT_ENABLED === 'true',
@@ -26,5 +29,20 @@ export function contentRuntime(env: Record<string, string | undefined> = process
       return neonContentStore(connection, instance);
     },
     initial: page => initialContent[page],
+    scheduleInitial() {
+      if (schedule && schedule.expires > Date.now()) return schedule.data;
+      const data = (async () => {
+        try {
+          const feed = await fetchScheduleFeed(AbortSignal.timeout(3500));
+          if (feed.rows && feed.sessions) return {
+            content: validatePageContent('schedule', { ...initialContent.schedule, ...feed }, editorialDefinitions.schedule),
+            source: 'current-schedule' as const,
+          };
+        } catch { /* The editor labels the built-in schedule explicitly. */ }
+        return { content: initialContent.schedule, source: 'built-in-schedule' as const };
+      })();
+      schedule = { expires: Date.now() + 15000, data };
+      return data;
+    },
   };
 }

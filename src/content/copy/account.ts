@@ -1,0 +1,65 @@
+import { copy, group, url } from '../fields.js';
+
+export const definition = group("account", {
+  pageHeading: group("Page heading", {
+    ebsMembership: copy("Text · Your EBS membership", "Your EBS membership"),
+    title: copy("Page title", "Account"),
+    checking: copy('Status while checking', 'Checking your account…'),
+    approvalChecking: copy('Approval button while checking', 'Checking approval…'),
+    unavailable: copy('Status when unavailable', 'We could not check your account. Try again, or contact the EBS team.'),
+    hrefContactEbsTeam: url('Contact link destination', 'contact.html'),
+    contactEbsTeam: copy('Contact link text', 'Contact the EBS team'),
+  }),
+  visitor: group('Signed out', {
+    message: copy('Sign-in guidance', 'Sign in to see your account and approval status.'),
+    sign: copy('Sign-in button', 'Sign in'),
+  }),
+  signedIn: group('Signed in', {
+    accountSettings: copy('Account settings button', 'Account settings'),
+  }),
+  team: group('Team access', {
+    hrefManageParticipants: url('Participant administration destination', 'admin.html'),
+    manageParticipants: copy('Participant administration link text', 'Manage participants'),
+    hrefEditWebsiteContent: url('Website editor destination', 'admin.html?view=content'),
+    editWebsiteContent: copy('Website editor link text', 'Edit website content'),
+  }),
+  pendingStatus: group('Check approval', {
+    checkApproval: copy('Check approval button', 'Check approval status'),
+  }),
+  acceptedStatus: group('Accepted membership', {
+    message: copy('Approval status', 'Your account is accepted. Your EBS research tools are ready to use.'),
+    hrefJoinEbsDiscord: url("Link destination · Join the EBS Discord", "https://discord.gg/Wu9SvxYs4y", "link"),
+    joinEbsDiscord: copy("Link text · Join the EBS Discord", "Join the EBS Discord"),
+  }),
+  pendingAccount: group("Pending account", {
+    message: copy('Approval status', 'Your account is pending approval. The EBS team will review your account before granting access to research tools and events.'),
+    whileWait: copy("Heading · While you wait", "While you wait"),
+    whyMyAccountPending: copy("Question · Why is my account Pending?", "Why is my account Pending?"),
+    ebsTeamReviewsApplicationsBeforeApproving: copy("Text · The EBS team reviews applications before approving accounts.…", "The EBS team reviews applications before approving accounts. Signing in or submitting a form does not automatically unlock research folders, Events, or member resources."),
+    haveICompletedMyApplication: copy("Question · Have I completed my application?", "Have I completed my application?"),
+    creatingAnAccountOnlyFirstStep: copy("Text · Creating an account is only the first step. Each researcher must…", "Creating an account is only the first step. Each researcher must also submit the Google Form on"),
+    hrefStudentRegistration: url("Link destination · Student registration", "student-signup.html", "link"),
+    studentRegistration: copy("Link text · Student registration", "Student registration"),
+    usingSameEmailAsTheirEbs: copy("Text · Creating an account is only the first step. Each researcher must…", ", using the same email as their EBS account. A school registration does not replace individual applications."),
+    iReceivedApprovalWhyAmI: copy("Question · I received approval. Why am I still Pending?", "I received approval. Why am I still Pending?"),
+    signWithAccountMatchingApplicationEmail: copy("Text · Sign in with the account matching your application email and…", "Sign in with the account matching your application email and select"),
+    checkApprovalStatus: copy("Text · Check approval status", "Check approval status"),
+    aboveIfItStillShowsPending: copy("Text · Sign in with the account matching your application email and…", "above. If it still shows Pending,"),
+    hrefContactEbsTeam: url("Link destination · contact the EBS team", "contact.html", "link"),
+    contactEbsTeam: copy("Link text · contact the EBS team", "contact the EBS team"),
+    ifHaveNotHeardBackWithin: copy("Text · Sign in with the account matching your application email and…", ". If you have not heard back within a week or two, check your spam folder before contacting us."),
+  }),
+  acceptedAccount: group("Accepted account", {
+    exploreEbs: copy("Heading · Explore EBS", "Explore EBS"),
+    hrefEvents: url("Link destination · Events", "events.html", "link"),
+    events: copy("Link text · Events", "Events"),
+    hrefResources: url("Link destination · Resources", "resources.html", "link"),
+    resources: copy("Link text · Resources", "Resources"),
+    hrefCoding: url("Link destination · Coding", "datascience.html", "link"),
+    coding: copy("Link text · Coding", "Coding"),
+    hrefResearchProjects: url("Link destination · Research projects", "projects.html", "link"),
+    researchProjects: copy("Link text · Research projects", "Research projects"),
+    hrefDatasetLibrary: url("Link destination · Dataset library", "datasets.html", "link"),
+    datasetLibrary: copy("Link text · Dataset library", "Dataset library"),
+  }),
+});

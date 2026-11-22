@@ -1,6 +1,10 @@
 // Typed website content shared by reader pages, the Team editor and the content API.
 // Shared with server code, so imports use explicit .js extensions.
 import { memberPages } from '../access-policy.js';
+import type { Field } from './fields.js';
+import { editorialPages, type EditorialPage } from './pages.js';
+import { urlProblem, type UrlPurpose } from './urls.js';
+export { isExternalUrl, suggestUrl, urlProblem, type UrlPurpose } from './urls.js';
 
 export const CONTENT_SCHEMA_VERSION = 1;
 /** Largest accepted page, measured as UTF-8 JSON. */
@@ -10,6 +14,7 @@ export const contentLimits = { line: 200, paragraph: 2000, text: 20000, url: 200
 const LIMITS = contentLimits;
 
 export const contentPages = {
+  ...editorialPages,
   researchers: { label: 'Student research', route: 'researchers.html', audience: 'public', template: 'research' },
   resources: { label: 'Resources', route: 'resources.html', audience: 'accepted', template: 'lesson' },
   datascience: { label: 'Coding', route: 'datascience.html', audience: 'accepted', template: 'lesson' },
@@ -62,7 +67,7 @@ export type LessonSection = TextSection | ListSection | LinksSection | ImagesSec
 export type SectionType = LessonSection['type'];
 export type LessonContent = { eyebrow: string; title: string; lead: string; sections: LessonSection[] };
 
-export type PageContentMap = {
+export type PageContentMap = Record<EditorialPage, object> & {
   researchers: ResearchContent; resources: LessonContent; datascience: LessonContent; python: LessonContent; rstudio: LessonContent;
 };
 export type PageContent = PageContentMap[PageKey];
@@ -110,47 +115,6 @@ export function placeLinks(parts: string[], links: InlineLink[]): (LinkPlacement
 }
 
 // ---------------------------------------------------------------- Links
-
-export type UrlPurpose = 'link' | 'image' | 'form';
-const sitePage = /^[a-z0-9][a-z0-9-]*\.html(?:[?#]\S*)?$/i;
-function urlGuidance(purpose: UrlPurpose) {
-  return purpose === 'image' ? 'Use a site image (such as /images/…) or a link that starts with https://.'
-    : purpose === 'form' ? 'Use the full form link, starting with https://.'
-      : 'Use a site page (such as faq.html), a link that starts with https://, or an email link (mailto:…).';
-}
-/** Returns a plain-language problem, or null when the link is safe for its purpose. */
-export function urlProblem(value: string, purpose: UrlPurpose): string | null {
-  if (!value) return purpose === 'image' ? 'Enter an image link.' : 'Enter a link.';
-  if (value !== value.trim()) return 'Remove spaces from the start and end of the link.';
-  if (value.length > LIMITS.url) return 'This link is too long.';
-  if (/[\u0000-\u001f\u007f\\<>"`]/.test(value)) return 'This link contains characters that are not allowed.';
-  if (value.startsWith('/')) {
-    if (purpose === 'form') return urlGuidance(purpose);
-    if (value.startsWith('//')) return 'Start site links with a single /, or use a full https:// link.';
-    if (value.split(/[?#]/, 1)[0].split('/').some(part => /^(?:\.|%2e){1,2}$/i.test(part))) return 'Use a direct site path without . or .. folders.';
-    return null;
-  }
-  if (purpose === 'link' && (sitePage.test(value) || /^#[A-Za-z][\w-]*$/.test(value))) return null;
-  let url: URL;
-  try { url = new URL(value); } catch { return urlGuidance(purpose); }
-  if (url.username || url.password) return 'Links cannot include a username or password.';
-  if (url.protocol === 'https:') return !/^https:\/\//i.test(value) ? 'Start full links with https://.' : /\s/.test(value) ? 'Remove spaces from the link.' : url.hostname ? null : urlGuidance(purpose);
-  if (url.protocol === 'mailto:' && purpose === 'link') return /^mailto:[^\s@?#/]+@[^\s@?#/]+\.[^\s@?#/]+(?:\?\S*)?$/i.test(value) ? null : 'Enter a complete email link, such as mailto:name@example.com.';
-  if (url.protocol === 'http:') return 'Use a secure link that starts with https://.';
-  return urlGuidance(purpose);
-}
-// Endings that are web addresses rather than file names (.py, .sh, .md, .zip and .png are both).
-const webEndings = new Set(['com', 'org', 'net', 'edu', 'gov', 'io', 'co', 'us', 'uk', 'ca']);
-/** Friendly completion for common shorthand; never changes a link's scheme or guesses at file names. */
-export function suggestUrl(value: string, purpose: UrlPurpose): string {
-  const link = value.trim();
-  if (purpose === 'link' && /^[^\s@/:]+@[^\s@/:]+\.[^\s@/:]+$/.test(link)) return 'mailto:' + link;
-  if (purpose === 'image' && /^images\//i.test(link)) return '/' + link;
-  const address = /^(?:[a-z0-9-]+\.)+([a-z]{2,})(?:[/?#]\S*)?$/i.exec(link);
-  if (address && (/^www\./i.test(link) || webEndings.has(address[1].toLowerCase()))) return 'https://' + link;
-  return link;
-}
-export function isExternalUrl(value: string) { return /^https:\/\//i.test(value); }
 
 // ---------------------------------------------------------------- Validation
 
@@ -291,19 +255,44 @@ const lessonCheck = shape<LessonContent>({
   sections: list(sectionCheck, 80, 'sections'),
 });
 
-function check<K extends PageKey>(page: K, value: unknown): { result: PageContentMap[K]; issues: ContentIssue[] } {
+function checkEditorial(field: Field, value: unknown, path: string, context: Context, expected?: unknown): unknown {
+  switch (field.type) {
+    case 'locked':
+      if (!sameContent(value, expected)) context.issues.push({ path, message: 'This value is fixed for the existing entry.' });
+      return expected;
+    case 'text':
+      if (field.url) return link(field.url, field.optional)(value, path, context);
+      if (field.options) return choice(Object.keys(field.options), 'Choose one of the listed options.')(value, path, context);
+      return text({ max: field.max ?? (field.multiline ? LIMITS.text : LIMITS.line), multiline: field.multiline,
+        required: field.optional ? undefined : 'Enter ' + field.label.toLowerCase() + '.' })(value, path, context);
+    case 'record':
+      return shape(Object.fromEntries(Object.entries(field.fields).map(([key, child]) =>
+        [key, (entry: unknown, at: string, ctx: Context) => checkEditorial(child, entry, at, ctx, (expected as Record<string, unknown> | undefined)?.[key])])))(value, path, context);
+    case 'list':
+      if (field.fixed && Array.isArray(value) && value.length !== field.initial.length) {
+        context.issues.push({ path, message: 'The existing entries must keep their positions.' });
+        return [];
+      }
+      return list((entry, at, ctx) => checkEditorial(field.item, entry, at, ctx, field.fixed ? field.initial[Number(at.split('.').at(-1))] : undefined), field.max, 'entries',
+        { count: field.min, message: 'Add at least ' + field.min + ' entries.' })(value, path, context);
+  }
+}
+
+function check<K extends PageKey>(page: K, value: unknown, field?: Field): { result: PageContentMap[K]; issues: ContentIssue[] } {
   const context: Context = { issues: [] };
-  const result = (contentPages[page].template === 'research' ? researchCheck : lessonCheck)(value, '', context) as PageContentMap[K];
+  const template = contentPages[page].template;
+  if (template === 'fields' && !field) context.issues.push({ path: '', message: FORMAT });
+  const result = (template === 'fields' ? field ? checkEditorial(field, value, '', context) : value : (template === 'research' ? researchCheck : lessonCheck)(value, '', context)) as PageContentMap[K];
   if (!context.issues.length && new TextEncoder().encode(JSON.stringify(result)).length > MAX_CONTENT_BYTES) {
     context.issues.push({ path: '', message: 'This page is too large. Shorten it or remove some sections.' });
   }
   return { result, issues: context.issues };
 }
 /** Every problem, with field paths such as "timeline.entries.2.title", for inline editor messages. */
-export function contentIssues(page: PageKey, value: unknown): ContentIssue[] { return check(page, value).issues; }
+export function contentIssues(page: PageKey, value: unknown, field?: Field): ContentIssue[] { return check(page, value, field).issues; }
 /** Returns a clean copy containing only known fields, or throws ContentValidationError. */
-export function validatePageContent<K extends PageKey>(page: K, value: unknown): PageContentMap[K] {
-  const { result, issues } = check(page, value);
+export function validatePageContent<K extends PageKey>(page: K, value: unknown, field?: Field): PageContentMap[K] {
+  const { result, issues } = check(page, value, field);
   if (issues.length) throw new ContentValidationError(issues);
   return result;
 }

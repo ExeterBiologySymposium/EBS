@@ -19,6 +19,7 @@ async function membership(userId: string): Promise<Membership> {
 export const clerkAccess: AccessDependencies = {
   authenticate: authenticateClerk,
   membership,
+  isTeam: userId => organizationRuntime().service.isTeam(userId),
   async enrollPending(userId) {
     if (process.env.EBS_ORG_POOLS_ENABLED === 'true') { await organizationRuntime().service.enroll(userId); return; }
     const { client, pending } = clerkConfiguration();

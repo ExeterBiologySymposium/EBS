@@ -93,7 +93,7 @@ test('sign-up message, email link and optional pre-filled form', () => {
   ].join('\n'));
   const mail = new URL(match.signupMailto(choices));
   assert.equal(mail.protocol, 'mailto:');
-  assert.equal(mail.pathname, 'exeterbiologysymposium@gmail.com');
+  assert.equal(mail.pathname, 'exeterbiosymposium@gmail.com');
   assert.equal(mail.searchParams.get('subject'), 'Research cohort sign-up: The Itch Germ');
   assert.equal(mail.searchParams.get('body'), summary + '\n');
   assert.match(match.signupSummary({ first: null, second: null, computer: null, partner: null }), /First choice: Not chosen yet/);
@@ -136,7 +136,7 @@ test('the page prerenders every question, project and the sign-up, and is a publ
   assert.equal(markup.match(/<input /g).length, 34);
   assert.equal(markup.match(/<label class="finder-choice">/g).length, 31);
   assert.ok(markup.includes('Your match appears here.'));
-  assert.ok(markup.includes('href="mailto:exeterbiologysymposium@gmail.com?subject='));
+  assert.ok(markup.includes('href="mailto:exeterbiosymposium@gmail.com?subject='));
   assert.doesNotMatch(markup, /MENTOR/);
 
   assert.equal(navigation.pageForUrl(new URL('https://ebs.test/projects.html')), 'projects.html');

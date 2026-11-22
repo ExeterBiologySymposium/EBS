@@ -264,7 +264,7 @@ export const cohortSignup = {
   formUrl: '',
   /** Optional Google Forms pre-fill entry IDs (such as "entry.1234567") from "Get pre-filled link". */
   prefill: { firstChoice: '', secondChoice: '', computer: '', partner: '' },
-  email: 'exeterbiologysymposium@gmail.com',
+  email: 'exeterbiosymposium@gmail.com',
 };
 
 export const cohortFacts = {
@@ -275,11 +275,11 @@ export const cohortFacts = {
 
 export const difficultyLabels: Record<Difficulty, string> = { easier: 'Easier', medium: 'Medium', harder: 'Harder' };
 
-export function platformOf(project: Project): Platform {
-  return platforms.find(platform => platform.key === project.platform)!;
+export function platformOf(project: Project, catalog = platforms): Platform {
+  return catalog.find(platform => platform.key === project.platform)!;
 }
-export function projectByKey(key: ProjectKey): Project {
-  return projects.find(project => project.key === key)!;
+export function projectByKey(key: ProjectKey, catalog = projects): Project {
+  return catalog.find(project => project.key === key)!;
 }
 export function isProjectKey(value: unknown): value is ProjectKey {
   return typeof value === 'string' && projects.some(project => project.key === value);

@@ -1,3 +1,5 @@
+import { editorFields, type Field } from '../../src/content/fields.js';
+import { editorialDefinitions } from './defaults.js';
 import { privateHeaders } from '../access.js';
 import {
   CONTENT_SCHEMA_VERSION, ContentValidationError, MAX_CONTENT_BYTES, contentPages, isPageKey, sameContent, validatePageContent,
@@ -18,6 +20,7 @@ export type ContentDependencies = {
   editorName(userId: string): Promise<string>;
   store(): ContentStore;
   initial(page: PageKey): unknown;
+  scheduleInitial?(): Promise<{ content: unknown; source: 'current-schedule' | 'built-in-schedule' }>;
 };
 
 const messages: Record<string, string> = {
@@ -66,17 +69,19 @@ async function readJson(request: Request): Promise<Record<string, unknown>> {
 }
 
 export function createContentHandlers(deps: ContentDependencies) {
+  const forms = new Map(Object.entries(editorialDefinitions).map(([key, field]) => [key, editorFields(field)]));
   const initial = new Map<PageKey, PageContent>();
   // A broken built-in default is a deployment bug: fail closed as unavailable rather than render it.
+  const definition = (page: PageKey): Field | undefined => (editorialDefinitions as Partial<Record<PageKey, Field>>)[page];
   const initialFor = (page: PageKey) => {
     if (!initial.has(page)) {
-      try { initial.set(page, validatePageContent(page, deps.initial(page))); } catch { throw problem('unavailable', 503); }
+      try { initial.set(page, validatePageContent(page, deps.initial(page), definition(page))); } catch { throw problem('unavailable', 503); }
     }
     return initial.get(page)!;
   };
   const stored = (page: PageKey, value: unknown, schemaVersion: number | null) => {
     if (schemaVersion !== CONTENT_SCHEMA_VERSION) throw problem('unavailable', 503);
-    try { return validatePageContent(page, value); } catch { throw problem('unavailable', 503); }
+    try { return validatePageContent(page, value, definition(page)); } catch { throw problem('unavailable', 503); }
   };
   // A publication never changes once made, so its validated form is reused while it stays live.
   const live = new Map<PageKey, { revision: number; content: PageContent }>();
@@ -88,12 +93,16 @@ export function createContentHandlers(deps: ContentDependencies) {
     live.set(page, { revision: row.publishedRevision, content });
     return content;
   }
-  function editView(page: PageKey, row: StoredPage | null) {
+  async function editView(page: PageKey, row: StoredPage | null) {
+    const schedule = page === 'schedule' && !row?.published && deps.scheduleInitial ? await deps.scheduleInitial() : undefined;
+    const builtIn = schedule ? stored(page, schedule.content, CONTENT_SCHEMA_VERSION) : initialFor(page);
     return {
       page,
+      ...(forms.has(page) ? { definition: forms.get(page) } : {}),
       revision: row?.revision ?? 0,
-      draft: row ? stored(page, row.draft, row.schemaVersion) : initialFor(page),
-      live: row ? published(page, row) : initialFor(page),
+      draft: row ? stored(page, row.draft, row.schemaVersion) : builtIn,
+      live: row?.published ? published(page, row) : builtIn,
+      ...(schedule ? { initialSource: schedule.source } : {}),
       liveSource: row?.published ? 'published' : 'initial',
       editedAt: row?.editedAt ?? null,
       editedBy: row ? row.editedByName || 'An EBS Team member' : null,
@@ -124,22 +133,29 @@ export function createContentHandlers(deps: ContentDependencies) {
       if (request.headers.get('content-type')?.split(';')[0].trim().toLowerCase() !== 'application/json') throw problem('invalid-request', 415);
     }
 
-    // Public readers need no account. Everything else is authorized freshly, server-side.
-    const publicRead = action === 'read' && contentPages[page].audience === 'public';
-    const userId = publicRead ? null : await deps.authenticate(request);
-    if (!publicRead) {
+    const audience = contentPages[page].audience;
+    const reader = action === 'read';
+    const userId = reader && audience === 'public' ? null : await deps.authenticate(request);
+    if (!reader || audience === 'accepted' || audience === 'team') {
       if (!userId) throw problem('signed-out', 401);
-      if (!(action === 'read' ? await deps.isAccepted(userId) : await deps.isTeam(userId))) throw problem('forbidden', 403);
+      if (!(reader && audience === 'accepted' ? await deps.isAccepted(userId) : await deps.isTeam(userId))) throw problem('forbidden', 403);
     }
-    if (action === 'read') {
-      // Readers only ever receive published (or initial) content, never drafts.
-      if (!deps.enabled) return respond(200, { content: initialFor(page) });
-      const row = await deps.store().read(page);
-      return respond(200, { content: row ? published(page, row) : initialFor(page) });
+    if (reader) {
+      const row = deps.enabled ? await deps.store().read(page) : null;
+      let content = row ? published(page, row) : initialFor(page);
+      if (page === 'account') {
+        const { pageHeading, visitor, signedIn, pendingStatus, pendingAccount, acceptedStatus, acceptedAccount, participantHelp, team } = content as Record<string, unknown>;
+        const accepted = userId ? await deps.isAccepted(userId) : false;
+        const teamAccess = userId && await deps.isTeam(userId).catch(() => false);
+        content = { pageHeading, ...(userId ? { signedIn, pendingStatus } : { visitor }),
+          ...(accepted ? { acceptedStatus, acceptedAccount, participantHelp } : userId ? { pendingAccount } : {}),
+          ...(teamAccess ? { team } : {}) };
+      }
+      return respond(200, { content, ...(contentPages[page].template === 'fields' ? { published: Boolean(row?.published) } : {}) });
     }
     if (!deps.enabled) throw problem('not-configured', 503);
     const store = deps.store();
-    if (action === 'edit') return respond(200, editView(page, await store.read(page)));
+    if (action === 'edit') return respond(200, await editView(page, await store.read(page)));
     if (action === 'history') {
       const versions = await store.versions(page, 50);
       return respond(200, { versions: versions.map(entry => ({ revision: entry.revision, publishedAt: entry.publishedAt, publishedBy: entry.publishedByName || 'An EBS Team member' })) });
@@ -160,19 +176,19 @@ export function createContentHandlers(deps: ContentDependencies) {
     if (!revisionValue(expected, action === 'save' ? 0 : 1)) throw problem('invalid-request', 400);
     const conflict = async () => problem('conflict', 409, { revision: (await store.read(page))?.revision ?? 0 });
     if (action === 'save') {
-      const content = validatePageContent(page, body.content);
+      const content = validatePageContent(page, body.content, definition(page));
       const row = await store.saveDraft(page, expected, content, await actor(userId!));
       if (!row) throw await conflict();
-      return respond(200, editView(page, row));
+      return respond(200, await editView(page, row));
     }
     if (action === 'publish') {
       const current = await store.read(page);
       if (!current || current.revision !== expected) throw await conflict();
       const draft = stored(page, current.draft, current.schemaVersion);
-      if (sameContent(draft, published(page, current))) throw problem('no-changes', 409);
+      if (sameContent(draft, (await editView(page, current)).live)) throw problem('no-changes', 409);
       const row = await store.publish(page, expected, await actor(userId!));
       if (!row) throw await conflict();
-      return respond(200, editView(page, row));
+      return respond(200, await editView(page, row));
     }
     // Restoring copies a publication into the draft. It never publishes by itself.
     if (!revisionValue(body.version, 1)) throw problem('invalid-request', 400);
@@ -180,10 +196,10 @@ export function createContentHandlers(deps: ContentDependencies) {
     if (!entry) throw problem('not-found', 404);
     if (entry.schemaVersion !== CONTENT_SCHEMA_VERSION) throw problem('old-version', 409);
     let content: PageContent;
-    try { content = validatePageContent(page, entry.content); } catch { throw problem('old-version', 409); }
+    try { content = validatePageContent(page, entry.content, definition(page)); } catch { throw problem('old-version', 409); }
     const row = await store.saveDraft(page, expected, content, await actor(userId!));
     if (!row) throw await conflict();
-    return respond(200, editView(page, row));
+    return respond(200, await editView(page, row));
   }
 
   return async function contentHandler(request: Request): Promise<Response> {

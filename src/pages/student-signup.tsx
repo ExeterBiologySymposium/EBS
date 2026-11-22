@@ -1,10 +1,17 @@
+import { usePageCopy, safeCopyUrl } from '../content/page-copy';
+import { definition } from '../content/copy/student-signup';
 import { RegistrationLink } from '../auth';
-import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
+import { ApplicationProgress } from '../application-progress';
 
-export default function PageContent() { return <div className="page-layout layout-student-signup">
+export default function PageContent() {
+  const editorial = usePageCopy('student-signup', definition); return <div className="page-layout layout-student-signup">
 <div className={"shell"}>
-<section className={"page-heading"}><a className={"back-link"} href={"register.html"}>{"Registration options"}</a><h1>{"Student registration"}</h1><p className={"lead"}>{"Present original biology research. Participation is 100% free."}</p><p>{"Open to all middle and high school students. Attend at Phillips Exeter Academy or online on April 25th, 2027."}</p></section>
-<section className={"registration-focus"}><h2>{"Before you apply"}</h2><ul><li>{"No prior research experience required."}</li><li>{"Present a research poster in person or online."}</li><li>{"Wet-lab projects will be accepted for presentation on a case-by-case basis."}</li><li>{"Projects may be individual or teams of up to three students."}</li></ul><div className={"actions"}><RegistrationLink className={"button"} href={"https://forms.gle/vgtVrsBm1UbBhwtv9"}>{"Open student application"}</RegistrationLink></div><p className={"external-form-note"}>{"Sign in to open the application in a new tab. Complete your registration in Google Forms."}</p><p className={"small"}>{"Registering for a school? "}<a href={"schools.html"}>{"Use school registration"}</a>{"."}</p></section>
-<section className={"content-section reading"} id={"form"}><h2>{"Help with registration"}</h2><p>{"Use the student or school application above. For questions, "}<a href={"faq.html#contact"}>{"contact the EBS team"}</a>{" or email "}<a href={"mailto:exeterbiologysymposium@gmail.com"}>{"exeterbiologysymposium@gmail.com"}</a>{"."}</p><p><a href={"faq.html"}>{"Read participation and eligibility FAQs"}</a></p></section>
+<section className={"page-heading"}><a className={"back-link"} href={safeCopyUrl(editorial.pageHeading.hrefRegistrationOptions)}>{editorial.pageHeading.registrationOptions}</a><h1>{editorial.pageHeading.title}</h1><p className={"lead"}>{editorial.pageHeading.presentOriginalBiologyResearchParticipation100}</p><p>{editorial.pageHeading.openAllMiddleHighSchoolStudents}</p></section>
+<section className={"registration-focus"}><h2>{editorial.beforeApply.beforeApply}</h2><ul><li>{editorial.beforeApply.noPriorResearchExperienceRequired}</li><li>{editorial.beforeApply.presentResearchPosterPersonOrOnline}</li><li>{editorial.beforeApply.wetLabProjectsWillBeAccepted}</li><li>{editorial.beforeApply.projectsMayBeIndividualOrTeams}</li></ul><p className={"small"}>{editorial.beforeApply.registeringSchool + " "}<a href={safeCopyUrl(editorial.beforeApply.hrefUseSchoolRegistration)}>{editorial.beforeApply.useSchoolRegistration}</a>{"."}</p></section>
+<ApplicationProgress>
+<div className={"actions"}><RegistrationLink className={"button"} href={safeCopyUrl(editorial.beforeApply.hrefOpenStudentApplication, "google-form")}>{editorial.beforeApply.openStudentApplication}<span className="sr-only"> (opens in a new tab)</span></RegistrationLink></div>
+<p className="small">{editorial.beforeApply.signOpenApplicationNewTabComplete}</p>
+</ApplicationProgress>
+<section className={"content-section reading"} id={"form"}><h2>{editorial.helpWithRegistration.helpWithRegistration}</h2><p>{editorial.helpWithRegistration.useStudentOrSchoolApplicationAbove + " "}<a href={safeCopyUrl(editorial.helpWithRegistration.hrefContactEbsTeam)}>{editorial.helpWithRegistration.contactEbsTeam}</a>{" " + editorial.helpWithRegistration.orEmail + " "}<a href={safeCopyUrl(editorial.helpWithRegistration.hrefExeterbiosymposiumGmailCom)}>{editorial.helpWithRegistration.exeterbiosymposiumGmailCom}</a>{"."}</p><p><a href={safeCopyUrl(editorial.helpWithRegistration.hrefReadParticipationEligibilityFaqs)}>{editorial.helpWithRegistration.readParticipationEligibilityFaqs}</a></p></section>
 </div>
 </div>; }

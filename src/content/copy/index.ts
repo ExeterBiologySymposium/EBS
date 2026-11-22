@@ -1,0 +1,63 @@
+import { facts, guidance, steps, questions, people } from './home-entries.js';
+import { copy, group, url } from '../fields.js';
+
+export const definition = group("index", {
+  hero: group("Hero", {
+    facts,
+    schoolLink: copy("School registration link", "Register your school ↗"),
+    schoolPage: url("School registration destination", "schools.html"),
+    srcEbsStudentsVisitingBroadInstitute: url("Image URL · EBS students visiting the Broad Institute", "/images/team/ebs-team-broad-institute-1920.jpg", "image"),
+    altEbsStudentsVisitingBroadInstitute: copy("Image description", "EBS students visiting the Broad Institute"),
+    title: copy("Page title", "Exeter Biology Symposium"),
+    biologyResearch: copy("Text · Biology research.Led by students.Open to everyone.", "Biology research."),
+    ledByStudents: copy("Text · Biology research.Led by students.Open to everyone.", "Led by students."),
+    openEveryone: copy("Text · Biology research.Led by students.Open to everyone.", "Open to everyone."),
+    entry100FreeAllMiddleHighSchool: copy("Text · 100% free for all middle and high school students.Learn,…", "100% free for all middle and high school students."),
+    learnInvestigatePresentPersonOrOnline: copy("Text · 100% free for all middle and high school students.Learn,…", "Learn, investigate, and present—in person or online."),
+    srcPhillipsExeterAcademy: url("Image URL · Phillips Exeter Academy", "/Phillips Exeter Academy-selected-assets/PEA_Squaremark_Outline_White.png", "image"),
+    altPhillipsExeterAcademy: copy("Image description", "Phillips Exeter Academy"),
+    hrefRegisterAsStudent: url("Link destination · Register as a student", "student-signup.html", "link"),
+    registerAsStudent: copy("Link text · Register as a student", "Register as a student"),
+  }),
+  researchGuidance: group("Research guidance", {
+    guidance,
+    whatMakesStudentResearchPossible: copy("Heading · What makes student research possible?", "What makes student research possible?"),
+    learnMore: copy("Link text · Learn more", "Learn more"),
+  }),
+  researchSteps: group("Research steps", {
+    steps,
+    hrefExploreResources: url("Link destination · Explore the resources", "resources.html", "link"),
+    exploreResources: copy("Link text · Explore the resources", "Explore the resources"),
+  }),
+  questionsAnswers: group("Questions and answers", {
+    questions,
+    beforeBegin: copy("Heading · Before you begin.", "Before you begin."),
+    hrefAllQuestions: url("Link destination · All questions", "faq.html", "link"),
+    allQuestions: copy("Link text · All questions", "All questions"),
+  }),
+  closingInvitation: group("Closing invitation", {
+    srcStudentsExploringScienceExhibits: url("Image URL · Students exploring science exhibits", "/images/Genetics Club Photos/GeneticsClubBoston_3.jpg", "image"),
+    altStudentsExploringScienceExhibits: copy("Image description", "Students exploring science exhibits"),
+    april25th2027: copy("Text · April 25th, 2027", "April 25th, 2027"),
+    question: copy("Heading · Your question.Your research.Your place here.", "Your question."),
+    research: copy("Heading · Your question.Your research.Your place here.", "Your research."),
+    placeHere: copy("Heading · Your question.Your research.Your place here.", "Your place here."),
+    hrefTakePartEbs: url("Link destination · Take part in EBS", "register.html", "link"),
+    takePartEbs: copy("Link text · Take part in EBS", "Take part in EBS"),
+  }),
+  homeFeatures: group("Home features", {
+    people,
+    srcPhillipsExeterAcademySelectedAssets: url("Image URL", "/Phillips Exeter Academy-selected-assets/PEA_Seal_LtGray_Lg.png", "image"),
+    whyEbsExists: copy("Heading · Why EBS exists", "Why EBS exists"),
+    researchBelongsHandsStudents: copy("Heading · Research belongs in the hands of students.", "Research belongs in the hands of students."),
+    ebsHelpsStudentsDevelopOriginalDry: copy("Text · EBS helps students develop original dry-lab biology projects and…", "EBS helps students develop original dry-lab biology projects and present their findings. Wet-lab projects will be accepted for presentation on a case-by-case basis."),
+    hrefAboutSymposium: url("Link destination · About the symposium", "about.html", "link"),
+    aboutSymposium: copy("Link text · About the symposium", "About the symposium"),
+    studentsBehind: copy("Heading · Students behindthe symposium.", "Students behind"),
+    symposium: copy("Heading · Students behindthe symposium.", "the symposium."),
+    hrefMeetEveryone: url("Link destination · Meet everyone", "team.html", "link"),
+    meetEveryone: copy("Link text · Meet everyone", "Meet everyone"),
+    hrefCoHead: url("Link destination · Co-Head", "team.html", "link"),
+    coHead: copy("Text · Co-Head", "Co-Head"),
+  }),
+});

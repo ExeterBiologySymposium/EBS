@@ -1,0 +1,113 @@
+import { copy, group, url } from '../fields.js';
+
+export const definition = group("faq", {
+  pageHeading: group("Page heading", {
+    faq: copy("Text · FAQ", "FAQ"),
+    title: copy("Page title", "Questions about EBS?"),
+    startHereBasicsThenFindHelp: copy("Text · Start here for the basics, then find help for your next step.", "Start here for the basics, then find help for your next step."),
+    hrefAccountHelp: url("Link destination · Account help", "account.html", "link"),
+    accountHelp: copy("Link text · Account help", "Account help"),
+    hrefSchools: url("Link destination · For schools", "schools.html#school-questions", "link"),
+    schools: copy("Link text · For schools", "For schools"),
+    hrefJudges: url("Link destination · For judges", "judges.html#judge-questions", "link"),
+    judges: copy("Link text · For judges", "For judges"),
+  }),
+  aboutEbs: group("About EBS", {
+    aboutEbs: copy("Link text · About EBS", "About EBS"),
+    takingPart: copy("Link text · Taking part", "Taking part"),
+    gettingStarted: copy("Link text · Getting started", "Getting started"),
+    aboutEbs2: copy("Heading · About EBS", "About EBS"),
+    schoolSignupSchoolContactRolesFaculty: copy("Text · School signup, school contact roles, and faculty-advisor…", "School signup, school contact roles, and faculty-advisor contact:"),
+    hrefQuestionsFromSchools: url("Link destination · Questions from schools", "schools.html#school-questions", "link"),
+    questionsFromSchools: copy("Link text · Questions from schools", "Questions from schools"),
+    qualificationsTimeCommitmentBriefing: copy("Text · Qualifications, time commitment, and briefing: Questions from…", "Qualifications, time commitment, and briefing:"),
+    hrefQuestionsFromJudges: url("Link destination · Questions from judges", "judges.html#judge-questions", "link"),
+    questionsFromJudges: copy("Link text · Questions from judges", "Questions from judges"),
+    applicationStatusResourcesFolderHelp: copy("Text · Application status, resources, and folder help: Your Account…", "Application status, resources, and folder help:"),
+    hrefAccountPage: url("Link destination · Your Account page", "account.html", "link"),
+    accountPage: copy("Link text · Your Account page", "Your Account page"),
+  }),
+  whatEbsWhenIt: group("What is EBS, and when is it?", {
+    whatEbsWhenIt: copy("Question · What is EBS, and when is it?", "What is EBS, and when is it?"),
+    hrefEbs: url("Link destination · EBS", "team.html", "link"),
+    ebs: copy("Link text · EBS", "EBS"),
+    hasTwoParts: copy("Text · EBS has two parts: a year-long dry-lab biology research program…", "has two parts: a"),
+    hrefYearLongDryLabBiology: url("Link destination · year-long dry-lab biology research program", "researchers.html", "link"),
+    yearLongDryLabBiologyResearch: copy("Link text · year-long dry-lab biology research program", "year-long dry-lab biology research program"),
+    studentsAllLevelsFollowedByPoster: copy("Text · EBS has two parts: a year-long dry-lab biology research program…", "for students of all levels, followed by poster presentations at Phillips Exeter Academy in Exeter, New Hampshire, or online on April 25, 2027. The full-day event includes a keynote and two poster sessions. See the", {"multiline":true}),
+    hrefSchedule: url("Link destination · Schedule", "schedule.html", "link"),
+    schedule: copy("Link text · Schedule", "Schedule"),
+  }),
+  whoCanTakePart: group("Who can take part?", {
+    whoCanTakePart: copy("Question · Who can take part?", "Who can take part?"),
+    allMiddleHighSchoolStudentsFrom: copy("Text · All middle and high school students from any school are welcome,…", "All middle and high school students from any school are welcome, with no prior research experience required. International students may participate online only in 2027."),
+  }),
+  whatDoesItCost: group("What does it cost?", {
+    whatDoesItCost: copy("Question · What does it cost?", "What does it cost?"),
+    participationPersonPosterPrintingAreFree: copy("Text · Participation and in-person poster printing are free.…", "Participation and in-person poster printing are free. Participants cover travel, lodging, and meals outside the event. EBS does not provide travel funding or housing; online presentation is available if you cannot travel.", {"multiline":true}),
+  }),
+  whatResearchCanIPresent: group("What research can I present?", {
+    whatResearchCanIPresent: copy("Question · What research can I present?", "What research can I present?"),
+    originalDryLabBiologyResearchUses: copy("Text · Original dry-lab biology research uses public data, published…", "Original dry-lab biology research uses public data, published studies, or computational methods instead of physical lab experiments."),
+    biologyRelatedProductDesignSupportedBy: copy("Text · Original dry-lab biology research uses public data, published…", "Biology-related product design supported by research also qualifies. Wet-lab projects will be accepted for presentation on a case-by-case basis. Reviewers must be able to verify your methods and evidence. See", {"multiline":true}),
+    hrefProjectExamples: url("Link destination · project examples", "researchers.html", "link"),
+    projectExamples: copy("Link text · project examples", "project examples"),
+  }),
+  takingPart: group("Taking part", {
+    takingPart: copy("Heading · Taking part", "Taking part"),
+  }),
+  howMuchTimeWillINeed: group("How much time will I need?", {
+    howMuchTimeWillINeed: copy("Question · How much time will I need?", "How much time will I need?"),
+    mostStudentsSpend12Hours: copy("Text · Most students spend 1–2 hours per week throughout the year. Work…", "Most students spend 1–2 hours per week throughout the year. Work through the research document and its exercises at your own pace, with email support, regular office hours, and progress check-ins from the EBS team.", {"multiline":true}),
+  }),
+  canIWorkTeam: group("Can I work in a team?", {
+    canIWorkTeam: copy("Question · Can I work in a team?", "Can I work in a team?"),
+    yesWorkAloneOrTeamUp: copy("Text · Yes. Work alone or in a team of up to three students. Each…", "Yes. Work alone or in a team of up to three students. Each member registers individually, contributes meaningfully, and should be able to explain any part of the project."),
+  }),
+  canIPresentOnline: group("Can I present online?", {
+    canIPresentOnline: copy("Question · Can I present online?", "Can I present online?"),
+    yesIncludingPosterPresentationJudgingInternational: copy("Text · Yes, including poster presentation and judging. International…", "Yes, including poster presentation and judging. International students may attend online only in 2027."),
+    presentationsAreEnglish: copy("Text · Yes, including poster presentation and judging. International…", "Presentations are in English, and the"),
+    hrefSchedule: url("Link destination · schedule", "schedule.html", "link"),
+    schedule: copy("Link text · schedule", "schedule"),
+    usesEasternTimeChoosingOnlineDoes: copy("Text · Yes, including poster presentation and judging. International…", "uses Eastern Time. Choosing online does not affect acceptance."),
+  }),
+  whatDoINeedAttendPerson: group("What do I need to attend in person?", {
+    whatDoINeedAttendPerson: copy("Question · What do I need to attend in person?", "What do I need to attend in person?"),
+    mustBeAbleTravelExeterCover: copy("Text · You must be able to travel to Exeter, cover your travel costs,…", "You must be able to travel to Exeter, cover your travel costs, and attend with an adult chaperone. Your school decides whether a parent, guardian, or teacher can chaperone; it remains responsible for student supervision and liability for incidents involving its group. International participants attend online only in 2027.", {"multiline":true}),
+  }),
+  canISubmitMyProjectElsewhere: group("Can I submit my project elsewhere?", {
+    canISubmitMyProjectElsewhere: copy("Question · Can I submit my project elsewhere?", "Can I submit my project elsewhere?"),
+    yesCanAlsoSubmitEbsResearch: copy("Text · Yes. You can also submit your EBS research to other science…", "Yes. You can also submit your EBS research to other science fairs, competitions, and academic journals."),
+  }),
+  gettingStarted: group("Getting started", {
+    gettingStarted: copy("Heading · Getting started", "Getting started"),
+  }),
+  howDoISignUp: group("How do I sign up?", {
+    howDoISignUp: copy("Question · How do I sign up?", "How do I sign up?"),
+    signOrCreateAnAccountThen: copy("Text · Sign in or create an account, then open Student registration and…", "Sign in or create an account, then open"),
+    hrefStudentRegistration: url("Link destination · Student registration", "student-signup.html", "link"),
+    studentRegistration: copy("Link text · Student registration", "Student registration"),
+    submitGoogleFormUsingAccountEmail: copy("Text · Sign in or create an account, then open Student registration and…", "and submit the Google Form using your account email. Every researcher applies individually. Creating an account or opening the form does not submit your application."),
+  }),
+  whatHappensAfterIApply: group("What happens after I apply?", {
+    whatHappensAfterIApply: copy("Question · What happens after I apply?", "What happens after I apply?"),
+    ebsTeamReviewsApplicationEmailsIf: copy("Text · The EBS team reviews your application and emails you if…", "The EBS team reviews your application and emails you if approved. Check your status on your"),
+    hrefAccountPage: url("Link destination · Account page", "account.html", "link"),
+    accountPage: copy("Link text · Account page", "Account page"),
+    acceptedAccountsCanCreateResearchFolder: copy("Text · The EBS team reviews your application and emails you if…", ". Accepted accounts can create a research folder and access Events and available member resources; account help explains the next steps."),
+  }),
+  whatOrientationMeeting: group("What is the orientation meeting?", {
+    whatOrientationMeeting: copy("Question · What is the orientation meeting?", "What is the orientation meeting?"),
+    entry20MinuteZoomIntroductionEbsGetting: copy("Text · A 20-minute Zoom introduction to EBS, getting started with…", "A 20-minute Zoom introduction to EBS, getting started with research, and where to find support. You can ask questions, too. An EBS team member arranges the meeting by email;"),
+    hrefEmailEbs: url("Link destination · email EBS", "mailto:exeterbiosymposium@gmail.com", "link"),
+    emailEbs: copy("Link text · email EBS", "email EBS"),
+    coordinate: copy("Text · A 20-minute Zoom introduction to EBS, getting started with…", "to coordinate."),
+  }),
+  stillHaveQuestion: group("Still have a question?", {
+    stillHaveQuestion: copy("Heading · Still have a question?", "Still have a question?"),
+    sendMessageBelowOrVisitOur: copy("Text · Send a message below or visit our Contact page.", "Send a message below or visit our"),
+    hrefContactPage: url("Link destination · Contact page", "contact.html", "link"),
+    contactPage: copy("Link text · Contact page", "Contact page"),
+  }),
+});

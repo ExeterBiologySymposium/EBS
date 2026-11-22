@@ -1,5 +1,8 @@
 export const learningPages = ['resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'opensource.html', 'datasets.html'] as const;
 
+// The event poster is already stored in the protected asset namespace.
+export const eventPosterPath = '/protected-assets/events/kate-adamala.png';
+
 export const memberPages = [...learningPages, 'events.html'] as const;
 
 export function normalizedPath(path: string): string {

@@ -1,4 +1,5 @@
-import { createContext, forwardRef, useContext, useEffect, useState, type ChangeEvent, type ReactNode } from 'react';
+import { createContext, forwardRef, useContext, useEffect, useRef, useState, type ChangeEvent, type ReactNode } from 'react';
+import { initialFields, type Field } from './fields';
 import { ArrowDown, ArrowUp, Plus, Trash2 } from 'lucide-react';
 import {
   contentLimits, memberDestinations, newSection, sectionTypes, suggestUrl, urlProblem,
@@ -59,6 +60,20 @@ const shorten = (text: string, length = 60) => { const value = text.replace(/\s+
 
 /** Moves focus to a field (opening collapsed groups), falling back to its nearest container. */
 export function focusPath(path: string) {
+  const segments = path.split('.');
+  for (const region of document.querySelectorAll<HTMLElement>('[data-content-list]')) {
+    const prefix = region.dataset.contentList?.split('.') ?? [];
+    const index = Number(segments[prefix.length]);
+    if (prefix.every((key, at) => key === segments[at]) && Number.isInteger(index)) {
+      region.dispatchEvent(new CustomEvent('content:focus-entry', { detail: index }));
+      later(() => revealField(path));
+      return;
+    }
+  }
+  revealField(path);
+}
+
+function revealField(path: string) {
   const parts = path ? path.split('.') : [];
   for (let length = parts.length; length >= 0; length--) {
     const id = fieldId(parts.slice(0, length));
@@ -412,13 +427,14 @@ export function LessonForm() {
 
 // ---------------------------------------------------------------- Error summary
 
-function locate(template: 'research' | 'lesson', path: string) {
+function locate(template: 'research' | 'lesson' | 'fields', path: string) {
   const [first, second, third] = path.split('.');
+  if (template === 'fields') return 'Page content';
   if (template === 'lesson') return first === 'sections' && second !== undefined ? `Section ${Number(second) + 1}` : 'Page heading';
   const group = ({ overview: 'Research overview', timeline: 'Timeline', formats: 'Presentation formats', support: 'Research support', registration: 'Register as a student' } as Record<string, string>)[first] ?? 'Page heading';
   return second === 'entries' && third !== undefined ? `${group}, entry ${Number(third) + 1}` : group;
 }
-export const ErrorSummary = forwardRef<HTMLDivElement, { template: 'research' | 'lesson'; issues: ContentIssue[] }>(function ErrorSummary({ template, issues }, ref) {
+export const ErrorSummary = forwardRef<HTMLDivElement, { template: 'research' | 'lesson' | 'fields'; issues: ContentIssue[] }>(function ErrorSummary({ template, issues }, ref) {
   return <div className="content-summary" ref={ref} tabIndex={-1} role="alert" aria-labelledby="content-summary-title">
     <h3 id="content-summary-title">{issues.length === 1 ? 'Fix this problem before saving' : `Fix these ${issues.length} problems before saving`}</h3>
     <ul>{issues.slice(0, 20).map((issue, index) => <li key={`${issue.path}-${index}`}>
@@ -426,3 +442,64 @@ export const ErrorSummary = forwardRef<HTMLDivElement, { template: 'research' | 
     </li>)}</ul>
   </div>;
 });
+
+function EditorialList({ field, path }: { field: Extract<Field, { type: 'list' }>; path: Path }) {
+  const editor = useEditor();
+  const items = (getIn(editor.value, path) as unknown[] | undefined) ?? [];
+  const [index, setIndex] = useState(0);
+  const [query, setQuery] = useState('');
+  const wrapper = useRef<HTMLDivElement>(null);
+  const id = fieldId(path);
+  useEffect(() => {
+    const element = wrapper.current;
+    if (!element) return;
+    function reveal(event: Event) {
+      setQuery('');
+      setIndex((event as CustomEvent<number>).detail);
+    }
+    element.addEventListener('content:focus-entry', reveal);
+    return () => element.removeEventListener('content:focus-entry', reveal);
+  }, []);
+  const title = (value: unknown, order: number) => typeof value === 'string' ? shorten(value) : field.titleKey && value
+    ? String((value as Record<string, unknown>)[field.titleKey] || `Entry ${order + 1}`) : `Entry ${order + 1}`;
+  if (!field.fixed) {
+    return <Repeater<unknown> path={path} legend={field.label} noun="entry" max={field.max}
+      create={() => initialFields(field.item)} itemLabel={title}>
+      {itemPath => <EditorialField field={field.item} path={itemPath} />}
+    </Repeater>;
+  }
+  const options = items.map((item, order) => ({ order, name: title(item, order) }));
+  const visible = options.filter(option => option.name.toLowerCase().includes(query.toLowerCase()));
+  const selection = visible.find(option => option.order === index) ?? visible[0];
+  return <div ref={wrapper} data-content-list={path.join('.')} id={id} tabIndex={-1} className="content-field">
+    {items.length > 10 && <><label htmlFor={id + '-search'}>Search {field.label.toLowerCase()}</label>
+      <input id={id + '-search'} type="search" value={query} onChange={event => setQuery(event.target.value)} /></>}
+    <label htmlFor={id + '-select'}>{field.label}</label>
+    <select id={id + '-select'} value={selection?.order ?? ''} onChange={event => setIndex(Number(event.target.value))}>
+      {!selection && <option value="">No matching entries</option>}
+      {visible.map(item => <option key={item.order} value={item.order}>{item.name}</option>)}
+    </select>
+    {selection && <EditorialField key={selection.order} field={field.item} path={[...path, selection.order]} />}
+  </div>;
+}
+
+function EditorialField({ field, path }: { field: Field; path: Path }) {
+  if (field.type === 'locked') return null;
+  if (field.type === 'text') return field.url ? <UrlField path={path} label={field.label} purpose={field.url} />
+    : field.options ? <SelectField path={path} label={field.label} options={field.options} />
+    : <TextField path={path} label={field.label} required={!field.optional} multiline={field.multiline}
+      maxLength={field.max ?? (field.multiline ? contentLimits.text : contentLimits.line)} />;
+  if (field.type === 'list') return <EditorialList field={field} path={path} />;
+  return <>{Object.entries(field.fields).map(([key, child]) => <EditorialField key={key} field={child} path={[...path, key]} />)}</>;
+}
+
+export function EditorialForm({ definition }: { definition: Field }) {
+  if (definition.type !== 'record') return null;
+  const fields = Object.entries(definition.fields);
+  const heading = fields.find(([key]) => key === 'pageHeading');
+  const ordered = heading ? [heading, ...fields.filter(([key]) => key !== 'pageHeading')] : fields;
+  return <>{ordered.map(([key, field], index) =>
+    <Group key={key} title={field.label} prefixes={[key]} open={index === 0}>
+      <EditorialField field={field} path={[key]} />
+    </Group>)}</>;
+}

@@ -6,14 +6,15 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { createServer } from 'vite';
 
 const vite = await createServer({ configLoader: 'runner', cacheDir: '.vite-cache', server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' });
-let model, view, auth, createContentHandlers, createContentStore, initialContent;
+let access, model, view, auth, createContentHandlers, createContentStore, initialContent, editorialDefinitions;
 try {
+  access = await vite.ssrLoadModule('/server/access.ts');
   model = await vite.ssrLoadModule('/src/content/model.ts');
   view = await vite.ssrLoadModule('/src/content/view.tsx');
   auth = await vite.ssrLoadModule('/src/auth.tsx');
   ({ createContentHandlers } = await vite.ssrLoadModule('/server/content/handlers.ts'));
   ({ createContentStore } = await vite.ssrLoadModule('/server/content/store.ts'));
-  ({ initialContent } = await vite.ssrLoadModule('/server/content/defaults.ts'));
+  ({ initialContent, editorialDefinitions } = await vite.ssrLoadModule('/server/content/defaults.ts'));
 } finally { await vite.close(); }
 let PGlite;
 try { ({ PGlite } = await import('@electric-sql/pglite')); } catch { /* Optional local PostgreSQL test runtime. */ }
@@ -25,7 +26,7 @@ const text = (body, links = [], extra = {}) => ({ type: 'text', heading: '', bod
 const issuesFor = (page, value) => model.contentIssues(page, value).map(issue => issue.path);
 
 test('initial content validates and preserves the latest copy, layout and access-aware controls', () => {
-  for (const page of model.pageKeys) assert.ok(model.sameContent(model.validatePageContent(page, initialContent[page]), initialContent[page]), page);
+  for (const page of model.pageKeys) assert.ok(model.sameContent(model.validatePageContent(page, initialContent[page], editorialDefinitions[page]), initialContent[page]), page);
   const research = initialContent.researchers;
   assert.match(research.overview.body.text, /Wet-lab projects will be accepted for presentation on a case-by-case basis/);
   assert.equal(research.timeline.entries.length, 7);
@@ -33,7 +34,7 @@ test('initial content validates and preserves the latest copy, layout and access
   assert.equal(research.registrationUrl, 'https://forms.gle/vgtVrsBm1UbBhwtv9');
   const signedOut = render(h(view.PublishedPage, { page: 'researchers', initial: research }));
   assert.equal(signedOut.match(/<h1>/g).length, 1);
-  for (const link of ['href="faq.html"', 'href="schedule.html"', 'href="account.html"', 'href="mailto:exeterbiologysymposium@gmail.com"', 'href="/register.html"']) assert.ok(signedOut.includes(link), link);
+  for (const link of ['href="faq.html"', 'href="schedule.html"', 'href="account.html"', 'href="mailto:exeterbiosymposium@gmail.com"', 'href="/register.html"']) assert.ok(signedOut.includes(link), link);
   assert.ok(signedOut.includes('>Sign in to continue: Register your interest</button>'));
   assert.equal(signedOut.match(/class="timeline__item"/g).length, 7);
   const accepted = render(h(view.PublishedPage, { page: 'researchers', initial: research }), { status: 'signed-in', access: 'accepted' });
@@ -76,7 +77,7 @@ test('validation names the field for unsafe links, missing text and malformed co
   for (const [url, purpose] of [['http://example.com', 'link'], ['//example.com', 'link'], ['/guides/../admin.html', 'link'], ['/guides/%2E%2E/x', 'link'], ['https://user:pass@example.com', 'link'], ['mailto:nobody', 'link'], ['data:text/html,x', 'link'], ['vbscript:x', 'link'], ['/x\\y', 'link'], ['faq.html', 'image'], ['/images/a.png', 'form'], [' https://example.com', 'link'], ['', 'image']]) {
     assert.ok(model.urlProblem(url, purpose), `${purpose} ${url}`);
   }
-  for (const [url, purpose] of [['faq.html#research', 'link'], ['#top', 'link'], ['/images/Poster/Luke Poster.jpeg', 'image'], ['/images/Studying/Screenshot 2026-09-10 at 6.02.51 PM.png', 'image'], ['mailto:exeterbiologysymposium@gmail.com', 'link'], ['https://forms.gle/vgtVrsBm1UbBhwtv9', 'form']]) {
+  for (const [url, purpose] of [['faq.html#research', 'link'], ['#top', 'link'], ['/images/Poster/Luke Poster.jpeg', 'image'], ['/images/Studying/Screenshot 2026-09-10 at 6.02.51 PM.png', 'image'], ['mailto:exeterbiosymposium@gmail.com', 'link'], ['https://forms.gle/vgtVrsBm1UbBhwtv9', 'form']]) {
     assert.equal(model.urlProblem(url, purpose), null, `${purpose} ${url}`);
   }
   assert.equal(model.suggestUrl('team@example.org', 'link'), 'mailto:team@example.org');
@@ -105,7 +106,9 @@ test('readers render editor text, code and links as inert text with safe link at
   assert.ok(html.includes('<div class="callout">'));
   assert.ok(html.includes('<ol class="lesson-list">'));
   // Sections without a heading continue the previous page section.
-  assert.equal(html.match(/<section class="section">/g).length, 2);
+  assert.equal(html.match(/<section class="section" id="lesson-section-\d+">/g)?.length, 2);
+  assert.ok(html.includes('<a href="#lesson-section-1">Start here</a>'));
+  assert.ok(html.includes('<a href="#lesson-section-2">Steps</a>'));
   assert.equal(html.match(/<h1>/g).length, 1);
   // Unsaved previews can contain unchecked links; the renderer drops anything unsafe.
   const unsafe = render(h(view.LessonView, { content: lesson([
@@ -142,7 +145,7 @@ function memoryStore() {
     async version(page, revision) { return history.find(entry => entry.page === page && entry.revision === revision) ?? null; },
   };
 }
-function api({ actor = null, enabled = true, store = memoryStore(), team = ['user_team'], accepted = ['user_accepted'], initial = page => initialContent[page], name = user => user === 'user_team' ? 'Ada Team' : '' } = {}) {
+function api({ actor = null, enabled = true, store = memoryStore(), team = ['user_team'], accepted = ['user_accepted'], initial = page => initialContent[page], name = user => user === 'user_team' ? 'Ada Team' : '', scheduleInitial } = {}) {
   const calls = { authenticate: 0, store: 0 };
   const handler = createContentHandlers({
     enabled,
@@ -151,7 +154,7 @@ function api({ actor = null, enabled = true, store = memoryStore(), team = ['use
     isAccepted: async user => accepted.includes(user),
     editorName: async user => name(user),
     store: () => { calls.store++; if (store instanceof Error) throw store; return store; },
-    initial,
+    initial, scheduleInitial,
   });
   return { handler, calls, store };
 }
@@ -163,6 +166,87 @@ async function call(handler, request) {
   assert.equal(response.headers.get('x-content-type-options'), 'nosniff');
   return { status: response.status, body: await response.json() };
 }
+
+test('every website route has a usable editor and its reader audience is enforced', async () => {
+  const { readdir } = await import('node:fs/promises');
+  const routes = (await readdir(new URL('..', import.meta.url))).filter(name => name.endsWith('.html')).sort();
+  assert.deepEqual(model.pageKeys.map(key => model.contentPages[key].route === '/' ? 'index.html' : model.contentPages[key].route).sort(), routes);
+  const anonymous = api().handler;
+  const accepted = api({ actor: 'user_accepted' }).handler;
+  const team = api({ actor: 'user_team' }).handler;
+  const memberRoutes = ['datascience', 'datasets', 'events', 'opensource', 'python', 'resources', 'rstudio'];
+  for (const page of model.pageKeys) {
+    const editable = await call(team, get(page, 'edit'));
+    assert.equal(editable.status, 200, page);
+    assert.equal(editable.body.revision, 0, page);
+    assert.equal((await call(accepted, get(page, 'edit'))).status, 403, page);
+    assert.equal((await call(anonymous, get(page))).status, memberRoutes.includes(page) || page === 'admin' ? 401 : 200, page);
+    assert.equal((await call(accepted, get(page))).status, page === 'admin' ? 403 : 200, page);
+  }
+});
+
+test('Account serves the editorial guidance for the reader’s own state', async () => {
+  const copy = structuredClone(initialContent.account);
+  copy.visitor.message = 'Visitor copy';
+  copy.pendingAccount.whileWait = 'Pending help';
+  copy.acceptedAccount.exploreEbs = 'Accepted help';
+  copy.team.manageParticipants = 'Team tools';
+  for (const [actor, owned] of [[null, ['visitor']], ['user_pending', ['signedIn', 'pendingStatus', 'pendingAccount']],
+    ['user_accepted', ['signedIn', 'pendingStatus', 'acceptedStatus', 'acceptedAccount', 'participantHelp']],
+    ['user_team', ['signedIn', 'pendingStatus', 'pendingAccount', 'team']]]) {
+    const { handler } = api({ actor, enabled: false, initial: () => copy });
+    const { status, body } = await call(handler, get('account'));
+    assert.equal(status, 200);
+    assert.deepEqual(Object.keys(body.content).sort(), ['pageHeading', ...owned].sort(), actor);
+  }
+});
+
+test('the schedule editor can start from the current feed and publishing supersedes it', async () => {
+  const current = structuredClone(initialContent.schedule);
+  current.rows[0].event = 'Current remote opening';
+  const { handler } = api({ actor: 'user_team', scheduleInitial: async () => ({ content: current, source: 'current-schedule' }) });
+  const opened = await call(handler, get('schedule', 'edit'));
+  assert.equal(opened.body.initialSource, 'current-schedule');
+  assert.equal(opened.body.draft.rows[0].event, 'Current remote opening');
+  current.rows[0].event = 'Published opening';
+  assert.equal((await call(handler, post('schedule', 'save', { revision: 0, content: current }))).status, 200);
+  assert.equal((await call(handler, get('schedule'))).body.published, false);
+  // Make the original feed's value differ from the saved draft.
+  current.rows[0].event = 'Remote event changed';
+  assert.equal((await call(handler, post('schedule', 'publish', { revision: 1 }))).status, 200);
+  const { body } = await call(handler, get('schedule'));
+  assert.ok(body.published);
+  assert.equal(body.content.rows[0].event, 'Published opening');
+});
+
+test('only Team members may request the protected event poster for preview', async () => {
+  const { createAccessHandlers } = access;
+  const poster = '/protected-assets/events/kate-adamala.png';
+  const check = (actor, isTeam) => createAccessHandlers({
+    authenticate: async () => actor, membership: async () => 'pending', isTeam: async () => isTeam,
+    enrollPending: async () => {},
+  });
+  const preview = new Request(origin + poster + '?preview=1');
+  assert.equal((await check(null, false).protect(preview)).status, 401);
+  assert.equal((await check('user_pending', false).protect(preview)).status, 403);
+  assert.equal((await check('user_team', true).protect(new Request(origin + poster))).status, 403);
+  assert.equal(await check('user_team', true).protect(preview), null);
+  assert.equal((await check('user_team', true).protect(new Request(origin + '/protected-assets/anything.png?preview=1'))).status, 403);
+});
+
+test('page fields reject unsafe images, unsafe registration destinations, and changes to fixed catalog length', () => {
+  const home = structuredClone(initialContent.index);
+  home.hero.srcEbsStudentsVisitingBroadInstitute = 'data:image/svg+xml,<svg>';
+  assert.deepEqual(model.contentIssues('index', home, editorialDefinitions.index).map(issue => issue.path), ['hero.srcEbsStudentsVisitingBroadInstitute']);
+  assert.ok(model.urlProblem('https://example.org/collect', 'google-form'));
+  assert.ok(model.urlProblem('https://docs.google.com/document/d/abc', 'google-form'));
+  assert.equal(model.urlProblem('https://forms.gle/vgtVrsBm1UbBhwtv9', 'google-form'), null);
+  const library = structuredClone(initialContent.datasets);
+  library.catalog[0].id = library.catalog[1].id;
+  assert.deepEqual(model.contentIssues('datasets', library, editorialDefinitions.datasets).map(issue => issue.path), ['catalog.0.id']);
+  library.catalog.pop();
+  assert.deepEqual(model.contentIssues('datasets', library, editorialDefinitions.datasets).map(issue => issue.path), ['catalog']);
+});
 
 test('Student research is public, member pages require Accepted, and editing requires Team', async () => {
   const draft = structuredClone(initialContent.researchers); draft.title = 'Unpublished draft title';
@@ -202,7 +286,7 @@ test('requests are validated before any content is read or written', async () =>
     [post(pages.public, 'save', { revision: 0, content }, { origin: 'https://evil.test' }), 403],
     [post(pages.public, 'save', { revision: 0, content }, { 'content-type': 'text/plain' }), 415],
     [new Request(`${origin}/api/page-content?page=researchers&action=save`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }), 403],
-    [get('admin'), 400], [get('researchers', 'read', '&instance=ins_other'), 400], [get('researchers', 'read', '&page=resources'), 400],
+    [get('unknown'), 400], [get('researchers', 'read', '&instance=ins_other'), 400], [get('researchers', 'read', '&page=resources'), 400],
     [get('researchers', 'save'), 400], [post('researchers', 'read', {}), 400], [get('researchers', 'version'), 400], [get('researchers', 'version', '&version=0'), 400],
     [new Request(`${origin}/api/page-content?page=researchers`, { method: 'PUT' }), 405],
     [post(pages.public, 'save', { revision: 0, content, page: 'resources' }), 400],
@@ -297,6 +381,31 @@ test('drafts, publication, conflicts and restoration follow revisions', async ()
   assert.equal((await call(handler, post(pages.public, 'restore', { revision: 5, version: 99 }))).status, 404);
 });
 
+test('the schema upgrade preserves saved drafts and publication history', { skip: !PGlite && 'Requires PGlite.' }, async () => {
+  const database = new PGlite();
+  try {
+    const migration = await readFile(new URL('./sql/page-content.sql', import.meta.url), 'utf8');
+    const priorSchema = migration.replace(/ADD CONSTRAINT ebs_content_pages_page_key_check CHECK \(page_key IN \([\s\S]*?\)\);/,
+      "ADD CONSTRAINT ebs_content_pages_page_key_check CHECK (page_key IN ('researchers', 'resources', 'datascience', 'python', 'rstudio'));");
+    assert.notEqual(priorSchema, migration);
+    await database.exec(priorSchema);
+    const store = createContentStore(async (sql, params) => (await database.query(sql, params)).rows, 'ins_upgrade');
+    const actor = { id: 'user_team', name: 'Ada Team' };
+    await store.saveDraft('researchers', 0, initialContent.researchers, actor);
+    await store.publish('researchers', 1, actor);
+    await store.saveDraft('researchers', 2, { ...initialContent.researchers, title: 'Saved draft' }, actor);
+    await assert.rejects(() => store.saveDraft('index', 0, initialContent.index, actor), /check constraint/);
+    await database.exec(migration);
+    await database.exec(migration);
+    assert.equal((await store.read('researchers')).draft.title, 'Saved draft');
+    assert.equal((await store.read('researchers')).revision, 3);
+    assert.equal((await store.version('researchers', 2)).content.title, initialContent.researchers.title);
+    for (const page of model.pageKeys.filter(page => page !== 'researchers')) {
+      assert.equal((await store.saveDraft(page, 0, initialContent[page], actor)).revision, 1, page);
+    }
+  } finally { await database.close(); }
+});
+
 test('PostgreSQL schema keeps revisions atomic, versions append-only and instances isolated', { skip: !PGlite && 'Install an isolated PostgreSQL-compatible test runtime (@electric-sql/pglite) to run SQL checks.' }, async () => {
   const database = new PGlite();
   try {
@@ -337,7 +446,7 @@ test('PostgreSQL schema keeps revisions atomic, versions append-only and instanc
     await assert.rejects(() => database.query('TRUNCATE ebs_content_versions'), /cannot be changed/);
     assert.equal((await store.read('researchers')).publishedSchemaVersion, 1);
     await assert.rejects(() => database.query('DELETE FROM ebs_content_pages'), /foreign key/);
-    await assert.rejects(() => database.query("INSERT INTO ebs_content_pages (instance_id, page_key, schema_version, revision, draft, edited_by) VALUES ('ins_one', 'admin', 1, 1, '{}', 'x')"), /check constraint/);
+    await assert.rejects(() => database.query("INSERT INTO ebs_content_pages (instance_id, page_key, schema_version, revision, draft, edited_by) VALUES ('ins_one', 'unknown', 1, 1, '{}', 'x')"), /check constraint/);
     await assert.rejects(() => database.query("INSERT INTO ebs_content_pages (instance_id, page_key, schema_version, revision, draft, edited_by) VALUES ('other', 'python', 1, 1, '{}', 'x')"), /check constraint/);
     await assert.rejects(() => database.query("INSERT INTO ebs_content_pages (instance_id, page_key, schema_version, revision, draft, edited_by, published) VALUES ('ins_one', 'python', 1, 1, '{}', 'x', '{}')"), /check constraint/, 'a publication needs its revision, time and publisher');
 

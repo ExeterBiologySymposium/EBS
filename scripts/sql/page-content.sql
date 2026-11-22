@@ -2,10 +2,12 @@
 -- Additive and safe to re-run: creates two private tables and an append-only trigger. It does not
 -- modify organization registry or research-folder tables. Apply with a private server database role.
 
+BEGIN;
+
 -- One row per page: the current draft and the publication readers see.
 CREATE TABLE IF NOT EXISTS ebs_content_pages (
   instance_id text NOT NULL CHECK (instance_id ~ '^ins_[A-Za-z0-9]+$'),
-  page_key text NOT NULL CHECK (page_key IN ('researchers', 'resources', 'datascience', 'python', 'rstudio')),
+  page_key text NOT NULL,
   schema_version integer NOT NULL CHECK (schema_version > 0),
   -- Increases on every save, publication and restoration; writes must name the revision they read.
   revision integer NOT NULL CHECK (revision > 0),
@@ -26,6 +28,16 @@ CREATE TABLE IF NOT EXISTS ebs_content_pages (
       AND published_at IS NOT NULL AND published_by IS NOT NULL)
   )
 );
+
+-- Replace the original five-page constraint in place. Existing rows and their history stay intact.
+ALTER TABLE ebs_content_pages
+  DROP CONSTRAINT IF EXISTS ebs_content_pages_page_key_check,
+  ADD CONSTRAINT ebs_content_pages_page_key_check CHECK (page_key IN (
+    'index', 'about', 'team', 'schedule', 'faq', 'contact',
+    'register', 'student-signup', 'schools', 'judges', 'researchers', 'projects',
+    'events', 'resources', 'datascience', 'python', 'rstudio', 'opensource', 'datasets',
+    'account', 'accept-invitation', 'admin', 'terms', 'privacy'
+  ));
 
 -- Every publication, recorded in the same statement that makes it live.
 CREATE TABLE IF NOT EXISTS ebs_content_versions (
@@ -54,3 +66,5 @@ CREATE OR REPLACE TRIGGER ebs_content_versions_no_truncate
   FOR EACH STATEMENT EXECUTE FUNCTION ebs_content_versions_append_only();
 
 REVOKE ALL ON ebs_content_pages, ebs_content_versions FROM PUBLIC;
+
+COMMIT;

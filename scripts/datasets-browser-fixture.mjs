@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 // as a fake Accepted member. It never contacts Clerk, the content API or any database.
 // Run: node scripts/datasets-browser-fixture.mjs, then open http://127.0.0.1:4182/datasets.html
 const root = resolve(import.meta.dirname, '..');
-const pages = ['datasets.html', 'account.html', 'resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'contact.html', 'faq.html'];
+const pages = ['datasets.html', 'account.html', 'resources.html', 'datascience.html', 'python.html', 'rstudio.html', 'contact.html', 'faq.html', 'index.html', 'register.html', 'student-signup.html', 'events.html', 'schedule.html'];
 const vite = await createServer({
   root, configLoader: 'runner', cacheDir: resolve(root, '.vite-qa'),
   optimizeDeps: { include: ['react', 'react-dom/client', 'react/jsx-runtime', 'motion/react', 'lucide-react', '@vercel/analytics/react'] },
@@ -14,7 +14,7 @@ const vite = await createServer({
   plugins: [{ name: 'datasets-qa-only', configureServer(server) {
     server.middlewares.use(async (request, response, next) => {
       const path = request.url.split(/[?#]/)[0];
-      const page = path === '/' ? 'datasets.html' : path.slice(1);
+      const page = path === '/' ? 'index.html' : path.slice(1);
       if (!pages.includes(page)) return next();
       const html = await server.transformIndexHtml('/datasets-qa.html', `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EBS dataset library QA</title></head><body data-react-page="${page}"><div id="root"></div><script type="module" src="/scripts/datasets-browser-entry.tsx"></script></body></html>`);
       response.setHeader('Content-Type', 'text/html');

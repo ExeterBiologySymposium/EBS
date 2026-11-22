@@ -1,11 +1,27 @@
-import { CodeBlock, ContactForm, RemoteSchedule, RemoteSessions } from '../page-controls';
-import { symposiumVenue } from '../schedule-details';
+import { usePageCopy, safeCopyUrl, usePageCopyState } from '../content/page-copy';
+import { definition } from '../content/copy/schedule';
+import { useEffect, useState } from 'react';
+import { fetchScheduleFeed } from '../schedule-feed';
 
-export default function PageContent() { return <div className="page-layout layout-schedule">
+export default function PageContent() {
+  const editorial = usePageCopy('schedule', definition);
+  const published = usePageCopyState()?.published;
+  const [feed, setFeed] = useState<Awaited<ReturnType<typeof fetchScheduleFeed>>>({});
+  useEffect(() => {
+    if (published) return;
+    const controller = new AbortController();
+    void fetchScheduleFeed(AbortSignal.any([controller.signal, AbortSignal.timeout(15000)])).then(value => {
+      if (!controller.signal.aborted) setFeed(value);
+    });
+    return () => controller.abort();
+  }, [published]);
+  const rows = published ? editorial.rows : feed.rows ?? editorial.rows;
+  const sessions = published ? editorial.sessions : feed.sessions ?? editorial.sessions;
+  return <div className="page-layout layout-schedule">
 <section className={"page-heading"}>
 <div className={"shell"}>
-<h1>{"Symposium schedule"}</h1>
-<p className={"lead"}>{"April 25th, 2027 · Phillips Exeter Academy and online. All times below are Eastern Time; sessions and locations are provisional."}</p>
+<h1>{editorial.pageHeading.title}</h1>
+<p className={"lead"}>{editorial.pageHeading.april25th2027PhillipsExeterAcademy}</p>
 </div>
 </section>
 <section className={"section"}>
@@ -15,90 +31,36 @@ export default function PageContent() { return <div className="page-layout layou
 <table aria-label={"Symposium day schedule with times, events, and locations"} className={"sched-table"}>
 <thead>
 <tr>
-<th scope={"col"}>{"Time (Eastern Time)"}</th>
-<th scope={"col"}>{"Event"}</th>
-<th scope={"col"}>{"Location"}</th>
+<th scope={"col"}>{editorial.page.timeEasternTime}</th>
+<th scope={"col"}>{editorial.page.event}</th>
+<th scope={"col"}>{editorial.page.location}</th>
 </tr>
 </thead>
-<RemoteSchedule><tbody id={"schedule-body"}>
-<tr>
-<td>{"8:00 – 9:00 AM"}</td>
-<td>{"Registration"}</td>
-<td>{"Phelps Lobby"}</td>
-</tr>
-<tr>
-<td>{"9:00 – 9:10 AM"}</td>
-<td>{"Symposium Orientation & Logistics"}</td>
-<td>{"Grainger"}</td>
-</tr>
-<tr>
-<td>{"9:10 – 9:15 AM"}</td>
-<td>{"Faculty Welcome Address"}</td>
-<td>{"Grainger"}</td>
-</tr>
-<tr>
-<td>{"9:15 – 10:15 AM"}</td>
-<td>{"Opening Keynote Presentation"}</td>
-<td>{"Grainger"}</td>
-</tr>
-<tr>
-<td>{"10:15 AM – 12:15 PM"}</td>
-<td>{"Morning Poster Session"}</td>
-<td>{"Grainger"}</td>
-</tr>
-<tr>
-<td>{"12:15 – 1:15 PM"}</td>
-<td>{"Lunch"}</td>
-<td>{"Grainger"}</td>
-</tr>
-<tr>
-<td>{"1:15 – 2:45 PM"}</td>
-<td>{"Afternoon Poster Session"}</td>
-<td>{"Grainger"}</td>
-</tr>
-<tr>
-<td>{"2:45 – 3:15 PM"}</td>
-<td>{"Cleanup / Judging Deliberation"}</td>
-<td>{"Grainger"}</td>
-</tr>
-<tr>
-<td>{"3:15 – 3:45 PM"}</td>
-<td>{"Closing Ceremony"}</td>
-<td>{"Grainger"}</td>
-</tr>
-</tbody></RemoteSchedule>
+<tbody id="schedule-body">{rows.map(({ time, event, location }, index) =>
+  <tr key={index}><td>{time}</td><td>{event}</td><td>{location}</td></tr>)}</tbody>
 </table>
 </div>
-<p className={"form-hint"}>{"Schedule is provisional and may shift slightly as final logistics are confirmed. Registered participants will receive the finalized schedule by email."}</p>
+<p className={"form-hint"}>{editorial.page.scheduleProvisionalMayShiftSlightlyAs}</p>
 </div>
 </div>
 </section>
 <section className={"section"}>
 <div className={"shell"}>
-<RemoteSessions><div className={"grid columns-4"} id={"session-info-grid"}>
-<div className={"session-item"}>
-<h3>{"Venue"}</h3>
-<p>{symposiumVenue}</p>
+<div className={!published && feed.sessions ? 'session-grid' : 'grid columns-4'} id="session-info-grid">
+  {sessions.map(({ title, description }, index) => !published && feed.sessions
+    ? <section key={index}><h3>{title}</h3><p>{description}</p></section>
+    : <div className="session-item" key={index}><h3>{title}</h3><p>{description}</p></div>)}
 </div>
-<div className={"session-item"}>
-<h3>{"Online Option"}</h3>
-<p>{"Can't make it to campus? Join the livestreamed virtual track running alongside the in-person schedule throughout the day."}</p>
-</div>
-<div className={"session-item"}>
-<h3>{"Who Should Attend"}</h3>
-<p>{"Presenting students, judges, guest speakers, and visiting school groups are all welcome, in-person or online."}</p>
-</div>
-</div></RemoteSessions>
 </div>
 </section>
 <section className={"section"}>
 <div className={"shell"}>
 <div className={"next-step"}>
-<h2>{"Register for updates"}</h2>
-<p>{"Whether you're presenting, judging, or visiting with your school, register your interest to receive schedule updates."}</p>
+<h2>{editorial.registerUpdates.registerUpdates}</h2>
+<p>{editorial.registerUpdates.whetherRePresentingJudgingOrVisiting}</p>
 <div className={"actions"}>
-<a className={"button primary"} href={"register.html"}>{"Register Your Interest"}</a>
-<a className={"button secondary"} href={"faq.html"}>{"Read the FAQ"}</a>
+<a className={"button primary"} href={safeCopyUrl(editorial.registerUpdates.hrefRegisterInterest)}>{editorial.registerUpdates.registerInterest}</a>
+<a className={"button secondary"} href={safeCopyUrl(editorial.registerUpdates.hrefReadFaq)}>{editorial.registerUpdates.readFaq}</a>
 </div>
 </div>
 </div>

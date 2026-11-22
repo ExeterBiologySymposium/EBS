@@ -137,7 +137,7 @@ public/
 ## External Resources
 - **Images**: All stored in public/images/ (team, data analysis, posters, planning)
 - **Google Forms**: Student registration and school registration (embedded in pages)
-- **Email**: exeterbiologysymposium@gmail.com (in footer)
+- **Email**: exeterbiosymposium@gmail.com (in footer)
 
 ## Current Focus
 - **Site**: Live marketing + registration for April 25, 2027 event

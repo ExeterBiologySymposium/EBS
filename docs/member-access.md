@@ -4,7 +4,7 @@ EBS uses Clerk membership in **Accepted** to authorize Events (including its pos
 
 ## Website content
 
-Student research, Resources, Coding, Python and R/RStudio are edited by the EBS Team through **EBS administration → Website content**; see [Website content editor](website-content.md). Their content loads from `/api/page-content`, which serves Student research publicly and checks Accepted membership server-side for the four member pages. Member page content is never included in public JavaScript or prerendered HTML.
+All 24 pages have an editor in **EBS administration → Website content**. The content API checks Accepted membership for the seven member pages, checks Team membership for the administration page and filters Account guidance by reader status. Every editor request checks Team membership. Member copy stays behind the protected asset gate. See [Website content editor](website-content.md).
 
 ## Team administration and organization rollover
 

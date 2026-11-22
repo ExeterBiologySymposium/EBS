@@ -145,13 +145,18 @@ export function LessonView({ content }: { content: LessonContent }) {
     if (!groups.length || section.heading.trim()) groups.push([section]);
     else groups[groups.length - 1].push(section);
   }
+  const sectionLinks = groups.flatMap((group, index) => group[0].heading.trim() ? [{ id: `lesson-section-${index + 1}`, title: group[0].heading }] : []);
   return <>
     <section className="page-heading"><div className="shell">
       {content.eyebrow && <p className="eyebrow">{content.eyebrow}</p>}
       <h1>{content.title}</h1>
       {content.lead && <p className="lead"><Lines text={content.lead} /></p>}
     </div></section>
-    {groups.map((group, index) => <section className="section" key={index}><div className="shell">
+    {sectionLinks.length > 1 && <nav className="shell lesson-contents" aria-label="On this page">
+      <h2>On this page</h2>
+      <ul>{sectionLinks.map(({ id, title }) => <li key={id}><a href={`#${id}`}>{title}</a></li>)}</ul>
+    </nav>}
+    {groups.map((group, index) => <section className="section" id={`lesson-section-${index + 1}`} key={index}><div className="shell">
       {group.map((section, item) => <LessonBlock key={item} section={section} />)}
     </div></section>)}
   </>;
