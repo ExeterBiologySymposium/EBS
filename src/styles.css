@@ -530,7 +530,7 @@ details.dataset-howto>summary{min-height:56px;font-size:17px}
 @media(max-width:767px){.field-picker{display:none}.library-control--field{display:block}.tool-table{min-width:600px}.tool-facts,.library-controls,.dataset-facts{grid-template-columns:minmax(0,1fr)}.library-clear{justify-self:start}.dataset-card{padding:18px}.tool-guide__tagline{font-size:18px}.dataset-field{margin-top:44px}}
 
 /* The shared header and public overview use the same hierarchy as the member portal. */
-.site-header--grouped {
+.site-header--shared {
   --header-height: 74px;
   position: sticky;
   top: 0;
@@ -540,34 +540,25 @@ details.dataset-howto>summary{min-height:56px;font-size:17px}
   padding-block: 0;
   border-bottom: 1px solid var(--line);
 }
-.site-header--grouped .desktop-nav { position: static; transform: none; margin-inline: auto; }
-.site-header--grouped .header-right { margin-left: 0; gap: 16px; }
-.site-header--grouped .account-controls { display:flex; flex-wrap:wrap; align-items:center; gap: 12px; }
-.site-header--grouped .account-controls button { min-height: 44px; }
-.site-header--grouped .account-controls button:hover { text-decoration: underline; }
-.site-header--grouped .header-right .button,
-.site-header--grouped .menu-tools .button {
+.site-header--shared .desktop-nav { position: static; transform: none; margin-inline: auto; }
+.site-header--shared .header-right { margin-left: 0; gap: 16px; }
+.site-header--shared .account-controls { display:flex; flex-wrap:wrap; align-items:center; gap: 12px; }
+.site-header--shared .account-controls button { min-height: 44px; }
+.site-header--shared .account-controls button:hover { text-decoration: underline; }
+.site-header--shared .header-right .button,
+.site-header--shared .menu-tools .button {
   background: var(--crimson);
   color: #fff;
 }
-.site-header--grouped .header-right .button:hover,
-.site-header--grouped .menu-tools .button:hover { background: var(--harkness); }
-.header-disclosure { position: relative; }
-.header-disclosure summary { display:flex; align-items:center; gap:8px; min-height:44px; list-style:none; white-space:nowrap; }
-.header-disclosure summary::-webkit-details-marker { display:none; }
-.header-disclosure summary::after { content: ''; width: 6px; height: 6px; border: solid currentColor; border-width: 0 1px 1px 0; transform: translateY(-2px) rotate(45deg); }
-.header-disclosure[open] summary::after { transform: translateY(2px) rotate(225deg); }
-.header-disclosure summary:hover, .header-disclosure .has-current-page { text-decoration: underline; }
-.header-disclosure-links { position:absolute; top:100%; left:-12px; width:max-content; min-width:180px; max-width:280px; padding:8px 12px; border:1px solid var(--line); border-radius:4px; background:var(--bg); }
-.header-disclosure-links a { display:flex; width:100%; padding-inline:8px; }
-.site-header--grouped .menu-panel { top:var(--header-height); }
-.site-header--grouped .menu-tools { padding:0 0 20px; flex-wrap:wrap; }
-.site-header--grouped .menu-tools .button { flex-direction:row; align-items:center; min-height:44px; min-width:0; padding:11px 15px; }
-.site-header--grouped .menu-panel nav { gap:16px 24px; }
-.site-header--grouped .menu-panel nav p { margin:0 0 8px; font-weight:700; }
-.site-header--grouped .menu-panel nav a { align-items:center; padding:8px 0; min-height:44px; }
-.site-header--grouped [aria-current=page] { color:var(--harkness); text-decoration:underline; }
-.site-header--grouped .menu-account { margin-top:20px; }
+.site-header--shared .header-right .button:hover,
+.site-header--shared .menu-tools .button:hover { background: var(--harkness); }
+.site-header--shared .menu-panel { top:var(--header-height); }
+.site-header--shared .menu-tools { padding:0 0 20px; flex-wrap:wrap; }
+.site-header--shared .menu-tools .button { flex-direction:row; align-items:center; min-height:44px; min-width:0; padding:11px 15px; }
+.site-header--shared .menu-panel nav { gap:16px 24px; }
+.site-header--shared .menu-panel nav a { align-items:center; padding:8px 0; min-height:44px; }
+.site-header--shared [aria-current=page] { color:var(--harkness); text-decoration:underline; }
+.site-header--shared .menu-account { margin-top:20px; }
 
 #root:not(:has(> main > .content-notice)) > .site-header--home { margin-bottom:calc(0px - var(--header-height)); }
 .site-header--home.on-media { background:transparent; color:#fff; border-color:transparent; }
@@ -639,7 +630,7 @@ details.dataset-howto>summary{min-height:56px;font-size:17px}
   .library-layout .library-control--field { display:block; }
 }
 @media (max-width:767px) {
-  .site-header--grouped { --header-height:72px; }
+  .site-header--shared { --header-height:72px; }
   .home-guidance-list, .layout-register .registration-routes>section { grid-template-columns:minmax(0,1fr); }
   .layout-register .registration-routes>section>p:not(.route-kicker) { grid-column:auto; }
   .layout-register .registration-routes .actions { justify-self:start; }
@@ -647,10 +638,10 @@ details.dataset-howto>summary{min-height:56px;font-size:17px}
   .application-progress .button { min-width:0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .site-header--grouped, .home-hero .button { transition:none; }
+  .site-header--shared, .home-hero .button { transition:none; }
 }
 .account-destination-links { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr)); gap:0 24px; margin-top:24px; }
 .account-destination-links a { display:flex; align-items:center; min-height:48px; padding-block:8px; border-bottom:1px solid var(--line); text-decoration:underline; }
-.site-header--grouped a.button[aria-current=page] { color:#fff; }
+.site-header--shared a.button[aria-current=page] { color:#fff; }
 .layout-datasets .step__body { min-width:0; }
 .layout-register .registration-routes .button { min-width:0; }

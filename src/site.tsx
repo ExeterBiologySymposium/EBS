@@ -19,16 +19,16 @@ function ArrowLink({href,children,className='',current=false}:{href?:string;chil
   if(href && isProtectedPath(href)&&access!=='accepted'){href=status==='signed-in'?'account.html':'register.html';children=status==='signed-in'?'Account':'Request resource access';}
   return <a className={`button ${className}`} href={href} aria-current={current?'page':undefined}><span>{children}</span><ArrowDownRight size={18} aria-hidden="true"/></a>;
 }
-const homeNavOrder = ['about.html', 'team.html', 'schedule.html', 'resources.html', 'datascience.html', 'events.html', 'faq.html', 'contact.html'];
+const primaryNavOrder = ['about.html', 'team.html', 'schedule.html', 'resources.html', 'datascience.html', 'events.html', 'faq.html', 'contact.html'];
 
 function Header({page}:{page:string}) {
   const {access,status}=useContext(AuthContext);
   const signedIn=status==='signed-in';
   const groups=siteNavigation(access,signedIn);
   const isHome=page==='index.html';
-  const homeLinks=groups.flatMap(group=>group.links).map(link=>link.href==='about.html'?{...link,label:'About'}:link);
-  const homePrimary=homeNavOrder.flatMap(href=>homeLinks.filter(link=>link.href===href));
-  const homeMore=homeLinks.filter(link=>!homeNavOrder.includes(link.href));
+  const navLinks=groups.flatMap(group=>group.links).map(link=>link.href==='about.html'?{...link,label:'About'}:link);
+  const primaryLinks=primaryNavOrder.flatMap(href=>navLinks.filter(link=>link.href===href));
+  const moreLinks=navLinks.filter(link=>!primaryNavOrder.includes(link.href));
   const header=useRef<HTMLElement>(null);
   const search=useRef<HTMLDialogElement>(null);
   const searchInput=useRef<HTMLInputElement>(null);
@@ -66,13 +66,13 @@ function Header({page}:{page:string}) {
     searchInput.current?.focus();
   }
 
-  function links(group:ReturnType<typeof siteNavigation>[number]) {
-    return group.links.map(({label,href})=><a href={href} key={href} aria-current={page===href?'page':undefined}>{label}</a>);
+  function links(items: typeof navLinks) {
+    return items.map(({label,href})=><a href={href} key={href} aria-current={page===href?'page':undefined}>{label}</a>);
   }
   const terms=query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   const results=searchPages.filter(({url})=>(access==='accepted'||!isProtectedPath(url))&&(!signedIn||!['register.html','student-signup.html'].includes(url))&&(signedIn||url!=='account.html')).map(({title,url,description})=>({title,url,score:terms.reduce((sum,term)=>sum+(title.toLowerCase()===term?12:title.toLowerCase().includes(term)?7:(url+' '+description).toLowerCase().includes(term)?3:0),0)})).filter(row=>!terms.length||row.score>0).sort((a,b)=>b.score-a.score||a.title.localeCompare(b.title)).slice(0,8);
   return <>
-    <header ref={header} className={`site-header site-header--grouped${isHome ? ' site-header--home' : ''}${isHome && !scrolled ? ' on-media' : ''}`} onKeyDown={event=>{
+    <header ref={header} className={`site-header site-header--shared${isHome ? ' site-header--home' : ''}${isHome && !scrolled ? ' on-media' : ''}`} onKeyDown={event=>{
       if (event.key!=='Escape') return;
       const open=header.current?.querySelector<HTMLDetailsElement>('details[open]');
       if (open) { event.preventDefault(); open.open=false; open.querySelector('summary')?.focus(); }
@@ -81,11 +81,7 @@ function Header({page}:{page:string}) {
       <a className="wordmark" href="/" aria-label="Exeter Biology Symposium home"><img className="wordmark-red" src="/images/brand/ebs-logo-red.png" alt="" width={1536} height={1024}/>
         {isHome&&<img className="wordmark-white" src="/images/brand/ebs-logo-white.png" alt="" width={1536} height={1024}/>}</a>
       <nav className="desktop-nav" aria-label="Main navigation">
-        {isHome?links({label:'Main navigation',links:homePrimary}):groups.map(group=>group.label==='Schedule' ? <div key={group.label}>{links(group)}</div> :
-          <details className="header-disclosure" name="ebs-main-navigation" key={group.label}>
-            <summary className={group.links.some(link=>link.href===page)?'has-current-page':undefined}>{group.label}</summary>
-            <div className="header-disclosure-links">{links(group)}</div>
-          </details>)}
+        {links(primaryLinks)}
       </nav>
       <div className="header-right">
         <button className="nav-search" type="button" aria-label="Search EBS" aria-haspopup="dialog" onClick={event=>openSearch(event.currentTarget)}><Search size={18}/></button>
@@ -103,7 +99,7 @@ function Header({page}:{page:string}) {
             <button type="button" aria-haspopup="dialog" onClick={event=>openSearch(event.currentTarget)}>Search EBS <Search size={17}/></button>
           </div>
           <nav aria-label="Main navigation">
-            {isHome?links({label:'Main navigation',links:[...homePrimary,...homeMore]}):groups.map(group=><div key={group.label}>{group.label!=='Schedule'&&<p>{group.label}</p>}{links(group)}</div>)}
+            {links([...primaryLinks,...moreLinks])}
           </nav>
           <div className="menu-account"><AccountControls/></div>
         </div>
