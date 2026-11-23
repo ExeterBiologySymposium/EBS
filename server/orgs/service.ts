@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { OrganizationProblem, type Destination, type OrganizationGateway, type OrganizationStore, type Pool, type PoolConfiguration, type Operation, type Result, type Page, type RegistrationStatus } from './types.js';
+import { OrganizationProblem, type Destination, type OrganizationGateway, type OrganizationStore, type Pool, type PoolConfiguration, type Operation, type Result, type Page } from './types.js';
 
 const normalize = (email: string) => email.trim().toLowerCase();
 const errorStatus = (error: unknown) => Number((error as { status?: number })?.status || 0);
@@ -62,6 +62,9 @@ export function createOrganizationService({ store, gateway, config }: { store: O
   async function allInvitations() {
     const rows = (await pools()).filter(row => row.state === 'ready');
     return (await parallel(rows, async row => (await gateway.invitations(row.organizationId!)).map(invite => ({ ...invite, organizationId: row.organizationId!, destination: row.kind })))).flat();
+  }
+  function poolMembers(rows: Pool[]) {
+    return parallel(rows, async row => ({ row, members: await gateway.members(row.organizationId!) }));
   }
   async function recoverPools(token: string) {
     const unresolved = (await pools()).filter(row => row.state === 'creating' || row.state === 'needs-review');
@@ -179,32 +182,6 @@ export function createOrganizationService({ store, gateway, config }: { store: O
     isTeam,
     async membership(userId: string) { const rows = await memberships(userId); return rows.some(row => row.kind === 'accepted') ? 'accepted' as const : rows.length ? 'pending' as const : 'unassigned' as const; },
     async lookup(email: string) { const user = await gateway.findUser(normalize(email)); return user ? { mode: 'add' as const, userId: user.id, name: user.name, email: normalize(email) } : { mode: 'invite' as const, email: normalize(email) }; },
-    // Read-only status for the registration tracker: the verified account behind each address and
-    // which registered EBS pools hold it. Never returns names and never changes memberships.
-    async registrationStatus(emails: string[]): Promise<RegistrationStatus[]> {
-      try {
-        await production();
-        const kinds = new Map((await pools()).filter(row => row.state === 'ready' && row.organizationId).map(row => [row.organizationId!, row.kind]));
-        return await parallel(emails.map(normalize), async (email): Promise<RegistrationStatus> => {
-          let user;
-          try { user = await gateway.findUser(email); }
-          catch (error) {
-            if (error instanceof OrganizationProblem && error.state === 'ambiguous-account') return { email, account: 'ambiguous' };
-            throw error;
-          }
-          if (!user) return { email, account: 'none' };
-          const times = await gateway.userMembershipTimes(user.id);
-          const accepted = times.filter(row => kinds.get(row.organizationId) === 'accepted');
-          if (accepted.length) {
-            const stamps = accepted.map(row => row.createdAt).filter(Number.isFinite);
-            return { email, account: 'verified', userId: user.id, status: 'accepted', acceptedAt: stamps.length ? Math.min(...stamps) : null };
-          }
-          return { email, account: 'verified', userId: user.id, status: times.some(row => kinds.get(row.organizationId) === 'pending') ? 'pending' : 'none', acceptedAt: null };
-        });
-      } catch (error) {
-        throw error instanceof OrganizationProblem ? error : providerProblem(error);
-      }
-    },
     add: (userId: string, email: string, group: Destination, actor: string) => add(userId, email, group, actor),
     accept: (userId: string, actor: string) => add(userId, null, 'accepted', actor, true),
     enroll: (userId: string) => add(userId, null, 'pending', null),
@@ -236,7 +213,7 @@ export function createOrganizationService({ store, gateway, config }: { store: O
     },
     async listMembers(group: Destination, cursor?: string | null) {
       const rows = (await pools()).filter(row => row.state === 'ready');
-      const groups = await parallel(rows, async row => ({ row, members: await gateway.members(row.organizationId!) }));
+      const groups = await poolMembers(rows);
       const users = new Map<string, { userId: string; name: string; identifier: string; joinedAt: number; pending: boolean; accepted: boolean }>();
       for (const { row, members: list } of groups) for (const member of list) {
         const value = users.get(member.userId) || { userId: member.userId, name: member.name, identifier: member.identifier, joinedAt: 0, pending: false, accepted: false };
@@ -245,6 +222,14 @@ export function createOrganizationService({ store, gateway, config }: { store: O
         users.set(member.userId, value);
       }
       return paginate([...users.values()].filter(user => user[group]).sort((a, b) => b.joinedAt - a.joinedAt || a.userId.localeCompare(b.userId)), 'members:' + group, cursor);
+    },
+    async folderRoster() {
+      const rows = (await pools()).filter(row => row.state === 'ready' && row.kind === 'accepted');
+      const participants = new Map<string, { userId: string; identifier: string }>();
+      for (const { members } of await poolMembers(rows)) {
+        for (const { userId, identifier } of members) participants.set(userId, { userId, identifier });
+      }
+      return [...participants.values()];
     },
     async listInvitations(cursor?: string | null) {
       const map = new Map<string, { id: string; email: string; destination: Destination; createdAt: number; expiresAt: number }>();

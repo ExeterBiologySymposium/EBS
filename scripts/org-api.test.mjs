@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createServer } from 'vite';
 import { fixture } from './org-fixture.mjs';
+import { participantDriveFixture } from './participant-drive-fixture.mjs';
 const vite = await createServer({ configLoader: 'runner', cacheDir: '.vite-cache', server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' });
 let createAdminHandlers, createOrganizationService, productionPoolConfiguration, createClerkOrganizationGateway, createOrganizationBootstrap, driveConfiguration, createFolderHandlers;
 try {
@@ -16,21 +17,161 @@ try {
 const get = query => new Request('https://ebs.test/api/team-admin?' + query);
 const post = body => new Request('https://ebs.test/api/team-admin', { method: 'POST', headers: { Origin: 'https://ebs.test', 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
 const noFolderLinks = { get: assert.fail, set: assert.fail };
-const trackerSheet = 'https://docs.google.com/spreadsheets/d/' + 'T'.repeat(44) + '/edit#gid=123';
 
-test('Team receives only a valid editable Google Sheets tracker link; everything else reads as not configured', async () => {
-  const read = async (trackerUrl, query = 'action=registration-tracker') => {
-    const handler = createAdminHandlers({ authenticate: async () => 'user_staff', service: fixture(createOrganizationService).service, teamId: 'org_team', folderLinks: noFolderLinks, trackerUrl });
-    const response = await handler.fetch(get(query));
-    return { status: response.status, body: await response.json(), cache: response.headers.get('cache-control') };
-  };
-  const configured = await read(' ' + trackerSheet + ' ');
-  assert.deepEqual(configured.body, { trackerUrl: trackerSheet });
-  assert.match(configured.cache, /no-store/);
-  for (const trackerUrl of [undefined, null, '', 'not a url', 'http://docs.google.com/spreadsheets/d/' + 'T'.repeat(44), 'https://docs.google.com/spreadsheets/d/e/2PACX-' + 'T'.repeat(40) + '/pubhtml', 'https://docs.google.com/document/d/' + 'T'.repeat(44) + '/edit', 'https://docs.google.com.evil.example/spreadsheets/d/' + 'T'.repeat(44), 'https://user:pass@docs.google.com/spreadsheets/d/' + 'T'.repeat(44), 'https://docs.google.com:8443/spreadsheets/d/' + 'T'.repeat(44), 'https://docs.google.com/spreadsheets/d/short']) {
-    assert.deepEqual((await read(trackerUrl)).body, { trackerUrl: null }, String(trackerUrl));
+test('the bulk folder roster includes all Accepted pools across pages and deduplicates accounts', async () => {
+  const fix = fixture(createOrganizationService);
+  const members = Array.from({ length: 28 }, (_, i) => ({ userId: 'user_student' + i, name: `Student ${i}`, identifier: `student${i}@example.test`, joinedAt: 100 - i }));
+  fix.organizations.get('org_accepted').members.push(...members.slice(0, 20));
+  fix.organizations.get('org_pending').members.push({ userId: 'user_pending', name: 'Pending', identifier: 'pending@example.test', joinedAt: 1 });
+  fix.organizations.set('org_accepted2', { id: 'org_accepted2', members: [members[0], ...members.slice(20)] });
+  fix.pools.push({ kind: 'accepted', ordinal: 2, operationId: 'second', organizationId: 'org_accepted2', state: 'ready' });
+  let actor = 'user_staff';
+  const handler = createAdminHandlers({ authenticate: async () => actor, service: fix.service, teamId: 'org_team', folderLinks: noFolderLinks });
+  const roster = () => handler.fetch(get('action=folder-roster'));
+  const response = await roster();
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get('cache-control'), /no-store/);
+  assert.deepEqual((await response.json()).participants, members.map(({ userId, identifier }) => ({ userId, identifier })));
+  assert.equal((await handler.fetch(get('action=folder-roster&group=pending'))).status, 400);
+  fix.organizations.get('org_accepted').members = [];
+  fix.organizations.get('org_accepted2').members = [];
+  assert.deepEqual(await (await roster()).json(), { participants: [] });
+  actor = null;
+  assert.equal((await roster()).status, 401);
+  actor = 'user_student0';
+  assert.equal((await roster()).status, 403);
+});
+
+test('only fresh Team requests can provision folders for current Accepted participants', async () => {
+  let actor = null;
+  let membership = 'accepted';
+  const service = { isTeam: async id => id === 'user_staff', membership: async () => membership };
+  const researchFolders = { participant: assert.fail, googleFolder: assert.fail };
+  const handler = createAdminHandlers({ authenticate: async () => actor, service, teamId: 'org_team', folderLinks: noFolderLinks, researchFolders });
+  const create = () => post({ action: 'create-folder', userId: 'user_student' });
+  assert.equal((await handler.fetch(create())).status, 401);
+  actor = 'user_student';
+  assert.equal((await handler.fetch(create())).status, 403);
+  actor = 'user_staff';
+  const crossOrigin = create();
+  crossOrigin.headers.set('origin', 'https://other.test');
+  assert.equal((await handler.fetch(crossOrigin)).status, 403);
+  assert.equal((await handler.fetch(post({ action: 'create-folder', userId: 'user_student', email: 'override@example.test' }))).status, 400);
+  membership = 'pending';
+  const removed = await handler.fetch(create());
+  assert.equal(removed.status, 409);
+  assert.deepEqual(await removed.json(), { state: 'not-accepted' });
+});
+
+test('bulk provisioning skips custom and unlinked accounts and uses the Account folder record and claim', async () => {
+  const { drive, store, records, shared } = participantDriveFixture();
+  let beginCopy, finishCopy;
+  const copyStarted = new Promise(resolve => { beginCopy = resolve; });
+  const copyMayFinish = new Promise(resolve => { finishCopy = resolve; });
+  const copy = drive.copyDocument;
+  let copyCalls = 0;
+  drive.copyDocument = async () => { copyCalls++; beginCopy(); await copyMayFinish; return copy(); };
+  const participant = async id => ({
+    customUrl: id === 'user_custom' ? 'https://example.test/custom' : null,
+    googleEmail: id === 'user_unlinked' ? null : 'linked@example.test',
+  });
+  let driveRequests = 0;
+  const researchFolders = { participant, googleFolder: () => { driveRequests++; return { drive, store }; } };
+  const membership = async () => 'accepted';
+  const handler = createAdminHandlers({ authenticate: async () => 'user_staff', service: { isTeam: async () => true, membership }, teamId: 'org_team', folderLinks: noFolderLinks, researchFolders });
+  const account = createFolderHandlers({ authenticate: async () => 'user_student', membership, ...researchFolders });
+  const create = id => handler.fetch(post({ action: 'create-folder', userId: id }));
+  const accountRequest = method => account.fetch(new Request('https://ebs.test/api/participant-folder', { method, headers: { Origin: 'https://ebs.test' } }));
+  for (const [id, status, state] of [['user_custom', 200, 'custom'], ['user_unlinked', 409, 'link-google']]) {
+    const skipped = await create(id);
+    assert.equal(skipped.status, status);
+    assert.deepEqual(await skipped.json(), { state });
   }
-  assert.equal((await read(trackerSheet, 'action=registration-tracker&group=pending')).status, 400);
+  assert.equal(driveRequests, 0);
+  const firstAttempt = create('user_student');
+  const result = await Promise.race([copyStarted.then(() => null), firstAttempt]);
+  assert.equal(result, null, 'Admin should start the starter document copy');
+  try {
+    assert.equal((await accountRequest('POST')).status, 202);
+    assert.deepEqual(await (await create('user_student')).json(), { state: 'processing' });
+  } finally { finishCopy(); }
+  assert.deepEqual(await (await firstAttempt).json(), { state: 'ready' });
+  assert.deepEqual(await (await create('user_student')).json(), { state: 'ready' });
+  assert.deepEqual(await (await accountRequest('GET')).json(), {
+    state: 'ready', folderUrl: 'https://drive.google.com/drive/folders/fixture-folder-1', documentUrl: 'https://docs.google.com/document/d/fixture-document-1/edit',
+  });
+  assert.equal(records.size, 1);
+  assert.equal(copyCalls, 1);
+  assert.deepEqual(shared, [{ folderId: 'fixture-folder-1', email: 'linked@example.test' }]);
+  records.get('user_student').email = 'previous@example.test';
+  assert.deepEqual(await (await create('user_student')).json(), { state: 'identity-changed' });
+  assert.equal(shared.length, 1);
+});
+
+test('participant admin rejects the retired registration tracker action even for Team members', async () => {
+  const service = fixture(createOrganizationService).service;
+  const handler = createAdminHandlers({ authenticate: async () => 'user_staff', service, teamId: 'org_team', folderLinks: noFolderLinks, researchFolders: { participant: assert.fail, googleFolder: assert.fail } });
+  const response = await handler.fetch(get('action=registration-tracker'));
+  assert.equal(response.status, 400);
+  assert.match(response.headers.get('cache-control'), /no-store/);
+  assert.deepEqual(await response.json(), { state: 'invalid-request' });
+});
+
+test('website approval provisions the Account folder after Accepted membership and reuses it on retry', async () => {
+  const fix = fixture(createOrganizationService);
+  await fix.service.enroll('user_student');
+  const { drive, store, records, shared } = participantDriveFixture();
+  const participants = [];
+  const researchFolders = {
+    async participant(userId) {
+      assert.equal(await fix.service.membership(userId), 'accepted');
+      participants.push(userId);
+      return { customUrl: null, googleEmail: 'linked@example.test' };
+    },
+    googleFolder: () => ({ drive, store }),
+  };
+  const handler = createAdminHandlers({ authenticate: async () => 'user_staff', service: fix.service, teamId: 'org_team', folderLinks: noFolderLinks, researchFolders });
+  const accept = () => handler.fetch(post({ action: 'accept', userId: 'user_student' }));
+  const response = await accept();
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { state: 'added', destination: 'accepted', folderState: 'ready' });
+  assert.deepEqual(await (await accept()).json(), { state: 'already-member', destination: 'accepted', folderState: 'ready' });
+  assert.deepEqual(participants, ['user_student', 'user_student']);
+  assert.equal(records.size, 1);
+  assert.deepEqual(shared, [{ folderId: 'fixture-folder-1', email: 'linked@example.test' }]);
+
+  const account = createFolderHandlers({ authenticate: async () => 'user_student', membership: fix.service.membership, ...researchFolders });
+  const folder = await account.fetch(new Request('https://ebs.test/api/participant-folder'));
+  assert.equal(folder.status, 200);
+  assert.deepEqual(await folder.json(), {
+    state: 'ready', folderUrl: 'https://drive.google.com/drive/folders/fixture-folder-1', documentUrl: 'https://docs.google.com/document/d/fixture-document-1/edit',
+  });
+});
+
+test('direct Accepted additions report folder follow-up without changing the approval result', async () => {
+  for (const [customUrl, googleEmail, folderState] of [
+    ['https://files.example.test/custom', 'linked@example.test', 'custom'],
+    [null, null, 'link-google'],
+    [null, 'linked@example.test', 'unavailable'],
+  ]) {
+    const fix = fixture(createOrganizationService);
+    let driveRequests = 0;
+    const researchFolders = {
+      participant: async () => ({ customUrl, googleEmail }),
+      googleFolder: () => { driveRequests++; throw Error('private Drive configuration'); },
+    };
+    const handler = createAdminHandlers({ authenticate: async () => 'user_staff', service: fix.service, teamId: 'org_team', folderLinks: noFolderLinks, researchFolders });
+    const add = destination => handler.fetch(post({ action: 'add', destination, userId: 'user_student', email: 'student@example.test' }));
+    assert.deepEqual(await (await add('pending')).json(), { state: 'added', destination: 'pending' });
+    const invite = await handler.fetch(post({ action: 'invite', destination: 'accepted', email: 'invitee@example.test' }));
+    assert.deepEqual(await invite.json(), { state: 'invited', destination: 'accepted' });
+    assert.equal(driveRequests, 0);
+    const accepted = await add('accepted');
+    assert.equal(accepted.status, 200);
+    assert.deepEqual(await accepted.json(), { state: 'added', destination: 'accepted', folderState });
+    assert.equal(await fix.service.membership('user_student'), 'accepted');
+    assert.equal(driveRequests, folderState === 'unavailable' ? 1 : 0);
+  }
 });
 
 test('Team can set, replace and clear a custom link for an Accepted participant', async () => {
@@ -106,8 +247,8 @@ test('all administration endpoints freshly authorize Team and return private san
   for (const userId of [null, 'user_student', 'user_staff']) {
     const fix = fixture(createOrganizationService);
     if (userId === 'user_staff') fix.organizations.get('org_team').members = [];
-    const handler = createAdminHandlers({ authenticate: async () => userId, service: fix.service, teamId: 'org_team', folderLinks: noFolderLinks, trackerUrl: trackerSheet });
-    for (const request of [get('action=status'), get('action=members&group=pending'), get('action=invitations'), get('action=availability'), get('action=registration-tracker'), post({ action: 'lookup', email: 'student@example.test' }), post({ action: 'accept', userId: 'user_student' })]) {
+    const handler = createAdminHandlers({ authenticate: async () => userId, service: fix.service, teamId: 'org_team', folderLinks: noFolderLinks });
+    for (const request of [get('action=status'), get('action=members&group=pending'), get('action=invitations'), get('action=availability'), post({ action: 'lookup', email: 'student@example.test' }), post({ action: 'accept', userId: 'user_student' })]) {
       const response = await handler.fetch(request);
       assert.equal(response.status, userId ? 403 : 401);
       assert.match(response.headers.get('cache-control'), /no-store/);

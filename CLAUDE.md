@@ -110,7 +110,7 @@ public/
 - Search index (`search-data.json`) must be updated when adding/removing pages
 - Cohort project text summarizes the private Drive guides; never copy student names or MENTOR notes from them. Run `npm run test:cohorts` after changing `src/cohorts/`
 - Student research, Resources, Coding, Python and R/RStudio are edited by the EBS Team in **EBS administration → Website content** (see `docs/website-content.md`). Their pages render typed content (`src/content/model.ts`, `src/content/view.tsx`); built-in initial content lives in `src/content/defaults/researchers.ts` (public) and `server/content/defaults.ts` (member pages, server-only)
-- Student registration: staff tick **Send welcome email** in the private Registration tracker Sheet; the copy-ready Apps Script (`apps-script/student-registration/`), the read-only `POST /api/registration-status` lookup (`server/registration-status.ts`) and the Team-only tracker link are described in `docs/student-registration.md`. Never commit Sheet or Form IDs, tokens or student data. Run `npm run test:registration` after changing them
+- Student registration: staff review private form responses, approve each verified EBS account in Participants, and send welcomes from the EBS inbox. See `docs/student-registration.md`. Keep private form data and credentials out of the repository. Run `npm run test:org-admin` after changing participant approval.
 
 ### Performance
 - All images optimized (srcSet, lazy loading where appropriate)

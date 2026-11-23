@@ -1,8 +1,8 @@
 import { privateHeaders } from '../access.js';
-import { OrganizationProblem, type Destination } from './types.js';
+import { OrganizationProblem, type Destination, type Result } from './types.js';
 import type { OrganizationService } from './service.js';
+import { provisionFolder, type FolderDependencies, type FolderResult } from '../participant-folders.js';
 import { validFolderLink } from '../../src/folder-link.js';
-import { validRegistrationTrackerUrl } from '../../src/registration-tracker.js';
 
 export function adminResponse(status: number, value: object) {
   return Response.json(value, { status, headers: { ...privateHeaders, 'X-Content-Type-Options': 'nosniff', ...(status === 202 || status === 429 ? { 'Retry-After': '5' } : {}) } });
@@ -29,17 +29,36 @@ export const exact = (body: object, fields: string) => Object.keys(body).sort().
 export const emailValue = (email: unknown): email is string => typeof email === 'string' && email.trim().length <= 254 && /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email.trim());
 const userValue = (id: unknown): id is string => typeof id === 'string' && /^user_[a-zA-Z0-9]{1,128}$/.test(id);
 const destinationValue = (value: unknown): value is Destination => value === 'pending' || value === 'accepted';
+type FolderState = FolderResult['state'];
+export type ParticipantAdminResult = Result & { folderState?: FolderState };
 
-export function createAdminHandlers({ authenticate, service, teamId, folderLinks, trackerUrl = null }: {
+export function createAdminHandlers({ authenticate, service, teamId, folderLinks, researchFolders }: {
   authenticate(request: Request): Promise<string | null>;
   service: OrganizationService;
   teamId: string;
   folderLinks: { get(userId: string): Promise<string | null>; set(userId: string, folderUrl: string | null): Promise<void> };
-  // Private registration tracker Sheet (EBS_REGISTRATION_TRACKER_URL); shown to the Team only.
-  trackerUrl?: string | null;
+  researchFolders: FolderDependencies;
 }) {
   async function requireAccepted(userId: string) {
     if (await service.membership(userId) !== 'accepted') throw new OrganizationProblem('not-accepted', 409);
+  }
+  async function createResearchFolder(userId: string): Promise<FolderState> {
+    await requireAccepted(userId);
+    const { customUrl, googleEmail } = await researchFolders.participant(userId);
+    if (customUrl) return 'custom';
+    if (!googleEmail) return 'link-google';
+    const { store, drive } = researchFolders.googleFolder();
+    return (await provisionFolder(userId, googleEmail, store, drive)).state;
+  }
+  async function approvalResponse(userId: string, result: Result): Promise<Response> {
+    let folderState: FolderState;
+    try {
+      folderState = await createResearchFolder(userId);
+    } catch {
+      // Membership is already committed. Return a separate, private folder outcome.
+      folderState = 'unavailable';
+    }
+    return adminResponse(200, { ...result, folderState } satisfies ParticipantAdminResult);
   }
   return { async fetch(request: Request): Promise<Response> {
     if (!['GET', 'POST'].includes(request.method)) return adminResponse(405, { state: 'method-not-allowed' });
@@ -59,9 +78,9 @@ export function createAdminHandlers({ authenticate, service, teamId, folderLinks
           await requireAccepted(userId);
           return adminResponse(200, { folderUrl: await folderLinks.get(userId) });
         }
-        if (query.get('action') === 'registration-tracker') {
+        if (query.get('action') === 'folder-roster') {
           if ([...query.keys()].join(',') !== 'action') throw new OrganizationProblem('invalid-request', 400);
-          return adminResponse(200, { trackerUrl: validRegistrationTrackerUrl(trackerUrl) });
+          return adminResponse(200, { participants: await service.folderRoster() });
         }
         if ([...query.keys()].some(key => !['action', 'group', 'cursor'].includes(key))) throw new OrganizationProblem('invalid-request', 400);
         switch (query.get('action')) {
@@ -83,10 +102,20 @@ export function createAdminHandlers({ authenticate, service, teamId, folderLinks
         await folderLinks.set(body.userId, folderUrl);
         return adminResponse(200, { folderUrl });
       }
+      if (body.action === 'create-folder' && exact(body, 'action,userId') && userValue(body.userId)) {
+        const state = await createResearchFolder(body.userId);
+        const status = state === 'ready' || state === 'custom' ? 200 : state === 'processing' ? 202 : 409;
+        return adminResponse(status, { state });
+      }
       if (body.action === 'lookup' && exact(body, 'action,email') && emailValue(body.email)) return adminResponse(200, await service.lookup(body.email.trim()));
       if (body.action === 'invite' && exact(body, 'action,destination,email') && emailValue(body.email) && destinationValue(body.destination)) return adminResponse(200, await service.invite(body.email.trim(), body.destination, actor));
-      if (body.action === 'add' && exact(body, 'action,destination,email,userId') && userValue(body.userId) && emailValue(body.email) && destinationValue(body.destination)) return adminResponse(200, await service.add(body.userId, body.email.trim(), body.destination, actor));
-      if (body.action === 'accept' && exact(body, 'action,userId') && userValue(body.userId)) return adminResponse(200, await service.accept(body.userId, actor));
+      if (body.action === 'add' && exact(body, 'action,destination,email,userId') && userValue(body.userId) && emailValue(body.email) && destinationValue(body.destination)) {
+        const result = await service.add(body.userId, body.email.trim(), body.destination, actor);
+        return body.destination === 'accepted' ? await approvalResponse(body.userId, result) : adminResponse(200, result);
+      }
+      if (body.action === 'accept' && exact(body, 'action,userId') && userValue(body.userId)) {
+        return await approvalResponse(body.userId, await service.accept(body.userId, actor));
+      }
       throw new OrganizationProblem('invalid-request', 400);
     } catch (error) {
       return error instanceof OrganizationProblem ? adminResponse(error.status, { state: error.state }) : adminResponse(503, { state: 'unavailable' });

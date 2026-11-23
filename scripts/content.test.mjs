@@ -35,11 +35,13 @@ test('initial content validates and preserves the latest copy, layout and access
   const signedOut = render(h(view.PublishedPage, { page: 'researchers', initial: research }));
   assert.equal(signedOut.match(/<h1>/g).length, 1);
   for (const link of ['href="faq.html"', 'href="schedule.html"', 'href="account.html"', 'href="mailto:exeterbiosymposium@gmail.com"', 'href="/register.html"']) assert.ok(signedOut.includes(link), link);
-  assert.ok(signedOut.includes('>Sign in to continue: Register your interest</button>'));
+  assert.ok(signedOut.includes('href="student-signup.html">Register your interest</a>'));
   assert.equal(signedOut.match(/class="timeline__item"/g).length, 7);
   assert.doesNotMatch(signedOut, /Zoom|orientation/i, 'Student research no longer describes an orientation call');
   const accepted = render(h(view.PublishedPage, { page: 'researchers', initial: research }), { status: 'signed-in', access: 'accepted' });
-  assert.ok(accepted.includes('href="https://forms.gle/vgtVrsBm1UbBhwtv9" target="_blank" rel="noopener noreferrer"'));
+  assert.ok(accepted.includes('href="student-signup.html">Register your interest</a>'));
+  const alternate = render(h(view.PublishedPage, { page: 'researchers', initial: { ...research, registrationUrl: 'https://forms.gle/AlternateForm' } }), { status: 'signed-in', access: 'accepted' });
+  assert.ok(alternate.includes('href="https://forms.gle/AlternateForm" target="_blank" rel="noopener noreferrer"'));
   assert.ok(accepted.includes('<a class="button secondary" href="resources.html">Browse Resources</a>'));
   const resources = render(h(view.LessonView, { content: initialContent.resources }));
   assert.equal(resources.match(/<img /g).length, 2);

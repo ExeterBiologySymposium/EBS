@@ -1,6 +1,7 @@
 import { createServer } from 'vite';
 import { resolve } from 'node:path';
 import { fixture } from './org-fixture.mjs';
+import { participantDriveFixture } from './participant-drive-fixture.mjs';
 
 // Explicit localhost-only QA process. This uses fake users and cannot send email.
 const root = resolve(import.meta.dirname, '..');
@@ -54,8 +55,29 @@ fix.pools.push({ kind: 'pending', ordinal: 2, operationId: 'seed-second', organi
 const remove = fix.gateway.removeMember;
 fix.gateway.removeMember = async (...args) => { if (cleanupFails) throw Error('fake cleanup failure'); return remove(...args); };
 await fix.service.add('user_student', 'student@example.test', 'accepted', 'user_staff');
+const accepted = Array.from({ length: 27 }, (_, i) => ({ userId: 'user_researcher' + i, name: 'Researcher ' + i, identifier: `researcher${i}@example.test`, joinedAt: Date.UTC(2026, 9, 22) - i * 1000 }));
+fix.organizations.get('org_accepted').members.push(...accepted.slice(0, 19));
+fix.organizations.set('org_accepted2', { id: 'org_accepted2', name: 'EBS Accepted 002', limit: 20, metadata: {}, members: accepted.slice(19), invitations: [] });
+fix.pools.push({ kind: 'accepted', ordinal: 2, operationId: 'seed-accepted-second', organizationId: 'org_accepted2', state: 'ready' });
+links.set('user_researcher25', 'https://files.example.test/custom');
+const { drive, store, records: folders } = participantDriveFixture();
+const shareFolder = drive.shareFolder;
+let sharingFailed = false;
+drive.shareFolder = async (folderId, email) => {
+  if (!sharingFailed && email === 'researcher0@example.test') {
+    sharingFailed = true;
+    throw Error('fake transient sharing failure');
+  }
+  await shareFolder(folderId, email);
+};
+folders.set('user_student', { userId: 'user_student', email: 'student@example.test', folderId: 'fixture-folder', documentId: 'fixture-document', ready: true, copyStarted: true });
+const researchFolders = {
+  participant: async userId => ({ customUrl: links.get(userId) ?? null, googleEmail: userId === 'user_researcher26' ? null : `${userId.slice(5)}@example.test` }),
+  googleFolder: () => ({ store, drive }),
+};
 handlers = createAdminHandlers({
   authenticate: async () => 'user_staff', service: fix.service, teamId: 'org_team',
+  researchFolders,
   folderLinks: {
     get: async userId => links.get(userId) ?? null,
     set: async (userId, url) => {
@@ -64,13 +86,10 @@ handlers = createAdminHandlers({
       else links.set(userId, url);
     },
   },
-  // Fake Sheet ID for browser QA of the Team-only tracker link.
-  trackerUrl: 'https://docs.google.com/spreadsheets/d/' + 'X'.repeat(44) + '/edit',
 });
 participantFolder = createFolderHandlers({
   authenticate: async () => 'user_student', membership: fix.service.membership,
-  participant: async userId => ({ customUrl: links.get(userId) ?? null, googleEmail: 'student@example.test' }),
-  googleFolder: () => ({ store: { get: async () => ({ email: 'student@example.test', folderId: 'fixture-folder', documentId: 'fixture-document', ready: true }) }, drive: {} }),
+  ...researchFolders,
 });
 await vite.listen();
 console.log('Fake-provider admin fixture: http://127.0.0.1:4180/admin.html');

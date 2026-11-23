@@ -2,7 +2,11 @@
 
 Accepted participants use **Account → Create my research folder** to create one personal folder and a copy of the research document template. The personal EBS Google account owns these resources in My Drive. Staff inherit access from the parent folder; the app adds only the participant's specific Google email to their child folder. It never shares the parent with participants or enables public links, and it does not send invitation emails.
 
+When staff approve an existing account in **Admin → Participants**, the website also tries to create its research folder and starter document. The student can open them in Account when ready. Folder setup reuses existing assignments and requires one verified linked Google account for generated folders. Approval still grants member access if setup needs follow-up. Staff can retry from **Accepted** or the student can complete setup in Account after linking Google.
+
 EBS Team members can assign a different folder in **Admin → Accepted → Research folder link** on the participant’s row. Paste an HTTP or HTTPS URL, save it, and grant the participant access on the linked service. **Account → Open my folder** uses this link without Google setup. To return to the generated folder and starter document, save the field empty. Custom links are stored in private Clerk user metadata and work independently of the Drive configuration.
+
+To provision folders in bulk, go to **Admin → Participants → Accepted** and select **Create Google Drive folders**. The run covers all Accepted pages and uses each participant's verified linked Google account. Keep the Accepted view open until it finishes. Staff can review follow-up reasons after the run and rerun the action to pick up accounts that have since linked Google or recover from temporary failures. Existing generated folders and custom links are reused. Participants can open their folder and starter document from Account after creation. No invitation emails are sent by the action.
 
 ## Current status
 
@@ -115,10 +119,12 @@ Removing a participant from Clerk Accepted blocks the website feature on subsequ
 
 ## Verification and release
 
-Run `npm run typecheck` and `npm run build`, then follow the preview checks in [member-access.md](member-access.md). The automated folder and browser test suites have been removed.
+Run `npm run test:org-admin` and `npm run build`, then follow the preview checks in [member-access.md](member-access.md). To exercise the bulk action locally with fake providers, start `node scripts/org-browser-fixture.mjs` and open its Admin page.
 
 Before deployment approval, test an authorized preview with disposable Google resources and identities: anonymous/Pending denial, Accepted creation, reload/retry, simultaneous tabs, direct Drive access by the recipient, denial for another participant, staff access, external-domain restrictions, account linking, and a hosted Neon connection. Inspect the actual ACLs on both folder and document. Live Google and hosted database verification remain required before describing this feature as operational.
 
 ## API
 
 `GET /api/participant-folder` reads the signed-in participant's saved state. `POST` returns their assigned link or creates or resumes a generated folder and requires an exact same-origin Origin header. Both independently verify current Accepted membership and use the session user ID. For generated folders, both resolve the Google identity server-side. All responses are private/no-store and errors contain a generic state.
+
+EBS Team members use `GET /api/team-admin?action=folder-roster` to load a deduplicated Accepted roster and a same-origin JSON `POST /api/team-admin` with `action: 'create-folder'` and the participant's `userId` to provision one folder. Each request checks current Team access and each write checks that the target is still Accepted. Results report each provisioning state without returning Drive links or linked Google addresses.

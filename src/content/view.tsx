@@ -3,6 +3,7 @@ import { PenLine } from 'lucide-react';
 import { AuthContext, LearningLink, RegistrationLink } from '../auth';
 import { CodeBlock } from '../page-controls';
 import { readPublishedContent } from './api';
+import { isStudentApplicationUrl } from './urls';
 import {
   contentPages, isExternalUrl, paragraphs, placeLinks, urlProblem,
   type LessonContent, type LessonSection, type LinkPlacement, type PageContentMap, type PageKey, type ResearchContent, type RichText,
@@ -18,6 +19,11 @@ export function SiteLink({ href, children }: { href: string; children: ReactNode
 }
 function Lines({ text }: { text: string }) {
   return <>{text.split('\n').flatMap((part, index) => index ? [<br key={index} />, part] : [part])}</>;
+}
+function ResearchRegistrationLink({ href, children }: { href: string; children: ReactNode }) {
+  if (isStudentApplicationUrl(href)) return <a className="button primary" href="student-signup.html">{children}</a>;
+  if (urlProblem(href, 'form')) return null;
+  return <RegistrationLink className="button primary" href={href}>{children}</RegistrationLink>;
 }
 export function RichTextView({ value }: { value: RichText }) {
   const parts = paragraphs(value.text);
@@ -89,7 +95,7 @@ export function ResearchView({ content }: { content: ResearchContent }) {
       <div>
         {support.heading && <h2>{support.heading}</h2>}
         <RichTextView value={support.body} />
-        {support.buttonLabel && !urlProblem(content.registrationUrl, 'form') && <RegistrationLink className="button primary" href={content.registrationUrl}>{support.buttonLabel}</RegistrationLink>}
+        {support.buttonLabel && <ResearchRegistrationLink href={content.registrationUrl}>{support.buttonLabel}</ResearchRegistrationLink>}
       </div>
       <div>
         {(support.listHeading || support.items.length > 0) && <div className="text-block">
@@ -102,7 +108,7 @@ export function ResearchView({ content }: { content: ResearchContent }) {
       {registration.heading && <h2>{registration.heading}</h2>}
       {registration.text && <p><Lines text={registration.text} /></p>}
       {(registration.buttonLabel || registration.secondaryLabel) && <div className="actions">
-        {registration.buttonLabel && !urlProblem(content.registrationUrl, 'form') && <RegistrationLink className="button primary" href={content.registrationUrl}>{registration.buttonLabel}</RegistrationLink>}
+        {registration.buttonLabel && <ResearchRegistrationLink href={content.registrationUrl}>{registration.buttonLabel}</ResearchRegistrationLink>}
         {registration.secondaryLabel && <LearningLink className="button secondary" href={registration.secondaryPage}>{registration.secondaryLabel}</LearningLink>}
       </div>}
     </div></div></section>}

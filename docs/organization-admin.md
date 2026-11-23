@@ -28,8 +28,6 @@ Set these only for the Production deployment:
 - `EBS_ORG_DATABASE_URL`: the existing private Neon database connection, or reuse `EBS_DRIVE_DATABASE_URL` through the supported fallback. Never expose either connection in browser environment variables.
 - `EBS_ORG_POOLS_ENABLED=true`: enable registry-based membership reads and allocation after bootstrap. Leave unset/false before setup; the original single-organization behavior remains available.
 - `EBS_ORG_ROLLOVER_ENABLED=true`: allow new organizations when existing lists are full. Set this to false to stop creation while preserving pooled access and use of existing capacity.
-- `EBS_REGISTRATION_STATUS_TOKEN` (optional, Sensitive): at least 32 random characters. It authorizes only the read-only `POST /api/registration-status` lookup that the student registration Apps Script uses to confirm a verified account and its Pending/Accepted status. Requires `EBS_ORG_POOLS_ENABLED=true`; unset, the endpoint answers 503. See [student registration](student-registration.md).
-- `EBS_REGISTRATION_TRACKER_URL` (optional): the editable Google Sheets link to the Registration tracker tab. Only the Team sees it, as **Open registration tracker** in Participants; anything other than a `https://docs.google.com/spreadsheets/d/…` link is ignored.
 
 The instance environment, pinned instance ID and frontend key domain are checked against Clerk. Preview/Development keys cannot enable live pool operations. Real organization creation is Production-only; automated/browser QA uses fake providers.
 

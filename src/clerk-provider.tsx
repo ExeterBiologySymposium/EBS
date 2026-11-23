@@ -63,8 +63,13 @@ function ClerkSession({ children }: { children: ReactNode }) {
   useEffect(() => { const update = () => { if (document.visibilityState === 'visible') refreshAccess(); }; window.addEventListener('focus', refreshAccess); document.addEventListener('visibilitychange', update); return () => { window.removeEventListener('focus', refreshAccess); document.removeEventListener('visibilitychange', update); }; }, [refreshAccess]);
   const access: MemberAccess = status !== 'signed-in' ? null : member.userId === user?.id ? member.access : 'checking';
   const teamAccess: TeamAccess = status !== 'signed-in' ? null : team.userId === user?.id ? team.access : 'checking';
+  const primaryEmail = user?.primaryEmailAddress;
   return <AuthContext.Provider value={{
     status, access, teamAccess, userId: status === 'signed-in' ? user?.id : undefined, teamOrganizationId: teamAccess === 'allowed' ? team.organizationId : null, refreshAccess,
+    registrationProfile: status === 'signed-in' && user ? {
+      fullName: user.fullName,
+      verifiedEmail: primaryEmail?.verification?.status === 'verified' ? primaryEmail.emailAddress : null,
+    } : undefined,
     signIn: () => clerk.openSignIn({ forceRedirectUrl: window.location.href, signUpForceRedirectUrl: window.location.href }),
     signUp: () => clerk.openSignUp({ forceRedirectUrl: window.location.href, signInForceRedirectUrl: window.location.href }),
     manageAccount: () => clerk.openUserProfile(),

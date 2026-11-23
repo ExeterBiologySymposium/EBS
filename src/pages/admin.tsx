@@ -3,9 +3,10 @@ import { definition } from '../content/copy/admin';
 import { lazy, Suspense, useCallback, useContext, useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { AuthContext } from '../auth';
 import { adminMessage, adminRequest, lostTeamAccess } from '../admin-api';
+import { AdminDriveFolders } from '../admin-drive-folders';
 import { folderLinkMaxLength, validFolderLink } from '../folder-link';
-import { validRegistrationTrackerUrl } from '../registration-tracker';
 import type { Destination, Page, Result } from '../../server/orgs/types';
+import type { ParticipantAdminResult } from '../../server/orgs/handlers';
 
 const ContentEditor = lazy(() => import('../content-editor'));
 const TeamSettings = lazy(() => import('../team-organization-settings'));
@@ -21,6 +22,19 @@ function resultMessage(result: Result): string {
   if (result.state === 'already-accepted') return 'This participant is already Accepted. Their access has not been downgraded.';
   if (result.state === 'already-member') return `This participant already belongs to ${label(result.destination)}.`;
   return result.state === 'invited' ? `Invitation sent to ${label(result.destination)}. Membership begins when the invitation is accepted.` : `Added to ${label(result.destination)}${result.destination === 'accepted' ? '. EBS resource access is now granted.' : ' for review.'}`;
+}
+const folderMessages: Partial<Record<NonNullable<ParticipantAdminResult['folderState']>, string>> = {
+  ready: 'Their research folder and starter document are ready in Account.',
+  custom: 'Their assigned research folder is available in Account.',
+  'link-google': 'Ask the participant to link one verified Google account, then retry setup from Accepted.',
+  processing: 'Folder creation is already in progress. Check Account or retry setup from Accepted.',
+  'needs-review': 'Review the starter document in Drive before retrying folder setup.',
+  'identity-changed': 'Review the folder’s existing Drive access and the linked Google account before retrying.',
+  unavailable: 'Folder creation is unavailable. Retry setup from Accepted when Drive is available.',
+};
+function participantResultMessage(result: ParticipantAdminResult): string {
+  const folder = result.folderState && folderMessages[result.folderState];
+  return [resultMessage(result), folder].filter(Boolean).join(' ');
 }
 function Pagination({ page, busy, onChange }: { page: Page<unknown>; busy: boolean; onChange(cursor: string | null): void }) {
   return <div className="actions admin-pagination" aria-label="Pagination">
@@ -65,9 +79,9 @@ function AddParticipant({ revision, onChanged, onDenied }: { revision: number; o
         if (mounted.current) setLookup(value);
       } else {
         if (!open) return;
-        const value = await adminRequest<Result>('', { body: lookup.mode === 'add' ? { action: 'add', userId: lookup.userId, email: lookup.email, destination } : { action: 'invite', email: lookup.email, destination } });
+        const value = await adminRequest<ParticipantAdminResult>('', { body: lookup.mode === 'add' ? { action: 'add', userId: lookup.userId, email: lookup.email, destination } : { action: 'invite', email: lookup.email, destination } });
         if (!mounted.current) return;
-        setMessage(resultMessage(value));
+        setMessage(participantResultMessage(value));
         if (value.state === 'added' || value.state === 'invited') { setEmail(''); setLookup(null); }
         onChanged();
       }
@@ -175,13 +189,14 @@ function ParticipantList({ group, revision, onChanged, onDenied }: { group: Dest
     if (busyRef.current) return;
     busyRef.current = true; setBusy(member.userId); setMessage('');
     try {
-      const result = await adminRequest<Result>('', { body: { action: 'accept', userId: member.userId } });
+      const result = await adminRequest<ParticipantAdminResult>('', { body: { action: 'accept', userId: member.userId } });
       if (!mounted.current) return;
-      setMessage(`${member.identifier}: ${resultMessage(result)}`); onChanged();
+      setMessage(`${member.identifier}: ${participantResultMessage(result)}`); onChanged();
     } catch (reason) { if (mounted.current) { if (lostTeamAccess(reason)) onDenied(); else setMessage(`${member.identifier}: ${adminMessage(reason)}`); } }
     finally { busyRef.current = false; if (mounted.current) { setBusy(null); announcement.current?.focus(); } }
   }
   return <><h2>{label(group)} participants</h2>
+    {group === 'accepted' && <AdminDriveFolders onDenied={onDenied} />}
     <p ref={announcement} className="admin-result" role="status" aria-live="polite" tabIndex={-1}>{message}</p>
     {error ? <div role="alert"><p>{error}</p><button className="button secondary" type="button" onClick={() => setReload(value => value + 1)}>Retry participant list</button></div> : !page ? <p role="status">Loading participants…</p> : <>
       {page.data.length ? <ul className="admin-members" aria-label={`${group} participants`}>{page.data.map(member => <li key={member.userId}>
@@ -209,28 +224,6 @@ function InvitationList({ revision, onDenied }: { revision: number; onDenied(): 
     {page.data.length ? <ul className="admin-members">{page.data.map(invite => <li key={invite.id}><div><h3>{invite.email}</h3><p>{label(invite.destination)} invitation · Sent {date(invite.createdAt)} · Expires {date(invite.expiresAt)}</p></div></li>)}</ul> : <p>No outstanding invitations.</p>}
     <Pagination page={page} busy={false} onChange={setCursor} />
   </>}<button className="admin-refresh" type="button" onClick={() => setReload(value => value + 1)}>Refresh invitations</button></>;
-}
-
-// The private Google Sheet where staff request welcome emails (docs/student-registration.md).
-// Rendered only for a valid editable Sheets URL; Google sharing controls who can open it.
-export function RegistrationTrackerLink({ url }: { url: string | null }) {
-  const href = validRegistrationTrackerUrl(url);
-  if (!href) return null;
-  return <>
-    <a className="button secondary" href={href} target="_blank" rel="noopener noreferrer" aria-describedby="registration-tracker-hint">Open registration tracker<span className="sr-only"> (opens in a new tab)</span></a>
-    <p className="form-hint admin-tracker-hint" id="registration-tracker-hint">After accepting a participant, tick Send welcome email for them in the tracker.</p>
-  </>;
-}
-function RegistrationTracker({ onDenied }: { onDenied(): void }) {
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    const controller = new AbortController();
-    adminRequest<{ trackerUrl: string | null }>('action=registration-tracker', { signal: controller.signal })
-      .then(value => { if (!controller.signal.aborted) setUrl(value.trackerUrl ?? null); })
-      .catch(error => { if (!controller.signal.aborted && lostTeamAccess(error)) onDenied(); });
-    return () => controller.abort();
-  }, [onDenied]);
-  return <RegistrationTrackerLink url={url} />;
 }
 
 type Workspace = 'participants' | 'content' | 'settings';
@@ -265,7 +258,7 @@ function AdminWorkspace({ teamOrganizationId }: { teamOrganizationId: string }) 
     {workspace === 'content' ? <Suspense fallback={<section className="section"><div className="shell"><p role="status">Loading the website editor…</p></div></section>}><ContentEditor onDenied={onDenied} /></Suspense>
       : workspace === 'settings' ? <section className="section"><div className="shell"><Suspense fallback={<p role="status">Loading Team settings…</p>}><TeamSettings teamOrganizationId={teamOrganizationId} /></Suspense></div></section>
       : <>
-        <div className="shell actions admin-tools"><button className="button secondary" type="button" onClick={onChanged}>{editorial.workspace.refreshListsCapacity}</button><RegistrationTracker onDenied={onDenied} /></div>
+        <div className="shell actions admin-tools"><button className="button secondary" type="button" onClick={onChanged}>{editorial.workspace.refreshListsCapacity}</button></div>
         <AddParticipant revision={revision} onChanged={onChanged} onDenied={onDenied} />
         <section className="section"><div className="shell">
           <div className="actions admin-views" aria-label="Participant views">{(['pending', 'accepted', 'invitations'] as const).map(value => <button key={value} type="button" className={`button ${view === value ? '' : 'secondary'}`} aria-pressed={view === value} onClick={() => setView(value)}>{value === 'invitations' ? 'Invitations' : label(value)}</button>)}</div>

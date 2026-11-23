@@ -191,13 +191,15 @@ details:not(.site-menu)>summary{min-height:70px;font-size:18px}.faq-nav a{font-s
 .admin-folder-form { margin: .75rem 0; }
 .admin-folder-form .admin-folder-status:empty { margin: 0; }
 .admin-folder-form input { background: var(--surface); }
+.admin-drive-actions { margin-block: .75rem; }
+.admin-drive-actions button[aria-disabled="true"] { opacity: .4; cursor: default; }
+.admin-drive-status:empty { margin: 0; }
 .admin-pagination { align-items: center; margin: 1.25rem 0; }
 .admin-invite { display: grid; gap: .75rem; max-width: 34rem; }
 .admin-invite input, .admin-invite select { width: 100%; min-width: 0; padding: .8rem; border: 1px solid var(--line, #d8d3ca); border-radius: 4px; font: inherit; background: #fff; color: inherit; }
 .admin-invite .button { justify-self: start; }
 .admin-result:empty { display: none; }
 .admin-result { overflow-wrap: anywhere; }
-.admin-tools .admin-tracker-hint { flex-basis: 100%; margin: 0; }
 .admin-clerk-settings { max-width: 100%; }
 .admin-clerk-settings .cl-rootBox, .admin-clerk-settings .cl-cardBox { width: 100%; max-width: 100%; }
 .admin-staff-invite { margin-bottom: 1.5rem; }
@@ -604,6 +606,14 @@ details.dataset-howto>summary{min-height:56px;font-size:17px}
 .application-progress li::marker { color:var(--crimson); font-weight:700; }
 .application-progress li p { margin-top:4px; }
 .application-progress li .actions { margin-block:12px; }
+.student-application-frame { max-width:640px; margin-block:16px; container-type:inline-size; }
+.student-application-embed { display:block; width:100%; border:0; }
+@container (max-width:575px) { .student-application-embed { height:3100px; } }
+@container (max-width:450px) { .student-application-embed { height:3300px; } }
+@container (max-width:370px) { .student-application-embed { height:3550px; } }
+@container (max-width:310px) { .student-application-embed { height:4000px; } }
+@container (max-width:250px) { .student-application-embed { height:4450px; } }
+@media (max-width:360px) { .layout-student-signup .application-progress { padding-inline:10px; } }
 .application-check { margin-top:16px; }
 .application-check label { display:inline-flex; align-items:center; gap:10px; min-height:44px; cursor:pointer; }
 .application-check input { width:20px; height:20px; accent-color:var(--crimson); }

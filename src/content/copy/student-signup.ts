@@ -1,4 +1,5 @@
 import { copy, group, url } from '../fields.js';
+import { studentApplicationForm } from '../urls.js';
 
 export const definition = group("student-signup", {
   pageHeading: group("Page heading", {
@@ -14,9 +15,9 @@ export const definition = group("student-signup", {
     presentResearchPosterPersonOrOnline: copy("Text · Present a research poster in person or online.", "Present a research poster in person or online."),
     wetLabProjectsWillBeAccepted: copy("Text · Wet-lab projects will be accepted for presentation on a…", "Wet-lab projects will be accepted for presentation on a case-by-case basis."),
     projectsMayBeIndividualOrTeams: copy("Text · Projects may be individual or teams of up to three students.", "Projects may be individual or teams of up to three students."),
-    hrefOpenStudentApplication: url("Google Forms application URL", "https://forms.gle/vgtVrsBm1UbBhwtv9", "google-form"),
+    hrefOpenStudentApplication: url("Google Forms application URL", studentApplicationForm, "google-form"),
     openStudentApplication: copy("Link text · Open student application", "Open student application"),
-    signOpenApplicationNewTabComplete: copy("Text · Application instructions", "In the Researcher Email field, enter the email you use to sign in to EBS. Google Forms opens in a new tab."),
+    signOpenApplicationNewTabComplete: copy("Text · Application instructions", "In the Researcher Email field, enter the email you use to sign in to EBS."),
     welcomeEmail: copy("Text · Welcome email", "When you're approved, the team sends you a welcome email from exeterbiosymposium@gmail.com with next steps. Check your spam folder if you don't see it."),
     registeringSchool: copy("Text · Registering for a school? Use school registration.", "Registering for a school?"),
     hrefUseSchoolRegistration: url("Link destination · Use school registration", "schools.html", "link"),

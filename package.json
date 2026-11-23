@@ -14,8 +14,7 @@
     "orgs:bootstrap": "node scripts/org-bootstrap.mjs",
     "test:content": "node --test scripts/content.test.mjs",
     "test:cohorts": "node --test scripts/cohorts.test.mjs",
-    "test:datasets": "node --test scripts/datasets.test.mjs",
-    "test:registration": "node --test scripts/registration-status.test.mjs scripts/registration-apps-script.test.mjs"
+    "test:datasets": "node --test scripts/datasets.test.mjs"
   },
   "repository": {
     "type": "git",

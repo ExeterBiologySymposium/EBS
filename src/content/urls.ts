@@ -1,4 +1,6 @@
 export type UrlPurpose = 'link' | 'image' | 'form' | 'google-form';
+export const studentApplicationForm = 'https://docs.google.com/forms/d/e/1FAIpQLScLhePk0I1YFo0jGGvxMXjDBsl8t939jxLAxF1o4jOFLu5Maw/viewform';
+export const shortStudentApplicationForm = 'https://forms.gle/vgtVrsBm1UbBhwtv9';
 const sitePage = /^[a-z0-9][a-z0-9-]*\.html(?:[?#]\S*)?$/i;
 function urlGuidance(purpose: UrlPurpose) {
   return purpose === 'image' ? 'Use a site image (such as /images/…) or a link that starts with https://.'
@@ -42,4 +44,11 @@ export function suggestUrl(value: string, purpose: UrlPurpose): string {
   return link;
 }
 export function isExternalUrl(value: string) { return /^https:\/\//i.test(value); }
+
+export function isStudentApplicationUrl(value?: string) {
+  if (!value || urlProblem(value, 'google-form')) return false;
+  const { origin, pathname } = new URL(value);
+  const address = origin + pathname.replace(/\/$/, '');
+  return address === studentApplicationForm || address === shortStudentApplicationForm;
+}
 

@@ -6,6 +6,7 @@ export type TeamAccess = 'checking' | 'allowed' | 'denied' | 'unavailable' | nul
 export type AuthState = {
   access: MemberAccess;
   userId?: string;
+  registrationProfile?: { fullName: string | null; verifiedEmail: string | null };
   teamAccess: TeamAccess;
   teamOrganizationId: string | null;
   refreshAccess: () => void;

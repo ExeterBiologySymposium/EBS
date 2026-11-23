@@ -31,6 +31,10 @@ export type FolderResult = {
   folderUrl?: string;
   documentUrl?: string;
 };
+export type FolderDependencies = {
+  participant(userId: string): Promise<{ customUrl: string | null; googleEmail: string | null }>;
+  googleFolder(): { store: FolderStore; drive: ParticipantDrive };
+};
 
 export function googleRecipient(user: { externalAccounts: { provider: string; emailAddress: string; verification: { status: string } | null }[] }): string | null {
   const emails = [...new Set(user.externalAccounts
@@ -81,10 +85,7 @@ export async function provisionFolder(userId: string, email: string, store: Fold
     await store.release(userId, claim);
   }
 }
-export function createFolderHandlers(dependencies: Pick<AccessDependencies, 'authenticate' | 'membership'> & {
-  participant(userId: string): Promise<{ customUrl: string | null; googleEmail: string | null }>;
-  googleFolder(): { store: FolderStore; drive: ParticipantDrive };
-}) {
+export function createFolderHandlers(dependencies: Pick<AccessDependencies, 'authenticate' | 'membership'> & FolderDependencies) {
   return { async fetch(request: Request): Promise<Response> {
     const respond = (status: number, value: FolderResult) => Response.json(value, { status, headers: privateHeaders });
     if (!['GET', 'POST'].includes(request.method)) return respond(405, { state: 'unavailable' });

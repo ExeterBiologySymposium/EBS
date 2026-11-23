@@ -62,7 +62,7 @@ export function ApplicationProgress({ children, account = false, submissionNote,
         {status === 'unavailable' && <p role="status">Sign-in is unavailable. Reload the page or <a href="contact.html">contact the EBS team</a>.</p>}
       </li>
       <li><strong>Submit the Google Form</strong>
-        <p>{submissionNote ?? 'Use the same email address as your EBS account. Google Forms opens in a new tab.'}</p>
+        <p>{submissionNote ?? 'Use the same email address as your EBS account.'}</p>
         {signedIn && children}
         {signedIn && !accepted && userId && !preview && <SubmissionCheck key={userId} userId={userId} />}
         {signedIn && !accepted && preview && <p className="small">I submitted my form · Self-reported</p>}
